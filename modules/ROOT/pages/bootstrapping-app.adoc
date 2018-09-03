@@ -1,0 +1,167 @@
+= Bootstrapping the application
+:page-topic-type: concept
+
+[abstract]
+With all the dependencies installed and ready to go, we can start out by adding our `index.php` and doing the basic bootstrap.
+
+Create a `index.php` file inside your `/beersample-php` directory and add the following.
+We’ll discuss it afterwards:
+
+[source,php]
+----
+<?php
+use Symfony\Component\HttpFoundation\Request;
+use Silex\Application;
+use Silex\Provider\TwigServiceProvider;
+
+// Config Settings
+define("SILEX_DEBUG", true);
+define("COUCHBASE_CONNSTR", "http://127.0.0.1");
+define("COUCHBASE_BUCKET", "beer-sample");
+define("COUCHBASE_PASSWORD", "");
+define("COUCHBASE_CONN_PERSIST", true);
+define("INDEX_DISPLAY_LIMIT", 20);
+
+// Autoloader
+require_once __DIR__.'/vendor/autoload.php';
+
+// Silex-Application Bootstrap
+$app = new Application();
+$app['debug'] = SILEX_DEBUG;
+
+// Connecting to Couchbase
+$cbc = new CouchbaseCluster(COUCHBASE_CONNSTR, "beer-sample", COUCHBASE_PASSWORD);
+$cb = $cbc->openBucket(COUCHBASE_BUCKET);
+
+// Register the Template Engine
+$app->register(new TwigServiceProvider(), array('twig.path' => __DIR__.'/templates'));
+
+// Run the Application
+$app->run();
+?>
+----
+
+The first part defines some constants to make configuration settings easy to change.
+Of course this is not needed, but makes it easy for you to change the configuration later in different environments.
+Afterward, the composer autoloader is included.
+This is needed to make sure the `use` statements are available to us without having to require all PHP files by hand.
+
+The `new Application();` initializes a new Silex application.
+To make sure that we see all errors during development, we can set `debug` to `true`.
+
+Now it gets interesting.
+We connect to our Couchbase cluster by constructing a new Couchbase object.
+We pass in all required information (easy to grasp with the name of the constants).
+This object will then be passed into all controller actions and used from there.
+
+Because we’re using the http://twig.sensiolabs.org/[Twig template engine^], we can register a http://silex.sensiolabs.org/doc/providers/twig.html[TwigServiceProvider^] which helps us to automatically locate and load them.
+You’ll see later how these are rendered and how we can pass data to them.
+
+Finally, we run the application through `+$app->run();+`.
+The actual actions are implemented between the Twig registration call ( `+$app->register(new TwigServiceProvider()...+` ) and the final run method ( `+$app->run()+` ), so remember to put them in there.
+
+If you now run the application in your browser, you should see the following Exception showing up: `"Sorry, the page you are looking for could not be found."`.
+This is actually great, because http://silex.sensiolabs.org/[Silex^] is at work, but can’t find the route for the `/` URL.
+Let’s fix this now.
+Add the following snippet between the `TwigServiceProvider` and the `run()` call:
+
+[source,php]
+----
+$app->get('/', function() use ($app) {
+    return $app['twig']->render('welcome.twig.html');
+});
+----
+
+This action is called when a `GET` request comes in for the `/` URL.
+We don’t need to fetch any data from Couchbase here, so we just instruct http://silex.sensiolabs.org/[Silex^] to render a http://twig.sensiolabs.org/[Twig^] template named `welcome.twig.html`.
+Since we haven’t created it yet, go ahead and place the file inside the "templates" directory:
+
+[source,markup]
+----
+{% extends "layout.twig.html" %}
+
+{% block content %}
+    <div class="span6">
+      <div class="span12">
+        <h4>Browse all Beers</h4>
+        <a href="/beersample-php/beers" class="btn btn-warning">Show me all beers</a>
+        <hr />
+      </div>
+      <div class="span12">
+        <h4>Browse all Breweries</h4>
+        <a href="/beersample-php/breweries" class="btn btn-info">Take me to the breweries</a>
+      </div>
+    </div>
+    <div class="span6">
+      <div class="span12">
+        <h4>About this App</h4>
+        <p>Welcome to Couchbase!</p>
+        <p>This application helps you to get started on application
+            development with Couchbase. It shows how to create, update and
+            delete documents and how to work with JSON documents.</p>
+        <p>The official tutorial can be found
+            <a href="http://www.couchbase.com/docs/couchbase-sdk-php-1.1/tutorial.html">here</a>!</p>
+      </div>
+    </div>
+{% endblock %}
+----
+
+There is nothing fancy here, we’re just showing some basic information to the user and guiding them to the real application functionality.
+Also, note the `{% extends "layout.twig.html" %}` and `{% block content %}` twig elements on top of the page.
+
+Since we don’t want to repeat the HTML layout part on every template, we can define a layout and each template is a block that is loaded into that template.
+Since we haven’t created the `layout.twig.html`, do that in the same directory as the `welcome.twig.html` :
+
+[source,markup]
+----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Couchbase PHP Beer-Sample</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="The Couchbase PHP Beer-Sample App">
+    <meta name="author" content="Couchbase, Inc. 2012">
+
+    <link href="/beersample-php/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/beersample-php/assets/css/beersample.css" rel="stylesheet">
+    <link href="/beersample-php/assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container-narrow">
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="/beersample-php">Home</a></li>
+          <li><a href="/beersample-php/beers">Beers</a></li>
+          <li><a href="/beersample-php/breweries">Breweries</a></li>
+        </ul>
+        <h2 class="muted">Couchbase Beer-Sample</h2>
+      </div>
+      <hr>
+      <div class="row-fluid">
+        <div class="span12">
+            {% block content %}{% endblock %}
+        </div>
+      </div>
+      <hr>
+      <div class="footer">
+        <p>&copy; Couchbase, Inc. 2012</p>
+      </div>
+    </div>
+    <script src="/beersample-php/assets/js/jquery.min.js"></script>
+    <script src="/beersample-php/assets/js/bootstrap.min.js"></script>
+    <script src="/beersample-php/assets/js/beersample.js"></script>
+  </body>
+</html>
+----
+
+The `{% block content %}{% endblock %}` is responsible for loading the appropriate block later (the other markup is again just HTML boilerplate to help with a nice layout for http://twitter.github.com/bootstrap/[Twitter Bootstrap^] ).
+
+If you load the page, you should see the welcome page loading!
+If not, you may need to look at your web server logs to see what kind of error messages have been generated when running the scripts.
+Assuming all is working well, we’re now ready to implement the actual functionality.

@@ -1,0 +1,7 @@
+= Working with documents
+:page-topic-type: concept
+
+[abstract]
+This topic covers the basic CRUD operations of creating, retrieving, updating, and deleting documents.
+
+It also describes how to do bulk operations and atomic operations.

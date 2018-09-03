@@ -1,0 +1,52 @@
+= Managing server connections
+:page-topic-type: concept
+
+[abstract]
+To manage the server connections, you need to configure the client, connect to a bucket, and configure SSL.
+
+== Configuring the client
+
+To configure the client, instantiate a new `Cluster` object:
+
+[source,php]
+----
+$myCluster = new CouchbaseCluster('couchbase://10.4.4.1,10.4.4.2,10.4.4.3');
+----
+
+In addition to the connection string passed to the `Cluster` object, you can include a username and password.
+The username and password are required to perform management operations against your cluster.
+If you do not use the cluster management aspects of the SDK, the user name and password parameters are optional.
+Keep in mind that these credentials are the same ones you use to log in to the Couchbase administrator console, not those specified for the bucket itself.
+
+== Connecting to a bucket
+
+To connect to a bucket, call the `openBucket()` method against your `Cluster` instance, passing in the name of the bucket that you want to connect to.
+If no bucket name is specified, the default bucket is opened.
+The following example shows how to connect to a bucket:
+
+[source,php]
+----
+$myCluster = new CouchbaseCluster();
+$myBucket = $myCluster->openBucket('default');
+----
+
+In addition to the bucket name, you can optionally include the bucket password if one has been defined, as shown in the following example:
+
+[source,php]
+----
+$myCluster = new CouchbaseCluster();
+$myBucket = $myCluster->openBucket('default', 'password');
+----
+
+To close the connection to a bucket, call its `disconnect()` method.
+This method queues the disconnection of all open connections and causes any pending operations to fail.
+
+== Configuring SSL
+
+To configure SSL, pass an SSL scheme with your connection string when creating your cluster object.
+
+[source,php]
+----
+$myCluster = new CouchbaseCluster('couchbases://10.1.1.1,10.1.1.2');
+$myBucket = $myCluster->openBucket();
+----

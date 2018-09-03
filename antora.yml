@@ -1,0 +1,7 @@
+name: php-sdk
+version: '2.1'
+title: PHP SDK
+start_page: php-intro.adoc
+nav:
+- modules/ROOT/nav.adoc
+server_version: '4.1'

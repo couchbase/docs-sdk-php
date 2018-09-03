@@ -1,0 +1,41 @@
+= Retrieving documents
+:page-topic-type: concept
+
+[abstract]
+You can retrieve documents by using regular reads or replica reads.
+
+== Regular reads
+
+You perform regular reads by using the `get()` method.
+Regular reads enable you to retrieve a previously stored document from your active data set.
+
+The following example shows a regular read:
+
+[source,php]
+----
+$myBucket = $myCluster->openBucket();
+$res = $myBucket->get(‘document_name’);
+var_dump($res);
+----
+
+Sample output from the example:
+
+----
+object(CouchbaseMetaDoc)#4 (4) {
+  ["value"]=>
+  array(1) {
+    ["name"]=>
+    string(5) "Frank"
+  }
+  ["flags"]=>
+  int(4)
+  ["cas"]=>
+  resource(5) of type (CAS)
+}
+----
+
+== Replica reads
+
+You perform replica reads by using the `getReplica()` method.
+Replica reads enable you to retrieve a previously stored document by querying the replica copies of this document rather than the active one.
+This is not guaranteed to be consistent, but does permit a level of recovery in case the primary server is not reachable.

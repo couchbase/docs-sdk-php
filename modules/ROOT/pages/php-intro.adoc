@@ -1,0 +1,52 @@
+= PHP SDK 2.0/2.1
+:page-topic-type: concept
+
+[abstract]
+The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
+The Couchbase PHP SDKis a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
+
+Here's a sampling of what you can do with the Couchbase PHP SDK:
+
+== Connecting
+
+To connect to a bucket, simply instantiate a new CouchbaseCluster object to represent your cluster, and call the `openBucket()` method, passing in the name of the bucket that you want to connect to.
+If no bucket name is specified, the default bucket is opened.
+The following example shows how to connect to a bucket on localhost:
+
+[source,php]
+----
+$myCluster = new CouchbaseCluster('couchbase://localhost');
+$myBucket = $myCluster->openBucket('default');
+----
+
+== Operations
+
+In most cases, operations are performed by invoking the relevant method whilst passing the key, any data and meta information that goes with it.
+The operation will return the result of the operation, or alternatively throw an Exception if an error occurred.
+
+Here is an example of performing a get operations:
+
+[source,php]
+----
+$res = $myBucket->get('document_name');
+echo 'Value: ' . $res->value;
+----
+
+Additionally, sometimes more information beyond the key is needed for an operation, as seen here:
+
+[source,php]
+----
+$myBucket->insert('document_name', array('some'=>'value'));
+----
+
+== Performing Queries
+
+In addition to the basic operations that are available, we additional provide methods to perform queries against your data.
+These queries allow you to ask questions like "What beers start with A?" rather than simply "Give me the beer that is called Aaas_Frankl." This is possible through the use of Couchbase MapReduce views engine.
+The following is an example of performing a view query.
+
+[source,php]
+----
+$query = CouchbaseViewQuery::from('beer', 'by_name')->skip(6)->limit(3);;
+$results = $myBucket->query($query);
+----
