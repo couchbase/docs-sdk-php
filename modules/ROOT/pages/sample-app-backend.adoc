@@ -2,7 +2,181 @@
 :navtitle: Sample App Backend
 
 [abstract]
-The PHP SDK sample application backend features both simple and advanced programming concepts, and demonstrates how an application using the PHP SDK can be constructed.
+The PHP SDK tutorial bridges the gap between simple and advanced concepts, by walking through a complete web application.
 
-The PHP SDK sample application backend is available for Couchbase Server 5.0.
-See the documentation provided at https://developer.couchbase.com/documentation/server/5.0/sdk/php/sample-app-backend.html[Sample App Backend^].
+The source code for the tutorial is available on GitHub, at https://github.com/couchbaselabs/try-cb-php/tree/server-5.0[couchbaselabs/try-cb-php^].
+The primary focus of the tutorial is to explain the function and theory behind the Couchbase PHP client, and how it works together with Couchbase Server; with special reference to features such as `N1QL`, `FTS` and `sub-document`.
+It makes use of the `travel-sample` data set.
+The code that generates the web application is provided with the source code, but is not discussed in this tutorial.
+
+== Specific PHP Prerequisites and Set-Up
+
+Before attempting to install the sample-app backend, install the Couchbase PHP SDK, as explained in xref:start-using-sdk.adoc[Start Using the SDK]
+
+Then, proceed as follows:
+
+* Make sure your system is running the 5.0 version of Couchbase Server.
+The server must have the `travel-sample` bucket installed, and an index named `hotel` defined on `travel-sample`.
+A user with username `travel-sample` and password `travel-sample` should also be defined, with the `Bucket Full Access` and `Bucket Admin` roles assigned for the `travel-sample` bucket.
++
+For information on installing Couchbase Server, see xref:6.0@server:install:install-intro.adoc[Installing Couchbase Server].
+For information on initializing and configuring, see xref:6.0@server:install:init-setup.adoc[Initialize the Cluster].
+Sample buckets, and your means of installing them, are described in xref:6.0@server:settings:install-sample-buckets.adoc[Sample Buckets].
+The process whereby users, credentials, and roles are defined by means of the Couchbase Web Console is explained in xref:6.0@server:security:security-rbac-for-admins-and-apps.adoc[Creating and Managing Users with the UI].
+
+* Clone the source for the application, and checkout the 5.0 version:
++
+[source,bash]
+----
+git clone https://github.com/couchbaselabs/try-cb-php.git
+cd try-cb-php
+git checkout server-5.0
+----
+
+* Make sure `composer` is installed, then use it to install the application:
++
+[source,bash]
+----
+curl -sS https://getcomposer.org/installer | sudo php -- --install-dir=/usr/local/bin --filename=composer
+composer install
+----
+
+* Create an `.env` file as follows:
++
+[source,bash]
+----
+cp .env.example .env
+----
++
+Then, bring up `.env` in an editor, and establish username and password values as follows:
++
+[source,bash]
+----
+DB_USERNAME=travel-sample
+DB_PASSWORD=travel-sample
+----
+
+* Generate a key, for accessing the application:
++
+[source,bash]
+----
+php artisan key:generate
+----
+
+* Run the application:
++
+[source,bash]
+----
+php artisan serve --port 8080
+----
+
+== Connecting to the Cluster and Getting a Bucket
+
+Initially, the application must connect to the Couchbase cluster.
+The set-up information for this activity is provided in https://github.com/couchbaselabs/try-cb-php/blob/master/config/database.php[try-cb-php/config/database.php^].
+This file includes definitions of the IP address of the cluster, and the credentials used by the applications for server-access:
+
+[source,php]
+----
+'couchbase' => [
+'driver'        => 'couchbase',
+'host'          => 'couchbase://' . env('COUCHBASE_SERVER', '127.0.0.1'),
+'user'          => env('COUCHBASE_USER', 'Administrator'),
+'password'      => env('COUCHBASE_PASS', 'password'),
+],
+----
+
+Note that detailed information on connection-management via the Couchbase PHP SDK can be found in xref:managing-connections.adoc[Managing Connections].
+
+On connection to the cluster, a specific bucket must be opened.
+The bucket used by the application is `travel-sample`.
+Once the bucket is opened, queries can be performed on the data it contains.
+The code for cluster-connection and bucket-access is provided in https://github.com/couchbaselabs/try-cb-php/blob/95152187b98e97cc0f3f70885d41b8c6bc9f54a5/app/Http/Controllers/CouchbaseController.php[try-cb-php/app/Http/Controllers/CouchbaseController.php^]:
+
+[source,php]
+----
+$this->db = DB::connection('couchbase')->openBucket('travel-sample');
+----
+
+Note that a detailed functional description of buckets is provided in xref:6.0@server:understanding-couchbase:buckets-memory-and-storage/buckets.adoc[Buckets].
+
+== Manage Users
+
+The application creates and authenticates users, and allows them to make bookings.
+The code is provided in https://github.com/couchbaselabs/try-cb-php/blob/3d9975861b417ce53e051d57fa10388963d47798/app/Http/Controllers/UserController.php[try-cb-php/app/Http/Controllers/UserController.php^].
+Users are created and stored as follows:
+
+[source,php]
+----
+public function create(Request $request)
+{
+  $credentials = [
+    'name' => $request->user,
+    'password' => $request->password,
+  ];
+  $user = new User($credentials);
+  try {
+    $this->db->insert("user::".$request->user, $user);
+    return response()->json(["data" => ["token" => $this->buildToken($user)]]);
+  } catch (\Couchbase\Exception $ex) {
+      return response()->json(["failure" => 'Failed to create user'], 409);
+  }
+}
+----
+
+The full range of user-management features supported by the Couchbase PHP SDK is provided in xref:sdk-user-management-overview.adoc[User Management].
+
+== Simple N1QL Queries: Finding Airports
+
+The application queries Couchbase Server by means of the *N1QL* language.
+Simple N1QL queries, for finding airports, are demonstrated in https://github.com/couchbaselabs/try-cb-php/blob/3d9975861b417ce53e051d57fa10388963d47798/app/Http/Controllers/AirportController.php[try-cb-php/app/Http/Controllers/AirportController.php^].
+The following code-excerpt shows how a maximum of five results are returned, where the airport-name corresponds to that provided by means of a parameter whose value is user-specified:
+
+[source,php]
+----
+$query = \CouchbaseN1qlQuery::fromString('SELECT airportname FROM `travel-sample` WHERE faa like $faa limit 5');
+$query->namedParams(['faa' => $searchStr]);
+----
+
+An introduction to querying with N1QL is provided in xref:n1ql-query.adoc[Querying with N1QL].
+Additional information can be found in xref:n1ql-queries-with-sdk.adoc[N1QL from the SDKs].
+
+== Complex N1QL Queries: Finding Routes
+
+More complex N1QL queries are used to return flight paths between airports: the code is provided in https://github.com/couchbaselabs/try-cb-php/blob/3d9975861b417ce53e051d57fa10388963d47798/app/Http/Controllers/FlightPathsController.php[try-cb-php/app/Http/Controllers/FlightPathsController.php^].
+The following example returns airports each of which is both an origin and a destination:
+
+[source,php]
+----
+public function find(Request $request, $from, $to)
+{
+  $qs1 = \CouchbaseN1qlQuery::fromString('
+    SELECT faa AS fromAirport  FROM `travel-sample`
+    WHERE airportname = $from UNION
+    SELECT faa AS toAirport FROM `travel-sample`
+    WHERE airportname = $to
+  ');
+  $qs1->namedParams(['from' => $from, 'to' => $to]);
+  $result = $this->db->query($qs1);
+----
+
+== Full Text Search: Finding Hotels
+
+The Couchbase *Full Text Search* facility is used by the application, to return hotels.
+The code is provided in https://github.com/couchbaselabs/try-cb-php/blob/master/app/Http/Controllers/HotelController.php[try-cb-php/app/Http/Controllers/HotelController.php^].
+The following excerpt shows how a user-specified location is attemptedly matched with text-values provided in multiple location-fields in documents within the `travel-sample` bucket:
+
+[source,php]
+----
+$queryBody = SearchQuery::conjuncts(SearchQuery::term("hotel")->field("type"));
+if (!empty($location) && $location != "*") {
+  $queryBody->every(SearchQuery::disjuncts(
+    SearchQuery::match($location)->field("country"),
+    SearchQuery::match($location)->field("city"),
+    SearchQuery::match($location)->field("state"),
+    SearchQuery::match($location)->field("address")
+  ));
+}
+----
+
+For an introduction to Full Text Search, see xref:full-text-search-overview.adoc[Full Text Search].

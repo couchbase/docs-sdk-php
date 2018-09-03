@@ -4,7 +4,7 @@
 [abstract]
 This section covers the convenience functionality in the Couchbase PHP SDK for managing buckets, managing indexes used by N1QL and managing views.
 
-include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
+include::6.0@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
 
 The PHP SDK also comes with some convenience functionality for common Couchbase management requests.
 
@@ -58,7 +58,7 @@ array(
 );
 ----
 
-include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning]
+include::6.0@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning]
 
 Only the [.param]`$name` and [.param]`$opts['bucketType']` parameters are mandatory for configuring a bucket.
 This list of parameters is recognized for the [.param]`$opts` array, corresponding to those available in the REST API:
@@ -105,7 +105,7 @@ $cluster->removeBucket('hello');
 
 == N1QL Index Management
 
-include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=index-management]
+include::6.0@sdk:shared:partial$flush-info-pars.adoc[tag=index-management]
 
 You can manage indexes in the PHP SDK using the [.api]`CouchbaseBucketManager` class, with its various N1QL related methods: [.api]`listN1qlIndexes()`, [.api]`+createN1qlIndex(...)+`, etc\...
 
@@ -123,7 +123,7 @@ $manager->createN1qlIndex("fullName", array("firstName", "lastName" ), '`state` 
 
 == View Management
 
-include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
+include::6.0@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
 
 In the PHP SDK, design documents and view definitions are represented by associative arrays.
 All operations on design documents are performed on a `CouchbaseBucketManager` instance.
@@ -172,7 +172,7 @@ $designDoc = array(
 $manager->insertDesignDocument('landmarks_spatial', $designDoc);
 ----
 
-include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=one-view-update-warning]
+include::6.0@sdk:shared:partial$flush-info-pars.adoc[tag=one-view-update-warning]
 
 [source,php]
 ----
@@ -187,3 +187,24 @@ $bucketManager->upsertDesignDocument($designName, $designDoc);
 ----
 
 To remove a design document from a bucket, call the `removeDesignDocument` method with the name of the design document.
+
+== Configuration Cache File
+
+The legacy client configuration cache file records the current cluster configuration, which Couchbase Server uses at startup.
+
+Client applications use _libcouchbase_ to connect to Couchbase Server.
+By means of libcouchbase, the client can react to changes in cluster-topology.
+Whenever the client is started, libcouchbase is instantiated, and checks the local filesystem for a _configuration cache file_, containing information on the cluster-toplogy.
+If no such file exists, libcouchbase connects to the cluster by means of a REST method, in order to receive the latest topology details.
+Once acquired, these details are written to the configuration cache file, locally.
+
+Subsequently, when starting, the client uses the local configuration cache file to acquire its topology data.
+If at any time, when using this data, the client attempts to access a data item on a node, and is informed by Couchbase Server that the node is incorrect (due to the cluster configuration having changed), the current configuration cache file is duly invalidated.
+The client then requests an updated set of toplogy details from Couchbase Server; which are themselves then saved locally by the client, as a new configuration cache file.
+
+Use of the configuration cache-file is available only through PHP (not through Java or .NET), Node.js, and Python.
+Therefore, to use the cache file, add the following to the `php.ini`:
+
+----
+couchbase.config_cache = /tmp
+----

@@ -1,0 +1,80 @@
+= Threshold Logging Tracing through the SDK
+:navtitle: Threshold Logging
+
+include::6.0@sdk:shared:partial$tracing.adoc[tag=why_tracing]
+
+include::6.0@sdk:shared:partial$tracing.adoc[tag=open_tracing]
+
+[#tracing_php]
+== Threshold Logging in PHP SDK
+
+Response Time Observability is implemented as Threshold Logging in the Couchbase PHP SDK from release 2.5.0.
+
+.Threshold Logging Tracer Properties
+[#threshold-logging-tracer-ref-php]
+|===
+| Setting name | Description | Default Value
+
+| `enable_tracing`
+| Boolean used to determine tracing is enabled.
+Defaults to using the `ThesholdLoggingTracer` if enabled.
+When false a Noop or similar tracing implementation should be used instead.
+Also when enabled the SDK will try and retrieve duration metrics from the server for KV operations.
+| true
+
+| `tracing_threshold_queue_flush_interval`
+| The interval between executions that process the collected operation spans.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 10.0 seconds (or 10000000 microseconds)
+
+| `tracing_threshold_queue_size`
+| The maximum number of items to keep in internal queue per service.
+| 128
+
+| `tracing_threshold_kv`
+| The KV operation operation threshold.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 0.5 second (500000 microseconds)
+
+| `tracing_threshold_view`
+| The View query operation threshold.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 1 second (1000000 microseconds)
+
+| `tracing_threshold_n1ql`
+| The N1QL query operation threshold.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 1 second (1000000 microseconds)
+
+| `tracing_threshold_fts`
+| The FTS query operation threshold.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 1 second (1000000 microseconds)
+
+| `tracing_threshold_analytics`
+| The Analytics query operation threshold.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 1 second (1000000 microseconds)
+
+| `tracing_orphaned_queue_flush_interval`
+| The interval between executions that processes the collected operation spans.
+Expressed in seconds with fractions (or microseconds for `lcb_cntl`).
+| 10.0 seconds (or 10000000 microseconds)
+
+| `tracing_orphaned_queue_size`
+| The maximum number of items to keep in internal queue per service.
+| 128
+|===
+
+[#customizing]
+== Customizing
+
+You can customise Tracer settings through the connection string, or using [.api]`lcb_cntl`.
+Here is an example on how to customize our default tracer to reduce the time interval when the information gets logged:
+
+[source,php]
+----
+$cluster = new \Couchbase\Cluster("couchbase://127.0.0.1/default?tracing_threshold_queue_flush_interval=10.0");
+----
+
+Follow along with our example of xref:tracing-from-the-sdk.adoc[Tracing from the PHP SDK with Couchbase Server], to discover how to use tracing in the PHP SDK for Response Time Observability.

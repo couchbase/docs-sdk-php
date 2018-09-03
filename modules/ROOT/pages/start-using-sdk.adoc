@@ -16,12 +16,11 @@ The following examples download and install _couchbase-release_ repsitory, a C a
 [source,bash]
 ----
 # Only needed during first-time setup:
-wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-2-amd64.deb
-sudo dpkg -i couchbase-release-1.0-2-amd64.deb
+wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-4-amd64.deb
+sudo dpkg -i couchbase-release-1.0-4-amd64.deb
 # Will install or upgrade packages
 sudo apt-get update
 sudo apt-get install libcouchbase-dev build-essential php-dev zlib1g-dev
-sudo pecl install pcs-1.3.3 # since couchbase-2.2.4
 sudo pecl install couchbase
 ----
 
@@ -40,11 +39,10 @@ $ apt-cache search php | grep dev
 [source,bash]
 ----
 # Only needed during first-time setup:
-wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-2-x86_64.rpm
-sudo rpm -iv couchbase-release-1.0-2-x86_64.rpm
+wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-4-x86_64.rpm
+sudo rpm -iv couchbase-release-1.0-4-x86_64.rpm
 # Will install or upgrade existing packages
 sudo yum install libcouchbase-devel gcc gcc-c++ php-devel zlib-devel
-sudo pecl install pcs-1.3.3 # since couchbase-2.2.4
 sudo pecl install couchbase
 ----
 
@@ -100,8 +98,8 @@ extension=couchbase.so
 extension=couchbase.dll
 ----
 +
-The Couchbase SDK (as of 2.2.4) depends on both the JSON and https://pecl.php.net/package/pcs[PCS (PHP Code Service) extensions^].
-Releases from 2.0.0 through 2.2.3 depend only on the JSON extension.
+The Couchbase SDK Version 2.2.4 depends on both the JSON and https://pecl.php.net/package/pcs[PCS (PHP Code Service) extensions^].
+Releases from 2.0.0 through 2.2.3 and from 2.3.0 forward depend only on the JSON extension.
 Make sure that the load order is correct.
 For example, if your distribution has just a single `php.ini` file, just insert the line after `extension=json.so`.
 If your distribution uses a `conf.d`-style, name the file with the Couchbase SDK ini so that it will be alphabetically ordered after the JSON extension.
@@ -117,21 +115,27 @@ Information on new features, fixes, known issues as well as information on how t
 
 The Hello Couchbase example consists of one PHP file, [.path]_hello-couchbase.php_.
 The code opens a connection to Couchbase Server, retrieves a document, modifies the document, and stores the updated document in the database.
-Here's the [.path]_hello-couchbase.php_ code:
-
-FASTPATH: Couchbase Server 5.0 introduces _Role-Based Access Control_ (RBAC), whereby bucket-access requires authentication by means of username and, typically, password.
-To access Couchbase Server 5.0-based clusters, you can continue using your existing SDK-version.
-Alternatively, you can upgrade to the most recent SDK-version, which provides an optimized authentication interface, for use with RBAC.
-See https://developer.couchbase.com/documentation/server/5.0/sdk/php/sdk-authentication-overview.html[Authentication^], for information.
+The [.path]_hello-couchbase.php_ code is below.
+Note that to connect to a Couchbase bucket, you must use Couchbase _Role-Based Access Control_ (RBAC).
+This is fully described in the section xref:6.0@server:security:security-authorization.adoc[Authorization].
+A username and password for the current user must be specified.
+Following successful authentication, the bucket is opened.
 
 .hello-couchbase.php
 [source,php]
 ----
 <?php
-$bucketName = "default";
+$bucketName = "bucket-name";
+
+// Establish username and password for bucket-access
+$authenticator = new \Couchbase\PasswordAuthenticator();
+$authenticator->username('username')->password('password');
 
 // Connect to Couchbase Server
 $cluster = new CouchbaseCluster("couchbase://127.0.0.1");
+
+// Authenticate, then open bucket
+$cluster->authenticate($authenticator);
 $bucket = $cluster->openBucket($bucketName);
 
 // Store a document
@@ -159,7 +163,7 @@ echo "Creating primary index\n";
 // Before issuing a N1QL Query, ensure that there is
 // is actually a primary index.
 try {
-    // Do not override default name, fail if it is exists already, and wait for completion
+    // Do not override default name; fail if it already exists, and wait for completion
     $bucket->manager()->createN1qlPrimaryIndex('', false, false);
     echo "Primary index has been created\n";
 } catch (CouchbaseException $e) {
@@ -232,7 +236,7 @@ object(CouchbaseN1qlQuery)#8 (2) {
   ["options"]=>
   array(2) {
     ["statement"]=>
-    string(45) "SELECT * FROM `default` WHERE $p IN interests"
+    string(45) "SELECT * FROM `bucket-name` WHERE $p IN interests"
     ["$p"]=>
     string(16) "African Swallows"
   }
@@ -245,7 +249,7 @@ object(stdClass)#11 (3) {
   array(1) {
     [0]=>
     object(stdClass)#10 (1) {
-      ["default"]=>
+      ["bucket-name"]=>
       object(stdClass)#9 (2) {
         ["email"]=>
         string(24) "kingarthur@couchbase.com"

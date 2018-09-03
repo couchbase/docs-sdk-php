@@ -5,12 +5,12 @@
 [abstract]
 Perform Couchbase Query Language (N1QL) queries via the PHP SDK.
 
-NOTE: See Couchbase Developer documentation for a quick intro to xref:4.6@server:architecture:querying-data-with-n1ql.adoc[N1QL].
+NOTE: See Couchbase Developer documentation for a quick intro to xref:n1ql-query.adoc[N1QL].
 
 To issue N1QL queries, you should create a [.api]`CouchbaseN1qlQuery` object, and pass it to the [.api]`query` method in the [.api]`CouchbaseBucket` class.
 A few variants of such a query exist:
 
-* Simple queries, which are only strings, and do not use placeholders;
+* Simple queries, which are only strings and do not use placeholders;
 * Parameterized queries, which use numbered or named placeholders.
 
 You can create each via the corresponding factory method on `CouchbaseN1qlQuery`, passing in the statement as a string.
@@ -56,6 +56,13 @@ You can set other options in the query object as well:
 * `consistency` controls the xref:n1ql-query.adoc#consistency[version of the documents to be scanned], and can either be [.api]`CouchbaseN1qlQuery::NOT_BOUNDED` (which is the default) or [.api]`CouchbaseN1qlQuery::REQUEST_PLUS` (which ensures that only the most recent version of documents are used).
 * `adhoc` determines whether the query will be xref:n1ql-query.adoc#prepare-stmts[optimized] as a prepared statement at the SDK level.
 If this is set to `false` then a prepared reference to this query will be stored on the SDK and used for subsequent queries.
+* `max_parallelism` sets the number of logical CPUs which are used in parallel for the query, this setting can override the xref:6.0@server:n1ql:n1ql-rest-api/executen1ql.adoc[default] (although only in the Enterprise Edition), but please contact https://support.couchbase.com/[^] before changing this on a production system.
+It can be used as follows:
++
+----
+$query= CouchbaseN1qlQuery::fromString('SELECT * FROM default');
+$query->options['max_parallelism'] = "0";
+----
 
 == Cross-bucket queries
 
