@@ -1,7 +1,0 @@
-= Setting up logging
-:page-topic-type: concept
-
-[abstract]
-The PHP SDK does not currently have any built logging available.
-
-You can set the environment variable [.param]`LCB_LOGLEVEL` to various levels from 0 (none - default) to 5 (debug level) to have varying levels of debug output sent to the console from the C SDK which is used internally by the PHP SDK.

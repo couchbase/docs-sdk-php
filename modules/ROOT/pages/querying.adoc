@@ -1,5 +1,0 @@
-= Querying buckets
-:page-topic-type: concept
-
-[abstract]
-You can retrieve sets of information from Couchbase Server by using view queries or N1QL queries.

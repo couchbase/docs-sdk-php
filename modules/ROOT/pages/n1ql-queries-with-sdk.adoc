@@ -1,0 +1,58 @@
+= N1QL Queries Using the PHP SDK with Couchbase Server
+:navtitle: N1QL from the SDKs
+:page-topic-type: concept
+
+[abstract]
+Perform Couchbase Query Language (N1QL) queries via the PHP SDK.
+
+NOTE: See Couchbase Developer documentation for a quick intro to xref:4.5@server:architecture:querying-data-with-n1ql.adoc[N1QL].
+
+To issue N1QL queries, you should create a [.api]`CouchbaseN1qlQuery` object, and pass it to the [.api]`query` method in the [.api]`CouchbaseBucket` class.
+A few variants of such a query exist:
+
+* Simple queries, which are only strings and do not use placeholders;
+* Parameterized queries, which use numbered or named placeholders.
+
+You can create each via the corresponding factory method on `CouchbaseN1qlQuery` passing into it the statement as a string.
+
+The return value from [.api]`query()` is an instance of [.api]`stdClass`.
+Iterating over the [.api]`rows` property of the object will yield the rows returned by the server for the given query.
+Each row is either a [.api]`stdClass` instance (which is the default) or a nested array depending on the third argument [.api]`$json_asarray`.
+
+== Placeholders
+
+You can use N1QL placeholders in the query.
+Placeholders allow you to specify variable constraints for an otherwise constant query.
+A named or poditional parameter is a placeholder for a value in the WHERE, LIMIT or OFFSET clause of a query.
+To use placeholders, manually construct a `CouchbaseN1QLQuery` object with the base query string, and pass an array of arguments for named or positional placeholders to [.api]`namedParams` or [.api]`positionalParams` methods respectively:
+
+.N1QL Query with positional and named parameters
+[source,php]
+----
+// Positional parameters example
+$query = CouchbaseN1qlQuery::fromString('select * from `travel-sample` limit $1');
+$query->positionalParams(array(9));
+$result = $bucket->query($query);
+foreach ($result->rows as $row) {
+    // ...
+}
+
+// Named parameters example
+$query = CouchbaseN1qlQuery::fromString('select * from `travel-sample` limit $limit');
+$query->namedParams(array('limit' => 9));
+$result = $bucket->query($query);
+foreach ($result->rows as $row) {
+    // ...
+}
+----
+
+TIP: Be careful with placeholders and PHP interpolation, as they both use `$` (dollar sign) for the substitution variable.
+If you want to use double quotes for your query string, make sure you escape N1QL placeholders properly.
+
+== Query Options
+
+You can set other options in the query object as well:
+
+* `consistency` controls the xref:n1ql-query.adoc#consistency[version of the documents to be scanned], and can either be [.api]`CouchbaseN1qlQuery::NOT_BOUNDED` (which is the default) or [.api]`CouchbaseN1qlQuery::REQUEST_PLUS` (which ensures that only the most recent version of documents are used).
+* `adhoc` determines whether the query will be xref:n1ql-query.adoc#prepare-stmts[optimized] as a prepared statement at the SDK level.
+If this is set to `false` then a prepared reference to this query will be stored on the SDK and used for subsequent queries.

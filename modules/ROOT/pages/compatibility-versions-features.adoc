@@ -1,0 +1,116 @@
+= Compatibility of Couchbase Features, Couchbase Versions and the Couchbase PHP SDK
+:navtitle: Compatibility
+
+[abstract]
+Compatibility Information for the Couchbase PHP SDK
+
+== Couchbase Version/SDK Version Matrix
+
+Couchbase SDKs are tested against a variety of different environments to ensure both backward and forward compatibility with different versions of Couchbase Server.
+The matrix below denotes the version of Couchbase Server, the version of the PHP SDK and whether the SDK is:
+
+* ✖ *Unsupported*: This combination is not tested, and is not within the scope of technical support if you have purchased a support agreement.
+* ◎ *Compatible*: This combination has been tested previously, and should be compatible.
+This combination is not supported or recommended by our technical support organization.
+It is best to upgrade either the SDK or the Couchbase version you are using.
+* ✔ *Supported*:This combination is subject to ongoing quality assurance, and is fully supported by our technical support organization.
+
+.Couchbase PHP SDK and Couchbase Server Compatibility Version Matrix
+[#table_sdk_versions]
+|===
+| _CB/SDK_ | *SDK 2.0* | *SDK 2.1* | *SDK 2.2*
+
+| *CB 2.5*
+| *◎*
+| *◎*
+| *◎*
+
+| *CB 3.0*
+| *◎*
+| *◎*
+| *◎*
+
+| *CB 3.1*
+| *◎*
+| *✔*
+| *✔*
+
+| *CB 4.0*
+| *✔*
+| *✔*
+| *✔*
+
+| *CB 4.1*
+| *✔*
+| *✔*
+| *✔*
+
+| *CB 4.5*
+| *✔*
+| *✔*
+| *✔*
+|===
+
+== Couchbase Feature Availability Matrix
+
+.Couchbase PHP SDK and Couchbase Server Feature Availability Matrix
+|===
+| Server → | 2.0 | 2.5 | 3.0 | 3.1 | 4.0 | 4.1 | 4.5
+
+8+| *Basic Features*
+
+| CRUD Operations
+7+| PHP SDK 2.0
+
+| View Querying APIs
+7+| PHP SDK 2.0
+
+| Geospatial Views
+3+| Not Supported
+4+| Since PHP SDK 2.0
+
+8+| *Advanced Features*
+
+| Durability Requirements
+7+| PHP SDK 2.0.3
+
+| Carrier Publication Configuration
+2+| Not Supported
+5+| Since PHP SDK 2.0
+
+| SSL Connectivity
+3+| Not Supported
+4+| Since PHP SDK 2.0.7
+
+| Bulk Operations
+7+| PHP SDK 2.0
+
+| N1QL Querying
+4+| Not Supported
+3+| Since PHP SDK 2.0.7
+
+| Multi-Dimensional Scaling
+4+| Not Supported
+3+| Since PHP SDK 2.1
+
+| Sub-document API
+6+| Not Supported
+| Since PHP SDK 2.2
+
+| Fulltext Search
+6+| Not Supported
+| Since PHP SDK 2.2
+
+8+| *Administrative Features*
+
+| Administrative API
+7+| Since PHP SDK 2.0
+|===
+
+== Couchbase PHP SDK Version 1.0
+
+Version 1.x of the Couchbase PHP SDK is no longer supported.
+It is recommended if you are still using this version to upgrade as soon as possible to the latest version of the SDK.
+See the http://www.couchbase.com/support-policy[Couchbase Support Policy^] for details.
+
+include::4.5@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]

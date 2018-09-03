@@ -1,0 +1,141 @@
+= MapReduce Views Using the PHP SDK with Couchbase Server
+:navtitle: MapReduce Views
+
+[abstract]
+You can use MapReduce views to create queryable secondary indexes in Couchbase Server.
+
+include::4.5@sdk:shared:partial$views.adoc[tag=views-intro]
+
+include::4.5@sdk:shared:partial$views.adoc[tag=example-travel]
+
+include::4.5@sdk:shared:partial$views.adoc[tag=example-geo-travel]
+
+== Querying Views from the PHP SDK
+
+Once you have a view defined, it can be queried from the PHP SDK by using the [.api]`query(CouchbaseViewQuery $query)` method on the CouchbaseBucket class.
+Here is an example:
+
+.Querying simply MapReduce view
+[source,php]
+----
+$query = CouchbaseViewQuery::from("landmarks", "by_name")->limit(10);
+$landmarks = $bucket->query($query);
+foreach ($landmarks->rows as $landmark)
+{
+    printf("%s\n", $landmark->key);
+}
+----
+
+The [.api]`CouchbaseBucket.query` method takes an instance of CouchbaseViewQuery, executes it and returns back the result of query as either [.api]`stdClass` instance (which is default) or nested array depending on third argument [.api]`$json_asarray`.
+Some useful methods and properties of the [.api]`CouchbaseViewQuery` class include (others can be seen in the reference documentation):
+
+* [.api]`order`: set order of documents in result, accepts [.api]`CouchbaseViewQuery::ORDER_ASCENDING` or [.api]`CouchbaseViewQuery::ORDER_DESCENDING`
+* [.api]`skip`: skip this number of records before starting to return the results
+* [.api]`limit`: limit the number of the returned documents to the specified number
+* [.api]`key`: return only documents that match the specified key.
+* [.api]`keys`: return only documents that match one of keys specified within the given array
+
+The value returned by [.api]``query``implementation that contains the results of the query and number of rows.
+Depending on [.api]`$json_asarray` they should be accessed with property (default) or array syntax.
+
+* [.api]`rows`: the results of the query.
+* [.api]`total_rows`: the total count of all rows.
+
+The entry of [.api]`rows` collection represents each row returned by the view request and contains properties for the document [.api]`id`, the [.api]`key` and the [.api]`value` if it was emitted.
+Here is another example of a more advanced query:
+
+.Querying a MapReduce view
+[source,php]
+----
+$query = CouchbaseViewQuery::from("landmarks", "by_name")
+    ->limit(10)->range("A", "\u0fff");
+$landmarks = $bucket->query($query);
+foreach ($landmarks->rows as $landmark)
+{
+    printf("%s\n", $landmark->key);
+}
+----
+
+Here's some sample output for the previous query:
+
+....
+A R M Chicken
+A. Cavalli &
+A16
+Abacus Books
+Abbey and Palace of Holyroodhouse
+Abbey Grounds
+Abbot Kinney
+Abbots Tandoori
+ABC Bakery Cafe
+Aberconwy House
+....
+
+== Querying Geospatial Views
+
+To query a geospatial view, you will need to construct a [.api]`CouchbaseViewQuery` object using [.api]`fromSpatial` factory method.
+Spatial queries accept additional builder method [.param]`bbox` which allow you to limit the enclosing bounding boxes of the result.
+The argument to this method is and array of four [.api]``double``'s with each element corresponding to a component emitted by the key (longitude and latitude).
+
+On output, spatial queries yield objects similar to how regular view query does, with an added `Geometry` property.
+
+.Advanced querying a spatial view
+[source,php]
+----
+$query = CouchbaseViewQuery::fromSpatial("spatial", "routes")
+       ->limit(10)->bbox(array(0, -90, 180, 90));
+$routes = $bucket->query($query);
+foreach ($routes->rows as $route)
+{
+    var_dump($route->value);
+}
+----
+
+The output:
+
+....
+array(3) {
+  [0]=>
+  string(5) "US964"
+  [1]=>
+  string(3) "DCA"
+  [2]=>
+  string(3) "CRW"
+}
+array(3) {
+  [0]=>
+  string(5) "DL790"
+  [1]=>
+  string(3) "MSP"
+  [2]=>
+  string(3) "CLE"
+}
+...
+....
+
+In the example above, we construct a [.api]`CouchbaseViewQuery` that will target the "routes" view on the "spatial" design document.
+
+.Definition of spatial/routes view
+[source,javascript]
+----
+/*
+  Emit all the flights. You can filter them by day and time.
+*/
+function(doc, meta) {
+    if (doc.type === 'route') {
+        for (var i = 0; i < doc.schedule.length; i++) {
+            var schedule = doc.schedule[i];
+            var time = parseInt(schedule.utc.replace(/:/g, ''));
+            var key = [schedule.day, time];
+            var value = [
+                schedule.flight,
+                doc.sourceairport,
+                doc.destinationairport
+            ];
+            emit(key, value);
+        }
+    }
+}
+----
+
+We then pass the start and end coordinates in via the [.api]`bbox` method and finally we limit are results to 10 items with the [.api]`limit` method.
