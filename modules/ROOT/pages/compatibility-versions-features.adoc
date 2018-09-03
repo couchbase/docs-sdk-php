@@ -49,68 +49,73 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 | *✔*
 | *✔*
 | *✔*
+
+| *CB 4.6*
+| *✔*
+| *✔*
+| *✔*
 |===
 
 == Couchbase Feature Availability Matrix
 
 .Couchbase PHP SDK and Couchbase Server Feature Availability Matrix
 |===
-| Server → | 2.0 | 2.5 | 3.0 | 3.1 | 4.0 | 4.1 | 4.5
+| Server → | 2.0 | 2.5 | 3.0 | 3.1 | 4.0 | 4.1 | 4.5 | 4.6
 
-8+| *Basic Features*
+9+| *Basic Features*
 
 | CRUD Operations
-7+| PHP SDK 2.0
+8+| PHP SDK 2.0
 
 | View Querying APIs
-7+| PHP SDK 2.0
+8+| PHP SDK 2.0
 
 | Geospatial Views
 3+| Not Supported
-4+| Since PHP SDK 2.0
+5+| Since PHP SDK 2.0
 
-8+| *Advanced Features*
+9+| *Advanced Features*
 
 | Durability Requirements
-7+| PHP SDK 2.0.3
+8+| PHP SDK 2.0.3
 
 | Carrier Publication Configuration
 2+| Not Supported
-5+| Since PHP SDK 2.0
+6+| Since PHP SDK 2.0
 
 | SSL Connectivity
 3+| Not Supported
-4+| Since PHP SDK 2.0.7
+5+| Since PHP SDK 2.0.7
 
 | Bulk Operations
-7+| PHP SDK 2.0
+8+| PHP SDK 2.0
 
 | N1QL Querying
 4+| Not Supported
-3+| Since PHP SDK 2.0.7
+4+| Since PHP SDK 2.0.7
 
 | Multi-Dimensional Scaling
 4+| Not Supported
-3+| Since PHP SDK 2.1
+4+| Since PHP SDK 2.1
 
 | Sub-document API
 6+| Not Supported
-| Since PHP SDK 2.2
+2+| Since PHP SDK 2.2
 
 | Fulltext Search
 6+| Not Supported
-| Since PHP SDK 2.2
+2+| Since PHP SDK 2.2
 
-8+| *Administrative Features*
+9+| *Administrative Features*
 
 | Administrative API
-7+| Since PHP SDK 2.0
+8+| Since PHP SDK 2.0
 |===
 
 == Couchbase PHP SDK Version 1.0
 
 Version 1.x of the Couchbase PHP SDK is no longer supported.
-It is recommended if you are still using this version to upgrade as soon as possible to the latest version of the SDK.
+If you are still using this version, you should upgrade as soon as possible to the latest version of the SDK.
 See the http://www.couchbase.com/support-policy[Couchbase Support Policy^] for details.
 
-include::4.5@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]
+include::4.6@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]

@@ -9,4 +9,4 @@ The `CouchbaseException` object will include a `code` property which can be used
 
 The most common errors that will occur should be errors relating to keys existing when they shouldn't, or not existing when they should, in addition to these common errors, there are additionally a large number of connection or timeout related errors that can occur.
 
-include::4.5@sdk:shared:partial$couchbase-errors.adoc[tag=group]
+include::4.6@sdk:shared:partial$couchbase-errors.adoc[tag=group]

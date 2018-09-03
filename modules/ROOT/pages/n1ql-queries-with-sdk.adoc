@@ -5,15 +5,15 @@
 [abstract]
 Perform Couchbase Query Language (N1QL) queries via the PHP SDK.
 
-NOTE: See Couchbase Developer documentation for a quick intro to xref:4.5@server:architecture:querying-data-with-n1ql.adoc[N1QL].
+NOTE: See Couchbase Developer documentation for a quick intro to xref:4.6@server:architecture:querying-data-with-n1ql.adoc[N1QL].
 
 To issue N1QL queries, you should create a [.api]`CouchbaseN1qlQuery` object, and pass it to the [.api]`query` method in the [.api]`CouchbaseBucket` class.
 A few variants of such a query exist:
 
-* Simple queries, which are only strings and do not use placeholders;
+* Simple queries, which are only strings, and do not use placeholders;
 * Parameterized queries, which use numbered or named placeholders.
 
-You can create each via the corresponding factory method on `CouchbaseN1qlQuery` passing into it the statement as a string.
+You can create each via the corresponding factory method on `CouchbaseN1qlQuery`, passing in the statement as a string.
 
 The return value from [.api]`query()` is an instance of [.api]`stdClass`.
 Iterating over the [.api]`rows` property of the object will yield the rows returned by the server for the given query.
@@ -23,7 +23,7 @@ Each row is either a [.api]`stdClass` instance (which is the default) or a neste
 
 You can use N1QL placeholders in the query.
 Placeholders allow you to specify variable constraints for an otherwise constant query.
-A named or poditional parameter is a placeholder for a value in the WHERE, LIMIT or OFFSET clause of a query.
+A named or positional parameter is a placeholder for a value in the WHERE, LIMIT or OFFSET clause of a query.
 To use placeholders, manually construct a `CouchbaseN1QLQuery` object with the base query string, and pass an array of arguments for named or positional placeholders to [.api]`namedParams` or [.api]`positionalParams` methods respectively:
 
 .N1QL Query with positional and named parameters
@@ -56,3 +56,112 @@ You can set other options in the query object as well:
 * `consistency` controls the xref:n1ql-query.adoc#consistency[version of the documents to be scanned], and can either be [.api]`CouchbaseN1qlQuery::NOT_BOUNDED` (which is the default) or [.api]`CouchbaseN1qlQuery::REQUEST_PLUS` (which ensures that only the most recent version of documents are used).
 * `adhoc` determines whether the query will be xref:n1ql-query.adoc#prepare-stmts[optimized] as a prepared statement at the SDK level.
 If this is set to `false` then a prepared reference to this query will be stored on the SDK and used for subsequent queries.
+
+== Cross-bucket queries
+
+Since version 2.3.0, the PHP SDK implements the `\Couchbase\Authenticator` interface, which allows you to perform N1QL queries that involve multiple buckets and joins.
+Such query objects have to change their behaviour using `crossBucket(true)` method.
+The following example demonstrates the workflow:
+
+[source,php]
+----
+$authenticator = new \Couchbase\ClassicAuthenticator();
+$authenticator->bucket('people', 'secret');
+$authenticator->bucket('orders', '123456');
+
+$cluster = new \Couchbase\Cluster("couchbase://localhost");
+$cluster->authenticate($authenticator);
+
+$bucket = $cluster->openBucket('orders');
+
+$query = \Couchbase\N1qlQuery::fromString(
+    "SELECT * FROM `orders` JOIN `people` ON KEYS `orders`.person_id ORDER BY `orders`.name");
+$query->consistency(\Couchbase\N1qlQuery::REQUEST_PLUS);
+$query->crossBucket(true);
+
+$res = $bucket->query($query);
+// $res inludes rows from orders and people buckets
+----
+
+When executed, it will render the result from `$res`, which contains documents from both buckets (orders and people):
+
+....
+object(stdClass)#14 (5) {
+  ["rows"]=>
+  array(3) {
+    [0]=>
+    object(stdClass)#6 (2) {
+      ["orders"]=>
+      object(stdClass)#5 (2) {
+        ["name"]=>
+        string(10) "Green Soap"
+        ["person_id"]=>
+        string(4) "john"
+      }
+      ["people"]=>
+      object(stdClass)#7 (2) {
+        ["city"]=>
+        string(8) "New York"
+        ["name"]=>
+        string(8) "John Doe"
+      }
+    }
+    [1]=>
+    object(stdClass)#9 (2) {
+      ["orders"]=>
+      object(stdClass)#8 (2) {
+        ["name"]=>
+        string(8) "Red Soap"
+        ["person_id"]=>
+        string(4) "jane"
+      }
+      ["people"]=>
+      object(stdClass)#10 (2) {
+        ["city"]=>
+        string(5) "Miami"
+        ["name"]=>
+        string(8) "Jane Doe"
+      }
+    }
+    [2]=>
+    object(stdClass)#12 (2) {
+      ["orders"]=>
+      object(stdClass)#11 (2) {
+        ["name"]=>
+        string(7) "Rope 5m"
+        ["person_id"]=>
+        string(4) "john"
+      }
+      ["people"]=>
+      object(stdClass)#13 (2) {
+        ["city"]=>
+        string(8) "New York"
+        ["name"]=>
+        string(8) "John Doe"
+      }
+    }
+  }
+  ["requestId"]=>
+  string(36) "820416d5-6535-4519-be50-a2e9f03d0005"
+  ["status"]=>
+  string(7) "success"
+  ["signature"]=>
+  array(1) {
+    ["*"]=>
+    string(1) "*"
+  }
+  ["metrics"]=>
+  array(5) {
+    ["elapsedTime"]=>
+    string(11) "21.529512ms"
+    ["executionTime"]=>
+    string(11) "21.425838ms"
+    ["resultCount"]=>
+    int(3)
+    ["resultSize"]=>
+    int(691)
+    ["sortCount"]=>
+    int(3)
+  }
+}
+....

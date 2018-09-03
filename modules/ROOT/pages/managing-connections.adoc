@@ -3,7 +3,7 @@
 
 [abstract]
 This section describes how to connect the PHP SDK to a Couchbase cluster and bucket.
-It contains best practices as well as information on the connection string,  SSL and other advanced connection options.
+It contains best practices as well as information on the connection string, SSL and other advanced connection options.
 
 To manage Couchbase Server connections, you need to configure the client, connect to a bucket, and configure SSL.
 
@@ -16,10 +16,36 @@ To configure the client, instantiate a new `Cluster` object:
 $myCluster = new CouchbaseCluster('couchbase://10.4.4.1,10.4.4.2,10.4.4.3');
 ----
 
-In addition to the connection string passed to the `Cluster` object, you can include a user name and password.
-The user name and password are required to perform management operations against your cluster.
-If you do not use the cluster management aspects of the SDK, the user name and password parameters are optional.
+In addition to the connection string passed to the `Cluster` object, you can include a username and password.
+The username and password are required to perform management operations against your cluster.
+If you do not use the cluster management aspects of the SDK, the username and password parameters are optional.
 Keep in mind that these credentials are the same ones you use to log in to the Couchbase administrator console, not those specified for the bucket itself.
+
+== Authentication
+
+Regular authentication is where you provide a password to the `openBucket()` and `manager()` methods.
+It is also possible to define all credentials in single place, and associate with a container, which can be used for all future connections.
+
+Since version 2.3.0, the PHP SDK provides the interface `\Couchbase\Authenticator` which is implemented by all credentials containers.
+The library can pull authentication parameters from it when necessary.
+At the moment there is only one implementation of this interface: `\Couchbase\ClassicAuthenticator`, but upcoming releases will also have RBAC support.
+The use of the authenticator is simple:
+
+[source,php]
+----
+$authenticator = new \Couchbase\ClassicAuthenticator();
+$authenticator->cluster('Administrator', 'password');
+$authenticator->bucket('protected', 'secret');
+
+$cluster = new \Couchbase\Cluster("couchbase://localhost");
+$cluster->authenticate($authenticator);
+
+$cluster->openBucket('protected'); // successfully opens connection
+$cluster->manager()->createBucket('hello'); // automatically use admin credentials
+----
+
+It is still possible to provide a password to the `openBucket()` or `manager()` method, which will take precedence over the authenticator.
+Such behaviour is discouraged, and future implementations of the `\Couchbase\Authenticator` interface are likely to prevent mixing of authentication sources.
 
 == Connecting to a Bucket
 
@@ -52,4 +78,4 @@ Creating a new [.api]`Bucket` object is relatively expensive, and keeping many i
 
 PHP SDK by default uses persistent connections to reuse underlying IO objects if the connection strings are the same.
 
-include::2.6@c-sdk::page$managing-connections.adoc[tag=group]
+include::2.7@c-sdk::page$managing-connections.adoc[tag=group]

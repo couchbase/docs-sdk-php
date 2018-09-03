@@ -1,0 +1,8 @@
+= PHP Sample App Backend Tutorial
+:navtitle: Sample App Backend
+
+[abstract]
+The PHP SDK sample application backend features both simple and advanced programming concepts, and demonstrates how an application using the PHP SDK can be constructed.
+
+The PHP SDK sample application backend is available for Couchbase Server 5.0.
+See the documentation provided at https://developer.couchbase.com/documentation/server/5.0/sdk/php/sample-app-backend.html[Sample App Backend^].

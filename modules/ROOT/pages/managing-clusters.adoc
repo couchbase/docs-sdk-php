@@ -4,7 +4,7 @@
 [abstract]
 This section covers the convenience functionality in the Couchbase PHP SDK for managing buckets, managing indexes used by N1QL and managing views.
 
-include::4.5@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
+include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
 
 The PHP SDK also comes with some convenience functionality for common Couchbase management requests.
 
@@ -58,7 +58,7 @@ array(
 );
 ----
 
-include::4.5@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning]
+include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning]
 
 Only the [.param]`$name` and [.param]`$opts['bucketType']` parameters are mandatory for configuring a bucket.
 This list of parameters is recognized for the [.param]`$opts` array, corresponding to those available in the REST API:
@@ -105,7 +105,7 @@ $cluster->removeBucket('hello');
 
 == N1QL Index Management
 
-include::4.5@sdk:shared:partial$flush-info-pars.adoc[tag=index-management]
+include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=index-management]
 
 You can manage indexes in the PHP SDK using the [.api]`CouchbaseBucketManager` class, with its various N1QL related methods: [.api]`listN1qlIndexes()`, [.api]`+createN1qlIndex(...)+`, etc\...
 
@@ -123,7 +123,7 @@ $manager->createN1qlIndex("fullName", array("firstName", "lastName" ), '`state` 
 
 == View Management
 
-include::4.5@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
+include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
 
 In the PHP SDK, design documents and view definitions are represented by associative arrays.
 All operations on design documents are performed on a `CouchbaseBucketManager` instance.
@@ -172,7 +172,7 @@ $designDoc = array(
 $manager->insertDesignDocument('landmarks_spatial', $designDoc);
 ----
 
-include::4.5@sdk:shared:partial$flush-info-pars.adoc[tag=one-view-update-warning]
+include::4.6@sdk:shared:partial$flush-info-pars.adoc[tag=one-view-update-warning]
 
 [source,php]
 ----

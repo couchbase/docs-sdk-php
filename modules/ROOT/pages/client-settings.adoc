@@ -5,4 +5,4 @@ The PHP SDK may be configured using the connection string when instantiating a [
 
 Below follows the C settings section:
 
-include::2.6@c-sdk::page$client-settings.adoc[tag=group]
+include::2.7@c-sdk::page$client-settings.adoc[tag=group]
