@@ -1,5 +1,5 @@
 name: php-sdk
-version: '2.4'
+version: '2.5'
 title: PHP SDK
 start_page: start-using-sdk.adoc
 nav:
