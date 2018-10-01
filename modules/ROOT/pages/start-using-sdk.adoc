@@ -109,7 +109,7 @@ On UNIX-like systems no additional steps are necessary, because the libcouchbase
 For Windows though, it must be copied into either into a location from the `PATH` for the PHP executable or into a directory with like executables (like apache2, IIS or php.exe).
 This is controlled by your PHP distribution's setup, so see its documentation for further information.
 
-Information on new features, fixes, known issues as well as information on how to install older release versions is link:/server/other-products/release-notes-archives/php-sdk[in the release notes].
+Information on new features, fixes, known issues as well as information on how to install older release versions is relnotes-php-sdk.adocl#_version_2_4_7_7_june_2018[in the release notes].
 
 == Hello Couchbase
 
