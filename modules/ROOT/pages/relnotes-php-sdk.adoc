@@ -1,1 +1,1 @@
-include::2.5@php-sdk:pages$relnotes-php-sdk.adoc[]
+include::2.5@php-sdk::page$relnotes-php-sdk.adoc[]
