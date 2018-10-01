@@ -1,0 +1,702 @@
+= Couchbase PHP Release Notes and Archives
+
+== SDK Installation
+
+=== Installing on Linux-like systems
+
+Before installing the PHP SDK, you must install the link:/server/other-products/release-notes-archives/c-sdk[C SDK]; version 2.9.0 or higher is required for 2.4.7.
+
+After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
+
+[source,php]
+----
+ $ pecl install couchbase
+----
+
+=== Installing on Microsoft Windows
+
+When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment. You may also download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if you have a complete build toolchain.
+
+|===
+|Platform|x86|x64
+|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-nts-vc14-x86.zip[php_couchbase-2.5.1-7.1-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-nts-vc14-x64.zip[php_couchbase-2.5.1-7.1-nts-vc14-x64.zip]
+|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-zts-vc14-x86.zip[php_couchbase-2.5.1-7.1-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-zts-vc14-x64.zip[php_couchbase-2.5.1-7.1-zts-vc14-x64.zip]
+|PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-nts-vc14-x86.zip[php_couchbase-2.5.1-7.0-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-nts-vc14-x64.zip[php_couchbase-2.5.1-7.0-nts-vc14-x64.zip]
+|PHP 7.0 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-zts-vc14-x86.zip[php_couchbase-2.5.1-7.0-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-zts-vc14-x64.zip[php_couchbase-2.5.1-7.0-zts-vc14-x64.zip]
+|PHP 5.6 VC11 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-nts-vc11-x86.zip[php_couchbase-2.5.1-5.6-nts-vc11-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-nts-vc11-x64.zip[php_couchbase-2.5.1-5.6-nts-vc11-x64.zip]
+|PHP 5.6 VC11 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-zts-vc11-x86.zip[php_couchbase-2.5.1-5.6-zts-vc11-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-zts-vc11-x64.zip[php_couchbase-2.5.1-5.6-zts-vc11-x64.zip]
+|===
+
+Since release 2.3.3, by default binaries for Windows do not require `php_igbinary.dll` to be installed. If you still need it as Couchbase serializer, you can rebuild binaries from source, or use the following binaries
+
+|===
+Platform|x86|x64
+|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-nts-vc14-x86-igbinary.zip[php_couchbase-2.5.1-7.1-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-nts-vc14-x64-igbinary.zip[php_couchbase-2.5.1-7.1-nts-vc14-x64-igbinary.zip]
+|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-zts-vc14-x86-igbinary.zip[php_couchbase-2.5.1-7.1-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.1-zts-vc14-x64-igbinary.zip[php_couchbase-2.5.1-7.1-zts-vc14-x64-igbinary.zip]
+|PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-nts-vc14-x86-igbinary.zip[php_couchbase-2.5.1-7.0-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-nts-vc14-x64-igbinary.zip[php_couchbase-2.5.1-7.0-nts-vc14-x64-igbinary.zip]
+|PHP 7.0 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-zts-vc14-x86-igbinary.zip[php_couchbase-2.5.1-7.0-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-7.0-zts-vc14-x64-igbinary.zip[php_couchbase-2.5.1-7.0-zts-vc14-x64-igbinary.zip]
+|PHP 5.6 VC11 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-nts-vc11-x86-igbinary.zip[php_couchbase-2.5.1-5.6-nts-vc11-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-nts-vc11-x64-igbinary.zip[php_couchbase-2.5.1-5.6-nts-vc11-x64-igbinary.zip]
+|PHP 5.6 VC11 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-zts-vc11-x86-igbinary.zip[php_couchbase-2.5.1-5.6-zts-vc11-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.5.1-5.6-zts-vc11-x64-igbinary.zip[php_couchbase-2.5.1-5.6-zts-vc11-x64-igbinary.zip]
+|===
+
+=== Post Installation for All Platforms
+
+Once the PHP SDK has been installed, you need to specify that the PHP interpreter should load the Couchbase SDK as an extension. To do this:
+
+. Locate your php.ini file. This can be done using the command `php --ini`
+
+[source,bash]
+----
+ $ php --ini
+ Configuration File (php.ini) Path: /usr/local/etc/php/7.0
+ Loaded Configuration File:         /usr/local/etc/php/7.0/php.ini
+ Scan for additional .ini files in: /usr/local/etc/php/7.0/conf.d
+ Additional .ini files parsed:      (none)
+----
+
+. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section. If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file. 
+Note that the line differs for Linux/Mac OS from Microsoft Windows.
+
+[source,bash]
+----
+extension=couchbase.so
+
+extension=couchbase.dll
+----
+
+=== Note on Extension Dependencies
+
+If the igbinary extension is available at the time the Couchbase PHP extension is built, it will be built with support for `igbinary` serialization.  If that extension is not available at build time, later when loading the extension you may see a warning:
+
+[source,bash]
+----
+ [cb,WARN] (pcbc/ext L:383) igbinary serializer is not found
+----
+
+This warning is safe to ignore if you are not planning to use igbinary serialization in your application.
+
+== Version 2.5.1 (10 August 2018)
+
+This release contains FTS improvements. Note, that minimum version of
+libcouchbase required is 2.9.2.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.5.1/files/couchbase.html[API Reference]
+
+* https://issues.couchbase.com/browse/PCBC-557[PCBC-557]: Better FTS example
+* https://issues.couchbase.com/browse/PCBC-533[PCBC-533]: Implement experimental FTS index management API
+
+== Version 2.5.0 (5 July 2018)
+
+This release contains new features and bug fixes. Note, that minimum
+version of libcouchbase required is 2.9.2.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.5.0/files/couchbase.html[API Reference]
+
+* https://issues.couchbase.com/browse/PCBC-551[PCBC-551]: Do not
+complain about missing igbinary on start
+* https://issues.couchbase.com/browse/PCBC-552[PCBC-552]: Pass
+logger to lcb_create to catch all log messages
+* https://issues.couchbase.com/browse/PCBC-553[PCBC-553]: Check if
+crypto provider implements IV and signatures
+* https://issues.couchbase.com/browse/PCBC-554[PCBC-554]: Fix search
+query descending order to use "desc"
+* https://issues.couchbase.com/browse/PCBC-544[PCBC-544]: Implement
+CertAuthenticator for extra checks
+* Fixes for PHP 7.3
+
+== Version 2.4.7 (7 June 2018)
+
+This release contains new features and bug fixes. Note, that minimum
+version of libcouchbase required is 2.9.0.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.4.7/files/couchbase.html[API Reference]
+
+* https://issues.couchbase.com/browse/PCBC-534[PCBC-534]: Add
+profile N1QL query parameter.
+* https://issues.couchbase.com/browse/PCBC-538[PCBC-538]: do not
+dereference NULL values after encoding.
+* https://issues.couchbase.com/browse/PCBC-549[PCBC-549],
+https://issues.couchbase.com/browse/PCBC-541[PCBC-541]: Update
+crypto interfaces.
+
+== Version 2.4.6 (13 April 2018)
+
+This release contains new features and bug fixes. Note, that minimum
+version of libcouchbase required is 2.8.6.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.4.6/files/couchbase.html[API Reference]
+
+* https://issues.couchbase.com/browse/PCBC-523[PCBC-523]: Add
+tracing support for queries and the rest of KV commands.
+* https://issues.couchbase.com/browse/PCBC-536[PCBC-536]: Make it
+clear that timeout properties use microseconds.
+* https://issues.couchbase.com/browse/PCBC-531[PCBC-531]: Field
+encryption (See
+https://packagist.org/packages/couchbase/couchbase-encryption).
+* https://issues.couchbase.com/browse/PCBC-537[PCBC-537]: Implement
+Bucket#getName() returning bucket name.
+
+== Version 2.4.5 (9 March 2018)
+
+This release contains new features and bug fixes. Note, that minimum
+version of libcouchbase required is 2.8.5.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.4.5/files/couchbase.html[API Reference]
+
+* https://issues.couchbase.com/browse/PCBC-527[PCBC-527]: Initial
+tracing implementation. The extension checks if libcouchbase has
+tracing support, and sets up hooks for fetch/persist operations to
+report encoding/decoding times. This functionality is preview and is
+not enabled by default.
+* https://issues.couchbase.com/browse/PCBC-519[PCBC-519]: Implement
+log redaction. When log_redaction=on is specified in the connection
+string, the library will wrap sensitive data in the logs in special
+tags, which can be processed by the cblogredaction tool from the
+server distribution.
+* https://issues.couchbase.com/browse/PCBC-532[PCBC-532]: Fixed
+setting inclusive_start for DateRange search query.
+
+== Version 2.4.4 (12 February 2018)
+
+This release contains new feature. Note, that minimum version of
+libcouchbase required is 2.8.4.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.4.4/files/couchbase.html[API Reference]
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-508[PCBC-508]: Add
+support for FTS advanced sorting
+
+== Version 2.4.3 (4 January 2018)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.8.4.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.4.3/files/couchbase.html[API Reference]
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-497[PCBC-497]: Add health
+check functions. See examples:
+https://github.com/couchbase/php-couchbase/blob/v2.4.3/examples/health/ping.php[examples/health/ping.php]
+and
+https://github.com/couchbase/php-couchbase/blob/v2.4.3/examples/health/diag.php[examples/health/diag.php]
+* https://issues.couchbase.com/browse/PCBC-520[PCBC-520]: Add
+example for authentication with x.509 certificate:
+https://github.com/couchbase/php-couchbase/blob/v2.4.3/examples/certauth/certauth.php[examples/certauth/certauth.php]
+
+=== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-518[PCBC-518]: Detect and
+cleanup connections left in bad state
+* https://issues.couchbase.com/browse/PCBC-525[PCBC-525]: Fix memory
+leak for schemaless connspec
+* https://issues.couchbase.com/browse/PCBC-524[PCBC-524]: Fix memory
+leak when using authenticateAs()
+* https://issues.couchbase.com/browse/PCBC-522[PCBC-522]: Check
+username/password for NULL in Classic Authenticator
+* https://issues.couchbase.com/browse/PCBC-516[PCBC-516]: Append
+information about runtime to HELLO string
+
+== Version 2.4.2 (14 November 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.8.2.
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-515[PCBC-515]: Allow to
+specify expiration for subdocument mutations.
+* https://issues.couchbase.com/browse/PCBC-509[PCBC-509]: Implement
+fulldoc operations for subdoc API.
+
+=== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-442[PCBC-442]: Fail fast
+view requests on ephemeral buckets.
+* https://issues.couchbase.com/browse/PCBC-513[PCBC-513]: Make
+public API non-final (remove final attribute from classes and
+methods).
+
+== Version 2.4.1 (5 October 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.8.0.
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-493[PCBC-493]: Implement
+subdocument GET_COUNT API via \Couchbase\Bucket#getCount().
+* Allow to override default pool connection idle interval with
+couchbase.pool.max_idle_time_sec INI setting.
+
+=== Changes
+
+* Ability to run full test suite against
+https://github.com/couchbase/CouchbaseMock[CouchbaseMock].
+* Update AnalyticsQuery API: removed experimental hostname() method as
+it derived from cluster config now.
+
+== Version 2.4.0 (5 September 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.8.0. Also from
+this version we drop support of PHP runtime older than 5.6.
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-505[PCBC-505]: Enable
+error maps. This feature allows the server to control how the
+clients handle error codes, for example automatic retrying.
+* https://issues.couchbase.com/browse/PCBC-499[PCBC-499]: Expose
+more query options on N1QL query for advanced tuning query
+performance. See documentation for methods scanCap, pipelineBatch,
+pipelineCap, maxParallelism, and readonly on \Couchbase\N1qlQuery
+class.
+* https://issues.couchbase.com/browse/PCBC-485[PCBC-485]: Expose
+enhanced error messages. The server might fill new properties of the
+error (\Couchbase\Exception class instance): "context" (additional
+text description of the error) and "ref" (reference id in the server
+logs).
+
+=== Improvements
+
+* More examples: XATTRs and RBAC user management.
+
+== Version 2.3.4 (19 July 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.7.6.
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-495[PCBC-495]: Update
+user management APIs: added method to fetch user by name, and
+support for authentication domains.
+
+=== Improvements
+
+* https://issues.couchbase.com/browse/PCBC-478[PCBC-478]: Add tests
+for Error Map using CouchbaseMock
+
+== Version 2.3.3 (31 May 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.7.5.
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-475[PCBC-475]: Add
+support for term range query and geo search queries in full text
+search.
+* https://issues.couchbase.com/browse/PCBC-468[PCBC-468]: Add
+support for user CRUD in ClusterManager (RBAC feature of upcoming
+Couchbase Server 5). Read more about it in the https://developer.couchbase.com/documentation/server/5.0/rest-api/rbac.html[server
+documentation].
+* https://issues.couchbase.com/browse/PCBC-489[PCBC-489]: Add
+shortcut for PasswordAuthenticator as
+Cluster->authenticateAs($username, $password).
+* https://issues.couchbase.com/browse/PCBC-472[PCBC-472]: Expose
+setting accessor for configuration polling interval. Accessible as
+Bucket->configPollInterval. With Couchbase Server 5 it will allow
+faster failover.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-487[PCBC-487]:
+\Couchbase\N1qlQuery->adhoc() method actually worked in
+reversed way. When this parameter set to true (which is default),
+the library creates prepared statement, and skip it otherwise.
+* https://issues.couchbase.com/browse/PCBC-494[PCBC-494]: Fix double
+free error in passthruEncoder.
+
+== Version 2.3.2 (2 May 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.7.4.
+
+=== Known Issues
+
+* https://issues.couchbase.com/browse/PCBC-487[PCBC-487]:
+\Couchbase\N1qlQuery->adhoc() method actually worked in
+reversed way. When this parameter set to true (which is default),
+the library creates prepared statement, and skip it otherwise.
+Releases after 2.3.3 will fix this behaviour and really use adhoc
+queries by default.
+
+=== New Features
+
+* https://issues.couchbase.com/browse/PCBC-451[PCBC-451]: Add RBAC
+support in \Couchbase\PasswordAuthenticator class (Couchbase
+Server 5.x feature). Read more about it in the blog https://blog.couchbase.com/authentication-authorization-rbac/[Authentication
+and Authorization with
+RBAC].
++
+....
+$authenticator = new \Couchbase\PasswordAuthenticator(;
+$authenticator->username('john')->password('s3cret');
+
+$cluster = new \Couchbase\Cluster('couchbase://127.0.0.1');
+$cluster->authenticate($authenticator);
+....
+
+* https://issues.couchbase.com/browse/PCBC-440[PCBC-440]: Add
+experimental support of extended attributes for subdocument
+operations. This might be useful for storing application-specific
+information, which should not be treated as document contents.
++
+....
+$b->upsert('doc1', ['foo' => 'bar']);
+
+$b->mutateIn('doc1')
+    ->upsert('app.created_by', ['name' => 'John Doe', 'role' => 'DB administrator'],
+            ['xattr' => true, 'createPath' => true])
+    ->execute();
+
+$result = $b->lookupIn('doc1')
+    ->get('app.created_by', ['xattr' => true, 'createPath' => true])
+    ->execute();
+$result->value[0]['value'];
+// ['name' => 'John Doe', 'role' => 'DB administrator']
+....
+
+* https://issues.couchbase.com/browse/PCBC-453[PCBC-453]: Verify
+that ClusterManager supports ephemeral buckets. This is new type of
+buckets accessible in Couchbase Server 5, which basically enhanced
+Memcached-style bucket with replication, failover and other
+Couchbase bucket features.
+
+ $cluster = new \Couchbase\Cluster('couchbase://127.0.0.1');
+ $cluster->manager()->createBucket('ephemeralTest', ['bucketType' => 'ephemeral']);
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-473[PCBC-473]: Fix
+incorrect bucket reference copy in subdocument mutation/lookup
+builders, which might lead to segfault.
+* https://issues.couchbase.com/browse/PCBC-474[PCBC-474]: Fix
+segfault when using ViewQuery::keys().
+* https://issues.couchbase.com/browse/PCBC-476[PCBC-476]: Do not
+call destructors on unintialized ZVALs. Fixes possible segfaults
+with view queries on PHP 5.x.
+* https://issues.couchbase.com/browse/PCBC-477[PCBC-477]: Lookup
+JsonSerializable interface in run time, instead of compile time
+using php_json_serializable_ce symbol. This fixes support of some
+5.4-5.5 builds.
+* https://issues.couchbase.com/browse/PCBC-479[PCBC-479]: Do not
+allow to create objects in invalid state. For example Cluster might
+return an instance, and only show PHP warning on invalid arguments.
+* https://issues.couchbase.com/browse/PCBC-481[PCBC-481]: Fix
+Bucket->counter() without specifying delta value results in null
+pointer dereference.
+* https://issues.couchbase.com/browse/PCBC-482[PCBC-482]:
+mapSize/setExists/setRemove methods of Bucket did not check if 'get'
+sub-request had thrown exception. This cause segfault, if operation
+executed on keys which do not exist.
+
+== Version 2.3.1 (5 April 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.7.3.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-459[PCBC-459]: Restore
+\Couchbase\Bucket::unlock() method, which has been lost in
+refactoring.
+* https://issues.couchbase.com/browse/PCBC-460[PCBC-460]: Prefer
+managed strings to persistent when storing document values.
+* https://issues.couchbase.com/browse/PCBC-461[PCBC-461]: Deallocate
+intermediate results when using encoder compression
+* https://issues.couchbase.com/browse/PCBC-462[PCBC-462]: Replace
+new lines in log entries with space.
+* https://issues.couchbase.com/browse/PCBC-464[PCBC-464]: Fix
+NumericRangeFacet with NULL boundary on PHP 5.4.
+* https://issues.couchbase.com/browse/PCBC-463[PCBC-463]: Fix
+incorrect reference counting on Search API. (might lead to segfaults
+and leaks).
+* https://issues.couchbase.com/browse/PCBC-465[PCBC-465]: Check
+encoded ViewQuery before sending to libcouchbase.
+* https://issues.couchbase.com/browse/PCBC-467[PCBC-467]:
+Intermediate values in Datastructures API might leak. (e.g. result
+of internal "get" to find out size of the list).
+* https://issues.couchbase.com/browse/PCBC-471[PCBC-471]: Fixed
+issue, when the library always use credentials for the first bucket
+in Authenticator.
+
+=== New features
+
+* https://issues.couchbase.com/browse/PCBC-469[PCBC-469]: Implement
+SearchQuery->sort() function to support sorting FTS results,
+which is accessible in Couchbase Server 4.6+.
+* https://issues.couchbase.com/browse/PCBC-441[PCBC-441]: Add
+experimental support of Analytics query. Read more about Analytics
+Service at https://developer.couchbase.com/documentation/server/4.5/analytics/introduction.html[documentation
+site]
+
+== Version 2.3.0 (7 March 2017)
+
+This release contains internal improvements, as well as new features.
+Note, that minimum version of libcouchbase required is 2.7.2. This
+release does not depend on the PCS extension. All classes which were
+previously written in PHP are now implemented in the Zend C APIs. This
+means they do not require extra evaluation on module load or request
+initialization.
+
+=== New features
+
+* https://issues.couchbase.com/browse/PCBC-382[PCBC-382]: Implement
+cluster-level authentication using ClassicAuthenticator (see
+https://github.com/couchbase/php-couchbase/blob/v2.3.0/integration/CrossBucketN1qlQueryTest.php[integration/CrossBucketN1qlQueryTest.php])
+* https://issues.couchbase.com/browse/PCBC-383[PCBC-383]:
+Cross-bucket joins for N1QL queries (see see
+https://github.com/couchbase/php-couchbase/blob/v2.3.0/examples/api/couchbase.N1qlQuery.crossBucket.php[examples/api/couchbase.N1qlQuery.crossBucket.php])
+* https://issues.couchbase.com/browse/PCBC-386[PCBC-386]: Implement
+Datastructures API: List, Set, Map and Queue (see https://developer.couchbase.com/documentation/server/current/sdk/php/datastructures.html[Data
+Structures]
+on the documentation site and
+https://github.com/couchbase/php-couchbase/blob/v2.3.0/tests/DatastructuresTest.php[tests/DatastructuresTest.php]
+in the repository)
+* Improved connection management: connections are persistent by
+default, but the library tracks their liveliness and closes idle
+connections.
+* Migrate API to \Couchbase namespace.  The old API is still
+available at the toplevel as aliases, see
+https://github.com/couchbase/php-couchbase/blob/v2.3.0/tests/AliasesTest.php[tests/AliasesTest.php])
+* Refresh API documentation, describe all input options, put
+everything into single file (see
+https://github.com/couchbase/php-couchbase/tree/v2.3.0/api[api/])
+, and make it available through PHPStorm
+(https://github.com/JetBrains/phpstorm-stubs/pull/180[JetBrains/phpstorm-stubs#180])
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-443[PCBC-443]: PCS
+dependency has been removed and all classes were rewritten using the
+Zend C API
+
+=== Breaking change
+
+With previous default the options were defined in the global variables
+$COUCHBASE_DEFAULT_ENCOPTS and $COUCHBASE_DEFAULT_DECOPTS.
+ Starting with 2.3 if you are adjusting those defaults, this should now
+be done through INI variables couchbase.encoder.* and
+couchbase.decoder.*. The full list of the supported INI options with
+detailed description is in the http://docs.couchbase.com/sdk-api/couchbase-php-client-2.3.0/files/couchbase.html[API
+documentation].
+
+== Version 2.2.4 (26 December 2016)
+
+This release contains bug fixes and performance improvements. Note, the
+minimum version of libcouchbase required is 2.6.1. This release depends
+on PCS extension.
+
+=== Known Issues
+
+* https://issues.couchbase.com/browse/PCBC-443[PCBC-443]:
+Installation issues with PCS Extension.  Partially owing to a bug in
+PCS and partially owing to adding an additional dependency, the PCS
+Extension has been problemmatic.  It will be removed in a future
+release.  If this impacts your installation, use the 2.2.3 release.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-401[PCBC-401]: Embed PHP
+classes using https://pecl.php.net/package/pcs[PCS (PHP Code Service) extension
+1.3.1]. This fixes a performance
+issue, where the extension would spend time during each request to
+evaluate and load Couchbase classes written in PHP. The pecl/pcs
+extension has to be installed and loaded before loading couchbase
+SDK.
+* https://issues.couchbase.com/browse/PCBC-439[PCBC-439]: Fix code
+which handles document compression flags, so a compressed document
+is not handled by a JSON decoder.
+* https://issues.couchbase.com/browse/PCBC-438[PCBC-438]: Fix
+CouchbaseBucket#getFromReplica(), which returned NULL for all
+requests.
+
+== Version 2.2.3 (4 October 2016)
+
+This release contains bug fixes and transcoder improvements. Note, the
+minimum version of libcouchbase required is 2.6.1.
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-389[PCBC-389]:
+Deserialize legacy documents (e.g. documents included in sample
+buckets) as JSON with falling back to old behaviour.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-428[PCBC-428]: Raise
+InvalidArgumentException when credentials missing for
+CouchbaseClusterManager instead reporting fatal error.
+
+== Version 2.2.2 (6 September 2016)
+
+This release contains documentation updates and observability
+improvements. Note, the minimum version of libcouchbase required is
+2.6.1.
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-410[PCBC-410]:
+Consolidate libcouchbase and extension loggers and expose them
+through the PHP built-in logger. Read more about using this feature
+at http://developer.couchbase.com/documentation/server/4.5/sdk/php/collecting-information-and-logging.html[Collecting
+Information]
+section of SDK guide.
+* https://issues.couchbase.com/browse/PCBC-417[PCBC-417]: Do not
+send duplicated keys in multi-get and multi-remove operations.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-409[PCBC-409]: Propagate
+errors during View creation. Now, broken view definitions will cause
+CouchbaseException with message set to error explanation.
+* https://issues.couchbase.com/browse/PCBC-423[PCBC-423]: Report
+failed N1QL queries in log output.
+
+== Version 2.2.1 (8 August 2016)
+
+This release contains documentation updates and bug fixes for features
+introduced over the 2.2 beta development cycle. Note, the minimum
+version of libcouchbase required is 2.6.1.
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-414[PCBC-414]: All
+CouchbaseN1qlQuery methods return $this to allow method chaining.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-416[PCBC-416]: Fix
+segfault on multi-get for duplicated keys.
+
+== Version 2.2.0 (6 July 2016)
+
+This release contains documentation updates and bug fixes for features
+introduced over the 2.2 beta development cycle. Note, the minimum
+version of libcouchbase required is 2.6.1.
+
+=== Backward-incompatible API changes since 2.1.0
+
+. CouchbaseBucket->query() accepts only 2 arguments, and query
+properties supposed to be set in query objects (CouchbaseN1qlQuery,
+CouchbaseViewQuery, CouchbaseSearchQuery instances).\
+For *2.1.0*:
+
+ $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `travel-sample` WHERE city=$arg");
+ $bucket->query($query, array("arg" => "London"), true);
++
+For *2.2.0*:
+
+ $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `travel-sample` WHERE city=$arg");
+ $query->namedParams(array("arg" => "London"));
+ $bucket->query($query, true);
+
+. Return value of CouchbaseBucket->query() is always object, but
+the contents of the rows attribute still controlled by second
+argument to the method.\
+For *2.1.0*:
+
+ $query = CouchbaseN1qlQuery::fromString("SELECT * FROM `default` LIMIT 10");
+ // Rows as nested arrays
+ $res = $bucket->query($query, NULL, true);
+ foreach ($res as $row) {
+     printf("%s\n", $row['default']['myprop']);
+ }
+ // Rows as objects
+ $res = $bucket->query($query, NULL, false);
+ foreach ($res as $row) {
+     printf("%s\n", $row->default->myprop);
+ }
++
+For *2.2.0*
+
+ // Rows as nested arrays
+ $res = $bucket->query($query, true);
+ foreach ($res->rows as $row) {
+     printf("%s\n", $row['default']['myprop']);
+ }
+ // Rows as objects
+ $res = $bucket->query($query, false);
+ foreach ($res->rows as $row) {
+     printf("%s\n", $row->default->myprop);
+ }
++
+This is done to allow inject additional meta information into
+result, and to have a way to extend result objects in the future.
+For example, this is how one can pull N1QL metrics from results:
+
+ $res = $bucket->query($query);
+ printf("Query has been completed in %s and returned %d rows\n",
+        $res->metrics['elapsedTime'], $res->metrics['resultCount']);
+ //=> Query has been completed in 8.543433ms and returned 1 rows
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-393[PCBC-393]: Support
+for enhanced durability.
+* https://issues.couchbase.com/browse/PCBC-382[PCBC-382]: Cluster
+level authentication.
+* Expose meta for N1QL and Search Query responses.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-398[PCBC-398]: Expose
+methods for parameterized N1QL queries.
+
+== Version 2.2.0 Beta 4 (29 June 2016)
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-380[PCBC-380]: Support
+for AT_PLUS consistency.
+* https://issues.couchbase.com/browse/PCBC-381[PCBC-381]: Support
+for Full Text Search queries.
+
+//
+
+* https://issues.couchbase.com/browse/PCBC-395[PCBC-395]: Type
+checks incorrectly for booleans.  This could lead to a
+CouchbaseException occurring when query results contain numbers
+instead of booleans.
+
+== Version 2.2.0 Beta 3 (25 May 2016)
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-385[PCBC-385]: Support
+for Index Management.
+* https://issues.couchbase.com/browse/PCBC-379[PCBC-379]: Support
+for Sub-Document API.
+* https://issues.couchbase.com/browse/PCBC-394[PCBC-394]: Expose CAS
+as a bytestring.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-395[PCBC-395]: Type
+checks incorrectly for booleans.  This could lead to a
+CouchbaseException occurring when query results contain numbers
+instead of booleans.
+
+== Version 2.2.0 Beta 1 and 2 (19 April 2016)
+
+Owing to a package metadata problem, Beta 1 of the PHP client was
+immediately superseded by Beta 2.  
+
+=== New Features and Behavioral Changes
+
+* https://issues.couchbase.com/browse/PCBC-360[PCBC-360]: Support
+for PHP 7.0.
+* https://issues.couchbase.com/browse/PCBC-369[PCBC-369]: Allow
+building with system fastlz.
+
+=== Fixed Issues
+
+* https://issues.couchbase.com/browse/PCBC-376[PCBC-376]: Calling
+extension from within from transcoder fails.
+* https://issues.couchbase.com/browse/PCBC-373[PCBC-373]: Encoding
+of plus sign fails for view query ranges.
