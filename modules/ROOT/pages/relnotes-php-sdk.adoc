@@ -44,7 +44,7 @@ Platform|x86|x64
 Once the PHP SDK has been installed, you need to specify that the PHP interpreter should load the Couchbase SDK as an extension. To do this:
 
 1. Locate your php.ini file. This can be done using the command `php --ini`
-
++
 [source,bash]
 ----
  $ php --ini
@@ -53,7 +53,7 @@ Once the PHP SDK has been installed, you need to specify that the PHP interprete
  Scan for additional .ini files in: /usr/local/etc/php/7.0/conf.d
  Additional .ini files parsed:      (none)
 ----
-
++
 2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section. If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file. 
 Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
