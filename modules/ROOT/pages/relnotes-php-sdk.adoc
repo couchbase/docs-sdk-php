@@ -1,1 +1,1 @@
-2.6@php-sdk::page$relnotes-php-sdk.adoc#version-2-5-1-10-august-2018[]
+include::php-sdk::page$relnotes-php-sdk.adoc[]
