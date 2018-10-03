@@ -45,7 +45,7 @@
 * xref:tracing-from-the-sdk.adoc[Tracing from the SDK]
 
 .Project Docs
-* xref:relnotes-php-sdk.adoc[Release Notes]
+* xref:relnotes-php-sdk.adoc#version-2-4-7-7-june-2018[Release Notes]
 * xref:compatibility-versions-features.adoc[Compatibility]
 * xref:sdk-licenses.adoc[Licenses]
 * xref:get-involved.adoc[Get involved]
