@@ -30,7 +30,8 @@ When using Microsoft Windows, instead of using PECL, download a pre-built binary
 Since release 2.3.3, by default binaries for Windows do not require `php_igbinary.dll` to be installed. If you still need it as Couchbase serializer, you can rebuild binaries from source, or use the following binaries
 
 |===
-Platform|x86|x64
+|Platform|x86|x64
+
 |PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.1-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.1-nts-vc14-x64-igbinary.zip]
 |PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.1-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.1-zts-vc14-x64-igbinary.zip]
 |PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.0-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.0-nts-vc14-x64-igbinary.zip]
