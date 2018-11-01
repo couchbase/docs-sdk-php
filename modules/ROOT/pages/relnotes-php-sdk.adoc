@@ -19,6 +19,7 @@ When using Microsoft Windows, instead of using PECL, download a pre-built binary
 
 |===
 |Platform|x86|x64
+
 |PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x86.zip[php_couchbase-2.6.0-7.1-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x64.zip[php_couchbase-2.6.0-7.1-nts-vc14-x64.zip]
 |PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x86.zip[php_couchbase-2.6.0-7.1-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x64.zip[php_couchbase-2.6.0-7.1-zts-vc14-x64.zip]
 |PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x86.zip[php_couchbase-2.6.0-7.0-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x64.zip[php_couchbase-2.6.0-7.0-nts-vc14-x64.zip]
