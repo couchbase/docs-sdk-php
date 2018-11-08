@@ -1,2 +1,2 @@
-:php-api-link: http://docs.couchbase.com/sdk-api/couchbase-php-client-2.4.4/files/couchbase.html
-:php-current-version: 2.4.4
+:php-api-link: http://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.0/files/couchbase.html
+:php-current-version: 2.6.0
