@@ -10,7 +10,7 @@ The Couchbase PHP SDK is compatible with both PHP 5.6 and 7.0.
 == Installing on Linux
 
 For installation on Linux, install the _couchbase-release_ repository, and then install the _libcouchbase_ packages.
-The following examples download and install _couchbase-release_ repsitory, a C and C++ compiler, the C SDK development files (_libcouchbase-devel_ [RPM] or _libcouchbase-dev_ [DEB]), PHP development files, and finally the PHP SDK using _pecl_.
+The following examples download and install _couchbase-release_ repository, a C and C++ compiler, the C SDK development files (_libcouchbase-devel_ [RPM] or _libcouchbase-dev_ [DEB]), PHP development files, and finally the PHP SDK using _pecl_.
 
 .Debian and Ubuntu
 [source,bash]
@@ -24,10 +24,20 @@ sudo apt-get install libcouchbase-dev build-essential php-dev zlib1g-dev
 sudo pecl install couchbase
 ----
 
+For Ubuntu 18.04, and other Debian based releases unsupported by `couchbase-release-1.0-4-amd64.deb`, such as Debian 9, either replace the above first-time stup instructions with
+
+[source,bash]
+----
+sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
+sudo echo "deb http://packages.couchbase.com/ubuntu bionic bionic/main" > /etc/apt/sources.list.d/couchbase.list
+----
+
+or, see the detailed instructions on manually adding repos for your version in the relnotes-c-sdk.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
+
 [NOTE]
 ====
 On Ubuntu 14.04 (Trusty), and possibly some other distributions, you will need to substitute for _php-dev_ with _php5-dev_.
-To find particular variants of php-dev for your Linux distribution, use the command
+To find particular variants of php-dev for your Ubuntu or Debian-based distribution, use the command
 
 [source,bash]
 ----
