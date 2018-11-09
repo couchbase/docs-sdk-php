@@ -24,7 +24,7 @@ sudo apt-get install libcouchbase-dev build-essential php-dev zlib1g-dev
 sudo pecl install couchbase
 ----
 
-For Ubuntu 18.04, and other Debian based releases unsupported by `couchbase-release-1.0-4-amd64.deb`, such as Debian 9, either replace the above first-time stup instructions with
+For Ubuntu 18.04, and other Debian based releases unsupported by `couchbase-release-1.0-4-amd64.deb`, such as Debian 9, either replace the above _first-time setup_ instructions with:
 
 [source,bash]
 ----
