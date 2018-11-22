@@ -53,8 +53,8 @@ See the notes there for Support details.
 == Couchbase Feature Availability Matrix
 
 
-To take advantage of all features offered by Couchbase Server, you need to know what version of the Java SDK provides compatibility for the features you want to use.
-The following matrix shows which versions of the Couchbase Java SDK support the major features of each version of Couchbase Server.
+To take advantage of all features offered by Couchbase Server, you need to know what version of the PHP SDK provides compatibility for the features you want to use.
+The following matrix shows which versions of the Couchbase PHP SDK support the major features of each version of Couchbase Server.
 
 .Couchbase Server and SDK Supported Version Matrix
 [cols="<25,.^23,.^24,.^18,.^19"]
