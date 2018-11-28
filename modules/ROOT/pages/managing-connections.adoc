@@ -34,7 +34,7 @@ For more details, see the xref:c-sdk::managing-conections.doc[libcouchbase notes
 Note that any SSL/TLS certificates must be set up at the point where the connections are being made.
 The Couchbase SDKs will honor any valid SSL/TLS certificates.
 
-===
+====
 
 
 == Authentication
