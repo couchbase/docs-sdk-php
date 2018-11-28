@@ -21,6 +21,22 @@ The username and password are required to perform management operations against 
 If you do not use the cluster management aspects of the SDK, the username and password parameters are optional.
 Keep in mind that these credentials are the same ones you use to log in to the Couchbase administrator console, not those specified for the bucket itself.
 
+[NOTE]
+====
+
+From Couchbase Node.js SDK 2.5.0 (using _libcouchbase_ 2.9.2), [.api]`AlternateAddress` is implemented, for connecting to nodes in a NATed environment, such as Docker containers using portmapping.
+It is on by default, if the server provides a topology that includes a multi-network configuration.
+Whichever network is selected at bootstrap will be logged.
+
+If using __Docker Swarm__, or otherwise running the SDK inside the NAT, then you will want to disable with `?network = internal` in the connection string, or an xref:client-settings.adoc[environmental setting] can be made.
+For more details, see the xref:c-sdk::managing-conections.doc[libcouchbase notes].
+
+Note that any SSL/TLS certificates must be set up at the point where the connections are being made.
+The Couchbase SDKs will honor any valid SSL/TLS certificates.
+
+====
+
+
 == Authentication
 
 Regular authentication is where you provide a password to the `openBucket()` and `manager()` methods.
