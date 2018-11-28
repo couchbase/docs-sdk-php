@@ -24,7 +24,7 @@ Keep in mind that these credentials are the same ones you use to log in to the C
 [NOTE]
 ====
 
-From Couchbase Node.js SDK 2.5.0 (using _libcouchbase_ 2.9.2), [.api]`AlternateAddress` is implemented, for connecting to nodes in a NATed environment, such as Docker containers using portmapping.
+From Couchbase PHP SDK 2.5.0 (using _libcouchbase_ 2.9.2), [.api]`AlternateAddress` is implemented, for connecting to nodes in a NATed environment, such as Docker containers using portmapping.
 It is on by default, if the server provides a topology that includes a multi-network configuration.
 Whichever network is selected at bootstrap will be logged.
 
