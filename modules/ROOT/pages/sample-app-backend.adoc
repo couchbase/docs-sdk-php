@@ -21,8 +21,8 @@ A user with username `travel-sample` and password `travel-sample` should also be
 +
 For information on installing Couchbase Server, see xref:6.0@server:install:install-intro.adoc[Installing Couchbase Server].
 For information on initializing and configuring, see xref:6.0@server:install:init-setup.adoc[Initialize the Cluster].
-Sample buckets, and your means of installing them, are described in xref:6.0@server:settings:install-sample-buckets.adoc[Sample Buckets].
-The process whereby users, credentials, and roles are defined by means of the Couchbase Web Console is explained in xref:6.0@server:security:security-rbac-for-admins-and-apps.adoc[Creating and Managing Users with the UI].
+Sample buckets, and your means of installing them, are described in xref:6.0@server:manage:manage-settings/install-sample-buckets.adoc[Sample Buckets].
+The process whereby users, credentials, and roles are defined by means of the Couchbase Web Console is explained in xref:6.0@server:learn:security/authorization-overview.adoc[the Authorization section].
 
 * Clone the source for the application, and checkout the 5.0 version:
 +
@@ -98,7 +98,7 @@ The code for cluster-connection and bucket-access is provided in https://github.
 $this->db = DB::connection('couchbase')->openBucket('travel-sample');
 ----
 
-Note that a detailed functional description of buckets is provided in xref:6.0@server:understanding-couchbase:buckets-memory-and-storage/buckets.adoc[Buckets].
+Note that a detailed functional description of buckets is provided in xref:6.0@server:learn:buckets-memory-and-storage/buckets.adoc[Buckets].
 
 == Manage Users
 
