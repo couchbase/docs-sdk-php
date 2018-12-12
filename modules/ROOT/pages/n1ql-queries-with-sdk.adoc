@@ -56,7 +56,7 @@ You can set other options in the query object as well:
 * `consistency` controls the xref:n1ql-query.adoc#consistency[version of the documents to be scanned], and can either be [.api]`CouchbaseN1qlQuery::NOT_BOUNDED` (which is the default) or [.api]`CouchbaseN1qlQuery::REQUEST_PLUS` (which ensures that only the most recent version of documents are used).
 * `adhoc` determines whether the query will be xref:n1ql-query.adoc#prepare-stmts[optimized] as a prepared statement at the SDK level.
 If this is set to `false` then a prepared reference to this query will be stored on the SDK and used for subsequent queries.
-* `max_parallelism` sets the number of logical CPUs which are used in parallel for the query, this setting can override the xref:6.0@server:n1ql:n1ql-rest-api/executen1ql.adoc[default] (although only in the Enterprise Edition), but please contact https://support.couchbase.com/[^] before changing this on a production system.
+* `max_parallelism` sets the number of logical CPUs which are used in parallel for the query, this setting can override the xref:6.0@server:settings/query-settings.adoc[server-level parameters] (although only in the Enterprise Edition), but please contact https://support.couchbase.com/[^] before changing this on a production system.
 It can be used as follows:
 +
 ----
