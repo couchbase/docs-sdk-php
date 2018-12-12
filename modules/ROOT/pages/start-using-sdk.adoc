@@ -32,7 +32,7 @@ sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key
 sudo echo "deb http://packages.couchbase.com/ubuntu bionic bionic/main" > /etc/apt/sources.list.d/couchbase.list
 ----
 
-or, see the detailed instructions on manually adding repos for your version in the xref:relnotes-c-sdk.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
+or, see the detailed instructions on manually adding repos for your version in the xref:c-sdk::relnotes-c-sdk.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
 
 [NOTE]
 ====
@@ -127,7 +127,7 @@ The Hello Couchbase example consists of one PHP file, [.path]_hello-couchbase.ph
 The code opens a connection to Couchbase Server, retrieves a document, modifies the document, and stores the updated document in the database.
 The [.path]_hello-couchbase.php_ code is below.
 Note that to connect to a Couchbase bucket, you must use Couchbase _Role-Based Access Control_ (RBAC).
-This is fully described in the section xref:6.0@server:security:security-authorization.adoc[Authorization].
+This is fully described in the section xref:6.0@server:learn:security/authorization-overview.adoc[Authorization].
 A username and password for the current user must be specified.
 Following successful authentication, the bucket is opened.
 
