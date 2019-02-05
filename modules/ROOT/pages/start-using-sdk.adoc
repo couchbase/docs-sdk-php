@@ -58,7 +58,7 @@ sudo pecl install couchbase
 
 == Installation on Mac OS X
 
-On MacOS, the `libcouchbase` package was available in https://brew.sh[homebrew/core], and could be installed with:
+On MacOS, the `libcouchbase` package is available in https://brew.sh[homebrew/core], and could be installed with:
 
 [source,bash]
 ----
