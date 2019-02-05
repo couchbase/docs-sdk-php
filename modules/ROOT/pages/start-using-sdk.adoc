@@ -58,6 +58,13 @@ sudo pecl install couchbase
 
 == Installation on Mac OS X
 
+On MacOS, `libcouchbase` package available in https://brew.sh[homebrew/core], and could be installed with:
+
+[source,bash]
+----
+brew install libcouchbase
+----
+
 As `homebrew/php` is no longer available, the current best way to install newer versions of PHP (and one with the necessary permissions) is found at https://php-osx.liip.ch[^].
 Download `install.sh` from there or, if you are happy with the script, install in one line (in this example, PHP 7.2) with:
 
