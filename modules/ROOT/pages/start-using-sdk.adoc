@@ -74,7 +74,7 @@ curl -s https://php-osx.liip.ch/install.sh | bash -s 7.2
 ----
 
 Once you have PHP installed, then use `PECL` to install the Couchbase PHP SDK (read your PHP distribution manual to find
-out where `pecl` is located and whether the user need special permissions to install new extensions):
+out where `pecl` is located and whether the user needs special permissions to install new extensions):
 
 [source,bash]
 ----
