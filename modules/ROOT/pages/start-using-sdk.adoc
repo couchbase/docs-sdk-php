@@ -73,11 +73,12 @@ Download `install.sh` from there or, if you are happy with the script, install i
 curl -s https://php-osx.liip.ch/install.sh | bash -s 7.2
 ----
 
-Once you have PHP installed, then use `PECL` to install the Couchbase PHP SDK:
+Once you have PHP installed, then use `PECL` to install the Couchbase PHP SDK (read your PHP distribution manual to find
+out where `pecl` is located and whether the user need special permissions to install new extensions):
 
 [source,bash]
 ----
-pecl install couchbase
+/path/to/pecl install couchbase
 ----
 
 == Installing on Microsoft Windows
