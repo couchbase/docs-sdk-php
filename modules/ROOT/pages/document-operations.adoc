@@ -106,7 +106,7 @@ These methods accept an expiry value as their second parameter:
 
 [source,php]
 ----
-$cb->upsert('expires', "i'm getting old...", array("expiry" => 5));
+$cb->touch('expires', array("expiry" => 5));
 sleep(6)
 $cb->get('expires');
 ----
@@ -121,6 +121,11 @@ Stack trace:
 ....
 
 Document expiration can also be set using the [.api]`upsert` family of methods which accept an optional [.param]`expiry` key in their options arrays.
+
+[source,php]
+----
+$cb->upsert('expires', "i'm getting old...", array("expiry" => 5));
+----
 
 [#batching]
 == Batching Operations
