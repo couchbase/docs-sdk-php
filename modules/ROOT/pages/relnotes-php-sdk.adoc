@@ -4,7 +4,7 @@
 
 === Installing on Linux-like systems
 
-Before installing the PHP SDK, you must install the link:/server/other-products/release-notes-archives/c-sdk[C SDK]; version 2.9.0 or higher is required for 2.4.7.
+Before installing the PHP SDK, you must install the xref:c-sdk::start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)]; version 2.9.0 or higher is required from PHP Client 2.4.7.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
