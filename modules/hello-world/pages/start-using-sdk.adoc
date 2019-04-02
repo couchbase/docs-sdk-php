@@ -5,6 +5,8 @@
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP. The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols. The Couchbase PHP SDK is compatible with both PHP 7.....
 //// versions??
 
+// tag::install[]
+
 WARNING: These pages cover the first _Developer Preview_ of the Couchbase PHP SDK 3.0 (DP1).
 As such they are likely to change without notice.
 The DP1 code _should not_ be used in production.
@@ -12,6 +14,8 @@ The DP1 code _should not_ be used in production.
 == Installing the SDK
 
 // installation and post-installation across platforms
+
+// end::install[]
 
 == Hello Couchbase
 
