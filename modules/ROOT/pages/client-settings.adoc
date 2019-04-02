@@ -1,8 +1,0 @@
-= Client Settings Using the PHP SDK with Couchbase Server
-:navtitle: Client Settings
-
-The PHP SDK may be configured using the connection string when instantiating a [.api]`CouchbaseCluster` object.
-
-Below follows the C settings section:
-
-include::2.10@c-sdk::page$client-settings.adoc[tag=group]
