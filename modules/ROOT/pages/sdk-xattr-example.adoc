@@ -82,3 +82,44 @@ foreach ($result->rows as $row) {
 }
 printf("Results returned are: %s\n", $results);
 ----
+
+== Virtual Extended Attributes Example
+
+Using the Sub-Document API, xref:sdk-xattr-overview.adoc#_virtual_extended_attributes[Virtual XATTR] can be used to fetch metadata about a document, via the `$document` virtual XATTR.
+A common use case is discovering documentation expiration metadata, or TTL:
+
+[source,php]
+----
+<?php
+
+$cluster = new \Couchbase\Cluster('couchbase://localhost');
+$cluster->authenticateAs('Administrator', 'password');
+
+$bucket = $cluster->openBucket('travel-sample');
+
+$key = 'airline_17628';
+
+$bucket->touch($key, 300);
+
+$frag = $bucket->lookupIn($key)
+    ->get('$document.exptime', ['xattr' => true])
+    ->execute();
+$ttl = $frag->value[0]['value'];
+printf("Expiry value is %s\n", date('c', $ttl));
+
+// Reset the expiry so that the document does not expire
+$bucket->touch($key, 0);
+
+$frag = $bucket->lookupIn($key)
+    ->get('$document.exptime', ['xattr' => true])
+    ->get('$document.value_bytes', ['xattr' => true])
+    ->get('callsign')
+    ->execute();
+
+$ttl = $frag->value[0]['value'];
+$size = $frag->value[1]['value'];
+$callsign = $frag->value[2]['value'];
+printf("Expiry value is %s\n", $ttl);
+printf("Size is %s bytes\n", $size);
+printf("Callsign is %s\n", $callsign);
+----
