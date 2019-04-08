@@ -10,22 +10,8 @@ When requests are pipelined, they are sent in one large group to the cluster.
 The cluster in turn _pipelines_ responses back to the client.
 When operations are batched, there are fewer IP packets to be sent over the network (since there are fewer individual TCP segments).
 
-You can batch operations via the Couchbase SDK.
+You can batch operations via the PHP Couchbase SDK.
 Batching operations is done either via explicit _multi_ methods, or by scheduling multiple operations in sequence.
-
-NOTE: The availability of _multi_ APIs or the ability to explicitly schedule and wait for operations is dependent on language and SDK features.
-Refer to the SDK documentation for more specifics.
-
-// end::intro[]
-
-// tag::async[]
-
-== Asynchronous batching
-
-Asynchronous clients inherently batch operations: because the application receives the response at a later stage in the application, it may attain batching via issuing many requests in sequence.
-When using an SDK in an asynchronous (non-blocking) model, all requests are inherently batched.
-
-// end::async[]
 
 // tag::perf[]
 
@@ -109,8 +95,8 @@ Assuming an average key size of 5 and an average value size of 50:
 
 == Batching operations using SDK
 
-The following example is written in Python, and demonstrates properly splitting operations for batch sizes.
-It uses a 256K batch size and handles errors:
+The following example demonstrates properly splitting operations for batch sizes.
+It uses a 256K batch size, and handles errors:
 
 [source,php]
 ----
