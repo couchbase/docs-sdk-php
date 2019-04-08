@@ -24,14 +24,31 @@ Queries are issued in the SDK using the _query_ operation.
 This API accepts a string which is the statement to execute, and returns the rows (or an iterable object which returns rows) representing the query’s result.
 Here is an example of a query executed in Python:
 
+[source,python]
+----
+$query = \Couchbase\N1qlQuery::fromString('SELECT type FROM `travel-sample` LIMIT 4');
+$res = $bucket->query($query);
+foreach ($res->rows as $row) {
+  var_dump($row);
+}
+----
 ....
->>> for row in cb.n1ql_query('SELECT type FROM `travel-sample` LIMIT 4'):
-...   print(row)
-...
-{'type': 'airline'}
-{'type': 'airline'}
-{'type': 'airline'}
-{'type': 'airport'}
+object(stdClass)#5 (1) {
+  ["type"]=>
+  string(7) "airline"
+}
+object(stdClass)#6 (1) {
+  ["type"]=>
+  string(7) "airline"
+}
+object(stdClass)#7 (1) {
+  ["type"]=>
+  string(7) "airline"
+}
+object(stdClass)#8 (1) {
+  ["type"]=>
+  string(7) "airline"
+}
 ....
 
 The above query using _cbq_ (some output truncated for clarity):
@@ -72,16 +89,33 @@ Internally, however, the response looks like the _cbq_ output above.
 If you use aliases in your query, then the returned rows contain the aliased name rather than the original one.
 For example:
 
-[source,python]
+[source,php]
 ----
->>> for row in cb.n1ql_query('SELECT airportname as n FROM `travel-sample` where type="airport" LIMIT 4'):
-...   print(row)
-...
-{'n': 'Calais Dunkerque'}
-{'n': 'Peronne St Quentin'}
-{'n': 'Les Loges'}
-{'n': 'Couterne'}
+$query = \Couchbase\N1qlQuery::fromString(
+  'SELECT airportname as n FROM `travel-sample` where type="airport" LIMIT 4');
+$res = $bucket->query($query);
+foreach ($res->rows as $row) {
+  var_dump($row);
+}
 ----
+....
+object(stdClass)#5 (1) {
+  ["n"]=>
+  string(16) "Calais Dunkerque"
+}
+object(stdClass)#6 (1) {
+  ["n"]=>
+  string(18) "Peronne St Quentin"
+}
+object(stdClass)#7 (1) {
+  ["n"]=>
+  string(9) "Les Loges"
+}
+object(stdClass)#8 (1) {
+  ["n"]=>
+  string(8) "Couterne"
+}
+....
 
 == Specifying Query Criteria
 
@@ -187,12 +221,13 @@ The query may be divided into a _fixed_ or _static_ part (select all airports in
 
 A naive implementation of this function might look something like this:
 
-[source,python]
+[source,php]
 ----
-def airports_in_city(city):
-  query_string = "SELECT airportname FROM `travel-sample` WHERE city="
-  query_string += '"' + city + '"'
-  return cb.n1ql_query(query_string)
+function airportsInCity(string $city) {
+  $query_string = "SELECT airportname FROM `travel-sample` WHERE city=";
+  $query_string .= '"' . $city . '"';
+  return $this->bucket->query(\Couchbase\N1qlquery::fromString($query_string));
+}
 ----
 
 The approach above is both unwieldy and insecure (subject to SQL injection attacks).
@@ -200,12 +235,14 @@ The approach above is both unwieldy and insecure (subject to SQL injection attac
 N1QL allows the use of placeholders to declare dynamic query parameters.
 Here's a version of the above using placeholders:
 
-[source,python]
+[source,php]
 ----
-def airports_in_city(city):
-  query_string = "SELECT airportname FROM `travel-sample` WHERE city=$1"
-  query = N1QLQuery(query_string, city)
-  return cb.n1ql_query(query)
+function airportsInCity(string $city) {
+  $query_string = 'SELECT airportname FROM `travel-sample` WHERE city=$1';
+  $query = \Couchbase\N1qlquery::fromString($query_string);
+  $query->positionalParams([$city]);
+  return $this->bucket->query($query);
+}
 ----
 
 The `$1` is a positional placeholder.
@@ -216,25 +253,28 @@ Placeholders may also be _named_.
 This is particularly useful when there are many query parameters and ensuring that they are all in the correct order may be cumbersome.
 Name query placeholders take the form of `$name`.
 
-[source,python]
+[source,php]
 ----
-query_string = (
-"SELECT airportname FROM `travel-sample`"
-"WHERE country=$country "
-"AND geo.alt > $altitude "
-"AND (geo.lat BETWEEN $min_lat AND $max_lat) "
-"AND (geo.lon BETWEEN $min_lon AND $max_lon "
-)
+$query_string = 'SELECT airportname FROM `travel-sample` ' .
+                'WHERE country=$country ' .
+                'AND geo.alt > $altitude ' .
+                'AND (geo.lat BETWEEN $min_lat AND $max_lat) ' .
+                'AND (geo.lon BETWEEN $min_lon AND $max_lon';
 ----
 
 Then to issue the actual query:
 
-[source,python]
+[source,php]
 ----
-query = N1QLQuery(
-    query_string,
-    country="United States",
-    altitude=500, min_lat=-50, max_lat=50, min_lon=-180, max_lon=0)
+$query = \Couchbase\N1qlQuery::fromString($query_string);
+$query->namedParams([
+    'country' => 'United States',
+    'altitude' => 500,
+    'min_lat' => -50,
+    'max_lat' => 50, 
+    'min_lon' => -180,
+    'max_lon' => 0
+]);
 ----
 
 [#prepare-stmts]
@@ -255,10 +295,11 @@ To indicate that an SDK should optimize a query, the [.param]`adhoc` parameter s
 When a query is not _ad-hoc_, the SDK will fetch the plan (if it does not already have it).
 Do not turn off the _adhoc_ flag for each query since only a finite number of query plans (currently 5000) can be stored in the SDK.
 
-[source,python]
+[source,php]
 ----
-query = N1QLQuery("SELECT airportname FROM `travel-sample` WHERE country=$1", "USA")
-q.adhoc = False
+$query = \Couchbase\N1qlQuery::fromString('SELECT airportname FROM `travel-sample` WHERE country=$1');
+$query->positionalParams(["USA"]);
+$query->adhoc(true);
 ----
 
 NOTE: Parameterized queries are considered the same query for caching and planning purposes, even if the supplied parameters are different.
@@ -303,11 +344,11 @@ For more information, see xref:6.0@server:indexes:covering-indexes.adoc[Covering
 
 You can also create and define indexes in the SDK using
 
-[source,python]
+[source,php]
 ----
-cb.bucket_manager().create_n1ql_primary_index(ignore_exists=True)
-cb.bucket_manager().create_n1ql_index('index_name', fields['name'])
-cb.bucket_manager().create_n1ql_index('index_email', fields['email'])
+$bucket->manager()->createN1qlPrimaryIndex('', true); // $name, $ignoreIfExists
+$bucket->manager()->createN1qlIndex('index_name', ['name']);
+$bucket->manager()->createN1qlIndex('index_email', ['eamil']);
 ----
 
 == Index Building
@@ -330,13 +371,9 @@ if it has a `name` or `email`) field.
 
 Building deferred indexes can also be done via the SDK:
 
-[source,python]
+[source,php]
 ----
-mgr.create_n1ql_primary_index(ignore_exists=True, defer=True)
-mgr.create_n1ql_index('ix_name', fields=['name'], defer=True)
-mgr.create_n1ql_index('ix_email', fields=['email'], defer=True)
-mgr.build_n1ql_deferred_indexes()
-mgr.watch_n1ql_indexes(('ix_name', 'ix_email', '#primary'), timeout=120)
+// NOTE: PHP 2.x does not support triggering and waiting deferred indexes
 ----
 
 == Index Consistency
@@ -357,23 +394,31 @@ When using this consistency mode, the query service will ensure that the indexes
 
 Consider the following snippet:
 
-[source,python]
+[source,php]
 ----
-from couchbase.n1ql import N1QLQuery, CONSISTENCY_REQUEST
+<?php
 
-# Ensure there is a primary index on the default bucket!
-RANDOM_NUMBER = random.randint(0, 10000000)
+$cluster = new \Couchbase\Cluster('couchbase://localhost');
+$cluster->authenticateAs('Administrator', 'password');
+$bucket = $cluster->openBucket('default');
 
-cb = Bucket('couchbase://10.0.0.31/default')
-cb.upsert('user:{}'.format(RANDOM_NUMBER), {
-    'name': ['Brass', 'Doorknob'],
-    'email': ['brass.doorknob@juno.com'],
-    'random': RANDOM_NUMBER
-})
+// Ensure there is a primary index on the default bucket!
+$RANDOM_NUMBER = rand();
 
-query = N1QLQuery(
-    'SELECT name, email, random, META(default).id FROM default WHERE $1 IN name', 'Brass')
-row = cb.n1ql_query(query).get_single_result()
+$bucket->upsert('user:' . $RANDOM_NUMBER, [
+    'name' => ['Brass', 'Doorknob'],
+    'email' => ['brass.doorknob@juno.com'],
+    'random' => $RANDOM_NUMBER
+]);
+
+$query = \Couchbase\N1qlQuery::fromString(
+  'SELECT name, email, random, META(default).id FROM default WHERE $1 IN name');
+$query->positionalParams(['Brass']);
+
+$res = $bucket->query($query);
+foreach ($res->rows as $row) {
+  var_dump($row);
+}
 ----
 
 The above query may not return the newly inserted document because it has not yet been indexed.
@@ -381,13 +426,14 @@ The query is issued immediately after document creation, and in this case the qu
 
 If the above code is modified to use _request_plus_ (currently mapped to the [.api]`CONSISTENT_REQUEST` constant in the Python SDK), query processing will wait until all updates have been processed and recalculated into the index from the point in time the query was received:
 
-[source,python]
+[source,php]
 ----
-query = N1QLQuery(
-    'SELECT name, email, random, META(default).id FROM default WHERE $1 IN name', 'Brass')
-# If this line is removed, the latest 'random' field might not be present
-query.consistency = CONSISTENCY_REQUEST
-row = cb.n1ql_query(query).get_single_result()
+$query = \Couchbase\N1qlQuery::fromString(
+  'SELECT name, email, random, META(default).id FROM default WHERE $1 IN name');
+$query->positionalParams(['Brass']);
+// If this line is removed, the latest 'random' field might not be present
+$query->consistency(\Couchbase\N1qlQuery::REQUEST_PLUS);
+$res = $bucket->query($query);
 ----
 
 This gives you as an application developer more control over the balance between performance and consistency with respect to other actions on your distributed database.
