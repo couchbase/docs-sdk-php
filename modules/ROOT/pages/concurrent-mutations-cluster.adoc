@@ -258,8 +258,7 @@ You can modify the time the lock is held for (though it can be no longer than 15
 
 Be sure to keep note of the _cas_ value when locking a document.
 You will need it when unlocking.
-The following blocks show how to use [.api]`get(..., ["lock" => ...])` and [.api]`unlock` with the PHP SDK.
-This process should be similar for other SDKs.
+The following block shows how to use [.api]`get(..., ["lock" => ...])` and [.api]`unlock` with the PHP SDK.
 
 [source,php]
 ----
@@ -281,4 +280,4 @@ try {
 
 The handler will unlock the item either via an explicit unlock operation ([.api]`unlock()`) or implicitly via modifying the item with the correct CAS.
 
-If the item has already been locked, the library will raise exception with code [.var]`COUCHBASE_KEY_EEXISTS` which means that the operation could not be executed temporarily, but may succeed later on.
+If the item has already been locked, the library will raise exception with code [.var]`COUCHBASE_KEY_EXISTS` which means that the operation could not be executed temporarily, but may succeed later on.
