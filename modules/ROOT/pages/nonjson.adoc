@@ -41,7 +41,7 @@ The _name_ column displays the format name; the _native type_ column displays th
 The format code is discussed more in depth below.
 
 .Built-in format types
-[cols="20,35,103,21"]
+[cols="28,43,88,21"]
 |===
 | Name | Native Type | Description | Flags value (see below)
 
@@ -138,7 +138,7 @@ The _encoding_ function in the transcoder accepts a native Document type as inpu
 
 The _decoding_ function accepts a buffer (as fetched from the server) and a type code (the flags from the metadata) and returns the intended type to be used for the Document within the application.
 
-The following shows an implementation of the encoding ([.api]`encode_value`) and decoding ([.api]`decode_value`) functions in Python:
+The following shows an implementation of the encoding ([.api]`encode_value`) and decoding ([.api]`decode_value`) functions in PHP:
 
 [source,php]
 ----
@@ -181,7 +181,7 @@ It is important to note that all legacy typecodes (regardless of language) are u
 Legacy SDKs will also often have a mask value (typically no wider than 16 bits).
 
 The resultant typecode (actually stored as the _flags_ value is a bitwise OR of the modern typecode and the legacy typecode.
-For example, the older legacy Python code for _JSON_ was `0x00` and the unified typecode for _JSON_ is `0x02`.
+For example, the older legacy PHP code for _JSON_ was `0x00` and the unified typecode for _JSON_ is `0x02`.
 The resultant typecode is thus:
 
 ....
@@ -189,13 +189,6 @@ The resultant typecode is thus:
 0x02000000
 ....
 
-Another example: The legacy typecode for the _RAW_ format in Python is `0x02`, and the common type code is `0x03`.
-The resultant typecode is:
-
-....
-(0x03 << 24) | (0x02)
-0x03000002
-....
 
 When defining a new type code using the transcoder, ensure to keep the above information in mind, so as not to clash with any existing ones.
 // end::nonjson_flags[]
