@@ -41,13 +41,13 @@ Because JSON is a structured format, it can be subsequently searched and queried
 [#crud-overview]
 == Primitive Key-Value Operations
 
-[source,python]
+[source,php]
 ----
-upsert(docid, document)
-insert(docid, document)
-replace(docid, document)
-get(docid)
-remove(docid)
+upsert($docid, $document)
+insert($docid, $document)
+replace($docid, $document)
+get($docid)
+remove($docid)
 ----
 
 In Couchbase documents are stored using one of the operations: _upsert_, _insert_, and _replace_.
@@ -125,9 +125,11 @@ See xref:concurrent-mutations-cluster.adoc[CAS] for a description on how to use 
 ====
 If you wish to only modify certain parts of a document, you can use xref:subdocument-operations.adoc[sub-document] operations which operate on specific subsets of documents:
 
-[source,python]
+[source,php]
 ----
-cb.mutate_in('docid', subdoc.array_addunique('tags', 'fast'))
+$bucket->mutateIn('docid')
+       ->arrayAddUnique('tags', 'fast')
+       ->execute();
 ----
 
 or xref:{version-server}@server:n1ql:n1ql-language-reference/update.adoc[N1QL UPDATE] to update documents based on specific query criteria:
@@ -148,11 +150,15 @@ Primary key lookups are performed using the key-value API, which simplifies use 
 In Couchbase, documents are stored with their IDs.
 Retrieving a document via its ID is the simplest and quickest operation in Couchbase.
 
-....
->>> result = cb.get('docid')
->>> print result.value
-{'json': 'value'}
-....
+[source,php]
+----
+$result = $bucket->get('docid');
+var_dump($result->value);
+// => object(stdClass)#5 (1) {
+//      ["json"]=>
+//      string(5) "value"
+//    }
+----
 
 [source,bash]
 ----
@@ -185,9 +191,26 @@ SELECT * FROM default WHERE META(default).id = "docid";
 
 You can also retrieve _parts_ of documents using xref:subdocument-operations.adoc[sub-document operations], by specifying one or more sections of the document to be retrieved
 
-[source,python]
+[source,php]
 ----
-name, email = cb.retrieve_in('user:kingarthur', 'contact.name', 'contact.email')
+$result = $bucket->retrieveIn('user:kingarthur', 'contact.name', 'contact.email');
+var_dump($result->value);
+// => array(2) {
+//      [0]=>
+//      array(2) {
+//        ["value"]=>
+//        string(11) "King Arthur"
+//        ["code"]=>
+//        int(0)
+//      }
+//      [1]=>
+//      array(2) {
+//        ["value"]=>
+//        string(17) "arthur@britain.uk"
+//        ["code"]=>
+//        int(0)
+//      }
+//    }
 ----
 
 [#devguide_kvcore_counter_generic]
@@ -201,19 +224,24 @@ The same is the case for `decr()`.
 
 A document may be used as a counter if its value is a simple ASCII number, like `42`.
 Couchbase allows you to increment and decrement these values atomically using a special [.api]`counter` operation.
-The example below (in Python) shows how to use counters:
+The example below shows how to use counters:
 
-[source,python]
+[source,php]
 ----
->>> cb.counter('counter_id', delta=20, initial=100).value
-100L
->>> cb.counter('counter_id', delta=1).value
-101L
->>> cb.counter('counter_id', delta=-50).value
-51L
+$result = $bucket->counter('counter_id', 20, ['initial' => 100]);
+var_dump($result->value);
+// => int(100)
+
+$result = $bucket->counter('counter_id', 1);
+var_dump($result->value);
+// => int(101)
+
+$result = $bucket->counter('counter_id', -50);
+var_dump($result->value);
+// => int(51)
 ----
 
-In the above example, a counter is created by using the [.api]`counter` Python method with an [.param]`initial` value.
+In the above example, a counter is created by using the [.api]`counter` method with an [.param]`initial` value.
 The initial value is the value the counter uses if the counter ID does not yet exist.
 
 Once created, the counter can be incremented or decremented atomically by a given _amount_ or _delta_.
@@ -230,12 +258,14 @@ xref:concurrent-mutations-cluster.adoc[CAS] values are not used with counter ope
 The intent of the counter operation is to simply increment the current server-side value of the document.
 If you wish to only increment the document if it is at a certain value, then you may use a normal [.api]`upsert` function with CAS:
 
-[source,python]
+[source,php]
 ----
-rv = cb.get('counter_id')
-value, cas = rv.value, rv.cas
-if should_increment_value(value):
-  cb.upsert('counter_id', value + increment_amount, cas=cas)
+$rv = $bucket->get('counter_id');
+$value = $rv->value;
+$cas = $rv->cas;
+if shouldIncrementValue($value) {
+  $bucket->upsert('counter_id', $value + $increment_amount, ['cas' => $cas]);
+}
 ----
 
 You can also use xref:subdocument-operations.adoc#ul_fp2_2yw_mv[sub-document counter operations] to increment numeric values _within_ a document containing other content.
@@ -246,13 +276,13 @@ You can also use xref:subdocument-operations.adoc#ul_fp2_2yw_mv[sub-document cou
 You can use collection data structures such as lists, maps, sets and queues in Couchbase.
 These data structures may be manipulated with basic operations without retrieving and storing the entire document.
 
-See the data structures xref:python-sdk::datastructures.adoc[documentation for each SDK language] for details on implementation.
-Some Python examples are provided below for easy reference, but more advanced Collections frameworks are accessible in xref:java-sdk::datastructures.adoc[Java] and xref:dotnet-sdk::datastructures.adoc[.NET] as well.
+See the xref:php-sdk::datastructures.adoc[data structures documentation] for details on implementation.
+Some examples are provided below for easy reference, but more advanced Collections frameworks are accessible in xref:java-sdk::datastructures.adoc[Java] and xref:dotnet-sdk::datastructures.adoc[.NET] as well.
 
-Data structures in Couchbase are similar in concept to data structures in, for example, Python:
+Data structures in Couchbase are similar in concept to data structures in, for example:
 
-* *Map* is like Python `dict`, and is a key-value structure, where a value is accessed by using a key string.
-* *List* is like a Python `list` and is a sequential data structure.
+* *Map* is like PHP `Array`, and is a key-value structure, where a value is accessed by using a key string.
+* *List* is also like a PHP `Array` and is a sequential data structure.
 Values can be placed in the beginning or end of a list, and can be accessed using numeric indexes.
 * *Queue* is a wrapper over a _list_ which offers FIFO (first-in-first-out) semantics, allowing it to be used as a lightweight job queue.
 * *Set* is a wrapper over a _list_ which provides the ability to handle unique values.
@@ -263,18 +293,18 @@ Data structures can also be manipulated using the traditional sub-document and f
 To add an item to a map, specify the _document ID_ of the map itself (i.e.
 the ID which uniquely identifies the map in the server), the key _within_ the map, and the value to store under the key:
 
-[source,python]
+[source,php]
 ----
-bucket.map_add('map_id', 'name', 'Mark Nunberg', create=True)
+$bucket->mapAdd('map_id', 'name', 'John Doe');
 ----
 
 Data structures can be accessed using their appropriate methods.
 Most data access methods will return an [.api]`ValueResult`-like object with the actual returned value under the [.var]`value` property.
 
-[source,python]
+[source,php]
 ----
-bucket.list_get(0).value  # 'hello'
-bucket.map_get('map_id', 'name').value  # 'mark nunberg'
+$bucket->listGet('list_id', 0)
+$bucket->mapGet('map_id', 'name') //=> 'John Doe'
 ----
 
 [#devguide_kvcore_append_prepend_generic]
@@ -291,10 +321,10 @@ Using the append and prepend methods may invalidate an existing JSON document.
 You can use xref:subdocument-operations.adoc[sub-document operations] if you want to have true JSON-aware prepend and append operations which add values to JSON arrays.
 ====
 
-[source,python]
+[source,php]
 ----
-append(docid, fragment)
-prepend(docid, fragment)
+$bucket->append($docid, $fragment);
+$bucket->prepend($docid, $fragment);
 ----
 
 The _append_ and _prepend_ operations atomically add bytes to the end or beginning of a binary document.
@@ -307,35 +337,45 @@ These functions may be used to add efficiency for custom binary data structures 
 Consider the following versions (which are equivalent)
 
 .Append using get() and replace() (slow)
-[source,python]
+[source,php]
 ----
-# Store the document
-cb.upsert('binary_doc', '\x01', format=couchbase.FMT_BYTES)
+$bucket->setTranscoder('\\Couchbase\\passthruEncoder', '\\Couchbase\\passthruDecoder');
 
-while True:
-    # Retrieve the entire document
-    rv = cb.get('binary_doc')
-    value = rv.value + '\x02'
-    try:
-        # Upload the entire document
-        cb.replace('binary_doc', value, format=couchbase.FMT_BYTES)
-        break
-    except couchbase.exceptions.KeyExistsError:
-        continue
+// Store the document
+$bucket->upsert('binary_doc', "\x01");
 
-print repr(cb.get('binary_doc').value)
+while (true) {
+    // Retrieve the entire document
+    $rv = $bucket->get('binary_doc');
+    $value = $rv->value . "\x02";
+    try {
+        $bucket->replace('binary_doc', $value);
+    } catch (\Couchbase\Exception $ex) {
+        if ($ex->getCode() == COUCHBASE_KEY_EEXISTS) {
+            continue;
+        } else {
+            throw $ex;
+        }
+    }
+    break;
+}
+var_dump(bin2hex($bucket->get('binary_doc')->value));
+// => string(4) "0102"
 ----
 
 .Append using append() (fast)
-[source,python]
+[source,php]
 ----
-# Store the document
-cb.upsert('binary_doc', '\x01', format=couchbase.FMT_BYTES)
+$bucket->setTranscoder('\\Couchbase\\passthruEncoder', '\\Couchbase\\passthruDecoder');
 
-# Append a fragment
-cb.append('binary_doc', '\x02', format=couchbase.FMT_BYTES)
+// Store the document
+$bucket->upsert('binary_doc', "\x01");
 
-print repr(cb.get('binary_doc').value)
+// Append a fragment
+$bucket->append('binary_doc', "\x02");
+
+var_dump(bin2hex($bucket->get('binary_doc')->value));
+// => string(4) "0102"
 ----
 
 Note that since the _append_ operation is done atomically, there is no need for a CAS check (though one can still be supplied if the document must be at a specific state).
