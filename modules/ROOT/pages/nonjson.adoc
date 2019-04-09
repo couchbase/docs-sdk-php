@@ -81,21 +81,47 @@ If your application must store data that cannot be handled by any of the built-i
 == Using the _RAW_ format
 
 Manually serialize your document to a raw buffer, store the document using the _RAW_ format, and manually deserialize your document upon retrieval, reading and decoding the retrieved buffer manually.
-Here is an example in Python of manually encoding and decoding a UTF-16 string (note that the Python SDK names the _RAW_ format as [.param]`FMT_BYTES`):
+Here is an example in PHP of manually encoding and decoding a UTF-16 string (note that to use _RAW_ format in PHP SDK
+one have to substitute default transcoder with "pass through" transcoder which does nothing, read more about transcoders
+in the next section):
 
-[source,python]
+[source,php]
 ----
->>> from couchbase import FMT_BYTES
->>> cb.upsert('utf16_doc',
-              'Hello, UTF-16 World!'.encode('utf16'),
-              format=FMT_BYTES)
-OperationResult<RC=0x0, Key=u'utf16_doc', CAS=0x35cc17c7f213>
->>> raw_buf = cb.get('utf16_doc').value
->>> raw_buf
-'\xff\xfeH\x00e\x00l\x00l\x00o\x00,\x00 \x00U\x00T\x00F\x00-\x001\x006\x00 \x00W\x00o\x00r\x00l\x00d\x00!\x00'
->>> utf16_doc = raw_buf.decode('utf16')
->>> utf16_doc
-u'Hello, UTF-16 World!'
+$bucket->setTranscoder('\\Couchbase\\passthruEncoder', '\\Couchbase\\passthruDecoder');
+
+$data = mb_convert_encoding('Hello, UTF-16 World!', 'UTF-8', 'UTF-16LE');
+$res = $bucket->upsert('utf16_doc', $data);
+var_dump($res);
+// => object(Couchbase\Document)#4 (5) {
+//      ["error"]=>
+//      NULL
+//      ["value"]=>
+//      NULL
+//      ["flags"]=>
+//      int(0)
+//      ["cas"]=>
+//      string(12) "bt98zvv5txj4"
+//      ["token"]=>
+//      NULL
+//    }
+
+$res = $bucket->get('utf16_doc');
+var_dump($res);
+// => object(Couchbase\Document)#5 (5) {
+//      ["error"]=>
+//      NULL
+//      ["value"]=>
+//      string(30) "效汬Ɐ唠䙔ㄭ‶潗汲Ⅴ"
+//      ["flags"]=>
+//      int(0)
+//      ["cas"]=>
+//      string(12) "bt98zvv5txj4"
+//      ["token"]=>
+//      NULL
+//    }
+
+var_dump(mb_convert_encoding($res->value, 'UTF-16LE', 'UTF-8'));
+// => string(20) "Hello, UTF-16 World!"
 ----
 
 [#transcoders]
@@ -114,26 +140,27 @@ The _decoding_ function accepts a buffer (as fetched from the server) and a type
 
 The following shows an implementation of the encoding ([.api]`encode_value`) and decoding ([.api]`decode_value`) functions in Python:
 
-[source,python]
+[source,php]
 ----
-from couchbase.transcoder import Transcoder
-UTF16_TYPECODE = 0x0A000000
-class Utf16Transcoder(Transcoder):
-    def encode_value(self, value, format):
-        if (format == UTF16_TYPECODE):
-            return value.encode('utf16'), UTF16_TYPECODE
-        else:  # Call default implementation
-            return super(Utf16Transcoder, self).encode_value(value, format)
+define('UTF16_TYPECODE', 0x0A000000);
 
-    def decode_value(self, value, flags):
-        if flags == UTF16_TYPECODE:
-            return value.decode('utf16')
-        else:  # Call default implementation
-            return super(Utf16Transcoder, self).decode_value(value, flags)
+function utf16Encoder($value) {
+    $data = mb_convert_encoding($value, 'UTF-8', 'UTF-16LE');
+    return [$data, UTF16_TYPECODE, 0];
+}
 
-cb.transcoder = Utf16Transcoder()
-cb.upsert('utf16_doc', 'Hello, UTF-16 World!', format=UTF16_TYPECODE)
-cb.get('utf16_doc')
+function utf16Decoder($data, $flags, $datatype) {
+    if ($flags & UTF16_TYPECODE) {
+        return mb_convert_encoding($data, 'UTF-16LE', 'UTF-8');
+    } else {
+        return \Couchbase\defaultDecoder($data, $flags, $datatype);
+    }
+}
+
+$bucket->setTranscoder('utf16Encoder', 'utf16Decoder');
+
+$bucket->upsert('utf16_doc', 'Hello, UTF-16 World!');
+$bucket->get('utf16_doc');
 ----
 
 // tag::nonjson_flags[]
