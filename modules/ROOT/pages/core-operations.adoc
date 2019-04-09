@@ -224,7 +224,7 @@ The same is the case for `decr()`.
 
 A document may be used as a counter if its value is a simple ASCII number, like `42`.
 Couchbase allows you to increment and decrement these values atomically using a special [.api]`counter` operation.
-The example below (in Python) shows how to use counters:
+The example below shows how to use counters:
 
 [source,php]
 ----
@@ -241,7 +241,7 @@ var_dump($result->value);
 // => int(51)
 ----
 
-In the above example, a counter is created by using the [.api]`counter` Python method with an [.param]`initial` value.
+In the above example, a counter is created by using the [.api]`counter` method with an [.param]`initial` value.
 The initial value is the value the counter uses if the counter ID does not yet exist.
 
 Once created, the counter can be incremented or decremented atomically by a given _amount_ or _delta_.
@@ -276,13 +276,13 @@ You can also use xref:subdocument-operations.adoc#ul_fp2_2yw_mv[sub-document cou
 You can use collection data structures such as lists, maps, sets and queues in Couchbase.
 These data structures may be manipulated with basic operations without retrieving and storing the entire document.
 
-See the data structures xref:php-sdk::datastructures.adoc[documentation for each SDK language] for details on implementation.
-Some Python examples are provided below for easy reference, but more advanced Collections frameworks are accessible in xref:java-sdk::datastructures.adoc[Java] and xref:dotnet-sdk::datastructures.adoc[.NET] as well.
+See the xref:php-sdk::datastructures.adoc[data structures documentation] for details on implementation.
+Some examples are provided below for easy reference, but more advanced Collections frameworks are accessible in xref:java-sdk::datastructures.adoc[Java] and xref:dotnet-sdk::datastructures.adoc[.NET] as well.
 
-Data structures in Couchbase are similar in concept to data structures in, for example, Python:
+Data structures in Couchbase are similar in concept to data structures in, for example:
 
-* *Map* is like Python `dict`, and is a key-value structure, where a value is accessed by using a key string.
-* *List* is like a Python `list` and is a sequential data structure.
+* *Map* is like PHP `Array`, and is a key-value structure, where a value is accessed by using a key string.
+* *List* is also like a PHP `Array` and is a sequential data structure.
 Values can be placed in the beginning or end of a list, and can be accessed using numeric indexes.
 * *Queue* is a wrapper over a _list_ which offers FIFO (first-in-first-out) semantics, allowing it to be used as a lightweight job queue.
 * *Set* is a wrapper over a _list_ which provides the ability to handle unique values.
