@@ -55,26 +55,32 @@ Assume the following two blocks of code are executing concurrently in different 
 
 a|
 ....
->>> result = cb1.get('docid')
->>> new_doc = result.value
->>> new_doc['field1'] = 'value1'
->>> cb1.replace('docid', new_doc)
+$result = $cb1->get('docid');
+$new_doc = $result->value;
+$new_doc->field1 = 'value1';
+$cb1->replace('docid', $new_doc);
 ....
 a|
 ....
->>> result = cb2.get('docid')
->>> new_doc = result.value
->>> new_doc['field2'] = 'value2'
->>> cb2.replace('docid', new_doc)
+$result = $cb2->get('docid');
+$new_doc = $result->value;
+$new_doc->field2 = 'value2';
+$cb2->replace('docid', $new_doc);
 ....
 |===
 
 Retrieving the document again yields:
 
-[source,python]
+[source,php]
 ----
->>> cb1.get('docid').value
-{u'field2': u'value2', u'a_field': u'a_value'}
+$result = $cb1->get('docid')->value;
+var_dump($result);
+// => object(stdClass)#5 (2) {
+//      ["field2"]=>
+//      string(6) "value2"
+//      ["a_field"]=>
+//      string(7) "a_value"
+//    }
 ----
 
 Note that `field1` is not present, even though the application inserted it into the document.
@@ -83,22 +89,22 @@ The reason is because the replace on Thread #2 happened to run after the replace
 [cols="1,4"]
 |===
 | 0.00ms
-| (#2): `new_doc = get("docid").value`
+| (#2): `$new_doc = $cb->get("docid")->value;`
 
 | 0.00ms
-| (#1): `new_doc = get("docid").value`
+| (#1): `$new_doc = $cb->get("docid")->value;`
 
 | 0.00ms
-| (#1): `new_doc["field1"] = "value1"`
+| (#1): `$new_doc->field1 = "value1";`
 
 | 0.00ms
-| (#2): `new_doc["field2"] = "value2"`
+| (#2): `$new_doc->field2 = "value2";`
 
 | 0.01ms
-| (#1): `cb.replace("docid", new_doc)`
+| (#1): `$cb->replace("docid", $new_doc);`
 
 | 0.02ms
-| (#2): `cb.replace("docid", new_doc)`
+| (#2): `$cb->replace("docid", $new_doc);`
 |===
 
 == Using CAS - Example
@@ -112,44 +118,51 @@ This is not because Couchbase itself has lost the updates, but because the appli
 
 a|
 ....
->>> result = cb1.get('docid')
->>> new_doc = result.value
->>> print new_doc
-{u'a_field': u'a_value'}
->>> cur_cas = result.cas
->>> print cur_cas
-272002471883283
->>> new_doc['field1'] = 'value1'
->>> new_result = cb1.replace(
-       'docid',
-       new_doc,
-       cas=cur_cas)
+$result = $cb1->get('docid');
+$new_doc = $result->value;
+var_dump($new_doc);
+// => object(stdClass)#5 (1) {
+//      ["a_field"]=>
+//      string(7) "a_value"
+//    }
+
+$cur_cas = $result->cas;
+var_dump($cur_cas);
+// => string(12) "bt97sl3t3jsw"
+
+$new_doc->field = 'value1';
+$new_result = $cb1->replace('docid', $new_doc, ['cas' => $cur_cas]);
 ....
 
 NOTE: Server's CAS matches `cur_cas`.
 New CAS assigned
 
 ....
->>> print new_result.cas
-195896137937427
+>>> var_dump($new_result->cas);
+// => string(12) "bt97z7fmd5og"
 ....
 a|
 ....
->>> result = cb2.get('docid')
->>> new_doc = result.value
->>> print new_doc
-{u'a_field': u'a_value'}
->>> cur_cas = result.cas
->>> print cur_cas
-272002471883283
->>> new_doc['field2'] = 'value2'
->>> new_result = cb2.replace(
-       'docid',
-       new_doc,
-       cas=cur_cas)
+$result = $cb2->get('docid');
+$new_doc = $result->value;
+var_dump($new_doc);
+// => object(stdClass)#5 (1) {
+//      ["a_field"]=>
+//      string(7) "a_value"
+//    }
+
+$cur_cas = $result->cas;
+var_dump($cur_cas);
+// => string(12) "bt97sl3t3jsw"
+
+$new_doc->field2 = 'value2';
+$new_result = $cb2->replace('docid', $new_doc, ['cas' => $cur_cas]);
+
+>>> var_dump($new_result->cas);
+// => string(12) "bt9822mf87pc"
 ....
 
-WARNING: CAS on server differs: `195896137937427` vs `272002471883283`!
+WARNING: CAS on server differs: `bt97z7fmd5og` vs `"bt9822mf87pc"`!
 |===
 
 == Handling CAS errors
@@ -165,19 +178,28 @@ How to handle this error depends on the application logic.
 If the application wishes to simply insert a new property within the document (which is not dependent on other properties within the document), then it may simply retry the read-update cycle by retrieving the item (and thus getting the new CAS), performing the local modification and then uploading the change to the server.
 For example, if a document represents a user, and the application is simply updating a user’s information (like an email field), the method to update this information may look like this:
 
-[source,python]
+[source,php]
 ----
-def update_email(cb, user_id, email):
-    while True:
-        result = cb.get(user_id)
-        user_doc = result.value
-        user_doc['email'] = email
-        cb.upsert(user_id, user_doc, cas=result.cas)
-        break # Mutation succeeded
-    except KeyExistsError:
-        # This means the CAS has been modified. We still need to
-        # insert the email field, but do not want to override new changes
-        continue
+function updateEmail($bucket, $userId, $email) {
+    while (true) {
+        try {
+            $result = $bucket->get($userId);
+            $userDoc = $result->value;
+            $userDoc->email = $email;
+            $bucket->upsert($userId, $userDoc, ['cas' => $result->cas]);
+        } catch (\Couchbase\Exception $ex) {
+            if ($ex->getCode() == COUCHBASE_KEY_EEXISTS) {
+                // This means the CAS has been modified. We still need to
+                // insert the email field, but do not want to override new changes
+                continue;
+            } else {
+                throw $ex;
+            }
+        }
+	// Mutation succeeded
+        break;
+    }
+}
 ----
 
 Sometimes more logic is needed when performing updates, for example, if a property is mutually exclusive with another property; only one or the other can exist, but not both.
@@ -236,49 +258,27 @@ You can modify the time the lock is held for (though it can be no longer than 15
 
 Be sure to keep note of the _cas_ value when locking a document.
 You will need it when unlocking.
-The following blocks show how to use [.api]`lock` and [.api]`unlock` with the C SDK.
+The following blocks show how to use [.api]`get(..., ["lock" => ...])` and [.api]`unlock` with the PHP SDK.
 This process should be similar for other SDKs.
 
-[source,c]
+[source,php]
 ----
-lcb_CMDGET cmd = { 0 };
-LCB_CMD_SET_KEY(&cmd, "key", 3);
-cmd.lock = 1;
-cmd.exptime = 5;
-lcb_get3(instance, NULL, &cmd);
-lcb_wait(instance);
-----
-
-----
-static int unlock_only = 0;
-
-void get_handler(lcb_t instance, int cbtype, const lcb_RESPBASE *rb)
-{
-    const lcb_RESPGET *resp = (const lcb_RESPGET *)rb;
-
-    union {
-        lcb_CMDBASE base;
-        lcb_CMDSTORE store;
-        lcb_CMDUNLOCK unlock;
-    } u;
-
-    if (rb->rc == LCB_ETMPFAIL) {
-        printf("Key already locked!");
-    } else if (rb->rc == LCB_SUCCESS) {
-        memset(&u, 0, sizeof u);
-        LCB_CMD_SET_KEY(&u.base, rb->key, rb->nkey);
-        u.base.cas = rb->cas;
-        if (unlock_only) {
-            lcb_unlock3(instance, NULL, &u.unlock);
-        } else {
-            LCB_CMD_SET_VALUE(&u.store, "value", 5);
-            u.store.operation = LCB_REPLACE;
-            lcb_store3(instance, NULL, &u.store);
-        }
+$bucket = $cluster->openBucket('default');
+$res = $bucket->get('docid', ['lockTime' => 5]);
+$new_value = ['foo' => 42];
+try {
+    $bucket->replace('docid', $new_value);
+} catch (\Couchbase\Exception $ex) {
+    if ($ex->getCode() == COUCHBASE_KEY_EEXISTS) {
+        $bucket->unlock('docid', ['cas' => $res->cas]);
+        $bucket->replace('docid', $new_value);
+        // or replace with known cas
+    } else {
+        throw $ex;
     }
 }
 ----
 
-The handler will unlock the item either via an explicit unlock operation ([.api]`lcb_unlock3`) or implicitly via modifying the item with the correct CAS.
+The handler will unlock the item either via an explicit unlock operation ([.api]`unlock()`) or implicitly via modifying the item with the correct CAS.
 
-If the item has already been locked, the server will respond with [.var]`LCB_ETMPFAIL` which means that the operation could not be executed temporarily, but may succeed later on.
+If the item has already been locked, the library will raise exception with code [.var]`COUCHBASE_KEY_EEXISTS` which means that the operation could not be executed temporarily, but may succeed later on.
