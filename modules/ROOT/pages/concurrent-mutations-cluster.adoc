@@ -280,4 +280,4 @@ try {
 
 The handler will unlock the item either via an explicit unlock operation ([.api]`unlock()`) or implicitly via modifying the item with the correct CAS.
 
-If the item has already been locked, the library will raise exception with code [.var]`COUCHBASE_KEY_EXISTS` which means that the operation could not be executed temporarily, but may succeed later on.
+If the item has already been locked, the library will raise exception with code [.var]`COUCHBASE_KEY_EEXISTS` which means that the operation could not be executed temporarily, but may succeed later on.
