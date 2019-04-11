@@ -15,7 +15,7 @@ You should use Sub-Document operations when you are modifying only portions of a
 
 [caption=Attention]
 IMPORTANT: The Sub-Document operations described on this page are for _Key-Value_ requests only: they are not related to Sub-Document N1QL queries.
-(ub-Document N1QL queries are explained in the section xref:n1ql-query.adoc[Querying with N1QL].)
+(Sub-Document N1QL queries are explained in the section xref:n1ql-query.adoc[Querying with N1QL].)
 
 In order to use Sub-Document operations you need to specify a _path_ indicating the location of the Sub-Document.
 The _path_ follows N1QL syntax (see https://developer.couchbase.com/documentation/server/current/sdk/subdocument-operations.html#story-h2-12[below^], and xref:{version-server}@server:n1ql:n1ql-intro/queriesandresults.adoc[N1QL Queries and Results]).
