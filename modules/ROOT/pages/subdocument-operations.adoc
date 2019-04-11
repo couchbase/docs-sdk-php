@@ -59,22 +59,24 @@ You have a choice of actually retrieving the document path using the _subdoc-get
 The latter saves even more bandwidth by not retrieving the contents of the path if it is not needed.
 
 .Retrieve Sub-Document value
-[source,python]
+[source,php]
 ----
-import couchbase.subdocument as SD  # Use SD alias for brevity
-rv = bucket.lookup_in('customer123', SD.get('addresses.delivery.country'))
-country = rv[0] # => 'United Kingdom'
+$rv = $bucket->lookupIn('customer123')
+             ->get('addresses.delivery.country')
+             ->execute();
+$country = $rv->value[0]['value'];
+var_dump($country);
+// => string(14) "United Kingdom"
 ----
 
 .Check existence of Sub-Document path
-[source,javascript]
+[source,php]
 ----
-bucket.lookupIn('customer123').exists('purchases.pending[-1]').execute(
-    function(err, result) {
-        console.log('Path exists? %j', result.exists('purchases.pending[-1]'));
-    }
-);
-# Path exists? false
+$rv = $bucket->lookupIn('customer123')
+             ->exists('purchases.pending[-1]')
+             ->execute();
+var_dump($rv->value[0]['code'] == COUCHBASE_SUBDOC_PATH_ENOENT);
+// => bool(true)
 ----
 
 Multiple operations can be combined as well:
@@ -89,8 +91,8 @@ $frags = $bucket->lookupIn('customer123')
 
 echo $frags->value[0]['value'] . ", Code=" . $frags->value[0]['code'] . "\n";
 echo $frags->value[1]['value'] . ", Code=" . $frags->value[1]['code'] . "\n";
-# United Kingdom, 0 (No error)
-# , 63 (COUCHBASE_SUBDOC_PATH_ENOENT)
+// United Kingdom, 0 (No error)
+// , 63 (COUCHBASE_SUBDOC_PATH_ENOENT)
 ----
 
 == Mutating
@@ -99,28 +101,48 @@ Mutation operations modify one or more paths in the document.
 The simplest of these operations is _subdoc-upsert_, which, just like the fulldoc-level _upsert_, this will either modify the value of an existing path or create it if it does not exist:
 
 .Upserting a new Sub-Document
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.upsert('fax', '311-555-0151'))
+$rv = $bucket->mutateIn('customer123')
+             ->upsert('fax', '311-555-0151')
+             ->execute();
+var_dump($rv->value[0]['code'] == COUCHBASE_SUCCESS);
+// => bool(true)
 ----
 
 Likewise, the _subdoc-insert_ operation will only add the new value to the path if it does not exist:
 
 .Inserting a Sub-Document
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.insert('purchases.complete', [42, True, None]))
-# SubdocPathExistsError
+$rv = $bucket->mutateIn('customer123')
+             ->insert('purchases.complete', [42, true, null])
+             ->execute();
+var_dump($rv->value[0]['code'] == COUCHBASE_SUBDOC_PATH_EEXISTS);
+// => bool(true)
 ----
 
 Dictionary values can also be replaced or removed, and you may combine any number of mutation operations within the same general _mutate-in_ API.
 Here's an example of one which replaces one path and removes another.
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123',
-                 SD.remove('addresses.billing'),
-                 SD.replace('email', 'dougr96@hotmail.com'))
+$rv = $bucket->mutateIn('customer123')
+             ->remove('addresses.billing')
+             ->replace('email', 'dougr96@hotmail.com')
+             ->execute();
+var_dump($rv);
+// => object(Couchbase\DocumentFragment)#5 (4) {
+//      ["error"]=>
+//      NULL
+//      ["cas"]=>
+//      string(12) "btaxwujyuark"
+//      ["value"]=>
+//      array(0) {
+//      }
+//      ["token"]=>
+//      NULL
+//    }
 ----
 
 == Array append and prepend
@@ -128,64 +150,127 @@ bucket.mutate_in('customer123',
 The _subdoc-array-prepend_ and _subdoc-array-append_ operations are true array prepend and append operations.
 Unlike fulldoc _append_/_prepend_ operations (which simply concatenate bytes to the existing value), _subdoc-array-append_ and _subdoc-array-prepend_ are JSON-aware:
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.array_append('purchases.complete', 777))
-# purchases.complete is now [339, 976, 442, 666, 777]
+$bucket->mutateIn('customer123')
+       ->arrayAppend('purchases.complete', 777)
+       ->execute();
+// purchases.complete is now [339, 976, 442, 666, 777]
 ----
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.array_prepend('purchases.abandoned', 18))
-# purchases.abandoned in now [18, 157, 49, 999]
+$bucket->mutateIn('customer123')
+       ->arrayPrepend('purchases.abandoned', 18)
+       ->execute();
+// purchases.abandoned in now [18, 157, 49, 999]
 ----
 
 If your document only needs to contain an array, you do not have to create a top-level object wrapper to contain it.
 Simply initialize the document with an empty array and then use the empty path for subsequent Sub-Document array operations:
 
 .Creating and populating an array document
-[source,python]
+[source,php]
 ----
-bucket.upsert('my_array', [])
-bucket.mutate_in('my_array', SD.array_append('', 'some element'))
-# the document my_array is now ["some element"]
+$bucket->upsert('my_array', []);
+$bucket->mutateIn('my_array')
+       ->arrayAppend('', 'some element')
+       ->execute();
+var_dump($bucket->get('my_array')->value);
+// => array(1) {
+//      [0]=>
+//      string(12) "some element"
+//    }
 ----
 
 If you wish to add multiple values to an array, you may do so by passing multiple values to the _array-append_, _array-prepend_, or _array-insert_ operations.
 Be sure to know the difference between passing a collection of multiple elements (in which case the collection is inserted as a single element in the array, as a sub-array) and passing multiple elements (in which case the elements are appended individually to the array):
 
 .Add multiple elements to an array
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('my_array', SD.array_append('', 'elem1', 'elem2', 'elem3')
-# the document my_array is now ["some_element", "elem1", "elem2", "elem3"]
+$bucket->mutateIn('my_array')
+       ->arrayAppendAll('', ['elem1', 'elem2', 'elem3'])
+       ->execute();
+var_dump($bucket->get('my_array')->value);
+// => array(4) {
+//      [0]=>
+//      string(12) "some element"
+//      [1]=>
+//      string(5) "elem1"
+//      [2]=>
+//      string(5) "elem2"
+//      [3]=>
+//      string(5) "elem3"
+//    }
 ----
 
 .Add single array as element to existing array
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('my_array', SD.array_append('', ['elem1', 'elem2', 'elem3'])
-# the document my_array is now ["some_element", ["elem1", "elem2", "elem3"]]
+$bucket->mutateIn('my_array')
+       ->arrayAppend('', ['elem1', 'elem2', 'elem3'])
+       ->execute();
+var_dump($bucket->get('my_array')->value);
+// => array(2) {
+//      [0]=>
+//      string(12) "some element"
+//      [1]=>
+//      array(3) {
+//        [0]=>
+//        string(5) "elem1"
+//        [1]=>
+//        string(5) "elem2"
+//        [2]=>
+//        string(5) "elem3"
+//      }
+//    }
 ----
 
 Note that passing multiple values to a single _array-append_ operation results in greater performance increase and bandwidth savings than simply specifying a single _array-append_ for each element.
 
 .Adding multiple elements to array (slow)
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('my_array',
-                  SD.array_append('', 'elem1'),
-                  SD.array_append('', 'elem2'),
-                  SD.array_append('', 'elem3'))
+$bucket->mutateIn('my_array')
+       ->arrayAppend('', 'elem1')
+       ->arrayAppend('', 'elem2')
+       ->arrayAppend('', 'elem3')
+       ->execute();
+var_dump($bucket->get('my_array')->value);
+// => array(4) {
+//      [0]=>
+//      string(12) "some element"
+//      [1]=>
+//      string(5) "elem1"
+//      [2]=>
+//      string(5) "elem2"
+//      [3]=>
+//      string(5) "elem3"
+//    }
 ----
 
 If you wish to create an array if it does not exist and also push elements to it within the same operation you may use the<< subdoc-create-parents,_create-parents_>> option:
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('some_doc',
-                  SD.array_append('some.array', 'Hello', 'World',
-                                  create_parents=True))
+$bucket->upsert('some_doc', (object)[]);
+$bucket->mutateIn('some_doc')
+       ->arrayAppendAll('some.array', ['Hello', 'World'], ['createPath' => true])
+       ->execute();
+var_dump($bucket->get('some_doc')->value);
+// => object(stdClass)#6 (1) {
+//      ["some"]=>
+//      object(stdClass)#4 (1) {
+//        ["array"]=>
+//        array(2) {
+//          [0]=>
+//          string(5) "Hello"
+//          [1]=>
+//          string(5) "World"
+//        }
+//      }
+//    }
 ----
 
 == Arrays as unique sets
@@ -193,12 +278,30 @@ bucket.mutate_in('some_doc',
 Limited support also exists for treating arrays like unique sets, using the _subdoc-array-addunique_ command.
 This will do a check to determine if the given value exists or not before actually adding the item to the array:
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.push_unique('purchases.complete', 95))
-# => Success
-bucket.mutate_in('customer123', SD.push_unique('purchases.abandoned', 42))
-# => SubdocPathExists exception!
+$rv = $bucket->mutateIn('customer123')
+             ->arrayAddUnique('purchases.complete', 95)
+             ->execute();
+var_dump($rv->error);
+// => NULL
+
+$rv = $bucket->mutateIn('customer123')
+             ->arrayAddUnique('purchases.abandoned', 42)
+             ->execute();
+var_dump($rv->error != null);
+// => bool(true)
+var_dump($rv->value[0]['code'] == COUCHBASE_SUBDOC_PATH_EEXISTS);
+// => bool(true)
+
+$rv = $bucket->mutateIn('customer123')
+             ->arrayAddUnique('purchases.abandoned', ['foo' => 42])
+             ->execute();
+var_dump($rv->error != null);
+// => bool(true)
+var_dump($rv->value[0]['code'] == COUCHBASE_SUBDOC_VALUE_CANTINSERT);
+// => bool(true)
+
 ----
 
 Note that currently the _addunique_ will fail with a _Path Mismatch_ error if the array contains JSON _floats_, _objects_, or _arrays_.
@@ -213,9 +316,21 @@ While _append_ will place a new item at the _end_ of an array and _prepend_ will
 The position is indicated by the last path component, which should be an array index.
 For example, to insert `"cruel"` as the second element in the array `["Hello", "world"]`, the code would look like:
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('array', SD.arrayinsert('[1]', 'cruel'))
+$bucket->upsert('array', ['Hello', 'world']);
+$rv = $bucket->mutateIn('array')
+             ->arrayInsert('[1]', 'cruel')
+             ->execute();
+var_dump($bucket->get('array')->value);
+// => array(3) {
+//      [0]=>
+//      string(5) "Hello"
+//      [1]=>
+//      string(5) "cruel"
+//      [2]=>
+//      string(5) "world"
+//    }
 ----
 
 Note that the array must already exist and that the index must be valid (i.e.
@@ -226,20 +341,26 @@ it must not point to an element which is out of bounds).
 Counter operations allow the manipulation of a _numeric_ value inside a document.
 These operations are logically similar to the _counter_ operation on an entire document:
 
-[source,python]
+[source,php]
 ----
-rv = bucket.mutate_in('customer123', SD.counter('logins', 1))
-cur_count = rv[0] # => 1
+$rv = $bucket->mutateIn('customer123')
+             ->counter('logins', 1)
+             ->execute();
+$cur_count = $rv->value[0]['value'];
+var_dump($cur_count);
+// => int(1)
 ----
 
 The _subdoc-counter_ operation peforms simple arithmetic against a numeric value, either incrementing or decrementing the existing value.
 
-[source,python]
+[source,php]
 ----
-bucket.upsert('player432', {'gold': 1000})
-rv = bucket.mutate_in('player432', SD.counter('gold', -150))
-print('player432 now has {0} gold remaining'.format(rv[0]))
-# => player 432 now has 850 gold remaining
+$bucket->upsert('player432', ['gold' => 1000]);
+$rv = $bucket->mutateIn('player432')
+             ->counter('gold', -150)
+             ->execute();
+printf("player432 now has %d gold remaining\n", $rv->value[0]['value']);
+// => player 432 now has 850 gold remaining
 ----
 
 The existing value for _subdoc-counter_ operations must be within range of a 64 bit signed integer.
@@ -298,12 +419,13 @@ By default the automatic creation of parents is disabled, as a simple typo in ap
 Sometimes it is necessary to have the server create the hierarchy however.
 In this case, the _create-parents_ or _create-intermediates_ option may be used.
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123',
-                 SD.upsert('level_0.level_1.foo.bar.phone',
-                           {'num': '311-555-0101', 'ext': 16},
-                           create_parents=True))
+$bucket->mutateIn('customer123')
+       ->upsert('level_0.level_1.foo.bar.phone', 
+                ['num' => '311-555-0101', 'ext' => 16],
+                ['createPath' => true])
+       ->execute();
 ----
 
 == CAS Semantics
@@ -312,14 +434,18 @@ Subdoc mostly eliminates the need for tracking the xref:concurrent-mutations-clu
 Subdoc operations are atomic and therefore if two different threads access two different Sub-Documents then no conflict will arise.
 For example the following two blocks can execute concurrently without any risk of conflict:
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.array_append('purchases.complete', 999))
+$bucket->mutateIn('customer123')
+       ->arrayAppend('purchases.complete', 999)
+       ->execute();
 ----
 
-[source,python]
+[source,php]
 ----
-bucket.mutate_in('customer123', SD.array_append('purchases.abandoned', 998))
+$bucket->mutateIn('customer123')
+       ->arrayAppend('purchases.abandoned', 998)
+       ->execute();
 ----
 
 Even when modifying the _same_ part of the document, operations will not necessarily conflict.
@@ -397,16 +523,19 @@ If you need to combine both JSON _and_ path-syntax literals you can do so by esc
 a quote or backslash) and then encapsulating it in backticks (`pass:c[`path`]`).
 Here is such an example in Python:
 
-[source,python]
+[source,php]
 ----
-import json
-def escape_component(component):
-    component = json.dumps(component)[1:-1]
-    return '`' + component + '`'
+function escapeComponent($component) {
+    $component = json_encode($component);
+    return '`' . substr($component, 1, -1) . '`';
+}
 
-print escape_component("Hello!") # `Hello!`
-print escape_component("backtick[]") # `backtick[]`
-print escape_component("[\"mixed\\") # `[\"mixed\\`
+echo(escapeComponent("Hello!"));
+// => `Hello!`
+echo(escapeComponent("backtick[]"));
+// =>`backtick[]` 
+echo(escapeComponent("[\"mixed\\"));
+// =>`[\"mixed\\` 
 ----
 
 NOTE: Currently, paths cannot exceed 1024 characters, and cannot be more than 32 levels deep.
