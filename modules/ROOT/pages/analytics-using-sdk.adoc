@@ -16,37 +16,25 @@ While earlier Python SDK versions provide some support, we strongly recommend to
 
 == Usage: Performing a Request
 
-Intentionally, the API for analytics is very similar to the query service one, but with an additional host parameter.
-
-[source,python]
-----
-
-def analytics_query(self, query, host, *args, **kwargs):
-    """
-    Execute an Analytics query.
-    ...
-----
-
-The timeout is always propagated to the server, so when a timeout happens on the client side the server can also stop processing the request and save resources.
+Intentionally, the API for analytics is very similar to the query service. The timeout is always propagated to the
+server, so when a timeout happens on the client side the server can also stop processing the request and save resources.
 
 To perform a query, you need to create an `AnalyticsQuery` -- which can either be simple or parameterized. 
 If parameters are used, they can either be positional or named. Here is one example of each:
 
-[source,python]
+[source,php]
 ----
-from couchbase.analytics import AnalyticsQuery
-simple = AnalyticsQuery(
-    "select airportname, country from airports where country = 'France'")
+$simple = \Couchbase\AnalyticsQuery::fromString(
+     "SELECT airportname, country FROM airports WHERE country = 'France'");
 
-positional = AnalyticsQuery(
-    "select airportname, country from airports where country = ?",
-    "France")
+$positional = \Couchbase\AnalyticsQuery::fromString(
+    "SELECT airportname, country FROM airports WHERE country = ?");
+$positional->positionalParams(["France"]);
 
 
-named = AnalyticsQuery(
-    "select airportname, country from airports where country = $country",
-    country="France")
-
+$named = \Couchbase\AnalyticsQuery:fromString(
+    "SELECT airportname, country FROM airports WHERE country = $country");
+$named->namedparams(["country" => "France"]);
 ----
 
 Additional options are available at query time which can be passed in through the `AnalyticsRequest` object:
@@ -65,36 +53,34 @@ Additional options are available at query time which can be passed in through th
 
 These params must be sent as part of the query:
 
-[source,python]
+[source,php]
 ----
-q = AnalyticsQuery(
-    "select airportname, country from airports where country = 'France'"
-)
-q.set_option("pretty",True)
+$q = \Couchbase\AnalyticsQuery::fromString(
+    "SELECT airportname, country FROM airports WHERE country = 'France'");
+$q->rawParam("pretty", true);
 ----
 
 == Usage: Handling the Response
 
 Once the request has been executed, results are sent back to the client and it will return an `AnalyticsRequest`
 
-[source,python]
+[source,php]
 ----
-analytics_host_port="localhost:8091"
-result = bucket.analytics_query(query,analytics_host_port);
+$result = $bucket->query($query);
 ----
 
 The result contains all kinds of actual data and metadata which might or might not be set, depending on the query response. Here is an example:
 
-[source,python]
+[source,php]
 ----
-result = self.cb.analytics_query(AnalyticsQuery(
-            "SELECT airportname, country FROM airports WHERE country = 'France' LIMIT 5"
-        ), "localhost:8091")
-
-        try:
-            for row in result:
-                print(row)
-        except e:
-            # handle exceptions
-            ...
+$query = \Couchbase\AnalyticsQuery::fromString(
+            "SELECT airportname, country FROM airports WHERE country = 'France' LIMIT 5");
+$result = $cb->query();
+try {
+    foreach ($result->rows as $row) {
+	var_dump($row);
+    }
+} catch (\Couchbase\Exception $ex) {
+    // handle exceptions
+}
 ----
