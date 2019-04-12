@@ -61,9 +61,11 @@ Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
 [source,bash]
 ----
+# Unix-like OS
 extension=couchbase.so
 
-extension=couchbase.dll
+# MS Windows
+extension=php_couchbase.dll
 ----
 
 === Note on Extension Dependencies
