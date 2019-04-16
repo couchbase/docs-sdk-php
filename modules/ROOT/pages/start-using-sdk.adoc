@@ -24,7 +24,7 @@ sudo apt-get install libcouchbase-dev build-essential php-dev zlib1g-dev
 sudo pecl install couchbase
 ----
 
-For Ubuntu 18.10, and other Debian based releases unsupported by `couchbase-release-1.0-4-amd64.deb`, either replace the above _first-time setup_ instructions with (here using _cosmic_ for Ubuntu 18.10 Cosmic):
+For Ubuntu 18.10, and other Debian based releases unsupported by `couchbase-release-1.0-6-amd64.deb`, either replace the above _first-time setup_ instructions with (here using _cosmic_ for Ubuntu 18.10 Cosmic):
 
 [source,bash]
 ----
