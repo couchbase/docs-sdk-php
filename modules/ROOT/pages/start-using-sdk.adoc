@@ -32,7 +32,7 @@ sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key
 echo "deb http://packages.couchbase.com/ubuntu cosmic cosmic/main" | sudo tee /etc/apt/sources.list.d/couchbase.list
 ----
 
-or, see the detailed instructions on manually adding repos for your version in the xref:c-sdk::relnotes-c-sdk.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
+or, see the detailed instructions on manually adding repos for your version in the xref:c-sdk::sdk-release-notes.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
 
 [NOTE]
 ====
@@ -127,7 +127,7 @@ On UNIX-like systems no additional steps are necessary, because the libcouchbase
 For Windows though, it must be copied into either into a location from the `PATH` for the PHP executable or into a directory with like executables (like apache2, IIS or php.exe).
 This is controlled by your PHP distribution's setup, so see its documentation for further information.
 
-Information on new features, fixes, known issues as well as information on how to install older release versions is xref:relnotes-php-sdk.adoc[in the release notes].
+Information on new features, fixes, known issues as well as information on how to install older release versions is xref:sdk-release-notes.adoc[in the release notes].
 
 == Hello Couchbase
 
