@@ -1,4 +1,5 @@
 = Couchbase PHP Release Notes and Archives
+:page-aliases: relnotes-php-sdk
 
 == SDK Installation
 
