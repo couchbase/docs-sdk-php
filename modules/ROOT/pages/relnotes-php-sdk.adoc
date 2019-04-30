@@ -1,1 +1,1 @@
-include::php-sdk::page$relnotes-php-sdk.adoc[]
+include::php-sdk::page$sdk-release-notes.adoc[tag=latest]
