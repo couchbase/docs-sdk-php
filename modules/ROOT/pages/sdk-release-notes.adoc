@@ -1,6 +1,8 @@
 = Couchbase PHP Release Notes and Archives
+:page-partial:
 :page-aliases: relnotes-php-sdk
 
+// tag::latest[]
 == SDK Installation
 
 === Installing on Linux-like systems
@@ -716,3 +718,4 @@ building with system fastlz.
 extension from within from transcoder fails.
 * https://issues.couchbase.com/browse/PCBC-373[PCBC-373]: Encoding
 of plus sign fails for view query ranges.
+// end::latest[]
