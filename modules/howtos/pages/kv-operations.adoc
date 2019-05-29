@@ -28,26 +28,23 @@ Make sure you're familiar with the basics of authorization and connecting to a C
 We're going to expand on the short _Upsert_ example we used there, adding options as we move through the various CRUD operations.
 Here is the _Insert_ operation at its simplest:
 
-[source,csharp]
+[source,php]
 ----
-Insert
-var document = new {foo = "bar", bar = "foo"};
-var result = await collection.Insert("document-key", document);
+// Insert
+$document = ["foo" => "bar", "bar" => "foo"];
+$result = $collection->insert("document-key", $document);
 ----
 
 Options may be added to operations:
 
-[source,csharp]
+[source,php]
 ----
-Insert (with options)
-var document = new {foo = "bar", bar = "foo"};
-var result = await collection.Insert("document-key", document,
-    new InsertOptions
-    {
-        Cas = 12345,
-        Timeout = TimeSpan.FromSeconds(5)
-    }
-);
+// Insert (with options)
+$document = ["foo" => "bar", "bar" => "foo"];
+$options = new \Couchbase\InsertOptions();
+$options->expiration(30) // 30 seconds
+	->timeout(5000); // 5 seconds
+$result = $collection->insert("document-key", $document, $options);
 ----
 
 Setting a Compare and Swap (CAS) value is a form of optimistic locking - dealt with in depth in the xref:concurrent-document-mutations.adoc[CAS page].
@@ -59,41 +56,35 @@ _Timeout_ is an optional parameter which in the .NET SDK has a type value of `Ti
 Timeout sets the timeout value for the underlying network connection.
 We will add to these options for the _Replace_ example:
 
-[source,csharp]
+[source,php]
 ----
-var document = new {foo = "bar", bar = "foo"};
-var result = await collection.Replace("document-key", document,
-    new ReplaceOptions
-    {
-        Cas = 12345,
-        Expiration = TimeSpan.FromMinutes(1),
-        Timeout = TimeSpan.FromSeconds(5)
-    }
-);
+$document = ["foo" => "bar", "bar" => "foo"];
+$options = new \Couchbase\ReplaceOptions();
+$options->cas("AADQjvAwoxU=")
+        ->expiration(60) // 1 minute
+	->timeout(5000); // 5 seconds
+$result = $collection->replace("document-key", $document, $options);
 ----
 
 Expiration sets an explicit time to live (TTL) for a document, for which you can also xref:sdk-xattr-example.adoc[see a more detailed example of TTL discovery] later in the docs.
 We'll discuss modifying `Expiration` in more details xref:#net-modifying-expiration[below].
-For a discussion of item (Document) _vs_ Bucket expiration, see the 
+For a discussion of item (Document) _vs_ Bucket expiration, see the
 xref:6.5@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
 
-[source,csharp]
+[source,php]
 ----
-var document = new {foo = "bar", bar = "foo"};
-var result = await collection.Upsert("document-key", document,
-    new UpsertOptions
-    {
-        Cas = 12345,
-        Expiration = TimeSpan.FromMinutes(1),
-        PersistTo = PersistTo.One,
-        ReplicateTo = ReplicateTo.One,
-        Timeout = TimeSpan.FromSeconds(5)
-    }
-);
+$document = ["foo" => "bar", "bar" => "foo"];
+$options = new \Couchbase\UpsertOptions();
+$options->cas("AADQjvAwoxU=")
+        ->expiration(60) // 1 minute
+	->timeout(5000); // 5 seconds
+$result = $collection->upsert("document-key", $document, $options);
 ----
 
+// TODO: old-style durability will come later
+
 Here, we have add _Durability_ options, namely `PersistTo` and `ReplicateTo`.
-In Couchbase Server releases before 6.5, Durability was set with these two options -- see the xref:https://docs.couchbase.com/dotnet-sdk/2.7/durability.html[6.0 Durability documentation] -- covering  how many replicas the operation must be propagated to and how many persisted copies of the modified record must exist. 
+In Couchbase Server releases before 6.5, Durability was set with these two options -- see the xref:https://docs.couchbase.com/dotnet-sdk/2.7/durability.html[6.0 Durability documentation] -- covering  how many replicas the operation must be propagated to and how many persisted copies of the modified record must exist.
 Couchbase Data Platform 6.5 refines these two options, with xref:synchronous-replication.adoc[Synchronous Replication] -- although they remain essentially the same in use -- as well as adding the option of xref:transactions.adoc[atomic document transactions].
 
 
@@ -108,24 +99,21 @@ Where the number of operations or other circumstances make bandwidth a significa
 
 Using the `Get()` method with the document key can be done in a similar fashion to the other operations:
 
-[source,csharp]
+[source,php]
 ----
-var result = await collection.Get(“document-key”);
-var content = result.ContentAs<string>();
+$result = $collection->get("document-key");
+$content = $result->content();
 ----
 
 Timeout can also be set - as in the earlier `Insert` example:
 
-[source,csharp]
+[source,php]
 ----
-Get (with options)
-var result = await collection.Get(“document-key”,
-    new GetOptions
-    {
-        Timeout = TimeSpan.FromSeconds(5)
-    }
-);
-var content = result.ContentAs<string>();
+// Get (with options)
+$options = new \Couchbase\GetOptions();
+$options->timeout(5000); // 5 seconds
+$result = $collection->get("document-key", $options);
+$content = $result->content();
 ----
 
 
@@ -134,39 +122,32 @@ var content = result.ContentAs<string>();
 When removing a document, you will have the same concern for durability as with any additive modification to the Bucket:
 
 Remove (with options)
-[source,csharp]
+[source,php]
 ----
-var result = await collection.Remove("document-key",
-    new RemoveOptions
-    {
-        Cas = 12345,
-        PersistTo = PersistTo.One,
-        ReplicateTo = ReplicateTo.One,
-        Timeout = TimeSpan.FromSeconds(5)
-    }
-);
+$options = new \Couchbase\RemoveOptions();
+$options->cas("AAArulMxoxU=")
+	->timeout(5000); // 5 seconds
+$result = $collection->remove("document-key");
 ----
+// TODO: old-style durability will come later
 
 == Expiration / TTL
 
-By default, Couchbase documents do not expire, but transient or temporary data may be needed for user sessions, caches, or other temporary documents. 
+By default, Couchbase documents do not expire, but transient or temporary data may be needed for user sessions, caches, or other temporary documents.
 Using `Touch()`, you can set expiration values on documents to handle transient data:
 
-[source,csharp]
+[source,php]
 ----
-var result = await collection.Touch("document-key", TimeSpan.FromSeconds(10));
+$result = $collection->touch("document-key", 10); // seconds
 ----
 
 A network timeout can be set with the optional `TouchOptions()`, in the same fashion as earlier examples on this page:
 
-[source,csharp]
+[source,php]
 ----
-var result = await collection.Touch("document-key", TimeSpan.FromSeconds(30),
-    new TouchOptions
-    {
-        Timeout = TimeSpan.FromSeconds(5)
-    }
-);
+$options = new \Couchbase\TouchOptions();
+$options->timeout(5000); // 5 seconds
+$result = $collection->touch("document-key", 10, $options);
 ----
 
 == Atomic document modifications
@@ -174,40 +155,43 @@ var result = await collection.Touch("document-key", TimeSpan.FromSeconds(30),
 The value of a document can be increased or decreased atomically using `Binary.Increment()` and `.Binary.Decrement()`.
 
 .Increment
-[source,csharp]
+[source,php]
 ----
-// increment binary value by 1, if document doesn’t exist, seed it at 1000
-await collection.Binary.Increment("document-key", 1, 1000);
+// increment binary value by 1 (default)
+$result = $collection->increment("document-key");
 ----
+// TODO: increment will be extracted into ->binary() interface
 
-[source,csharp]
+[source,php]
 ----
-.Increment (with options)
+// increment (with options)
 // increment binary value by 1, if document doesn’t exist, seed it at 1000
-// optional arguments:
-// - Timeout (TimeSpan)
-// - Expiration (TimeSpan)
-// - CAS (ulong)
-
-await collection.Binary.Increment("document-key", 1, 1000, TimeSpan.FromSeconds(5), TimeSpan.FromDays(1), cas);
+$options = new \Couchbase\CounterOptions();
+$options->delta(1)
+        ->initial(1000)
+        ->timeout(5000); // 5 seconds
+$result = $collection->increment("document-key", $options);
 ----
 
 .Decrement
-[source,csharp]
+[source,php]
 ----
-// decrement binary value by 1, if document doesn’t exist, seed it at 1000
-await collection.Binary.Decrement("document-key", 1, 1000);
+// decrement binary value by 1
+$result = $collection->decrement("document-key");
 ----
 
-.Increment (with options)
-[source,csharp]
+.Decrement (with options)
+[source,php]
 ----
 // decrement binary value by 1, if document doesn’t exist, seed it at 1000
 // optional arguments:
-// - Timeout (TimeSpan)
-// - Expiration (TimeSpan)
-// - CAS (ulong)
-await collection.Binary.Decrement("document-key", 1, 1000, TimeSpan.FromSeconds(5), TimeSpan.FromDays(1), cas);
+// - Timeout
+// - Expiration
+$options = new \Couchbase\CounterOptions();
+$options->delta(1)
+        ->initial(1000)
+        ->timeout(5000); // 5 seconds
+$result = $collection->decrement("document-key", $options);
 ----
 
 NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change
