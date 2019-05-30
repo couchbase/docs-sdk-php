@@ -363,7 +363,7 @@ $result = $collection->mutateIn("customer123", [
 ], $options);
 ----
 
-[source,csharp]
+[source,php]
 ----
 $options = new \Couchbase\MutateInOptions();
 $options->cas("AABmBlI4oxU=");
