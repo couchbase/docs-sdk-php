@@ -11,35 +11,32 @@ include::6.5@sdk:shared:partial$views.adoc[tag=views-intro]
 include::6.5@sdk:shared:partial$views.adoc[tag=example-beer]
 
 
-[source,csharp]
+[source,php]
 ----
-var result = bucket.ViewQuery<Beer>("beers", "by_name", options => {
-    options.WithStartKey("A");
-    options.WithLimit(10);
-});
+$options = new \Couchbase\ViewOptions();
+$options->range("A", NULL)
+        ->limit(10);
+$result = $bucket->viewQuery("beer", "brewery_beers", $options);
 ----
 
 include::6.5@sdk:shared:partial$views.adoc[tag=example-travel]
 
 
-[source,csharp]
+[source,php]
 ----
-var result = bucket.ViewQuery<Landmark>("landmarks", "by_name", options => {
-    options.WithKey("<landmark-name>");
-});
+$options = new \Couchbase\ViewOptions();
+$options->key("<landmark-name>");
+$result = $bucket->viewQuery("landmarks", "by_name", $options);
 ----
 
 include::6.5@sdk:shared:partial$views.adoc[tag=example-geo-travel]
 
-
-(10)
-);
-
-foreach (var row in result.Rows)
-{
-    var id = row.Id;
-    var key = row.Key;
-    var value = row.Value;
+[source,php]
+---
+foreach($result->rows() as $row) {
+    $row->id();
+    $row->key();
+    $row->value();
 }
 ----
 
@@ -53,7 +50,7 @@ function (doc, meta) {
 ----
 
 
-== Querying Views through the .NET SDK
+== Querying Views through the PHP SDK
 
 
 
@@ -62,10 +59,12 @@ Once you have a view defined, it can be queried from the .NET SDK by using the `
 
 Here is an example:
 
-[source,csharp]
+[source,php]
 ----
-var result = bucket.ViewQuery<Type>(“design-doc”, “view-name”, options =>
-    options.WithLimit
+$options = new \Couchbase\ViewOptions();
+$options->limit(10);
+$result = $bucket->viewQuery("design-doc", "view-name", $options);
+----
 
 // also need sdk-common file below
 
