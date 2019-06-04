@@ -80,6 +80,7 @@ Select this when consistency is always more important than performance.
 
 [source,php]
 ----
+// Scan consistency to be implemented in a forthcoming alpha release.
 include::example$query.php[tag=scan]
 ----
 
