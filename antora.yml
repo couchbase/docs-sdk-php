@@ -1,5 +1,5 @@
 name: php-sdk
-version: '3.0dp1'
+version: '3.0'
 prerelease: ALPHA
 title: PHP SDK
 start_page: 3.0dp1@php-sdk:hello-world:start-using-sdk.adoc
