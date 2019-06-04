@@ -80,7 +80,7 @@ Select this when consistency is always more important than performance.
 
 [source,php]
 ----
-include::example$scan.php[tag=results]
+include::example$query.php[tag=scan]
 ----
 
 
