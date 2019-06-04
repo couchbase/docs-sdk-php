@@ -8,6 +8,8 @@ _Sub-document_ operations can be used to efficiently access _parts_ of documents
 Sub-document operations may be quicker and more network-efficient than _full-document_ operations such as _upsert_, _replace_ and _get_ because they only transmit the accessed sections of the document over the network.
 Sub-document operations are also atomic, allowing safe modifications to documents with built-in concurrency control.
 
+include::partial$alpha-warning.adoc[]
+
 == Sub-documents
 
 Starting with Couchbase Server 4.5 you can atomically and efficiently update and retrieve _parts_ of a document.
@@ -19,7 +21,7 @@ IMPORTANT: The sub-document operations described on this page are for _Key-Value
 (Sub-document N1QL queries are explained in the section xref:n1ql-query.adoc[Querying with N1QL].)
 
 In order to use sub-document operations you need to specify a _path_ indicating the location of the sub-document.
-The _path_ follows N1QL syntax (see https://developer.couchbase.com/documentation/server/current/sdk/subdocument-operations.html#story-h2-12[below^], and xref:6.0@server:n1ql:n1ql-intro/queriesandresults.adoc[N1QL Queries and Results]).
+The _path_ follows N1QL syntax xref:#[below^], and xref:6.0@server:n1ql:n1ql-intro/queriesandresults.adoc[N1QL Queries and Results]).
 Considering the document:
 
 .customer123.json
