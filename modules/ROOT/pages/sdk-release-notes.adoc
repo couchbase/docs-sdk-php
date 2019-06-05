@@ -71,10 +71,12 @@ This warning is safe to ignore if you are not planning to use igbinary serializa
 
 This release contains documentation and test infrastructure improvements.
 
-http://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.0/files/couchbase.html[API Reference]
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.1/files/couchbase.html[API Reference]
 
-* https://issues.couchbase.com/browse/PCBC-574[PCBC-574]: Added documentation on search index manager.
-* Updated CouchbaseMock integration. Now the tests could be executed with CouchbaseMock on Windows.
+* https://issues.couchbase.com/browse/PCBC-574[PCBC-574]: 
+Added documentation on search index manager.
+* Updated CouchbaseMock integration. 
+Now the tests can be executed with CouchbaseMock on Windows.
 
 == Version 2.6.0 (5 October 2018)
 
