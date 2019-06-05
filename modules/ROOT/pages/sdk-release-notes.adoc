@@ -21,27 +21,12 @@ After installing the C SDK, install the PHP SDK through your PHP distribution's 
 When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment. You may also download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
 |===
-|Platform|x86|x64
+|Platform|x64
 
-|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x86.zip[php_couchbase-2.6.0-7.1-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x64.zip[php_couchbase-2.6.0-7.1-nts-vc14-x64.zip]
-|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x86.zip[php_couchbase-2.6.0-7.1-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x64.zip[php_couchbase-2.6.0-7.1-zts-vc14-x64.zip]
-|PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x86.zip[php_couchbase-2.6.0-7.0-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x64.zip[php_couchbase-2.6.0-7.0-nts-vc14-x64.zip]
-|PHP 7.0 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x86.zip[php_couchbase-2.6.0-7.0-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x64.zip[php_couchbase-2.6.0-7.0-zts-vc14-x64.zip]
-|PHP 5.6 VC11 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x86.zip[php_couchbase-2.6.0-5.6-nts-vc11-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x64.zip[php_couchbase-2.6.0-5.6-nts-vc11-x64.zip]
-|PHP 5.6 VC11 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x86.zip[php_couchbase-2.6.0-5.6-zts-vc11-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x64.zip[php_couchbase-2.6.0-5.6-zts-vc11-x64.zip]
-|===
-
-Since release 2.3.3, by default binaries for Windows do not require `php_igbinary.dll` to be installed. If you still need it as Couchbase serializer, you can rebuild binaries from source, or use the following binaries
-
-|===
-|Platform|x86|x64
-
-|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.1-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.1-nts-vc14-x64-igbinary.zip]
-|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.1-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.1-zts-vc14-x64-igbinary.zip]
-|PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.0-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.0-nts-vc14-x64-igbinary.zip]
-|PHP 7.0 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.0-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.0-zts-vc14-x64-igbinary.zip]
-|PHP 5.6 VC11 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x86-igbinary.zip[php_couchbase-2.6.0-5.6-nts-vc11-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x64-igbinary.zip[php_couchbase-2.6.0-5.6-nts-vc11-x64-igbinary.zip]
-|PHP 5.6 VC11 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x86-igbinary.zip[php_couchbase-2.6.0-5.6-zts-vc11-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x64-igbinary.zip[php_couchbase-2.6.0-5.6-zts-vc11-x64-igbinary.zip]
+|PHP 7.2 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.2-nts-x64.zip[php_couchbase-2.6.1-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.2-zts-x64.zip[php_couchbase-2.6.1-7.2-zts-x64.zip]
+|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.1-nts-x64.zip[php_couchbase-2.6.1-7.1-nts-x64.zip]
+|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.1-zts-x64.zip[php_couchbase-2.6.1-7.1-zts-x64.zip]
 |===
 
 === Post Installation for All Platforms
@@ -82,6 +67,15 @@ If the igbinary extension is available at the time the Couchbase PHP extension i
 
 This warning is safe to ignore if you are not planning to use igbinary serialization in your application.
 
+== Version 2.6.1 (3 June 2019)
+
+This release contains documentation and test infrastructure improvements.
+
+http://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.0/files/couchbase.html[API Reference]
+
+* https://issues.couchbase.com/browse/PCBC-574[PCBC-574]: Added documentation on search index manager.
+* Updated CouchbaseMock integration. Now the tests could be executed with CouchbaseMock on Windows.
+
 == Version 2.6.0 (5 October 2018)
 
 This release contains Analytics improvements. Note, that minimum version of
@@ -92,6 +86,29 @@ http://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.0/files/couchbase.htm
 * https://issues.couchbase.com/browse/PCBC-562[PCBC-562]: Allow disabling caching (persistent) connections by setting couchbase.pool.max_idle_time_sec to zero.
 * https://issues.couchbase.com/browse/PCBC-560[PCBC-560]: Positional, named, and raw parameters for Analytics
 
+|===
+|Platform|x86|x64
+
+|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x86.zip[php_couchbase-2.6.0-7.1-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x64.zip[php_couchbase-2.6.0-7.1-nts-vc14-x64.zip]
+|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x86.zip[php_couchbase-2.6.0-7.1-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x64.zip[php_couchbase-2.6.0-7.1-zts-vc14-x64.zip]
+|PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x86.zip[php_couchbase-2.6.0-7.0-nts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x64.zip[php_couchbase-2.6.0-7.0-nts-vc14-x64.zip]
+|PHP 7.0 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x86.zip[php_couchbase-2.6.0-7.0-zts-vc14-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x64.zip[php_couchbase-2.6.0-7.0-zts-vc14-x64.zip]
+|PHP 5.6 VC11 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x86.zip[php_couchbase-2.6.0-5.6-nts-vc11-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x64.zip[php_couchbase-2.6.0-5.6-nts-vc11-x64.zip]
+|PHP 5.6 VC11 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x86.zip[php_couchbase-2.6.0-5.6-zts-vc11-x86.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x64.zip[php_couchbase-2.6.0-5.6-zts-vc11-x64.zip]
+|===
+
+Since release 2.3.3, by default binaries for Windows do not require `php_igbinary.dll` to be installed. If you still need it as Couchbase serializer, you can rebuild binaries from source, or use the following binaries
+
+|===
+|Platform|x86|x64
+
+|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.1-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-nts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.1-nts-vc14-x64-igbinary.zip]
+|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.1-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.1-zts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.1-zts-vc14-x64-igbinary.zip]
+|PHP 7.0 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.0-nts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-nts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.0-nts-vc14-x64-igbinary.zip]
+|PHP 7.0 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x86-igbinary.zip[php_couchbase-2.6.0-7.0-zts-vc14-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-7.0-zts-vc14-x64-igbinary.zip[php_couchbase-2.6.0-7.0-zts-vc14-x64-igbinary.zip]
+|PHP 5.6 VC11 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x86-igbinary.zip[php_couchbase-2.6.0-5.6-nts-vc11-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-nts-vc11-x64-igbinary.zip[php_couchbase-2.6.0-5.6-nts-vc11-x64-igbinary.zip]
+|PHP 5.6 VC11 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x86-igbinary.zip[php_couchbase-2.6.0-5.6-zts-vc11-x86-igbinary.zip]|http://packages.couchbase.com/clients/php/php_couchbase-2.6.0-5.6-zts-vc11-x64-igbinary.zip[php_couchbase-2.6.0-5.6-zts-vc11-x64-igbinary.zip]
+|===
 
 == Version 2.5.1 (10 August 2018)
 
