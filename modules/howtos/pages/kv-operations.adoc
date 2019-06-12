@@ -22,7 +22,7 @@ Or read on, for a hands-on introduction to working with documents from the PHP S
 == CRUD Operations
 
 The core interface to Couchbase Server is simple KV operations on full documents.
-Make sure you're familiar with the basics of authorization and connecting to a Cluster from the xref::hello-world:start-using-sdk.adoc[Start Using the SDK section].
+Make sure you're familiar with the basics of authorization and connecting to a Cluster from the xref:hello-world:start-using-sdk.adoc[Start Using the SDK section].
 We're going to expand on the short _Upsert_ example we used there, adding options as we move through the various CRUD operations.
 Here is the _Insert_ operation at its simplest:
 
@@ -81,7 +81,7 @@ $result = $collection->upsert("document-key", $document, $options);
 
 // TODO: old-style durability will come later
 
-Here, we have add _Durability_ options, namely `PersistTo` and `ReplicateTo`.
+Here, we have added _Durability_ options, namely `PersistTo` and `ReplicateTo`.
 In Couchbase Server releases before 6.5, Durability was set with these two options -- see the xref:https://docs.couchbase.com/dotnet-sdk/2.7/durability.html[6.0 Durability documentation] -- covering  how many replicas the operation must be propagated to and how many persisted copies of the modified record must exist.
 Couchbase Data Platform 6.5 refines these two options, with xref:synchronous-replication.adoc[Synchronous Replication] -- although they remain essentially the same in use -- as well as adding the option of xref:transactions.adoc[atomic document transactions].
 

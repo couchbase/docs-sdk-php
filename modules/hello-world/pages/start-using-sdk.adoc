@@ -66,7 +66,7 @@ $upsertResult = $collection->upsert("my-document", ["name" => "mike"]);
 $getResult = $collection->get("my-document");
 ----
 
-KV Operations are described in detail on the xref:php-sdk:howtos:kv-operations.adoc[KV Operations page].
+KV Operations are described in detail on the xref:howtos:kv-operations.adoc[KV Operations page].
 Now that you know the basics, you may wish to go straight to that page -- or first see a complete worked example of
 using the Couchbase php client, our xref:3.0dp1@sample-application.adoc[Travel Sample Application].
 
