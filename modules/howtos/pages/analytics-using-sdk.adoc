@@ -1,2 +1,118 @@
-= Analytics using the SDK
+= Analytics using the PHP SDK
+:page-topic-type: howto
+:page-edition: Enterprise Edition:
 
+[abstract]
+Parallel data management for complex queries over many records, using a familiar N1QL-like syntax.
+
+include::partial$alpha-warning.adoc[]
+
+For complex and long-running queries, involving large ad hoc join, set, aggregation, and grouping operations, Couchbase Data Platform offers the xref:6.5@server:analytics:introduction.adoc[Couchbase Analytics Service (CBAS)].
+This is the analytic counterpart to our xref:n1ql-queries-with-sdk.adoc[operational data focussed Query Service].
+The analytics service is available in Couchbase Data Platform 6.0 and later (developer preview in 5.5).
+
+
+== Getting Started
+
+After familiarizing yourself with our xref:6.5@server:analytics:primer-beer.adoc[introductory primer],
+in particular creating a dataset and linking it to a bucket to shadow the operational data, 
+try Couchbase Analytics using the PHP SDK.
+Intentionally, the API for analytics is very similar to that of the query service. 
+In these examples we will be using an `airports` dataset created on the `travel-sample` bucket.
+
+// TODO: update when valid
+// In PHP SDK 2.x, Analytics was only available on the `Bucket` object;
+// in PHP SDK 3.0, Analytics queries are submitted using the Cluster reference, not a Bucket or Collection:
+
+[source,php]
+----
+include::example$analytics.php[tag=query]
+----
+
+
+== Queries
+
+A query can either be `simple` or be `parameterized`. If parameters are used, they can either be `positional` or `named`. 
+Here is one example of each:
+
+[source,php]
+----
+include::example$analytics.php[tag=simple]
+----
+
+The query may be performed with positional parameters:
+
+[source,php]
+----
+include::example$analytics.php[tag=positional]
+----
+
+Alternatively, the query may be performed with named parameters:
+
+[source,php]
+----
+include::example$analytics.php[tag=named]
+----
+
+NOTE: As timeouts are propagated to the server by the client, a timeout set on the client side may be used to stop the processing of a request, in order to save system resources.
+See example in the next section.
+
+
+== Options
+
+Additional parameters may be sent as part of the query.
+
+// * *Client Context ID*, sets a context ID that is returned back as part of the result.
+// Uses `ClientContextID string` default is a random UUID 
+* *Server Side Timeout*, customizes the timeout sent to the server. 
+Does not usually have to be set, as the client sets it based on the timeout on the operation. 
+Uses `timeout(long)`, and defaults to the Analytics timeout set on the client (75s).
+This can be adjusted at the xref:project-docs:client-settings.html#timeout-options[cluster global config level].
+// * *Priority*, set if the request should have priority over others.
+// The `Priority bool` option defaults to `false`.
+
+
+Here, we set a custom, server-side timeout value:
+
+[source,php]
+----
+include::example$analytics.php[tag=options]
+----
+
+
+== Handling the Response
+
+The analytics query result may contain various sorts of data and metadata, 
+depending upon the nature of the query, 
+as you will have seen when working through our xref:6.5@server:analytics:primer-beer.adoc[introductory primer]. 
+
+[source,php]
+----
+include::example$analytics.php[tag=results]
+----
+
+// Move these to Error reference doc?
+Common errors are listed in our xref:ref:errors-and-exceptions.adoc#analytics-errors[Errors Reference doc], with errors caused by resource unavailability (such as timeouts and _Operation cannot be performed during rebalance_ messages) leading to an xref:howtos:errors.adoc#retry[automatic retry] by the SDK.
+
+////
+Moving these to error reference doc
+----
+21002: Request timed out and will be cancelled
+23000: Analytics Service is temporarily unavailable
+23003: Operation cannot be performed during rebalance
+23007: Job queue is full with [string] jobs
+----
+////
+
+=== MetaData
+
+The `metadata` object contains useful metadata, such as `Metrics` and `ClientContextID`.
+Here is a snippet using several items of metadata
+
+[source,php]
+----
+include::example$analytics.php[tag=metadata]
+----
+
+
+For a listing of available `Metrics` in `MetaData`, see the xref:concept-docs:analytics-for-SDK-users.adoc[Understanding Analytics] SDK doc.
