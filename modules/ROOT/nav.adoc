@@ -1,7 +1,7 @@
 Couchbase PHP SDK
 
 .Getting Started!
-* xref:hello-world:start-using-sdk.adoc[Start Using the SDK]
+* xref:hello-world:start-using-sdk.adoc[Start Using the PHP SDK]
 // * xref:hello-world:sample-application.adoc[Sample Application]
 
 .Working with Data
