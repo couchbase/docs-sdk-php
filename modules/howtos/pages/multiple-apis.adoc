@@ -1,0 +1,21 @@
+= Choosing an API
+:navtitle: Choosing an API
+:page-topic-type: howto
+:page-aliases: ROOT:async-programming,ROOT:batching-operations
+
+[abstract]
+All blocking
+
+
+All blocking, no async, no streaming (streaming libraries do not offer the necessary PHP primitives).
+
+== Batching
+
+Bulk loading with multiple PHP processes -- using multi_get to fetch with multiple keys -- provides a useful way of achieving the effectiveness of asynchronous operations.
+
+// performance notes
+
+// code samples
+
+
+
