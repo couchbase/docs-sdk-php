@@ -7,7 +7,16 @@
 All blocking
 
 
-All blocking, no async, no streaming (streaming libraries do not offer the necessary PHP primitives).
+The PHP API may be all blocking -- with no asynchronous API, and no streaming (as the streaming libraries do not offer the necessary PHP primitives) -- but this is not necessarily a limitation.
+The PHP way is to launch as many processes as necessary.
+
+
+== Multi Get, Multi Options
+
+The availability of `multi_upsert`
+
+chunks in separate processes;
+parallel calls --> batching
 
 == Batching
 
@@ -17,5 +26,7 @@ Bulk loading with multiple PHP processes -- using multi_get to fetch with multip
 
 // code samples
 
-
+// transfer from a SQL database use case?
+//
+// retrieve/update session state ?
 
