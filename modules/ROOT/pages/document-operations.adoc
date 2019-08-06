@@ -1,5 +1,6 @@
 = CRUD Document Operations Using the PHP SDK with Couchbase Server
 :navtitle: Document Operations
+:page-aliases: documents-creating,documents-updating,documents-retrieving,documents-deleting,howtos:kv-operations
 
 [#operationbasics]
 == Operation Basics

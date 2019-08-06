@@ -1,5 +1,6 @@
 = Asynchronous Progamming Using the PHP SDK with Couchbase Server
 :navtitle: Asynchronous Programming
+:page-aliases: reactive-apps,observables,rxjava,howtos:concurrent-async-apis
 
 The PHP SDK does not support non-blocking operations.
 You can nevertheless take advantage of xref:batching-operations.adoc[batching operations] by using the various xref:document-operations.adoc#batching[[.api]`*Multi` operations].

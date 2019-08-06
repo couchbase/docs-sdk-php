@@ -1,6 +1,7 @@
 = N1QL Queries Using the PHP SDK with Couchbase Server
 :navtitle: N1QL from the SDKs
 :page-topic-type: concept
+:page-aliases: querying-n1ql,howtos:n1ql-queries-with-sdk
 
 [abstract]
 Perform Couchbase Query Language (N1QL) queries via the PHP SDK.

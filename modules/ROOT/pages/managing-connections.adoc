@@ -1,5 +1,6 @@
 = Managing Connections Using the PHP SDK with Couchbase Server
 :navtitle: Managing Connections
+:page-aliases: howtos:managing-connections,howtos:multi-network,connecting,connection-advanced
 
 [abstract]
 This section describes how to connect the PHP SDK to a Couchbase cluster and bucket.

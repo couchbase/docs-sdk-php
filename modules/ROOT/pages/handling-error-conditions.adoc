@@ -1,6 +1,7 @@
 = Handling Exceptions and Other Errors with the PHP SDK in Couchbase
 :navtitle: Handling Errors
 :page-topic-type: concept
+:page-aliases: howtos:handling-errors,concept-docs:errors,ref:errors
 
 [abstract]
 All methods available within the SDK will throw a `CouchbaseException` when encounting any form of error.

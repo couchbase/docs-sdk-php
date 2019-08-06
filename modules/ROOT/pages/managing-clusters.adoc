@@ -1,5 +1,6 @@
 = Managing Clusters Using the PHP SDK with Couchbase Server
 :navtitle: Managing Clusters
+:page-aliases: concept-docs:buckets-and-clusters,concept-docs:collections,howtos:provisioning-cluster-resources
 
 [abstract]
 This section covers the convenience functionality in the Couchbase PHP SDK for managing buckets, managing indexes used by N1QL and managing views.
