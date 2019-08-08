@@ -16,7 +16,7 @@ Release notes, installation instructions, and download archive for the Couchbase
 
 // needs updating for 3.0
 
-Before installing the PHP SDK, you must install the xref:c-sdk::start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
+Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
 version 3.0.0.alpha.4 or higher is required from PHP Client 3.0.0alpha4.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
@@ -71,7 +71,7 @@ extension=couchbase.dll
 
 === Note on Extension Dependencies
 
-The Couchbase SDK depends on json module, therefore it has to be loaded before.
+The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
 == Version 3.0.0alpha4 (July 18, 2019)
 
