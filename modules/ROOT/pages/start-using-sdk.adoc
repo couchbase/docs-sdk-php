@@ -33,6 +33,13 @@ sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key
 echo "deb http://packages.couchbase.com/ubuntu cosmic cosmic/main" | sudo tee /etc/apt/sources.list.d/couchbase.list
 ----
 
+For Ubuntu 19.04, use _bionic_
+[source,bash]
+----
+sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
+echo "deb http://packages.couchbase.com/ubuntu bionic bionic/main" | sudo tee /etc/apt/sources.list.d/couchbase.list
+----
+
 or, see the detailed instructions on manually adding repos for your version in the xref:c-sdk::sdk-release-notes.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
 
 [NOTE]
