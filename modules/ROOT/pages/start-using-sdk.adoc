@@ -25,12 +25,12 @@ sudo apt-get install libcouchbase-dev build-essential php-dev zlib1g-dev
 sudo pecl install couchbase
 ----
 
-For Ubuntu 18.10, and other Debian based releases unsupported by `couchbase-release-1.0-6-amd64.deb`, either replace the above _first-time setup_ instructions with (here using _cosmic_ for Ubuntu 18.10 Cosmic):
+For Ubuntu 18.10, and other Debian based releases unsupported by `couchbase-release-1.0-6-amd64.deb`, either replace the above _first-time setup_ instructions with the following -- using the _bionic_ repo of Ubuntu 18.04 to install on Ubuntu 18.10 Cosmic, Ubuntu 19.04 Disco, or other recent versions:
 
 [source,bash]
 ----
 sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
-echo "deb http://packages.couchbase.com/ubuntu cosmic cosmic/main" | sudo tee /etc/apt/sources.list.d/couchbase.list
+echo "deb http://packages.couchbase.com/ubuntu bionic bionic/main" | sudo tee /etc/apt/sources.list.d/couchbase.list
 ----
 
 or, see the detailed instructions on manually adding repos for your version in the xref:c-sdk::sdk-release-notes.adoc#configuring-apt-repositories-debian-ubuntu[C SDK installation instructions].
