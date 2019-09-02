@@ -16,8 +16,9 @@ Couchbase PHP SDK
 ////
 * xref:howtos:view-queries-with-sdk.adoc[MapReduce Views]
 
+.Advanced Data Operations
+* xref:howtos:concurrent-async-apis.adoc[Batching]
 ////
-.Advanced Topics
 * xref:howtos:durability.adoc[Durability]
 
 .Managing Couchbase
