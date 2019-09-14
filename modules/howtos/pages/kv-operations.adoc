@@ -82,8 +82,8 @@ $result = $collection->upsert("document-key", $document, $options);
 // TODO: old-style durability will come later
 
 Here, we have added _Durability_ options, namely `PersistTo` and `ReplicateTo`.
-In Couchbase Server releases before 6.5, Durability was set with these two options -- see the xref:https://docs.couchbase.com/dotnet-sdk/2.7/durability.html[6.0 Durability documentation] -- covering  how many replicas the operation must be propagated to and how many persisted copies of the modified record must exist.
-Couchbase Data Platform 6.5 refines these two options, with xref:concep-docs:durability.adoc[Synchronous Replication] -- although they remain essentially the same in use.
+In Couchbase Server releases before 6.5, Durability was set with these two options -- see the xref:2.6@php-sdk::durability.adoc[6.0 Durability documentation] -- covering  how many replicas the operation must be propagated to and how many persisted copies of the modified record must exist.
+Couchbase Data Platform 6.5 refines these two options, with xref:concep-docs:durability-replication-failure-considerations.adoc[Synchronous Replication] -- although they remain essentially the same in use.
 
 
 [TIP]
