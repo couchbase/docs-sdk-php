@@ -60,7 +60,7 @@ sudo pecl install couchbase
 
 # some older versions of Red Hat, such as CentOS 7, also need
 ----
-sudo yum installphp-pear
+sudo yum install php-pear
 ----
 to get `PECL` installed.
 
