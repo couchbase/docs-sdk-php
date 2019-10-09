@@ -57,6 +57,17 @@ sudo yum install libcouchbase-devel gcc gcc-c++ php-devel zlib-devel
 sudo pecl install couchbase
 ----
 
+
+# some older versions of Red Hat, such as CentOS 7, also need
+----
+sudo yum installphp-pear
+----
+to get `PECL` installed.
+
+NOTE: CentOS 7 ships with PHP 5.4, which must be upgraded to at least PHP 5.6 in order to run the Couchbase PHP SDK.
+Doing this is beyond the scope of this quick start guide, but instructions can be found xref:https://www.tecmint.com/install-php-5-6-on-centos-7/[online].
+Do this before the `yum` step above.
+
 == Installation on Mac OS X
 
 On MacOS, the `libcouchbase` package is available in https://brew.sh[homebrew/core], and can be installed with:
