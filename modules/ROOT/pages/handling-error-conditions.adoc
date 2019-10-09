@@ -4,7 +4,7 @@
 :page-aliases: howtos:handling-errors,concept-docs:errors,ref:errors
 
 [abstract]
-All methods available within the SDK will throw a `CouchbaseException` when encounting any form of error.
+All methods available within the SDK will throw a `CouchbaseException` when encountering any form of error.
 
 The `CouchbaseException` object will include a `code` property which can be used to quickly match and handle the error.
 
