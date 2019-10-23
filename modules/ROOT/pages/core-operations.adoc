@@ -133,7 +133,7 @@ $bucket->mutateIn('docid')
        ->execute();
 ----
 
-or xref:{version-server}@server:n1ql:n1ql-language-reference/update.adoc[N1QL UPDATE] to update documents based on specific query criteria:
+or xref:{version-server}@server:n1ql:n1ql-language-reference:update.adoc[N1QL UPDATE] to update documents based on specific query criteria:
 
 [source,sql]
 ----
