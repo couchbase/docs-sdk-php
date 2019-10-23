@@ -2,8 +2,8 @@
 :navtitle: Start Using the SDK
 
 [abstract]
-The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP. 
-The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols. 
+The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
+The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
 
 
 include::partial$alpha-warning.adoc[]
@@ -20,13 +20,13 @@ The Couchbase PHP SDK is compatible with PHP 7.
 == Installing the SDK
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0.alpha.4 or higher is required from PHP Client 3.0.0alpha4.
+version 3.0.0.alpha.4 or higher is required from PHP Client 3.0.0beta1.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,bash]
 ----
-$ pecl install couchbase-3.0.0alpha4
+$ pecl install couchbase-3.0.0beta1
 ----
 
 Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
@@ -48,10 +48,9 @@ If you're developing client code on the same VM or machine as the Couchbase Serv
 [source,php]
 ----
 $connectionString = "couchbase://localhost";
-$cluster = new \Couchbase\Cluster($connectionString);
-
-$cluster->authenticateAs("Administrator", "password");
-// The bootstrap process and API is subject to change
+$options = new \Couchbase\ClusterOptions();
+$options->credentials("Administrator", "password");
+$cluster = new \Couchbase\Cluster($connectionString, $options);
 ----
 
 Connection to the cluster is initialized by

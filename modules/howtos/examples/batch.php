@@ -39,9 +39,11 @@ foreach ($children as $child) {
 }
 
 use \Couchbase\Cluster;
+use \Couchbase\ClusterOptions;
 function upload_batch($id, $batch) {
-  $cluster = new Cluster("couchbase://10.112.193.101");
-  $cluster->authenticateAs("Administrator", "password");
+  $options = new ClusterOptions();
+  $options->credentials("Administrator", "password");
+  $cluster = new Cluster("couchbase://10.112.193.101", $options);
   $collection = $cluster->bucket("default")->defaultCollection();
   foreach ($batch as $path) {
     $collection->upsert($path, json_decode(file_get_contents($path)));

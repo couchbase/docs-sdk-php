@@ -17,13 +17,13 @@ Release notes, installation instructions, and download archive for the Couchbase
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0.alpha.4 or higher is required from PHP Client 3.0.0alpha4.
+version 3.0.0.beta.1 or higher is required from PHP Client 3.0.0beta1.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,bash]
 ----
-$ pecl install couchbase-3.0.0alpha4
+$ pecl install couchbase-3.0.0beta1
 ----
 
 === Installing on Microsoft Windows
@@ -35,10 +35,10 @@ you have a complete build toolchain.
 |===
 |Platform|
 
-|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0alpha4-7.1-nts-vc14-x64.zip[php_couchbase-3.0.0alpha4-7.1-nts-vc14-x64.zip]
-|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0alpha4-7.1-zts-vc14-x64.zip[php_couchbase-3.0.0alpha4-7.1-zts-vc14-x64.zip]
-|PHP 7.2 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0alpha4-7.2-nts-vc14-x64.zip[php_couchbase-3.0.0alpha4-7.2-nts-vc14-x64.zip]
-|PHP 7.2 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0alpha4-7.2-zts-vc14-x64.zip[php_couchbase-3.0.0alpha4-7.2-zts-vc14-x64.zip]
+|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.1-nts-x64.zip[php_couchbase-3.0.0beta1-7.1-nts-x64.zip]
+|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.1-zts-x64.zip[php_couchbase-3.0.0beta1-7.1-zts-x64.zip]
+|PHP 7.2 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.2-nts-x64.zip[php_couchbase-3.0.0beta1-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.2-zts-x64.zip[php_couchbase-3.0.0beta1-7.2-zts-x64.zip]
 |===
 
 
@@ -72,6 +72,12 @@ extension=couchbase.dll
 === Note on Extension Dependencies
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
+
+== Version 3.0.0beta1 (October 23, 2019)
+
+First beta release
+
+* Revised API to conform RFCs and libcouchbase 3.0.0.beta.1
 
 == Version 3.0.0alpha4 (July 18, 2019)
 

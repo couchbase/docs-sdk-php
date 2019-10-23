@@ -1,8 +1,9 @@
 <?php
 $connectionString = "couchbase://10.112.193.101";
-$cluster = new \Couchbase\Cluster($connectionString);
+$options = new \Couchbase\ClusterOptions();
+$options->credentials("Administrator", "password");
+$cluster = new \Couchbase\Cluster($connectionString, $options);
 
-$cluster->authenticateAs("Administrator", "password");
 $bucket = $cluster->bucket("travel-sample");
 $collection = $bucket->defaultCollection();
 
