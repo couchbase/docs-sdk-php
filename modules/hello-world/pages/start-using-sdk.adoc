@@ -19,6 +19,18 @@ The Couchbase PHP SDK is compatible with PHP 7.
 
 == Installing the SDK
 
+Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
+version 3.0.0.alpha.4 or higher is required from PHP Client 3.0.0alpha4.
+
+After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
+
+[source,bash]
+----
+$ pecl install couchbase-3.0.0alpha4
+----
+
+Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
+
 // installation and post-installation across platforms
 
 // end::install[]
