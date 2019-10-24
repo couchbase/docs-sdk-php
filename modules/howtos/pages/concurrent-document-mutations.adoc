@@ -3,5 +3,5 @@ Concurrent Document Mutations
 [abstract]
 CAS
 
-include::partial$alpha-warning.adoc[]
+include::partial$beta-warning.adoc[]
 
