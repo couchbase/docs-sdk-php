@@ -1,4 +1,4 @@
-= Couchbase Node.js Release Notes and Archives
+= Couchbase PHP Release Notes and Archives
 :navtitle: Release Notes
 :page-topic-type: project-doc
 :page-aliases: relnotes-php-sdk
