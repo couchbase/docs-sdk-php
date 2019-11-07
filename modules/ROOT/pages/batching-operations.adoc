@@ -12,7 +12,9 @@ The cluster in turn _pipelines_ responses back to the client.
 When operations are batched, there are fewer IP packets to be sent over the network (since there are fewer individual TCP segments).
 
 You can batch operations via the PHP Couchbase SDK.
-Batching operations is done either via explicit _multi_ methods, or by scheduling multiple operations in sequence.
+Batching operations is done by scheduling multiple operations in sequence.
+These bulk operations may be performed by passing an array as the first argument to one of the `get()`, `upsert()`, `insert()`, `replace()` and other key-value methods.
+// end::intro[]
 
 // tag::perf[]
 
