@@ -401,9 +401,9 @@ Consider the following snippet:
 
 $cluster = new \Couchbase\Cluster('couchbase://localhost');
 $cluster->authenticateAs('Administrator', 'password');
-$bucket = $cluster->openBucket('default');
+$bucket = $cluster->openBucket('testBucket');
 
-// Ensure there is a primary index on the default bucket!
+// Ensure there is a primary index on the bucket!
 $RANDOM_NUMBER = rand();
 
 $bucket->upsert('user:' . $RANDOM_NUMBER, [
@@ -413,7 +413,7 @@ $bucket->upsert('user:' . $RANDOM_NUMBER, [
 ]);
 
 $query = \Couchbase\N1qlQuery::fromString(
-  'SELECT name, email, random, META(default).id FROM default WHERE $1 IN name');
+  'SELECT name, email, random, META(testBucket).id FROM testBucket WHERE $1 IN name');
 $query->positionalParams(['Brass']);
 
 $res = $bucket->query($query);
@@ -425,12 +425,12 @@ foreach ($res->rows as $row) {
 The above query may not return the newly inserted document because it has not yet been indexed.
 The query is issued immediately after document creation, and in this case the query engine may process the query before the index has been updated.
 
-If the above code is modified to use _request_plus_ (currently mapped to the [.api]`CONSISTENT_REQUEST` constant in the Python SDK), query processing will wait until all updates have been processed and recalculated into the index from the point in time the query was received:
+If the above code is modified to use _request_plus_, query processing will wait until all updates have been processed and recalculated into the index from the point in time the query was received:
 
 [source,php]
 ----
 $query = \Couchbase\N1qlQuery::fromString(
-  'SELECT name, email, random, META(default).id FROM default WHERE $1 IN name');
+  'SELECT name, email, random, META(testBucket).id FROM testBucket WHERE $1 IN name');
 $query->positionalParams(['Brass']);
 // If this line is removed, the latest 'random' field might not be present
 $query->consistency(\Couchbase\N1qlQuery::REQUEST_PLUS);
