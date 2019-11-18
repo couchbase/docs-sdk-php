@@ -75,13 +75,12 @@ $cluster->authenticateAs('Administrator', 'password');
 == Connecting to a Bucket
 
 To connect to a bucket, call the `openBucket()` method against your `Cluster` instance, passing in the name of the bucket that you want to connect to.
-If no bucket name is specified, the default bucket is opened.
-The following example shows how to connect to a bucket:
+The following example shows how to connect to a bucket (here named `testBucket`):
 
 [source,php]
 ----
 $myCluster = new CouchbaseCluster();
-$myBucket = $myCluster->openBucket('default');
+$myBucket = $myCluster->openBucket('testBucket');
 ----
 
 In addition to the bucket name, you can optionally include the bucket password if one has been defined, as shown in the following example:
@@ -89,7 +88,7 @@ In addition to the bucket name, you can optionally include the bucket password i
 [source,php]
 ----
 $myCluster = new CouchbaseCluster();
-$myBucket = $myCluster->openBucket('default', 'password');
+$myBucket = $myCluster->openBucket('testBucket', 'password');
 ----
 
 == Disconnecting from a Bucket
