@@ -161,7 +161,7 @@ $bucketName = "bucket-name";
 $authenticator = new \Couchbase\PasswordAuthenticator();
 $authenticator->username('username')->password('password');
 
-// Connect to Couchbase Server
+// Connect to Couchbase Server - using address of a KV (data) node
 $cluster = new CouchbaseCluster("couchbase://127.0.0.1");
 
 // Authenticate, then open bucket
