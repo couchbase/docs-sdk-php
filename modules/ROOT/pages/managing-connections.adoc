@@ -17,6 +17,8 @@ To configure the client, instantiate a new `Cluster` object:
 $myCluster = new CouchbaseCluster('couchbase://10.4.4.1,10.4.4.2,10.4.4.3');
 ----
 
+IMPORTANT: Any Cluster nodes addresses passed in to the `Cluster` object, to establish (bootstrap) the connection, should be for data (KV) nodes.
+
 In addition to the connection string passed to the `Cluster` object, you can include a username and password.
 The username and password are required to perform management operations against your cluster.
 If you do not use the cluster management aspects of the SDK, the username and password parameters are optional.
