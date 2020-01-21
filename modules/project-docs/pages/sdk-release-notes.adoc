@@ -17,13 +17,13 @@ Release notes, installation instructions, and download archive for the Couchbase
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0.beta.1 or higher is required from PHP Client 3.0.0beta1.
+version 3.0.0 or higher is required from PHP Client 3.0.0.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,bash]
 ----
-$ pecl install couchbase-3.0.0beta1
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.0.tgz
 ----
 
 === Installing on Microsoft Windows
@@ -32,15 +32,23 @@ When using Microsoft Windows, instead of using PECL, download a pre-built binary
 download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if
 you have a complete build toolchain.
 
+Binaries that marked with *(TLS)* contain libcouchbase.dll, that linked against OpenSSL 1.1.1d (MSVC15) and support secure connection to Couchbase. We highly recommend to use TLS, as it keeps all communication between SDK and Cluster secure. The packages do not include OpenSSL binaries, therefore they have to be installed in the PATH (see https://wiki.openssl.org/index.php/Binaries). 
+
 |===
 |Platform|
-
-|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.1-nts-x64.zip[php_couchbase-3.0.0beta1-7.1-nts-x64.zip]
-|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.1-zts-x64.zip[php_couchbase-3.0.0beta1-7.1-zts-x64.zip]
-|PHP 7.2 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.2-nts-x64.zip[php_couchbase-3.0.0beta1-7.2-nts-x64.zip]
-|PHP 7.2 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-3.0.0beta1-7.2-zts-x64.zip[php_couchbase-3.0.0beta1-7.2-zts-x64.zip]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.0.tgz[couchbase-3.0.0.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/php_couchbase-3.0.0.sha256sum[php_couchbase-3.0.0.sha256sum]
+|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.2-nts-x64.zip[php_couchbase-3.0.0-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.2-zts-x64.zip[php_couchbase-3.0.0-7.2-zts-x64.zip]
+|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.3-nts-x64.zip[php_couchbase-3.0.0-7.3-nts-x64.zip]
+|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.3-zts-x64.zip[php_couchbase-3.0.0-7.3-zts-x64.zip]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.4-nts-x64.zip[php_couchbase-3.0.0-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.4-zts-x64.zip[php_couchbase-3.0.0-7.4-zts-x64.zip]
+|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.3-nts-x64-openssl.zip[php_couchbase-3.0.0-7.3-nts-x64-openssl.zip]
+|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.3-zts-x64-openssl.zip[php_couchbase-3.0.0-7.3-zts-x64-openssl.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.4-nts-x64-openssl.zip[php_couchbase-3.0.0-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.0-7.4-zts-x64-openssl.zip[php_couchbase-3.0.0-7.4-zts-x64-openssl.zip]
 |===
-
 
 === Post Installation for All Platforms
 
@@ -52,9 +60,9 @@ extension. To do this:
 [source,bash]
 ----
  $ php --ini
- Configuration File (php.ini) Path: /usr/local/etc/php/7.2
- Loaded Configuration File:         /usr/local/etc/php/7.2/php.ini
- Scan for additional .ini files in: /usr/local/etc/php/7.2/conf.d
+ Configuration File (php.ini) Path: /usr/local/etc/php/7.4
+ Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
+ Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
  Additional .ini files parsed:      (none)
 ----
 +
@@ -72,6 +80,10 @@ extension=couchbase.dll
 === Note on Extension Dependencies
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
+
+== Version 3.0.0 (January 21, 2020)
+
+First GA release
 
 == Version 3.0.0beta1 (October 23, 2019)
 
