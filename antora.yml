@@ -1,6 +1,5 @@
 name: php-sdk
 version: '3.0'
-prerelease: BETA
 title: PHP SDK
 start_page: hello-world:start-using-sdk.adoc
 nav:
