@@ -1,6 +1,6 @@
 = Couchbase PHP Release Notes and Archives
 :page-partial:
-:page-aliases: relnotes-php-sdk,release-notes,download-links,project-docs:migrating-sdk-code-to-3.n,project-docs:sdk-release-notes
+:page-aliases: sdk-release-notes,release-notes,download-links,project-docs:migrating-sdk-code-to-3.n,project-docs:sdk-release-notes
 
 // tag::latest[]
 == SDK Installation
