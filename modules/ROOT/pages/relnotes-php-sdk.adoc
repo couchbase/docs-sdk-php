@@ -1,1 +1,1 @@
-include::2.6@php-sdk::page$sdk-release-notes.adoc[tag=latest]
+include::2.4@php-sdk::page$sdk-release-notes.adoc[tag=latest]
