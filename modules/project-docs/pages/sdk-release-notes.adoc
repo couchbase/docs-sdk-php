@@ -28,11 +28,12 @@ $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.1.tgz
 
 === Installing on Microsoft Windows
 
-When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment. You may also
-download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if
-you have a complete build toolchain.
+When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment. 
+You may also download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
-Binaries that marked with *(TLS)* contain libcouchbase.dll, that linked against OpenSSL 1.1.1d (MSVC15) and support secure connection to Couchbase. We highly recommend to use TLS, as it keeps all communication between SDK and Cluster secure. The packages do not include OpenSSL binaries, therefore they have to be installed in the PATH (see https://wiki.openssl.org/index.php/Binaries).
+Binaries that marked with *(TLS)* contain libcouchbase.dll, that linked against OpenSSL 1.1.1d (MSVC15) and support secure connection to Couchbase. 
+We highly recommend to use TLS, as it keeps all communication between SDK and Cluster secure. 
+The packages do not include OpenSSL binaries, therefore they have to be installed in the PATH (see https://wiki.openssl.org/index.php/Binaries).
 
 |===
 |Platform|
@@ -66,8 +67,8 @@ extension. To do this:
  Additional .ini files parsed:      (none)
 ----
 +
-2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section. If
-you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
+2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section. 
+If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
 Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
 [source,bash]
