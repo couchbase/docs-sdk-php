@@ -7,7 +7,8 @@
 
 === Installing on Linux-like systems
 
-Before installing the PHP SDK, you must install the xref:c-sdk::start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)]; version 2.9.0 or higher is required from PHP Client 2.4.7.
+Before installing the PHP SDK, you must install the xref:c-sdk::start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
+version 2.10.5 or higher is required from PHP Client 2.6.2.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
@@ -23,10 +24,12 @@ When using Microsoft Windows, instead of using PECL, download a pre-built binary
 |===
 |Platform|x64
 
-|PHP 7.2 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.2-nts-x64.zip[php_couchbase-2.6.1-7.2-nts-x64.zip]
-|PHP 7.2 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.2-zts-x64.zip[php_couchbase-2.6.1-7.2-zts-x64.zip]
-|PHP 7.1 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.1-nts-x64.zip[php_couchbase-2.6.1-7.1-nts-x64.zip]
-|PHP 7.1 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.1-7.1-zts-x64.zip[php_couchbase-2.6.1-7.1-zts-x64.zip]
+|PHP 7.4 VC15 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.2-7.4-nts-x64.zip[php_couchbase-2.6.2-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.2-7.4-zts-x64.zip[php_couchbase-2.6.2-7.4-zts-x64.zip]
+|PHP 7.3 VC15 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.2-7.3-nts-x64.zip[php_couchbase-2.6.2-7.3-nts-x64.zip]
+|PHP 7.3 VC15 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.2-7.3-zts-x64.zip[php_couchbase-2.6.2-7.3-zts-x64.zip]
+|PHP 7.2 VC14 NTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.2-7.2-nts-x64.zip[php_couchbase-2.6.2-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|http://packages.couchbase.com/clients/php/php_couchbase-2.6.2-7.2-zts-x64.zip[php_couchbase-2.6.2-7.2-zts-x64.zip]
 |===
 
 === Post Installation for All Platforms
@@ -67,15 +70,25 @@ If the igbinary extension is available at the time the Couchbase PHP extension i
 
 This warning is safe to ignore if you are not planning to use igbinary serialization in your application.
 
+== Version 2.6.2 (February 4, 2020)
+
+This release contains bug fixes and build infrastructure improvements.
+
+https://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.2/files/couchbase.html[API Reference]
+
+* fixed possible segfault in N1QL request
+* fixed windows build for PHP 7.4
+* https://issues.couchbase.com/browse/PCBC-646[PCBC-646]: Fixed issue with blank string decoding.
+
 == Version 2.6.1 (3 June 2019)
 
 This release contains documentation and test infrastructure improvements.
 
 http://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.1/files/couchbase.html[API Reference]
 
-* https://issues.couchbase.com/browse/PCBC-574[PCBC-574]: 
+* https://issues.couchbase.com/browse/PCBC-574[PCBC-574]:
 Added documentation on search index manager.
-* Updated CouchbaseMock integration. 
+* Updated CouchbaseMock integration.
 Now the tests can be executed with CouchbaseMock on Windows.
 
 == Version 2.6.0 (5 October 2018)
