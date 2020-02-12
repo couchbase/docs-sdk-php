@@ -1,0 +1,59 @@
+= Pre-release Archive Release Notes
+:navtitle: α & β Release Notes
+:page-topic-type: project-doc
+:page-aliases: 3.0αλφα-sdk-release-notes
+
+[abstract] 
+Release notes for the 3.0 Alpha & Beta Releases
+
+In the run-up to the SDK 3.0 AP releases, several αλφα and βετα releases were made.
+Their release notes are maintained here for archive purposes.
+The 3.0 series release notes proper can be found xref:sdk-release-notes.adoc[here], along with install instructions for all supported platforms.
+Please note that none of the pre-releases listed below are supported; all _supported_ (GA) releases can be found xref:sdk-release-notes.adoc[here].
+
+WARNING: These are the pre-release α & β Release Notes maintained purely for archive and information purposes.
+These releases are unsupported.
+Supported (GA) releases can be found xref:sdk-release-notes.adoc[on the general 3.0 Release Notes page].
+
+
+== Version 3.0.0beta1 (October 23, 2019)
+
+First beta release
+
+* Revised API to conform RFCs and libcouchbase 3.0.0.beta.1
+
+== Version 3.0.0alpha4 (July 18, 2019)
+
+Fourth alpha release
+
+* Removed support of geospatial views
+* Implemented analytics query options
+* Moved query methods up to cluster level
+
+== Version 3.0.0alpha3 (May 30, 2019)
+
+Third alpha release
+
+* Implemented query options for n1ql
+* Implemented query options for views
+* Fixed boolean typehint on function signatures
+* Implemented subdoc counter spec
+* Added delta/initial options for counter operations
+* Fixed content property for get operation result
+* Fixed parsing integers in operation options
+* Relaxed type check on KV mutate value
+
+== Version 3.0.0alpha2 (May 29, 2019)
+
+Second alpha release
+
+* Fixed operation options access
+* Fixed build on macos (duplicate symbols error)
+
+== Version 3.0.0alpha1 (May 22, 2019)
+
+First alpha release
+
+* Updated libcouchbase bindings (depends on libcouchbase 3.0.0.alpha.3)
+* Support for collections
+* Support for sync durability.
