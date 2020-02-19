@@ -7,27 +7,22 @@ The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
 The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
 
 
- 
-
-
-
 The Couchbase PHP SDK 3.0 is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area, and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 6.5 as a xref:concept-docs:collections.adoc[developer preview]).
 
-The Couchbase PHP SDK is compatible with PHP 7.
-
+The Couchbase PHP SDK is compatible with PHP 7.2+.
 
 // tag::install[]
 
 == Installing the SDK
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0.alpha.4 or higher is required from PHP Client 3.0.0beta1.
+version 3.0 or higher is required from PHP Client 3.0.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,bash]
 ----
-$ pecl install couchbase-3.0.0beta1
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.0.tgz
 ----
 
 Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
@@ -92,9 +87,9 @@ using the Couchbase php client, our xref:hello-world:sample-application.adoc[Tra
 
 == Additional Resources
 
-The API reference is generated for each release and can be found xref:http://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.0alpha/[here].
+The API reference is generated for each release and can be found http://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.0/[here].
 
-// xref:migrating-sdk-code-to-3.n.adoc[The Migrating from SDK2 to 3 page] highlights the main differences to be aware of when migrating your code.
+xref:project-docs:migrating-sdk-code-to-3.n.adoc[The Migrating from SDK2 to 3 page] highlights the main differences to be aware of when migrating your code.
 
 Couchbase welcomes community contributions to the PHP SDK.
-The PHP SDK source code is available on xref:https://github.com/couchbase/couchbase-php-client[GitHub].
+The PHP SDK source code is available on https://github.com/couchbase/php-couchbase[GitHub].

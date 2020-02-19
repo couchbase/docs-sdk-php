@@ -11,9 +11,6 @@ Retry behaviour is more proactive, and lazy bootstrapping moves all error handli
 Individual behaviour changes across services are explained here.
 
 
- 
-
-
 include::6.5@sdk:shared:partial$migration.adoc[tag=intro]
 
 
@@ -21,18 +18,16 @@ include::6.5@sdk:shared:partial$migration.adoc[tag=terms]
 
 As an example here is a KeyValue document fetch:
 
-// change to $Your_language
-[source,java]
+[source,php]
 ----
-GetResult getResult = collection.get("key", getOptions().timeout(Duration.ofSeconds(3));
+$getResult = $collection->get("key", (new GetOptionsl())->timeout(3000000));
 ----
 
 Compare this to a N1QL query:
 
-// change to $Your_language
-[source,java]
+[source,php]
 ----
-QueryResult queryResult = cluster.query("select 1=1", queryOptions().timeout(Duration.ofSeconds(3));
+$queryResult = $cluster->query("select 1=1", (new QueryOptions())->timeout(3000000));
 ----
 
 include::6.5@sdk:shared:partial$migration.adoc[tag=terms2]
@@ -53,68 +48,239 @@ include::6.5@sdk:shared:partial$migration.adoc[tag=lang]
 
 ===  Installation and Configuration
 
- - where to get the new artifacts / vs old place
- - discuss new dependencies if needed
- - discuss configuration old and new, especially if certain
-   custom options are not present anymore (why they are not used)
-   and how users might want to transfer this config over to the
-   new one
- - discuss cert auth
- - discuss encryption config
+As with 2.x release, the primary source of artifacts is xref:sdk-release-notes.adoc[the release notes page], 
+where we publish links to pre-built binaries, as well as to source tarballs.
+
+SDK 3.x supports PHP interpreters from 7.2 upwards.
+
+From 3.0 onwards, binaries are available for Windows with the OpenSSL dependency. 
+Note, that OpenSSL DLLs are not distributed in the archive and must be installed separately (see the https://wiki.openssl.org/index.php/Binaries[official OpenSSL page] for more details).
 
 ===  Connection Lifecycle
 
- - discuss bootstrapping
- - important: bootstrapping is now "lazy" so also discuss how to do the eager
-   checks and any impact it might have on the first op being slow?
- - discuss shutdown
- - if external state is passed in optionally, discuss
-   management of this state
- - discuss the impact of 6.5 "gcccp" and cluster level queries
- - SASL by default on non-PLAIN (if applicable)
+Bootstrapping the SDK is staged now, so the application has to create a Cluster object first, and then open the Bucket and
+Collection if necessary.
+
+As in SDK 2.x there is no explicit shutdown, and all underlying connections still kept in the cache, for reusing in
+future requests. 
+The connection idle time is controlled by the `couchbase.pool.max_idle_time_sec` PHP INI setting.
+
+SDK 3.x allows the performance of Queries on the Cluster level, so it is not necessary to open a bucket anymore.
+
+SDK 3.x does not allow the use of SASL PLAIN mechanism by default, instead it restricts to `SCRAM-SHA{1,256,512}`.
 
 ===  Exception Handling
 
- - discuss new exception hierachy in principle and how users should
-   approach it when migrating
- - explain maybe new error handling strategies that are in place,
-   around retry strategies especially and their behavior
+SDK 3.x actively uses `Exceptions` to signal errors. 
+Instead of using single `\Couchbase\Exception`, as in SDK 2.x, now we use a hierarchy of exceptions, which allows the handling of errors in a more reliable way:
+
+[source,php]
+----
+try {
+  $collection->get("foo");
+} catch (\Couchbase\KeyNotFoundException $ex) {
+  $collection->upsert("foo", ["bar" => 42]);
+}
+----
+
+Instead of SDK 2.x's:
+
+[source,php]
+----
+try {
+  $bucket->get("foo");
+} catch (\Couchbase\Exception $ex) {
+  if ($ex->getCode() == COUCHBASE_KEYNOTFOUND) {
+    $bucket->upsert("foo", ["bar" => 42]);
+  }
+}
+----
 
 === Serialization and Transcoding
 
- - describe how it works for your language, how to override and any platform-specific
-   encoding and decoding guidelines. 
- - Also important how to convert from the document types to the new approach
-
-=== Logging and Events
-
- - discuss any changes to the logging infrastructure or event system if made
+SDK 3.x still relies on native types and supports the `json_encode` API from the standard `json.so` module (therefore it still has to be loaded before `couchbase.so`). 
+But the `igbinary.so` transcoder is no longer supported.
 
 ===  Migrating Services
 
- - one section for each service that goes in-depth on each command 
-   and discusses old vs. new
-
 ==== Key Value
 
- - don't forget the get replica changes!
+Most of the KV APIs have moved from bucket-level (in SDK 2.x) to collection-level (in SDK 3.x). 
+For servers which don't support collections, the application should obtain the default collection using the `bucket->defaultCollection()` function.
+
+The following table describes the SDK 2 KV APIs and their equivalents in SDK 3:
+
+.SDK 2.x KV API vs. SDK 3.x KV API
+[options="header"]
+|====
+| SDK 2                          | SDK 3
+|`Bucket->upsert`                | `Collection->upsert`
+|`Bucket->get`                   | `Collection->get`
+|-                               | `Collection->exists`
+|`Bucket->getFromReplica`        | `Collection->getAnyReplica` and `Collection.getAllReplicas`
+|`Bucket->getAndLock`            | `Collection->getAndLock`
+|`Bucket->getAndTouch`           | `Collection->getAndTouch`
+|`Bucket->insert`                | `Collection->insert`
+|`Bucket->upsert`                | `Collection->upsert`
+|`Bucket->replace`               | `Collection->replace`
+|`Bucket->remove`                | `Collection->remove`
+|`Bucket->unlock`                | `Collection->unlock`
+|`Bucket->touch`                 | `Collection->touch`
+|`Bucket->lookupIn`              | `Collection->lookupIn`
+|`Bucket->mutateIn`              | `Collection->mutateIn`
+|`Bucket->counter`               | `BinaryCollection->increment` and `BinaryCollection->decrement`
+|`Bucket->append`                | `BinaryCollection->append`
+|`Bucket->prepend`               | `BinaryCollection->prepend`
+|====
+
+The `BinaryCollection` mentioned above could be retrieved from the regular collection object using the `$collection->binary()` method.
 
 ==== Query
 
+Ib SDK 3.x, the API for Query was improved and now it is more consistent with other endpoints.
+
+.SDK 2
+[source,php]
+----
+$query = N1qlQuery::fromString('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$type');
+$query->namedParams(['city' => "Los Angeles", 'type' => "airport"]);
+$result = $bucket->query($query);
+foreach ($result->rows as $row) {
+  printf("%s\n", $row->airportname);
+}
+----
+
+.SDK 3
+[source,php]
+----
+$options = new QueryOptions();
+$options->namedParameters(['city' => "Los Angeles", 'type' => "airport"]);
+$result = $cluster->query('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$airport', $options);
+foreach ($result->rows() as $row) {
+  printf("%s\n", $row['airportname']);
+}
+----
+
 ==== Analytics
 
-=== Search
+Analytics queries in SDK3 have their own API entry point.
 
- - especial focus, since the API has been reordered quite a bit
- - if applicable: Change in FTS Geospatial Lat/Lon ordering (i.e. node)
+.SDK 2
+[source,php]
+----
+$query = AnalyticsQuery::fromString('SELECT * FROM dataset WHERE type = $type');
+$query->namedParams(['type' => "airport"]);
+$result = $bucket->query($query);
+foreach ($result->rows as $row) {
+  printf("%s\n", $row->airportname);
+}
+----
 
-=== Views
+.SDK 3
+[source,php]
+----
+$options = new AnalyticsQueryOptions();
+$options->namedParameters(['type' => "airport"]);
+$result = $cluster->analyticsQuery('SELECT * FROM dataset WHERE type = $type', $options);
+foreach ($result->rows() as $row) {
+  printf("%s\n", $row['airportname']);
+}
+----
 
- - don't forget that the consistency bit has been renamed, biggest change there
+==== Search
+
+In SDK 3, query options and index name has been extracted from the query object.
+
+.SDK 2
+[source,php]
+----
+$queryPart = SearchQuery::matchPhrase("hop beer");
+$query = new SearchQuery("beer-search", $queryPart);
+$query->limit(3)->fields("name");
+
+$result = $this->bucket->query($query);
+foreach ($result->hits() as $hit) {
+  printf("%s - %f\n", $hit->id, $hit->score);
+}
+----
+
+.SDK 3
+[source,php]
+----
+$query = new MatchPhraseSearchQuery("hop beer");
+$options = new SearchOptions();
+$options->limit(3);
+$result = $cluster->search("beer-search", $query, $options);
+foreach ($result->rows() as $row) {
+  printf("%s - %f\n", $row['id'], $row['score']);
+}
+----
+
+==== Views
+
+The most noticeable change in the Views API for SDK 3.x is the change of names for consistency control settings.
+
+.SDK 2
+[source,php]
+----
+$query = ViewQuery::from('design_name', 'test');
+$query->consistency(ViewQuery::UPDATE_BEFORE);
+$res = $bucket->query($query);
+foreach ($res->rows as $row) {
+  printf("%s\n", $row->id);
+}
+----
+
+.SDK 3
+[source,php]
+----
+$options = new ViewOptions();
+$options->scanConsistency(ViewScanConsistency::REQUEST_PLUS);
+$res = $bucket->viewQuery('design_name', 'test', $options);
+foreach ($res->rows() as $row) {
+  printf("%s\n", $row->id());
+}
+----
+
 
 == Management APIs
 
- - discusses how to migrate from each old management api to the new one
- - where it is found, what exceptions it throws, etc.
+In SDK 2, the management APIs were centralized in the `ClusterManager` at the cluster level and the `BucketManager` at the bucket level.
+Since SDK 3 provides more management APIs, they have been split up into their respective domains.
+For example, when in SDK 2 you needed to remove a bucket you would call `ClusterManager.removeBucket` -- you will now find it under `BucketManager.dropBucket`.
+And, creating a N1QL index now lives in the `QueryIndexManager`, which is accessible through the `Cluster`.
 
+The following table provides a mapping from the SDK 2 management APIs to those of SDK 3:
 
+.SDK 2.x vs SDK 3.x ClusterManager
+[options="header"]
+|====
+| SDK 2                          | SDK 3
+|`ClusterManager->info`          | removed
+|`ClusterManager->listBuckets`   | `BucketManager->getAllBuckets`
+|-                               | `BucketManager->getBucket`
+|`ClusterManager->createBucket`  | `BucketManager->createBucket`
+|`ClusterManager->removeBucket`  | `BucketManager->removeBucket`
+|`ClusterManager->upsertUser`    | `UserManager->upsertUser`
+|`ClusterManager->removeUser`    | `UserManager->dropUser`
+|`ClusterManager->listUsers`     | `UserManager->getAllUsers`
+|`ClusterManager->getUser`       | `UserManager->getUser`
+|====
+
+.SDK 2.x vs SDK 3.x BucketManager
+[options="header"]
+|====
+| SDK 2                                    | SDK 3
+|`BucketManager->info`                      | removed
+|`BucketManager->flush`                     | `BucketManager->flushBucket`
+|`BucketManager->listDesignDocuments`       | `ViewIndexManager->getAllDesignDocuments`
+|`BucketManager->getDesignDocument`         | `ViewIndexManager->getDesignDocument`
+|`BucketManager->removeDesignDocument`      | `ViewIndexManager->dropDesignDocument`
+|`BucketManager->insertDesignDocument`      | `ViewIndexManager->upsertDesignDocument`
+|`BucketManager->upsertDesignDocument`      | `ViewIndexManager->upsertDesignDocument`
+|`BucketManager->listN1qlIndexes`           | `QueryIndexManager->getAllIndexes`
+|`BucketManager->createN1qlIndex`           | `QueryIndexManager->createIndex`
+|`BucketManager->createN1qlPrimaryIndex`    | `QueryIndexManager->createPrimaryIndex`
+|`BucketManager->dropN1qlIndex`             | `QueryIndexManager->dropIndex`
+|`BucketManager->dropN1qlPrimaryIndex`      | `QueryIndexManager->dropPrimaryIndex`
+|====
