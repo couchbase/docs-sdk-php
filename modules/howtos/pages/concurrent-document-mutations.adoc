@@ -11,27 +11,25 @@ include::6.5@sdk:shared:partial$cas.adoc[tag=example]
 
 include::6.5@sdk:shared:partial$cas.adoc[tag=errors]
 
-[source,javascript]
+[source,php]
 ----
-async function incrementVisitCount(collection, userId) {
-    var maxRetries = 10;
-    for(var i = 0; i < maxRetries; ++i) {
+function incrementVisitCount(\Couchbase\Collection $collection, string $userId) {
+    $maxRetries = 10;
+    for ($i = 0; $i < $maxRetries; ++$i) {
         // Get the current document contents
-        var getRes = await collection.get(userId);
+        $getRes = $collection->get($userId);
 
         // Increment the visit count
-        var userDoc = getRes.value;
-        userDoc.visitCount++;
+        $userDoc = $getRes->content();
+        $userDoc['visitCount']++;
 
         try {
             // Attempt to replace the document using CAS
-            await collection.replace(userId, userDoc, {cas: getRes.cas});
-        } catch (e) {
-            // Check if the error thrown is a cas mismatch, if it is, we retry
-            if (e instanceof couchbase.CasMismatchError) {
-                continue;
-            }
-            throw e;
+            $options = new \Couchbase\ReplaceOptions();
+            $options->cas($getRes->cas());
+            $collection->replace($userId, $userDoc, $options);
+        } catch (\Couchbase\CasMismatchError $ex) {
+            continue;
         }
 
         // If no errors occured during the replace, we can exit our retry loop
@@ -49,17 +47,21 @@ include::6.5@sdk:shared:partial$cas.adoc[tag=format]
 
 include::6.5@sdk:shared:partial$cas.adoc[tag=locking]
 
-[source,javascript]
+[source,php]
 ----
-var getRes = await collection.getAndLock('key');
+$getRes = $collection->getAndLock('key', 3 /* seconds */);
+$lockedCas = $getRes->cas();
 
-var lockedCas = getRes.cas;
+/*
 
-/** an example of simply unlocking the document:
-await collection.unlock('key', lockedCas);
+ // an example of simply unlocking the document
+ $collection->unlock('key', $lockedCas);
+
  */
 
-await collection.upsert('key', 'new value', {cas: lockedCas}); // don't do an upsert here, do a get
+$options = new \Couchbase\UpsertOptions();
+$options->cas($lockedCas);
+$collection->upsert('key', ['desc' => 'new value'], $options);
 ----
 
 The handler will unlock the item either via an explicit unlock operation ([.api]`unlock`) or implicitly via modifying the item with the correct CAS.
