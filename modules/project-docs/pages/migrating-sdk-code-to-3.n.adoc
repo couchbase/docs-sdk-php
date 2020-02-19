@@ -20,14 +20,14 @@ As an example here is a KeyValue document fetch:
 
 [source,php]
 ----
-$getResult = $collection->get("key", (new GetOptionsl())->timeout(3000000));
+$getResult = $collection\->get("key", (new GetOptionsl())\->timeout(3000000));
 ----
 
 Compare this to a N1QL query:
 
 [source,php]
 ----
-$queryResult = $cluster->query("select 1=1", (new QueryOptions())->timeout(3000000));
+$queryResult = $cluster\->query("select 1=1", (new QueryOptions())\->timeout(3000000));
 ----
 
 include::6.5@sdk:shared:partial$migration.adoc[tag=terms2]
@@ -77,9 +77,9 @@ Instead of using single `\Couchbase\Exception`, as in SDK 2.x, now we use a hier
 [source,php]
 ----
 try {
-  $collection->get("foo");
+  $collection\->get("foo");
 } catch (\Couchbase\KeyNotFoundException $ex) {
-  $collection->upsert("foo", ["bar" => 42]);
+  $collection\->upsert("foo", ["bar" => 42]);
 }
 ----
 
@@ -88,10 +88,10 @@ Instead of SDK 2.x's:
 [source,php]
 ----
 try {
-  $bucket->get("foo");
+  $bucket\->get("foo");
 } catch (\Couchbase\Exception $ex) {
-  if ($ex->getCode() == COUCHBASE_KEYNOTFOUND) {
-    $bucket->upsert("foo", ["bar" => 42]);
+  if ($ex\->getCode() == COUCHBASE_KEYNOTFOUND) {
+    $bucket\->upsert("foo", ["bar" => 42]);
   }
 }
 ----
@@ -106,7 +106,7 @@ But the `igbinary.so` transcoder is no longer supported.
 ==== Key Value
 
 Most of the KV APIs have moved from bucket-level (in SDK 2.x) to collection-level (in SDK 3.x). 
-For servers which don't support collections, the application should obtain the default collection using the `bucket->defaultCollection()` function.
+For servers which don't support collections, the application should obtain the default collection using the `bucket\->defaultCollection()` function.
 
 The following table describes the SDK 2 KV APIs and their equivalents in SDK 3:
 
@@ -114,26 +114,26 @@ The following table describes the SDK 2 KV APIs and their equivalents in SDK 3:
 [options="header"]
 |====
 | SDK 2                          | SDK 3
-|`Bucket->upsert`                | `Collection\->upsert`
-|`Bucket->get`                   | `Collection->get`
-|-                               | `Collection->exists`
-|`Bucket->getFromReplica`        | `Collection->getAnyReplica` and `Collection.getAllReplicas`
-|`Bucket->getAndLock`            | `Collection->getAndLock`
-|`Bucket->getAndTouch`           | `Collection->getAndTouch`
-|`Bucket->insert`                | `Collection->insert`
-|`Bucket->upsert`                | `Collection->upsert`
-|`Bucket->replace`               | `Collection->replace`
-|`Bucket->remove`                | `Collection->remove`
-|`Bucket->unlock`                | `Collection->unlock`
-|`Bucket->touch`                 | `Collection->touch`
-|`Bucket->lookupIn`              | `Collection->lookupIn`
-|`Bucket->mutateIn`              | `Collection->mutateIn`
-|`Bucket->counter`               | `BinaryCollection->increment` and `BinaryCollection->decrement`
-|`Bucket->append`                | `BinaryCollection->append`
-|`Bucket->prepend`               | `BinaryCollection->prepend`
+|`Bucket\->upsert`                | `Collection\->upsert`
+|`Bucket\->get`                   | `Collection\->get`
+|-                               | `Collection\->exists`
+|`Bucket\->getFromReplica`        | `Collection\->getAnyReplica` and `Collection.getAllReplicas`
+|`Bucket\->getAndLock`            | `Collection\->getAndLock`
+|`Bucket\->getAndTouch`           | `Collection\->getAndTouch`
+|`Bucket\->insert`                | `Collection\->insert`
+|`Bucket\->upsert`                | `Collection\->upsert`
+|`Bucket\->replace`               | `Collection\->replace`
+|`Bucket\->remove`                | `Collection\->remove`
+|`Bucket\->unlock`                | `Collection\->unlock`
+|`Bucket\->touch`                 | `Collection\->touch`
+|`Bucket\->lookupIn`              | `Collection\->lookupIn`
+|`Bucket\->mutateIn`              | `Collection\->mutateIn`
+|`Bucket\->counter`               | `BinaryCollection\->increment` and `BinaryCollection\->decrement`
+|`Bucket\->append`                | `BinaryCollection\->append`
+|`Bucket\->prepend`               | `BinaryCollection\->prepend`
 |====
 
-The `BinaryCollection` mentioned above could be retrieved from the regular collection object using the `$collection->binary()` method.
+The `BinaryCollection` mentioned above could be retrieved from the regular collection object using the `$collection\->binary()` method.
 
 ==== Query
 
@@ -143,10 +143,10 @@ Ib SDK 3.x, the API for Query was improved and now it is more consistent with ot
 [source,php]
 ----
 $query = N1qlQuery::fromString('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$type');
-$query->namedParams(['city' => "Los Angeles", 'type' => "airport"]);
-$result = $bucket->query($query);
-foreach ($result->rows as $row) {
-  printf("%s\n", $row->airportname);
+$query\->namedParams(['city' => "Los Angeles", 'type' => "airport"]);
+$result = $bucket\->query($query);
+foreach ($result\->rows as $row) {
+  printf("%s\n", $row\->airportname);
 }
 ----
 
@@ -154,9 +154,9 @@ foreach ($result->rows as $row) {
 [source,php]
 ----
 $options = new QueryOptions();
-$options->namedParameters(['city' => "Los Angeles", 'type' => "airport"]);
-$result = $cluster->query('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$airport', $options);
-foreach ($result->rows() as $row) {
+$options\->namedParameters(['city' => "Los Angeles", 'type' => "airport"]);
+$result = $cluster\->query('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$airport', $options);
+foreach ($result\->rows() as $row) {
   printf("%s\n", $row['airportname']);
 }
 ----
@@ -169,10 +169,10 @@ Analytics queries in SDK3 have their own API entry point.
 [source,php]
 ----
 $query = AnalyticsQuery::fromString('SELECT * FROM dataset WHERE type = $type');
-$query->namedParams(['type' => "airport"]);
-$result = $bucket->query($query);
-foreach ($result->rows as $row) {
-  printf("%s\n", $row->airportname);
+$query\->namedParams(['type' => "airport"]);
+$result = $bucket\->query($query);
+foreach ($result\->rows as $row) {
+  printf("%s\n", $row\->airportname);
 }
 ----
 
@@ -180,9 +180,9 @@ foreach ($result->rows as $row) {
 [source,php]
 ----
 $options = new AnalyticsQueryOptions();
-$options->namedParameters(['type' => "airport"]);
-$result = $cluster->analyticsQuery('SELECT * FROM dataset WHERE type = $type', $options);
-foreach ($result->rows() as $row) {
+$options\->namedParameters(['type' => "airport"]);
+$result = $cluster\->analyticsQuery('SELECT * FROM dataset WHERE type = $type', $options);
+foreach ($result\->rows() as $row) {
   printf("%s\n", $row['airportname']);
 }
 ----
@@ -196,11 +196,11 @@ In SDK 3, query options and index name has been extracted from the query object.
 ----
 $queryPart = SearchQuery::matchPhrase("hop beer");
 $query = new SearchQuery("beer-search", $queryPart);
-$query->limit(3)->fields("name");
+$query\->limit(3)\->fields("name");
 
-$result = $this->bucket->query($query);
-foreach ($result->hits() as $hit) {
-  printf("%s - %f\n", $hit->id, $hit->score);
+$result = $this\->bucket\->query($query);
+foreach ($result\->hits() as $hit) {
+  printf("%s - %f\n", $hit\->id, $hit\->score);
 }
 ----
 
@@ -209,9 +209,9 @@ foreach ($result->hits() as $hit) {
 ----
 $query = new MatchPhraseSearchQuery("hop beer");
 $options = new SearchOptions();
-$options->limit(3);
-$result = $cluster->search("beer-search", $query, $options);
-foreach ($result->rows() as $row) {
+$options\->limit(3);
+$result = $cluster\->search("beer-search", $query, $options);
+foreach ($result\->rows() as $row) {
   printf("%s - %f\n", $row['id'], $row['score']);
 }
 ----
@@ -224,10 +224,10 @@ The most noticeable change in the Views API for SDK 3.x is the change of names f
 [source,php]
 ----
 $query = ViewQuery::from('design_name', 'test');
-$query->consistency(ViewQuery::UPDATE_BEFORE);
-$res = $bucket->query($query);
-foreach ($res->rows as $row) {
-  printf("%s\n", $row->id);
+$query\->consistency(ViewQuery::UPDATE_BEFORE);
+$res = $bucket\->query($query);
+foreach ($res\->rows as $row) {
+  printf("%s\n", $row\->id);
 }
 ----
 
@@ -235,10 +235,10 @@ foreach ($res->rows as $row) {
 [source,php]
 ----
 $options = new ViewOptions();
-$options->scanConsistency(ViewScanConsistency::REQUEST_PLUS);
-$res = $bucket->viewQuery('design_name', 'test', $options);
-foreach ($res->rows() as $row) {
-  printf("%s\n", $row->id());
+$options\->scanConsistency(ViewScanConsistency::REQUEST_PLUS);
+$res = $bucket\->viewQuery('design_name', 'test', $options);
+foreach ($res\->rows() as $row) {
+  printf("%s\n", $row\->id());
 }
 ----
 
@@ -256,31 +256,31 @@ The following table provides a mapping from the SDK 2 management APIs to those o
 [options="header"]
 |====
 | SDK 2                          | SDK 3
-|`ClusterManager->info`          | removed
-|`ClusterManager->listBuckets`   | `BucketManager->getAllBuckets`
-|-                               | `BucketManager->getBucket`
-|`ClusterManager->createBucket`  | `BucketManager->createBucket`
-|`ClusterManager->removeBucket`  | `BucketManager->removeBucket`
-|`ClusterManager->upsertUser`    | `UserManager->upsertUser`
-|`ClusterManager->removeUser`    | `UserManager->dropUser`
-|`ClusterManager->listUsers`     | `UserManager->getAllUsers`
-|`ClusterManager->getUser`       | `UserManager->getUser`
+|`ClusterManager\->info`          | removed
+|`ClusterManager\->listBuckets`   | `BucketManager\->getAllBuckets`
+|-                               | `BucketManager\->getBucket`
+|`ClusterManager\->createBucket`  | `BucketManager\->createBucket`
+|`ClusterManager\->removeBucket`  | `BucketManager\->removeBucket`
+|`ClusterManager\->upsertUser`    | `UserManager\->upsertUser`
+|`ClusterManager\->removeUser`    | `UserManager\->dropUser`
+|`ClusterManager\->listUsers`     | `UserManager\->getAllUsers`
+|`ClusterManager\->getUser`       | `UserManager\->getUser`
 |====
 
 .SDK 2.x vs SDK 3.x BucketManager
 [options="header"]
 |====
 | SDK 2                                    | SDK 3
-|`BucketManager->info`                      | removed
-|`BucketManager->flush`                     | `BucketManager->flushBucket`
-|`BucketManager->listDesignDocuments`       | `ViewIndexManager->getAllDesignDocuments`
-|`BucketManager->getDesignDocument`         | `ViewIndexManager->getDesignDocument`
-|`BucketManager->removeDesignDocument`      | `ViewIndexManager->dropDesignDocument`
-|`BucketManager->insertDesignDocument`      | `ViewIndexManager->upsertDesignDocument`
-|`BucketManager->upsertDesignDocument`      | `ViewIndexManager->upsertDesignDocument`
-|`BucketManager->listN1qlIndexes`           | `QueryIndexManager->getAllIndexes`
-|`BucketManager->createN1qlIndex`           | `QueryIndexManager->createIndex`
-|`BucketManager->createN1qlPrimaryIndex`    | `QueryIndexManager->createPrimaryIndex`
-|`BucketManager->dropN1qlIndex`             | `QueryIndexManager->dropIndex`
-|`BucketManager->dropN1qlPrimaryIndex`      | `QueryIndexManager->dropPrimaryIndex`
+|`BucketManager\->info`                      | removed
+|`BucketManager\->flush`                     | `BucketManager\->flushBucket`
+|`BucketManager\->listDesignDocuments`       | `ViewIndexManager\->getAllDesignDocuments`
+|`BucketManager\->getDesignDocument`         | `ViewIndexManager\->getDesignDocument`
+|`BucketManager\->removeDesignDocument`      | `ViewIndexManager\->dropDesignDocument`
+|`BucketManager\->insertDesignDocument`      | `ViewIndexManager\->upsertDesignDocument`
+|`BucketManager\->upsertDesignDocument`      | `ViewIndexManager\->upsertDesignDocument`
+|`BucketManager\->listN1qlIndexes`           | `QueryIndexManager\->getAllIndexes`
+|`BucketManager\->createN1qlIndex`           | `QueryIndexManager\->createIndex`
+|`BucketManager\->createN1qlPrimaryIndex`    | `QueryIndexManager\->createPrimaryIndex`
+|`BucketManager\->dropN1qlIndex`             | `QueryIndexManager\->dropIndex`
+|`BucketManager\->dropN1qlPrimaryIndex`      | `QueryIndexManager\->dropPrimaryIndex`
 |====
