@@ -114,7 +114,7 @@ The following table describes the SDK 2 KV APIs and their equivalents in SDK 3:
 [options="header"]
 |====
 | SDK 2                          | SDK 3
-|`Bucket->upsert`                | `Collection->upsert`
+|`Bucket->upsert`                | `Collection\->upsert`
 |`Bucket->get`                   | `Collection->get`
 |-                               | `Collection->exists`
 |`Bucket->getFromReplica`        | `Collection->getAnyReplica` and `Collection.getAllReplicas`
