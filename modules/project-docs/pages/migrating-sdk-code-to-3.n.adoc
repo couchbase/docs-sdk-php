@@ -48,31 +48,31 @@ include::6.5@sdk:shared:partial$migration.adoc[tag=lang]
 
 ===  Installation and Configuration
 
-As with 2.x release, the primary source of artifacts is release notes page, where we publish links to pre-built binaries
-as well as to source tarball.
+As with 2.x release, the primary source of artifacts is xref:sdk-release-notes.adoc[the release notes page], 
+where we publish links to pre-built binaries, as well as to source tarballs.
 
-SDK 3.x supports PHP interpreters starting 7.2.
+SDK 3.x supports PHP interpreters from 7.2 upwards.
 
-Since 3.x release we start publish binaries for Windows with OpenSSL dependency. It allows the SDK simplify deployment
-of the application without rebuild. Note, that OpenSSL DLLs are not distributed in the archive and must be installed
-separately (see official OpenSSL page for more details).
+From 3.0 onwards, binaries are available for Windows with the OpenSSL dependency. 
+Note, that OpenSSL DLLs are not distributed in the archive and must be installed separately (see the https://wiki.openssl.org/index.php/Binaries[official OpenSSL page] for more details).
 
 ===  Connection Lifecycle
 
-Bootstrapping the SDK is staged now, so the application have to create Cluster object first, and then open Bucket and
+Bootstrapping the SDK is staged now, so the application has to create a Cluster object first, and then open the Bucket and
 Collection if necessary.
 
-As in SDK 2.x there is not explicit shutdown, and all underlying connections still kept in the cache, for reusing in
-future requests. The connection idle time is controlled by `couchbase.pool.max_idle_time_sec` PHP INI setting.
+As in SDK 2.x there is no explicit shutdown, and all underlying connections still kept in the cache, for reusing in
+future requests. 
+The connection idle time is controlled by the `couchbase.pool.max_idle_time_sec` PHP INI setting.
 
-SDK 3.x allows to perform Queries on the Cluster level, so it is not necessary to open a bucket anymore.
+SDK 3.x allows the performance of Queries on the Cluster level, so it is not necessary to open a bucket anymore.
 
-SDK 3.x does not allow to use SASL PLAIN mechanism by default, instead it restrict to `SCRAM-SHA{1,256,512}`.
+SDK 3.x does not allow the use of SASL PLAIN mechanism by default, instead it restricts to `SCRAM-SHA{1,256,512}`.
 
 ===  Exception Handling
 
-SDK 3.x actively uses Exceptions to signal about errors. Instead of using single `\Couchbase\Exception` as in SDK 2.x,
-now we use hierarchy of the exceptions, which allows to handle errors in more reliable way:
+SDK 3.x actively uses `Exceptions` to signal errors. 
+Instead of using single `\Couchbase\Exception`, as in SDK 2.x, now we use a hierarchy of exceptions, which allows the handling of errors in a more reliable way:
 
 [source,php]
 ----
@@ -83,7 +83,7 @@ try {
 }
 ----
 
-Instead of SDK 2.x
+Instead of SDK 2.x's:
 
 [source,php]
 ----
@@ -98,17 +98,17 @@ try {
 
 === Serialization and Transcoding
 
-SDK 3.x still relies on native types and support of `json_encode` API from standard `json.so` module (therefore it still
-have to be loaded before `couchbase.so`). But we stopped supporting `igbinary.so` transcoder.
+SDK 3.x still relies on native types and supports the `json_encode` API from the standard `json.so` module (therefore it still has to be loaded before `couchbase.so`). 
+But the `igbinary.so` transcoder is no longer supported.
 
 ===  Migrating Services
 
 ==== Key Value
 
-Most of the KV APIs moved from bucket-level (in SDK 2.x) to collection-level (in SDK 3.x). For servers, which don't
-support collections, the application could obtain default collection using `bucket->defaultCollection()` function.
+Most of the KV APIs have moved from bucket-level (in SDK 2.x) to collection-level (in SDK 3.x). 
+For servers which don't support collections, the application should obtain the default collection using the `bucket->defaultCollection()` function.
 
-The following table describes the SDK 2 KV APIs and where they are now located in SDK 3:
+The following table describes the SDK 2 KV APIs and their equivalents in SDK 3:
 
 .SDK 2.x KV API vs. SDK 3.x KV API
 [options="header"]
@@ -133,14 +133,13 @@ The following table describes the SDK 2 KV APIs and where they are now located i
 |`Bucket->prepend`               | `BinaryCollection->prepend`
 |====
 
-The `BinaryCollection` mentioned above could be retrieved from regular collection object using `$collection->binary()`
-method.
+The `BinaryCollection` mentioned above could be retrieved from the regular collection object using the `$collection->binary()` method.
 
 ==== Query
 
-In SDK 3.x API for Query was improved and now it is more consistent with other endpoints.
+Ib SDK 3.x, the API for Query was improved and now it is more consistent with other endpoints.
 
-SDK 2
+.SDK 2
 [source,php]
 ----
 $query = N1qlQuery::fromString('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$type');
@@ -151,7 +150,7 @@ foreach ($result->rows as $row) {
 }
 ----
 
-SDK 3
+.SDK 3
 [source,php]
 ----
 $options = new QueryOptions();
@@ -164,9 +163,9 @@ foreach ($result->rows() as $row) {
 
 ==== Analytics
 
-Analytics queries in SDK3 has its own API entry point.
+Analytics queries in SDK3 have their own API entry point.
 
-SDK 2
+.SDK 2
 [source,php]
 ----
 $query = AnalyticsQuery::fromString('SELECT * FROM dataset WHERE type = $type');
@@ -177,7 +176,7 @@ foreach ($result->rows as $row) {
 }
 ----
 
-SDK 3
+.SDK 3
 [source,php]
 ----
 $options = new AnalyticsQueryOptions();
@@ -190,9 +189,9 @@ foreach ($result->rows() as $row) {
 
 ==== Search
 
-In SDK 3 query options and index name has been extracted from the query object.
+In SDK 3, query options and index name has been extracted from the query object.
 
-SDK 2
+.SDK 2
 [source,php]
 ----
 $queryPart = SearchQuery::matchPhrase("hop beer");
@@ -205,7 +204,7 @@ foreach ($result->hits() as $hit) {
 }
 ----
 
-SDK 3
+.SDK 3
 [source,php]
 ----
 $query = new MatchPhraseSearchQuery("hop beer");
@@ -219,9 +218,9 @@ foreach ($result->rows() as $row) {
 
 ==== Views
 
-Most noticeable change in Views API for SDK 3.x is the change of names of consistency control settings.
+The most noticeable change in the Views API for SDK 3.x is the change of names for consistency control settings.
 
-SDK 2
+.SDK 2
 [source,php]
 ----
 $query = ViewQuery::from('design_name', 'test');
@@ -232,7 +231,7 @@ foreach ($res->rows as $row) {
 }
 ----
 
-SDK 3
+.SDK 3
 [source,php]
 ----
 $options = new ViewOptions();
@@ -243,12 +242,13 @@ foreach ($res->rows() as $row) {
 }
 ----
 
+
 == Management APIs
 
 In SDK 2, the management APIs were centralized in the `ClusterManager` at the cluster level and the `BucketManager` at the bucket level.
-Since SDK 3 provides more management APIs, they have been split up in their respective domains.
-So for example when in SDK 2 you needed to remove a bucket you would call `ClusterManager.removeBucket` you will now find it under `BucketManager.dropBucket`.
-Also, creating a N1QL index now lives in the `QueryIndexManager`, which is accessible through the `Cluster`.
+Since SDK 3 provides more management APIs, they have been split up into their respective domains.
+For example, when in SDK 2 you needed to remove a bucket you would call `ClusterManager.removeBucket` -- you will now find it under `BucketManager.dropBucket`.
+And, creating a N1QL index now lives in the `QueryIndexManager`, which is accessible through the `Cluster`.
 
 The following table provides a mapping from the SDK 2 management APIs to those of SDK 3:
 
