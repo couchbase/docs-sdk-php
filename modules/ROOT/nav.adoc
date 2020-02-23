@@ -16,7 +16,7 @@ Couchbase PHP SDK
 
 .Advanced Data Operations
 * xref:howtos:concurrent-async-apis.adoc[Batching]
-// * xref:howtos:concurrent-document-mutations.adoc[Concurrent Document Mutations]
+* xref:howtos:concurrent-document-mutations.adoc[Concurrent Document Mutations]
 ////
 * xref:howtos:durability.adoc[Durability]
 
