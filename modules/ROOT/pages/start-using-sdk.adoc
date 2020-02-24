@@ -136,9 +136,9 @@ Make sure that the load order is correct.
 For example, if your distribution has just a single `php.ini` file, just insert the line after `extension=json.so`.
 If your distribution uses a `conf.d`-style, name the file with the Couchbase SDK ini so that it will be alphabetically ordered after the JSON extension.
 +
-IMPORTANT: Because the extension depends on the C library (libcouchbase), the shared object `libcouchbase.so` or `libcouchbase.dll` has to be accessible by the PHP process when loading the extension.
+IMPORTANT: [[dll_path]]Because the extension depends on the C library (libcouchbase), the shared object `libcouchbase.so` or `libcouchbase.dll` has to be accessible by the PHP process when loading the extension.
 On UNIX-like systems no additional steps are necessary, because the libcouchbase package installs shared objects into a common system location.
-[[dll_path]]For Windows though, it must be copied into either into a location from the `PATH` for the PHP executable or into a directory with like executables (like apache2, IIS or php.exe).
+For _Windows_ though, it must be copied into either into a location from the `PATH` for the PHP executable or into a directory with like executables (like apache2, IIS or php.exe).
 This is controlled by your PHP distribution's setup, so see its documentation for further information.
 
 Information on new features, fixes, known issues as well as information on how to install older release versions is xref:sdk-release-notes.adoc[in the release notes].
