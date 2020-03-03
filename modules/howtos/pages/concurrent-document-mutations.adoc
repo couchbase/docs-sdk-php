@@ -13,29 +13,7 @@ include::6.5@sdk:shared:partial$cas.adoc[tag=errors]
 
 [source,php]
 ----
-function incrementVisitCount(\Couchbase\Collection $collection, string $userId) {
-    $maxRetries = 10;
-    for ($i = 0; $i < $maxRetries; ++$i) {
-        // Get the current document contents
-        $getRes = $collection->get($userId);
-
-        // Increment the visit count
-        $userDoc = $getRes->content();
-        $userDoc['visitCount']++;
-
-        try {
-            // Attempt to replace the document using CAS
-            $options = new \Couchbase\ReplaceOptions();
-            $options->cas($getRes->cas());
-            $collection->replace($userId, $userDoc, $options);
-        } catch (\Couchbase\CasMismatchError $ex) {
-            continue;
-        }
-
-        // If no errors occured during the replace, we can exit our retry loop
-        break;
-    }
-}
+include::example$using-cas.php[tag=increment]
 ----
 
 Sometimes more logic is needed when performing updates, for example, if a property is mutually exclusive with another property; only one or the other can exist, but not both.
@@ -49,19 +27,7 @@ include::6.5@sdk:shared:partial$cas.adoc[tag=locking]
 
 [source,php]
 ----
-$getRes = $collection->getAndLock('key', 3 /* seconds */);
-$lockedCas = $getRes->cas();
-
-/*
-
- // an example of simply unlocking the document
- $collection->unlock('key', $lockedCas);
-
- */
-
-$options = new \Couchbase\UpsertOptions();
-$options->cas($lockedCas);
-$collection->upsert('key', ['desc' => 'new value'], $options);
+include::example$using-cas.php[tag=locking]
 ----
 
 The handler will unlock the item either via an explicit unlock operation ([.api]`unlock`) or implicitly via modifying the item with the correct CAS.
