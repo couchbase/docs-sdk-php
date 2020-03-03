@@ -9,17 +9,31 @@ header_template = <<EOT
 //
 EOT
 
+# resolve current directory to allow to execute script with any CWD
 script_path = File.expand_path(__dir__)
+# root of the documenation project
 repo_root = File.expand_path(File.join(script_path, '..', '..'))
+# root of the sdk-examples project module
 module_root = File.join(script_path, "examples")
+unless File.directory?(module_root)
+  # initialize and update submodule if it does not exist yet
+  Dir.chdir(repo_root) { system("git submodule update --init") }
+end
+
+# find all .php files in the documentation project
 Dir["#{repo_root}/**/*.php"]
-  .reject { |path| path.include?(module_root) }
+  .reject { |path| path.include?(module_root) } # exclude files living in sdk-examples module
   .each do |src_path|
+    # load file contents
     content = File.readlines(src_path)
+    # construct the file path inside the sdk-examples (NOTE: filename should be unique(
     dst_path = File.join(module_root, 'php', File.basename(src_path))
+    # strips documentation tags
     filtered = content.reject { |line| line =~ /^.*#(tag|end).*$/ }
+    # render and inject header
     header = format(header_template, source: src_path.sub(/#{repo_root}\/*/, ''))
     filtered[1, 0] = header # insert header after "<?php" line
     File.write(dst_path, filtered.join)
   end
+# display diff in sdk-examples submodule
 Dir.chdir(module_root) { system("git diff") }
