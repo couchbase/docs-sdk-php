@@ -3,7 +3,7 @@
 :page-topic-type: howto
 :page-aliases: document-operations.adoc
 
- 
+
 
 ////
 The complete code sample used on this page can be downloaded from
@@ -28,21 +28,14 @@ Here is the _Insert_ operation at its simplest:
 
 [source,php]
 ----
-// Insert
-$document = ["foo" => "bar", "bar" => "foo"];
-$result = $collection->insert("document-key", $document);
+include::example$kv-crud.php[tag=insert]
 ----
 
 Options may be added to operations:
 
 [source,php]
 ----
-// Insert (with options)
-$document = ["foo" => "bar", "bar" => "foo"];
-$options = new \Couchbase\InsertOptions();
-$options->expiration(30) // 30 seconds
-	->timeout(5000); // 5 seconds
-$result = $collection->insert("document-key", $document, $options);
+include::example$kv-crud.php[tag=insertwithoptions]
 ----
 
 Setting a Compare and Swap (CAS) value is a form of optimistic locking - dealt with in depth in the xref:concurrent-document-mutations.adoc[CAS page].
@@ -50,53 +43,45 @@ Here we just note that the CAS is a value representing the current state of an i
 The CAS value is returned as part of a document’s metadata whenever a document is accessed.
 Without explicitly setting it, a newly-created document would have a CAS value of _0_.
 
-_Timeout_ is an optional parameter which in the .NET SDK has a type value of `TimeSpan`.
+_Timeout_ is an optional parameter which is a integer value representing time duration in microseconds..
 Timeout sets the timeout value for the underlying network connection.
 We will add to these options for the _Replace_ example:
 
 [source,php]
 ----
-$document = ["foo" => "bar", "bar" => "foo"];
-$options = new \Couchbase\ReplaceOptions();
-$options->cas("AADQjvAwoxU=")
-        ->expiration(60) // 1 minute
-	->timeout(5000); // 5 seconds
-$result = $collection->replace("document-key", $document, $options);
+include::example$kv-crud.php[tag=replacewithcas]
 ----
 
+The example above also shows how to handle the case when optimistic falure will fail.
+
 Expiration sets an explicit time to live (TTL) for a document, for which you can also xref:sdk-xattr-example.adoc[see a more detailed example of TTL discovery] later in the docs.
-We'll discuss modifying `Expiration` in more details xref:#net-modifying-expiration[below].
+We'll discuss modifying `expiry` in more details xref:#php-modifying-expiration[below].
 For a discussion of item (Document) _vs_ Bucket expiration, see the
 xref:6.5@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
 
 [source,php]
 ----
-$document = ["foo" => "bar", "bar" => "foo"];
-$options = new \Couchbase\UpsertOptions();
-$options->cas("AADQjvAwoxU=")
-        ->expiration(60) // 1 minute
-	->timeout(5000); // 5 seconds
-$result = $collection->upsert("document-key", $document, $options);
+include::example$kv-crud.php[tag=upsertwithexpiry]
 ----
 
 // TODO: old-style durability will come later
 
-Here, we have added _Durability_ options, namely `PersistTo` and `ReplicateTo`.
+// Here, we have added _Durability_ options, namely `PersistTo` and `ReplicateTo`.
 
 == Durability
 
 In Couchbase Server releases before 6.5, Durability was set with these two options -- see the xref:2.6@php-sdk::durability.adoc[6.0 Durability documentation] -- covering  how many replicas the operation must be propagated to and how many persisted copies of the modified record must exist.
 
 
-If 6.5 or above is being used, you can take advantage of the xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[Durable Write] feature, 
-in which Couchbase Server will only return success to the SDK after the requested replication level has been achieved. 
+If 6.5 or above is being used, you can take advantage of the xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[Durable Write] feature,
+in which Couchbase Server will only return success to the SDK after the requested replication level has been achieved.
 The three replication levels are:
 
  * `Majority` - The server will ensure that the change is available in memory on the majority of configured replicas.
  * `MajorityAndPersistToActive` - Majority level, plus persisted to disk on the active node.
  * `PersistToMajority` - Majority level, plus persisted to disk on the majority of configured replicas.
 
-The options are in increasing levels of safety. 
+The options are in increasing levels of safety.
 Note that nothing comes for free - for a given node, waiting for writes to storage is considerably slower than waiting for it to be available in-memory.
 These trade offs, as well as which settings may be tuned, are discussed in the xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[durability page].
 
@@ -104,10 +89,10 @@ The following example demonstrates using the newer durability features available
 
 [source,php]
 ----
-// durability kv snippet
+include::example$kv-crud.php[tag=removewithdurability]
 ----
 
-To stress, durability is a useful feature but should not be the default for most applications, as there is a performance consideration, 
+To stress, durability is a useful feature but should not be the default for most applications, as there is a performance consideration,
 and the default level of safety provided by Couchbase will be reasonable for the majority of situations.
 
 
@@ -124,19 +109,14 @@ Using the `Get()` method with the document key can be done in a similar fashion 
 
 [source,php]
 ----
-$result = $collection->get("document-key");
-$content = $result->content();
+include::example$kv-crud.php[tag=get]
 ----
 
 Timeout can also be set - as in the earlier `Insert` example:
 
 [source,php]
 ----
-// Get (with options)
-$options = new \Couchbase\GetOptions();
-$options->timeout(5000); // 5 seconds
-$result = $collection->get("document-key", $options);
-$content = $result->content();
+include::example$kv-crud.php[tag=getwithoptions]
 ----
 
 
@@ -147,10 +127,7 @@ When removing a document, you will have the same concern for durability as with 
 Remove (with options)
 [source,php]
 ----
-$options = new \Couchbase\RemoveOptions();
-$options->cas("AAArulMxoxU=")
-	->timeout(5000); // 5 seconds
-$result = $collection->remove("document-key");
+include::example$kv-crud.php[tag=removewithoptions]
 ----
 // TODO: old-style durability will come later
 
@@ -162,17 +139,23 @@ Using `Touch()`, you can set expiration values on documents to handle transient 
 
 [source,php]
 ----
-$result = $collection->touch("document-key", 10); // seconds
+include::example$kv-expiry.php[tag=touch]
 ----
 
 A network timeout can be set with the optional `TouchOptions()`, in the same fashion as earlier examples on this page:
 
 [source,php]
 ----
-$options = new \Couchbase\TouchOptions();
-$options->timeout(5000); // 5 seconds
-$result = $collection->touch("document-key", 10, $options);
+include::example$kv-expiry.php[tag=touchwithoptions]
 ----
+
+Another way to change expiration time is to use `getAndTouch()` method of the collection.
+
+[source,php]
+----
+include::example$kv-expiry.php[tag=getandtouch]
+----
+
 
 == Atomic document modifications
 
@@ -181,41 +164,24 @@ The value of a document can be increased or decreased atomically using `Binary.I
 .Increment
 [source,php]
 ----
-// increment binary value by 1 (default)
-$result = $collection->increment("document-key");
+include::example$kv-counter.php[tag=increment]
 ----
-// TODO: increment will be extracted into ->binary() interface
 
 [source,php]
 ----
-// increment (with options)
-// increment binary value by 1, if document doesn’t exist, seed it at 1000
-$options = new \Couchbase\CounterOptions();
-$options->delta(1)
-        ->initial(1000)
-        ->timeout(5000); // 5 seconds
-$result = $collection->increment("document-key", $options);
+include::example$kv-counter.php[tag=incrementwithoptions]
 ----
 
 .Decrement
 [source,php]
 ----
-// decrement binary value by 1
-$result = $collection->decrement("document-key");
+include::example$kv-counter.php[tag=decrement]
 ----
 
 .Decrement (with options)
 [source,php]
 ----
-// decrement binary value by 1, if document doesn’t exist, seed it at 1000
-// optional arguments:
-// - Timeout
-// - Expiration
-$options = new \Couchbase\CounterOptions();
-$options->delta(1)
-        ->initial(1000)
-        ->timeout(5000); // 5 seconds
-$result = $collection->decrement("document-key", $options);
+include::example$kv-counter.php[tag=decrementwithoptions]
 ----
 
 NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change
