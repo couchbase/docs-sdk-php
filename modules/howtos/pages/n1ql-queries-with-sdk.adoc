@@ -4,16 +4,16 @@
 :page-aliases: n1ql-query
 
 [abstract]
-You can query for documents in Couchbase using the N1QL query language, a language based on SQL, but designed for structured and flexible JSON documents. 
+You can query for documents in Couchbase using the N1QL query language, a language based on SQL, but designed for structured and flexible JSON documents.
 Querying can solve typical programming tasks such as finding a user profile by email address, facebook login, or user ID.
 
- 
+
 
 Our query service uses N1QL, which will be fairly familiar to anyone who's used any dialect of SQL.
 xref:#_additional_resources[Further resources] for learning about N1QL are listed at the bottom of the page.
 Before you get started you may wish to checkout the xref:6.0@server:n1ql:n1ql-language-reference/index.adoc[N1QL intro page], or just dive in with a query against our travel sample data set.
 In this case, the one thing that you need to know is that in order to make a Bucket queryable, it must have at least one index defined.
-You can define a _primary_ index on a bucket. 
+You can define a _primary_ index on a bucket.
 When a primary index is defined you can issue non-covered queries on the bucket as well.
 
 Use
@@ -32,10 +32,10 @@ NOTE: The default installation places cbq in `/opt/couchbase/bin/` on Linux, `/A
 
 == Queries & Placeholders
 
-Placeholders allow you to specify variable constraints for an otherwise constant query. 
-There are two variants of placeholders: postional and named parameters. 
-Positional parameters use an ordinal placeholder for substitution and named parameters use variables. 
-A named or positional parameter is a placeholder for a value in the WHERE, LIMIT or OFFSET clause of a query. 
+Placeholders allow you to specify variable constraints for an otherwise constant query.
+There are two variants of placeholders: postional and named parameters.
+Positional parameters use an ordinal placeholder for substitution and named parameters use variables.
+A named or positional parameter is a placeholder for a value in the WHERE, LIMIT or OFFSET clause of a query.
 Note that both parameters and options are optional.
 
 .Positional parameter example:
@@ -80,10 +80,16 @@ Select this when consistency is always more important than performance.
 
 [source,php]
 ----
-// Scan consistency to be implemented in a forthcoming alpha release.
 include::example$query.php[tag=scan]
 ----
 
+More granular consistency requirement could be achieved with `consistentWith` query option, which accepts
+`MutationState` object that contains mutations the system must wait for before process the query
+
+[source,php]
+----
+include::example$query.php[tag=consistentWith]
+----
 
 == Additional Resources
 
