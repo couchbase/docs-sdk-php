@@ -27,19 +27,19 @@ $res = $collection->get($key);
 printf("[get] document content: %s\n", var_export($res->content(), true));
 
 // Touch the document to adjust expiration time
-// tag:touch[]
+// #tag:touch[]
 $collection->touch($key, 60 /* seconds */);
-// end:touch[]
+// #end:touch[]
 
 // Touch the document to adjust expiration time
-// tag:touchwithoptions[]
+// #tag:touchwithoptions[]
 $opts = new TouchOptions();
 $opts->timeout(500000 /* microseconds */);
 $collection->touch($key, 60 /* seconds */);
-// end:touchwithoptions[]
+// #end:touchwithoptions[]
 
 // Get and touch retrieves the document and adjusting expiration time
-// tag:getandtouch[]
+// #tag:getandtouch[]
 $res = $collection->getAndTouch($key, 1 /* seconds */);
 printf("[getAndTouch] document content: %s\n", var_export($res->content(), true));
 
@@ -50,7 +50,7 @@ try {
 } catch (Couchbase\DocumentNotFoundException $ex) {
     printf("The document does not exist\n");
 }
-// end:getandtouch[]
+// #end:getandtouch[]
 
 // Output:
 //

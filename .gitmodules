@@ -1,0 +1,3 @@
+[submodule "modules/devguide/examples"]
+	path = modules/devguide/examples
+	url = git://github.com/couchbaselabs/sdk-examples.git

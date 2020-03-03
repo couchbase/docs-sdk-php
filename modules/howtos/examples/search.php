@@ -9,7 +9,7 @@ use \Couchbase\MutationState;
 
 /*
  * index definition
-// tag:indexdefinition[]
+// #tag:indexdefinition[]
 {
   "type": "fulltext-index",
   "name": "travel-sample-index",
@@ -49,13 +49,13 @@ use \Couchbase\MutationState;
   },
   "sourceParams": {}
 }
-// end:indexdefinition[]
+// #end:indexdefinition[]
  */
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
 $cluster = new Cluster("couchbase://192.168.1.101", $opts);
 
-// tag:matchquery[]
+// #tag:matchquery[]
 $matchQuery = new MatchSearchQuery("swanky");
 $matchQuery->field("reviews.content");
 $opts = new SearchOptions();
@@ -65,9 +65,9 @@ printf("Match query: \"swanky\":\n");
 foreach ($res->rows() as $row) {
     printf("id: %s, score: %f\n", $row['id'], $row['score']);
 }
-// end:matchquery[]
+// #end:matchquery[]
 
-// tag:numrangequery[]
+// #tag:numrangequery[]
 $numericRangeQuery = new NumericRangeSearchQuery();
 $numericRangeQuery->field("reviews.ratings.Cleanliness")->min(5);
 $opts = new SearchOptions();
@@ -77,9 +77,9 @@ printf("Cleanliness 5+:\n");
 foreach ($res->rows() as $row) {
     printf("id: %s, score: %f\n", $row['id'], $row['score']);
 }
-// end:numrangequery[]
+// #end:numrangequery[]
 
-// tag:conjunctionquery[]
+// #tag:conjunctionquery[]
 $conjunction = new ConjunctionSearchQuery([$matchQuery, $numericRangeQuery]);
 $opts = new SearchOptions();
 $opts->limit(10);
@@ -88,10 +88,10 @@ printf("Swanky and with cleanliness 5+:\n");
 foreach ($res->rows() as $row) {
     printf("id: %s, score: %f\n", $row['id'], $row['score']);
 }
-// end:conjunctionquery[]
+// #end:conjunctionquery[]
 
 
-// tag:consistency[]
+// #tag:consistency[]
 // Create new hotel document and demonstrate query with consistency requirement
 $collection = $cluster->bucket('travel-sample')->defaultCollection();
 $hotel = [
@@ -116,7 +116,7 @@ printf("Match query: \"swanky\":\n");
 foreach ($res->rows() as $row) {
     printf("id: %s, score: %f\n", $row['id'], $row['score']);
 }
-// end:consistency[]
+// #end:consistency[]
 
 // Output
 //
