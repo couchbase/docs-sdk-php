@@ -13,22 +13,22 @@ $cluster = new Cluster("couchbase://192.168.1.101", $opts);
 
 $collection = $cluster->bucket("travel-sample")->defaultCollection();
 
-// #tag:insert[]
+// #tag::insert[]
 $document = ["foo" => "bar", "bar" => "foo"];
 $res = $collection->insert("document-key-new", $document);
 printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas());
-// #end:insert[]
+// #end::insert[]
 
 // Insert document with options
-// #tag:insertwithoptions[]
+// #tag::insertwithoptions[]
 $document = ["foo" => "bar", "bar" => "foo"];
 $opts = new InsertOptions();
 $opts->timeout(300000 /* microseconds */);
 $res = $collection->insert("document-key", $document, $opts);
 printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas());
-// #end:insertwithoptions[]
+// #end::insertwithoptions[]
 
-// #tag:replacewithcas[]
+// #tag::replacewithcas[]
 // Replace document with incorrect CAS
 $opts = new ReplaceOptions();
 $opts->timeout(300000 /* microseconds */);
@@ -50,42 +50,42 @@ $oldCas = $res->cas();
 $opts->cas($oldCas);
 $res = $collection->replace("document-key", $doc, $opts);
 printf("document \"document-key\" \"%s\" been replaced successfully. New CAS \"%s\"\n", $oldCas, $res->cas());
-// #end:replacewithcas[]
+// #end::replacewithcas[]
 
-// #tag:removewithoptions[]
+// #tag::removewithoptions[]
 $opts = new RemoveOptions();
 $options->timeout(5000000); // 5 seconds
 $result = $collection->remove("document-key");
-// #end:removewithoptions[]
+// #end::removewithoptions[]
 
-// #tag:upsertwithexpiry[]
+// #tag::upsertwithexpiry[]
 $document = ["foo" => "bar", "bar" => "foo"];
 $opts = new UpsertOptions();
 $opts->expiry(60 /* seconds */);
 $res = $collection->upsert("document-key", $document, $opts);
 printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas());
-// #end:upsertwithexpiry[]
+// #end::upsertwithexpiry[]
 
 // Get
-// #tag:get[]
+// #tag::get[]
 $res = $collection->get("document-key");
 $doc = $res->content();
 printf("document \"document-key\" has content: \"%s\" CAS \"%s\"\n", json_encode($doc), $res->cas());
-// #end:get[]
+// #end::get[]
 
-// #tag:getwithoptions[]
+// #tag::getwithoptions[]
 $opts = new GetOptions();
 $opts->timeout(300000 /* microseconds */);
 $res = $collection->get("document-key", $opts);
 $doc = $res->content();
 printf("document \"document-key\" has content: \"%s\" CAS \"%s\"\n", json_encode($doc), $res->cas());
-// #end:getwithoptions[]
+// #end::getwithoptions[]
 
-// #tag:removewithdurability[]
+// #tag::removewithdurability[]
 // Remove with Durability
 $opts = new RemoveOptions();
 $opts->timeout(3000000 /* microseconds */);
 $opts->durabilityLevel(DurabilityLevel::MAJORITY);
 $res = $collection->remove("document-key", $opts);
 printf("document \"document-key\" has been removed\n");
-// #end:removewithdurability[]
+// #end::removewithdurability[]
