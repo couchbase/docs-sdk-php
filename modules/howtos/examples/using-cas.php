@@ -50,7 +50,7 @@ function lockingAndCas(Collection $collection, string $userId) {
     $opts = new ReplaceOptions();
     $opts->cas($lockedCas);
     $collection->replace($userId, $user, $opts);
-// #end:locking[]
+// #end::locking[]
 }
 
 $opts = new ClusterOptions();
