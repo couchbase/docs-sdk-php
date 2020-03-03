@@ -6,7 +6,7 @@ use \Couchbase\Collection;
 use \Couchbase\ReplaceOptions;
 use \Couchbase\CasMismatchError;
 
-// #tag:increment[]
+// #tag::increment[]
 function incrementVisitCount(Collection $collection, string $userId) {
     $maxRetries = 10;
     for ($i = 0; $i < $maxRetries; $i++) {
@@ -31,11 +31,11 @@ function incrementVisitCount(Collection $collection, string $userId) {
     }
     printf("Replace failed after %d attempts\n", $maxRetries);
 }
-// #end:increment[]
+// #end::increment[]
 
 
 function lockingAndCas(Collection $collection, string $userId) {
-// #tag:locking[]
+// #tag::locking[]
     $res = $collection->getAndLock($userId, 2 /* seconds */);
     $lockedCas = $res->cas();
 
