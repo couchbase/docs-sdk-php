@@ -7,7 +7,7 @@
 [abstract]
 Release notes, installation instructions, and download archive for the Couchbase PHP Client.
 
-These pages cover the 3.0 versions of the Couchbase PHP SDK. 
+These pages cover the 3.0 versions of the Couchbase PHP SDK.
 For release notes, download links, and installation methods for 2.6 and earlier releases of the Couchbase PHP Client, please see the xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
 
 // include::start-using-sdk.adoc[tag=prep]
@@ -21,38 +21,38 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0 or higher is required for PHP Client 3.0.1.
+version 3.0.0 or higher is required for PHP Client 3.0.2.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,bash]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.1.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.2.tgz
 ----
 
 === Installing on Microsoft Windows
 
-When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment. 
+When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment.
 You may also download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
-Binaries that marked with *(TLS)* contain libcouchbase.dll, that linked against OpenSSL 1.1.1d (MSVC15) and support secure connection to Couchbase. 
-We highly recommend to use TLS, as it keeps all communication between SDK and Cluster secure. 
+Binaries that marked with *(TLS)* contain libcouchbase.dll, that linked against OpenSSL 1.1.1d (MSVC15) and support secure connection to Couchbase.
+We highly recommend to use TLS, as it keeps all communication between SDK and Cluster secure.
 The packages do not include OpenSSL binaries, therefore they have to be installed in the PATH (see https://wiki.openssl.org/index.php/Binaries).
 
 |===
 |Platform|
-|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.1.tgz[couchbase-3.0.1.tgz]
-|Checksum        |https://packages.couchbase.com/clients/php/php_couchbase-3.0.1.sha256sum[php_couchbase-3.0.1.sha256sum]
-|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.2-nts-x64.zip[php_couchbase-3.0.1-7.2-nts-x64.zip]
-|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.2-zts-x64.zip[php_couchbase-3.0.1-7.2-zts-x64.zip]
-|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.3-nts-x64.zip[php_couchbase-3.0.1-7.3-nts-x64.zip]
-|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.3-zts-x64.zip[php_couchbase-3.0.1-7.3-zts-x64.zip]
-|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.4-nts-x64.zip[php_couchbase-3.0.1-7.4-nts-x64.zip]
-|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.4-zts-x64.zip[php_couchbase-3.0.1-7.4-zts-x64.zip]
-|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.3-nts-x64-openssl.zip[php_couchbase-3.0.1-7.3-nts-x64-openssl.zip]
-|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.3-zts-x64-openssl.zip[php_couchbase-3.0.1-7.3-zts-x64-openssl.zip]
-|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.4-nts-x64-openssl.zip[php_couchbase-3.0.1-7.4-nts-x64-openssl.zip]
-|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.1-7.4-zts-x64-openssl.zip[php_couchbase-3.0.1-7.4-zts-x64-openssl.zip]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.2.tgz[couchbase-3.0.2.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.0.2.sha256sum[couchbase-3.0.2.sha256sum]
+|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.2-nts-x64.zip[php_couchbase-3.0.2-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.2-zts-x64.zip[php_couchbase-3.0.2-7.2-zts-x64.zip]
+|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-nts-x64.zip[php_couchbase-3.0.2-7.3-nts-x64.zip]
+|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-zts-x64.zip[php_couchbase-3.0.2-7.3-zts-x64.zip]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-nts-x64.zip[php_couchbase-3.0.2-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-zts-x64.zip[php_couchbase-3.0.2-7.4-zts-x64.zip]
+|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-nts-x64-openssl.zip[php_couchbase-3.0.2-7.3-nts-x64-openssl.zip]
+|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-zts-x64-openssl.zip[php_couchbase-3.0.2-7.3-zts-x64-openssl.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-nts-x64-openssl.zip[php_couchbase-3.0.2-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-zts-x64-openssl.zip[php_couchbase-3.0.2-7.4-zts-x64-openssl.zip]
 |===
 
 === Post Installation for All Platforms
@@ -71,7 +71,7 @@ extension. To do this:
  Additional .ini files parsed:      (none)
 ----
 +
-2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section. 
+2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section.
 If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
 Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
@@ -85,6 +85,18 @@ extension=couchbase.dll
 === Note on Extension Dependencies
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
+
+== Version 3.0.2 (March 4, 2020)
+
+* https://issues.couchbase.com/browse/PCBC-660[PCBC-660]:
+Fixed detection of replace with CAS, so `CasMismatchException` now raised where necessary instead of `KeyExistsException`.
+
+* https://issues.couchbase.com/browse/PCBC-663[PCBC-663]:
+Search method now increases refcounter of search object, avoiding double-free error in the script termination handler.
+
+* Fixed memory leaks.
+
+* Fixed manifest issue leading to install failure.
 
 == Version 3.0.1 (February 4, 2020)
 
