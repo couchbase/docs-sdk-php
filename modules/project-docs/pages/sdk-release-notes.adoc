@@ -89,10 +89,10 @@ The Couchbase SDK depends on the JSON module, therefore it has to be loaded befo
 == Version 3.0.2 (March 4, 2020)
 
 * https://issues.couchbase.com/browse/PCBC-660[PCBC-660]:
-Fixed detection when CasMismatchException have to be raised.
+Fixed detection of replace with CAS, so `CasMismatchException` now raised where necessary instead of `KeyExistsException`.
 
 * https://issues.couchbase.com/browse/PCBC-663[PCBC-663]:
-Ensured search object will not be double-freed
+Search method now increases refcounter of search object, avoiding double-free error in the script termination handler.
 
 * Fixed memory leaks.
 
