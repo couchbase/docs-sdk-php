@@ -169,7 +169,7 @@ baz => 2hcxy0srv8
 .Retrieving multiple documents
 [source,php]
 ----
-$results = $bucket->upsert(array("foo", "bar", "baz"));
+$results = $bucket->get(array("foo", "bar", "baz"));
     foreach ($results as $docid => $metadoc) {
     // Each document itself has a 'propname'
     echo "Result for $docid\n";
