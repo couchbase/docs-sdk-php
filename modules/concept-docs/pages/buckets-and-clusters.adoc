@@ -15,6 +15,8 @@ Management operations in the PHP SDK may be performed through several interfaces
 
 To create or delete a bucket, call the bucket manager with the `buckets()` call on the cluster:
 
+// PCBC-656
+
 [source,java]
 ----
 Cluster cluster = Cluster.connect("127.0.0.1", "Administrator", "123456");
