@@ -156,6 +156,8 @@ Another way to change expiration time is to use `getAndTouch()` method of the co
 include::example$kv-expiry.php[tag=getandtouch]
 ----
 
+include::6.5@sdk:shared:partial$documents.adoc[tag=exp-note]
+
 
 == Atomic document modifications
 
