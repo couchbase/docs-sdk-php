@@ -86,7 +86,7 @@ extension=couchbase.dll
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
-== Version 3.0.2 (March 4, 2020)
+== Version 3.0.2 (4 March 2020)
 
 * https://issues.couchbase.com/browse/PCBC-660[PCBC-660]:
 Fixed detection of replace with CAS, so `CasMismatchException` now raised where necessary instead of `KeyExistsException`.
@@ -98,7 +98,7 @@ Search method now increases refcounter of search object, avoiding double-free er
 
 * Fixed manifest issue leading to install failure.
 
-== Version 3.0.1 (February 4, 2020)
+== Version 3.0.1 (4 February 2020)
 
 * Exposed manager APIs on Cluster level:
     - Cluster#queryIndexes() -> QueryIndexManager
@@ -109,7 +109,7 @@ Search method now increases refcounter of search object, avoiding double-free er
     - Bucket#collections() -> CollectionManager
     - Bucket#viewIndexes() -> ViewIndexManager
 
-== Version 3.0.0 (January 21, 2020)
+== Version 3.0.0 (21 January 2020)
 
 First GA release
 
