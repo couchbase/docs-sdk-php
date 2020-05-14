@@ -5,7 +5,7 @@
 You can use complex data structures such as dictionaries and lists in Couchbase.
 These data structures may be manipulated with basic operations without retrieving and storing the entire document.
 
-Data structures in Couchbase are similar in concept to data structures in the Java Collections Framework:
+Data structures in Couchbase are similar in concept to data structures in PHP:
 
 * *Map* is like PHP `array`, where a value is accessed by using a key string.
 * *List* is like a PHP `array` and is a sequential data structure.
