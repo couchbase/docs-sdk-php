@@ -7,7 +7,7 @@
 You can use MapReduce views to create queryable indexes in Couchbase Data Platform.
 
  
-
+////
 include::6.5@sdk:shared:partial$views.adoc[tag=views-intro]
 
 include::6.5@sdk:shared:partial$views.adoc[tag=example-beer]
@@ -64,3 +64,5 @@ $options = new \Couchbase\ViewOptions();
 $options->limit(10);
 $result = $bucket->viewQuery("design-doc", "view-name", $options);
 ----
+
+////
