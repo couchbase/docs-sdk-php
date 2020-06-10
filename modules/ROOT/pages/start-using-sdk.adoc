@@ -74,7 +74,7 @@ On MacOS, the `libcouchbase` package is available in https://brew.sh[homebrew/co
 
 [source,bash]
 ----
-brew install libcouchbase
+brew install libcouchbase@2
 ----
 
 As `homebrew/php` is no longer available, the current best way to install newer versions of PHP (and one with the necessary permissions) is found at https://php-osx.liip.ch[^].
