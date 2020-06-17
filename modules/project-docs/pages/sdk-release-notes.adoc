@@ -86,21 +86,27 @@ extension=couchbase.dll
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
-== Version 3.0.3 (June 17, 2020)
+== Version 3.0.3 (17 June 2020)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3/index.html
 
-* https://issues.couchbase.com/browse/PCBC-696[PCBC-696]: Fix encoding issue in QueryString search query
+* https://issues.couchbase.com/browse/PCBC-696[PCBC-696]: 
+Fixed encoding issue in QueryString search query.
 
-* https://issues.couchbase.com/browse/PCBC-667[PCBC-667]: Add maxExpiry for CollectionSpec of collection manager
+* https://issues.couchbase.com/browse/PCBC-667[PCBC-667]: 
+Added maxExpiry for CollectionSpec of collection manager.
 
-* https://issues.couchbase.com/browse/PCBC-690[PCBC-690]: Increase refcount of arg in ViewOptions::keys()
+* https://issues.couchbase.com/browse/PCBC-690[PCBC-690]: 
+Increased refcount of arg in ViewOptions::keys().
 
-* https://issues.couchbase.com/browse/PCBC-688[PCBC-688]: Ensure that temporary strings are copied in ViewOptions builder
+* https://issues.couchbase.com/browse/PCBC-688[PCBC-688]: 
+Temporary strings are now copied in ViewOptions builder.
 
-* https://issues.couchbase.com/browse/PCBC-666[PCBC-666]: Fix invalid memory access of Query result "meta"
+* https://issues.couchbase.com/browse/PCBC-666[PCBC-666]: 
+Fixed invalid memory access of Query result "meta".
 
-* https://issues.couchbase.com/browse/PCBC-665[PCBC-665]: Fix build issue on Debian
+* https://issues.couchbase.com/browse/PCBC-665[PCBC-665]: 
+Fixed build issue on Debian.
 
 * Documentation improvements:
 
@@ -114,7 +120,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3
 
    - https://issues.couchbase.com/browse/PCBC-672[PCBC-672]: Add API docs for KV functions
 
-   - https://issues.couchbase.com/browse/PCBC-671[PCBC-671]: Add API reference docs for cluster/bucket etc...
+   - https://issues.couchbase.com/browse/PCBC-671[PCBC-671]: Add API reference docs for cluster/bucket etc.
 
    - https://issues.couchbase.com/browse/PCBC-694[PCBC-694]: Remove \ namespace prefix in return type and argument definitions
 
@@ -124,7 +130,8 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3
 
    - https://issues.couchbase.com/browse/PCBC-692[PCBC-692]: Use MutationResult instead of StoreResult
 
-   - https://issues.couchbase.com/browse/PCBC-691[PCBC-691]: Use "|null" instead of "?" in phpdoc
+   - https://issues.couchbase.com/browse/PCBC-691[PCBC-691]: Use "|null" instead of "?" in phpdoc.
+
 
 == Version 3.0.2 (4 March 2020)
 
