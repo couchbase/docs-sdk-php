@@ -21,8 +21,10 @@ Couchbase PHP SDK
 * xref:howtos:durability.adoc[Durability]
 
 .Managing Couchbase
-* User Management
- ** xref:howtos:sdk-authentication-overview.adoc[Authentication]
+// * User Management
+// * xref:howtos:managing-connections.adoc[Managing Connections]
+// ** xref:howtos:sdk-authentication-overview.adoc[Authentication]
+* xref:howtos:troubleshooting-cloud-connections.adoc[Troubleshooting Cloud Connections]
 ////
 .Errors & Diagnostics
 * xref:howtos:collecting-information-and-logging.adoc[Logging]
@@ -54,6 +56,7 @@ Couchbase PHP SDK
 
 .References
 * https://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html[PHP API Reference]
+// * xref:ref:error-codes.adoc[Error Messages]
 * xref:ref:travel-app-data-model.adoc[Travel Sample Data Model]
 
 .Project Docs
