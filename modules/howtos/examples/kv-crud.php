@@ -54,8 +54,8 @@ printf("document \"document-key\" \"%s\" been replaced successfully. New CAS \"%
 
 // #tag::removewithoptions[]
 $opts = new RemoveOptions();
-$options->timeout(5000000); // 5 seconds
-$result = $collection->remove("document-key");
+$opts->timeout(5000000); // 5 seconds
+$result = $collection->remove("document-key", $opts);
 // #end::removewithoptions[]
 
 // #tag::upsertwithexpiry[]
