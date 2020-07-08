@@ -36,8 +36,8 @@ Do not turn off the `adhoc` flag for each query since only a finite number of qu
 [source,php]
 ----
 $query = 'SELECT x.* FROM `travel-sample` x WHERE x.`type`="hotel" LIMIT 10';
-$opts = new adhoc();
-$opts->adhoc(adhoc::false);
+$opts = new \Couchbase\QueryOptions();
+$opts->adhoc(false);
 $res = $cluster->query($query, $opts);
 ----
 
