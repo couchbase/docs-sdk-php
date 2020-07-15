@@ -22,10 +22,12 @@ After installing the C SDK, install the PHP SDK through your PHP distribution's 
 
 [source,bash]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.0.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
 ----
 
 Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
+In particular, look at the post-install instructions in light of the `.ini` practices for your platform, 
+and note that the Couchbase SDK depends on the JSON module, therefore that module has to be loaded before the SDK.
 
 // installation and post-installation across platforms
 
