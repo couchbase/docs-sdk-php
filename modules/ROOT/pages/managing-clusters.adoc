@@ -101,7 +101,8 @@ Once you no longer need to use the bucket, you may delete the bucket using the [
 
 [source,php]
 ----
-$cluster->removeBucket('hello');
+$manager = $cluster->manager('Administrator', 'password');
+$manager->removeBucket('hello');
 ----
 
 == N1QL Index Management
