@@ -21,13 +21,13 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0 or higher is required for PHP Client 3.0.2.
+version 3.0.0 or higher is required for PHP Client 3.0.3.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,bash]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.2.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
 ----
 
 === Installing on Microsoft Windows
@@ -41,18 +41,18 @@ The packages do not include OpenSSL binaries, therefore they have to be installe
 
 |===
 |Platform|
-|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.2.tgz[couchbase-3.0.2.tgz]
-|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.0.2.sha256sum[couchbase-3.0.2.sha256sum]
-|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.2-nts-x64.zip[php_couchbase-3.0.2-7.2-nts-x64.zip]
-|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.2-zts-x64.zip[php_couchbase-3.0.2-7.2-zts-x64.zip]
-|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-nts-x64.zip[php_couchbase-3.0.2-7.3-nts-x64.zip]
-|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-zts-x64.zip[php_couchbase-3.0.2-7.3-zts-x64.zip]
-|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-nts-x64.zip[php_couchbase-3.0.2-7.4-nts-x64.zip]
-|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-zts-x64.zip[php_couchbase-3.0.2-7.4-zts-x64.zip]
-|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-nts-x64-openssl.zip[php_couchbase-3.0.2-7.3-nts-x64-openssl.zip]
-|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.3-zts-x64-openssl.zip[php_couchbase-3.0.2-7.3-zts-x64-openssl.zip]
-|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-nts-x64-openssl.zip[php_couchbase-3.0.2-7.4-nts-x64-openssl.zip]
-|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.2-7.4-zts-x64-openssl.zip[php_couchbase-3.0.2-7.4-zts-x64-openssl.zip]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz[couchbase-3.0.3.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.0.3.sha256sum[couchbase-3.0.3.sha256sum]
+|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.2-nts-x64.zip[php_couchbase-3.0.3-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.2-zts-x64.zip[php_couchbase-3.0.3-7.2-zts-x64.zip]
+|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-nts-x64.zip[php_couchbase-3.0.3-7.3-nts-x64.zip]
+|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-zts-x64.zip[php_couchbase-3.0.3-7.3-zts-x64.zip]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-nts-x64.zip[php_couchbase-3.0.3-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-zts-x64.zip[php_couchbase-3.0.3-7.4-zts-x64.zip]
+|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-nts-x64-openssl.zip[php_couchbase-3.0.3-7.3-nts-x64-openssl.zip]
+|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-zts-x64-openssl.zip[php_couchbase-3.0.3-7.3-zts-x64-openssl.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-nts-x64-openssl.zip[php_couchbase-3.0.3-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-zts-x64-openssl.zip[php_couchbase-3.0.3-7.4-zts-x64-openssl.zip]
 |===
 
 === Post Installation for All Platforms
@@ -85,6 +85,53 @@ extension=couchbase.dll
 === Note on Extension Dependencies
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
+
+== Version 3.0.3 (17 June 2020)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3/index.html
+
+* https://issues.couchbase.com/browse/PCBC-696[PCBC-696]: 
+Fixed encoding issue in QueryString search query.
+
+* https://issues.couchbase.com/browse/PCBC-667[PCBC-667]: 
+Added maxExpiry for CollectionSpec of collection manager.
+
+* https://issues.couchbase.com/browse/PCBC-690[PCBC-690]: 
+Increased refcount of arg in ViewOptions::keys().
+
+* https://issues.couchbase.com/browse/PCBC-688[PCBC-688]: 
+Temporary strings are now copied in ViewOptions builder.
+
+* https://issues.couchbase.com/browse/PCBC-666[PCBC-666]: 
+Fixed invalid memory access of Query result "meta".
+
+* https://issues.couchbase.com/browse/PCBC-665[PCBC-665]: 
+Fixed build issue on Debian.
+
+* Documentation improvements:
+
+   - https://issues.couchbase.com/browse/PCBC-683[PCBC-683]: update documentation steps
+
+   - https://issues.couchbase.com/browse/PCBC-675[PCBC-675]: Add API docs for exceptions
+
+   - Update API ref to add docs for results objects
+
+   - Update API reference for remaining undocument query API
+
+   - https://issues.couchbase.com/browse/PCBC-672[PCBC-672]: Add API docs for KV functions
+
+   - https://issues.couchbase.com/browse/PCBC-671[PCBC-671]: Add API reference docs for cluster/bucket etc.
+
+   - https://issues.couchbase.com/browse/PCBC-694[PCBC-694]: Remove \ namespace prefix in return type and argument definitions
+
+   - https://issues.couchbase.com/browse/PCBC-694[PCBC-694]: Allow null to be passed to nullable options
+
+   - https://issues.couchbase.com/browse/PCBC-693[PCBC-693]: replace GetAllReplicaOptions with GetAllReplicasOptions
+
+   - https://issues.couchbase.com/browse/PCBC-692[PCBC-692]: Use MutationResult instead of StoreResult
+
+   - https://issues.couchbase.com/browse/PCBC-691[PCBC-691]: Use "|null" instead of "?" in phpdoc.
+
 
 == Version 3.0.2 (4 March 2020)
 

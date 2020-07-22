@@ -23,7 +23,7 @@ printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas
 // #tag::insertwithoptions[]
 $document = ["foo" => "bar", "bar" => "foo"];
 $opts = new InsertOptions();
-$opts->timeout(300000 /* microseconds */);
+$opts->timeout(300000 /* milliseconds */);
 $res = $collection->insert("document-key", $document, $opts);
 printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas());
 // #end::insertwithoptions[]
@@ -31,7 +31,7 @@ printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas
 // #tag::replacewithcas[]
 // Replace document with incorrect CAS
 $opts = new ReplaceOptions();
-$opts->timeout(300000 /* microseconds */);
+$opts->timeout(300000 /* milliseconds */);
 $invalidCas = "776t3gAAAAA=";
 $opts->cas($invalidCas);
 try {
@@ -54,14 +54,14 @@ printf("document \"document-key\" \"%s\" been replaced successfully. New CAS \"%
 
 // #tag::removewithoptions[]
 $opts = new RemoveOptions();
-$options->timeout(5000000); // 5 seconds
-$result = $collection->remove("document-key");
+$options->timeout(5000); // 5 seconds
+$result = $collection->remove("document-key", $opts);
 // #end::removewithoptions[]
 
 // #tag::upsertwithexpiry[]
 $document = ["foo" => "bar", "bar" => "foo"];
 $opts = new UpsertOptions();
-$opts->expiry(60 /* seconds */);
+$opts->expiry(60 * 1000 /* 60 seconds */);
 $res = $collection->upsert("document-key", $document, $opts);
 printf("document \"document-key\" has been created with CAS \"%s\"\n", $res->cas());
 // #end::upsertwithexpiry[]
@@ -75,7 +75,7 @@ printf("document \"document-key\" has content: \"%s\" CAS \"%s\"\n", json_encode
 
 // #tag::getwithoptions[]
 $opts = new GetOptions();
-$opts->timeout(300000 /* microseconds */);
+$opts->timeout(3000 /* milliseconds */);
 $res = $collection->get("document-key", $opts);
 $doc = $res->content();
 printf("document \"document-key\" has content: \"%s\" CAS \"%s\"\n", json_encode($doc), $res->cas());
@@ -84,7 +84,7 @@ printf("document \"document-key\" has content: \"%s\" CAS \"%s\"\n", json_encode
 // #tag::removewithdurability[]
 // Remove with Durability
 $opts = new RemoveOptions();
-$opts->timeout(3000000 /* microseconds */);
+$opts->timeout(3000 /* milliseconds */);
 $opts->durabilityLevel(DurabilityLevel::MAJORITY);
 $res = $collection->remove("document-key", $opts);
 printf("document \"document-key\" has been removed\n");

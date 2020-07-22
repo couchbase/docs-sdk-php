@@ -22,10 +22,12 @@ After installing the C SDK, install the PHP SDK through your PHP distribution's 
 
 [source,bash]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.0.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
 ----
 
 Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
+In particular, look at the post-install instructions in light of the `.ini` practices for your platform, 
+and note that the Couchbase SDK depends on the JSON module, therefore that module has to be loaded before the SDK.
 
 // installation and post-installation across platforms
 
@@ -90,7 +92,7 @@ using the Couchbase php client, our xref:hello-world:sample-application.adoc[Tra
 
 == Additional Resources
 
-// The API reference is generated for each release and can be found http://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.0/[here].
+The API reference is generated for each release and can be found http://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html[here^].
 Older API references are linked from their respective sections in the xref:project-docs:sdk-release-notes.adoc[Release Notes].
 
 xref:project-docs:migrating-sdk-code-to-3.n.adoc[The Migrating from SDK2 to 3 page] highlights the main differences to be aware of when migrating your code.
