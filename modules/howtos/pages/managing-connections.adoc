@@ -9,17 +9,22 @@ It contains best practices as well as information on TLS/SSL and other advanced 
 
 == Connecting to a Cluster
 
-A connection to a Couchbase Server cluster is represented by a `Cluster` object.
-A `Cluster` provides access to Buckets, Scopes, and Collections, as well as various Couchbase services and management interfaces.
-The simplest way to create a `Cluster` object is to call `Cluster.connect()` with a <<connection-strings, connection string>>, username, and password:
+A connection to a Couchbase Server cluster is represented by a `cluster` object.
+A `cluster` provides access to Buckets, Scopes, and Collections, as well as various Couchbase services and management interfaces.
+The simplest way to create a `Cluster` object is to call a new `connectionString` with a username and password:
 
-[source,java]
+[source,php]
 ----
-include::example$ManagingConnections.java[tag=simpleconnect,indent=0]
+connectionString = "couchbase://localhost";
+options = new \Couchbase\ClusterOptions();
+options->credentials("Administrator", "password");
+cluster = new \Couchbase\Cluster(connectionString, options);
 ----
 
 NOTE: If you are connecting to a version of Couchbase Server older than 6.5, it will be more efficient if the addresses are those of data (KV) nodes.
 You will in any case, with 6.0 and earlier, need to open a ``Bucket` instance before connecting to any other HTTP services (such as _Query_ or _Search_.
+
+////
 
 In a production environment, your connection string should include the addresses of multiple server nodes in case some are currently unavailable.
 Multiple addresses may be specified in a connection string by delimiting them with commas:
@@ -229,7 +234,7 @@ INFO: DNS SRV enabled, but less or more than one seed node given.
 Proceeding with normal bootstrap.
 ----
 
-////
+//  NB
 Delete this, but add in any useful PHP-specific info
 == Async and Reactive APIs
 
