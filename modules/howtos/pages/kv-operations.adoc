@@ -54,8 +54,8 @@ include::example$kv-crud.php[tag=replacewithcas]
 
 The example above also shows how to handle the case when optimistic falure will fail.
 
-Expiration sets an explicit time to live (TTL) for a document, for which you can also xref:sdk-xattr-example.adoc[see a more detailed example of TTL discovery] later in the docs.
-We'll discuss modifying `expiry` in more details xref:#php-modifying-expiration[below].
+Expiration sets an explicit time to live (TTL) for a document.
+We'll discuss modifying `expiry` in more details xref:#expiration-ttl[below].
 For a discussion of item (Document) _vs_ Bucket expiration, see the
 xref:6.5@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
 
