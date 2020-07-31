@@ -20,7 +20,7 @@ version 3.0 or higher is required from PHP Client 3.0.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
-[source,bash]
+[source,console]
 ----
 $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
 ----

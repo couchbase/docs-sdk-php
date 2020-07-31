@@ -25,7 +25,7 @@ version 3.0.0 or higher is required for PHP Client 3.0.3.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
-[source,bash]
+[source,console]
 ----
 $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
 ----
@@ -62,7 +62,7 @@ extension. To do this:
 
 1. Locate your php.ini file. This can be done using the command `php --ini`
 +
-[source,bash]
+[source,console]
 ----
  $ php --ini
  Configuration File (php.ini) Path: /usr/local/etc/php/7.4
@@ -75,7 +75,7 @@ extension. To do this:
 If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
 Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
-[source,bash]
+[source,toml]
 ----
 extension=couchbase.so
 
