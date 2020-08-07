@@ -14,7 +14,7 @@ For installation on Linux, install the _couchbase-release_ repository, and then 
 The following examples download and install _couchbase-release_ repository, a C and C++ compiler, the C SDK development files (_libcouchbase-devel_ [RPM] or _libcouchbase-dev_ [DEB]), PHP development files, and finally the PHP SDK using _pecl_.
 
 .Debian and Ubuntu
-[source,bash]
+[source,console]
 ----
 # Only needed during first-time setup:
 wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-6-amd64.deb
@@ -27,7 +27,7 @@ sudo pecl install couchbase
 
 For Ubuntu 18.10, and other Debian based releases unsupported by `couchbase-release-1.0-6-amd64.deb`, either replace the above _first-time setup_ instructions with the following -- using the _bionic_ repo of Ubuntu 18.04 to install on Ubuntu 18.10 Cosmic, Ubuntu 19.04 Disco, or other recent versions:
 
-[source,bash]
+[source,console]
 ----
 sudo wget -O - http://packages.couchbase.com/ubuntu/couchbase.key | sudo apt-key add -
 echo "deb http://packages.couchbase.com/ubuntu bionic bionic/main" | sudo tee /etc/apt/sources.list.d/couchbase.list
@@ -40,14 +40,14 @@ or, see the detailed instructions on manually adding repos for your version in t
 On Ubuntu 14.04 (Trusty), and possibly some other distributions, you will need to substitute for _php-dev_ with _php5-dev_.
 To find particular variants of php-dev for your Ubuntu or Debian-based distribution, use the command
 
-[source,bash]
+[source,console]
 ----
 $ apt-cache search php | grep dev
 ----
 ====
 
 .RHEL and CentOS
-[source,bash]
+[source,console]
 ----
 # Only needed during first-time setup:
 wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-8-x86_64.rpm
@@ -60,6 +60,7 @@ sudo pecl install couchbase
 
 Some older versions of Red Hat, such as CentOS 7, also need:
 
+[source,console]
 ----
 sudo yum install php-pear
 ----
@@ -74,7 +75,7 @@ Do this before the `yum` step above.
 
 On MacOS, the `libcouchbase` package is available in https://brew.sh[homebrew/core], and can be installed with:
 
-[source,bash]
+[source,console]
 ----
 brew install libcouchbase@2
 ----
@@ -82,7 +83,7 @@ brew install libcouchbase@2
 As `homebrew/php` is no longer available, the current best way to install newer versions of PHP (and one with the necessary permissions) is found at https://php-osx.liip.ch[^].
 Download `install.sh` from there or, if you are happy with the script, install in one line (in this example, PHP 7.2) with:
 
-[source,bash]
+[source,console]
 ----
 curl -s https://php-osx.liip.ch/install.sh | bash -s 7.2
 ----
@@ -90,7 +91,7 @@ curl -s https://php-osx.liip.ch/install.sh | bash -s 7.2
 Once you have PHP installed, then use `PECL` to install the Couchbase PHP SDK
 (read your PHP distribution manual to find out where `pecl` is located and whether the user needs special permissions to install new extensions):
 
-[source,bash]
+[source,console]
 ----
 /path/to/pecl install couchbase
 ----
@@ -110,7 +111,7 @@ To do this:
 . Locate the location of your php.ini file.
 This can be done by `php --ini`
 +
-[source,bash]
+[source,console]
 ----
 $ php --ini
 Configuration File (php.ini) Path: /usr/local/etc/php/7.0
