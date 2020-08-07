@@ -50,8 +50,8 @@ $ apt-cache search php | grep dev
 [source,bash]
 ----
 # Only needed during first-time setup:
-wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-6-x86_64.rpm
-sudo rpm -iv couchbase-release-1.0-6-x86_64.rpm
+wget http://packages.couchbase.com/releases/couchbase-release/couchbase-release-1.0-8-x86_64.rpm
+sudo rpm -iv couchbase-release-1.0-8-x86_64.rpm
 # Will install or upgrade existing packages
 sudo yum install libcouchbase-devel gcc gcc-c++ php-devel zlib-devel
 sudo pecl install couchbase
