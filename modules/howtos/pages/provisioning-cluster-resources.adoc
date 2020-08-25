@@ -103,7 +103,7 @@ This is a xref:6.5@server:developer-preview:collections/collections-overview.ado
 In general,you will rarely need to work with Index Managers from the SDK.
 For those occasions when you do, please see the relevant API docs:
 
-* QueryIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-QueryIndexManager.html[``];
+* QueryIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-QueryIndexManager.html[`QueryIndexManager`];
 // * AnalyticsIndexManager -- https://pkg.go.dev/github.com/couchbase/gocb/v2?tab=doc#Cluster.AnalyticsIndexes[``];
 * SearchIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-SearchIndexManager.html[`SearchIndexManager`];
 * ViewIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-ViewIndexManager.html[`ViewIndexManager`].
