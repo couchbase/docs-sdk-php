@@ -11,7 +11,9 @@ _Diagnostics_ requests a report from a node, giving instant health check informa
 Diagnosing problems in distributed environments is far from easy, so Couchbase provides a _Health Check API_ with `Ping()` for active monitoring. ans `Diagnostics()` for a look at what the client believes is the current state of the cluster. 
 More extensive discussion of the uses of Health Check can be found in the xref:concept-docs:health-check.adoc[Health Check Concept Guide].
 
-
+Usage can be found in the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Bucket.html#method_ping[API docs].
+    
+////
 == Ping
 
 At its simplest, `ping` provides information about the current state of the connections in the Couchbase Cluster, by actively polling:
@@ -128,3 +130,4 @@ bucket.diagnostics((err, res) => {
 }
 */
 ----
+////
