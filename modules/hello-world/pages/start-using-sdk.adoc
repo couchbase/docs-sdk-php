@@ -54,6 +54,8 @@ $cluster = new \Couchbase\Cluster($connectionString, $options);
 The `Cluster` provides access to cluster-level operations like N1Ql queries, analytics, or full-text search.
 You will also find different management APIs on it.
 
+If you are connecting to Couchbase Cloud rather than a local Couchbase Server, then also refer to the <<cloud-connections, Cloud section>>, below.
+
 To access the KV (Key/Value) API or to query views, you need to open a `Bucket`:
 
 [source,php]
@@ -89,6 +91,18 @@ $getResult = $collection->get("my-document");
 KV Operations are described in detail on the xref:howtos:kv-operations.adoc[KV Operations page].
 Now that you know the basics, you may wish to go straight to that page -- or first see a complete worked example of
 using the Couchbase php client, our xref:hello-world:sample-application.adoc[Travel Sample Application].
+
+
+== Cloud Connections
+
+If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Cloud], be sure to get the correct endpoint as well as user, password, and `couchbasecloudbucket`
+
+For developing on Couchbase Cloud, if you are not working from the same _Availability Zone_, refer to the follorwing:
+
+* Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments], 
+* xref:project-docs:compatibility.adoc#network-requirements[Network Requirements], 
+* If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
+
 
 == Additional Resources
 
