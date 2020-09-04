@@ -749,5 +749,10 @@ building with system fastlz.
 * https://issues.couchbase.com/browse/PCBC-376[PCBC-376]: Calling
 extension from within from transcoder fails.
 * https://issues.couchbase.com/browse/PCBC-373[PCBC-373]: Encoding
-of plus sign fails for view query ranges.
+of plus sign fails for view query ranges. 
+
+
+== Older Releases
+
+Although https://www.couchbase.com/support-policy/enterprise-software[no longer supported], documentation for older releases continues to be available in our https://docs-archive.couchbase.com/home/index.html[docs archive].
 // end::latest[]
