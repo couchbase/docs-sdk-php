@@ -75,10 +75,15 @@ extension. To do this:
 If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
 Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
+.Mac & Linux
 [source,toml]
 ----
 extension=couchbase.so
+----
 
+.Windows
+[source,toml]
+----
 extension=couchbase.dll
 ----
 
