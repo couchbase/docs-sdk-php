@@ -379,9 +379,11 @@ For example, two concurrent _subdoc-array-append_ operations to the same array w
 
 While CAS is no longer so strongly required to ensure document updates are preserved, as Sub-Doc reduces the chance of losing a mutation, it may still be needed to ensure document state remains consistent over multiple invocations of _mutate-in_: Sometimes it's important to ensure the entire document didn't change state since the last operation, such as in the case _subdoc-remove_ operations to ensure that the element being removed was not already replaced by something else.
 
+
 == Durability
 
-Couchbase’s traditional durability, using `PersistTo` and `ReplicateTo`, is still available, particuarly for talking to Couchbase Server 6.0 and earlier:
+Couchbase’s xref:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions[traditional 'client verified' durability], 
+using `PersistTo` and `ReplicateTo`, is still available, particularly for talking to Couchbase Server 6.0 and earlier:
 
 [source,php]
 ----
