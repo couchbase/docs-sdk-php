@@ -163,7 +163,7 @@ include::example$kv-expiry.php[tag=getandtouch]
 include::6.5@sdk:shared:partial$documents.adoc[tag=exp-note]
 
 
-== Atomic document modifications
+== Atomic Counters
 
 The value of a document can be increased or decreased atomically using `Binary.Increment()` and `.Binary.Decrement()`.
 
