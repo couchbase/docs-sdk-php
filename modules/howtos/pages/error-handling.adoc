@@ -15,22 +15,18 @@ Couchbase gives you a lot of flexibility, but it is recommended that you equip y
 
 
 As covered xref:concurrent-async-apis.adoc[here], the PHP SDK ships with two different APIs, allowing you to structure your application the way you want.
-That guide also covers how errors are actually returned (e.g. via `Try`, `Future`, or `Mono`) and handled.
+That guide also covers how errors are actually returned and handled.
 //, so this document will focus instead on specific errors, along with a broader look at error handling strategies.
 
 // temporary section from migration guide, until code samples available for the page:
 ==  Exception Handling
 
-SDK 3.x actively uses `Exceptions` to signal errors. 
+SDK 3.x actively uses `Exceptions` to signal errors.
 Instead of using single `\Couchbase\Exception`, as in SDK 2.x, now we use a hierarchy of exceptions, which allows the handling of errors in a more reliable way:
 
 [source,php]
 ----
-try {
-  $collection->get("foo");
-} catch (\Couchbase\KeyNotFoundException $ex) {
-  $collection->upsert("foo", ["bar" => 42]);
-}
+include::example$errors.php[tag=catch]
 ----
 
 Instead of SDK 2.x's:

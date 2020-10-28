@@ -15,12 +15,8 @@ The simplest way to create a `Cluster` object is to call a new `connectionString
 
 [source,php]
 ----
-connectionString = "couchbase://localhost";
-options = new \Couchbase\ClusterOptions();
-options->credentials("Administrator", "password");
-cluster = new \Couchbase\Cluster(connectionString, options);
+include::example$connections.php[tag=rbac]
 ----
-
 NOTE: If you are connecting to a version of Couchbase Server older than 6.5, it will be more efficient if the addresses are those of data (KV) nodes.
 You will in any case, with 6.0 and earlier, need to open a `Bucket` instance before connecting to any other HTTP services (such as _Query_ or _Search_.
 

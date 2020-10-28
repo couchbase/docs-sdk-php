@@ -65,20 +65,14 @@ The latter saves even more bandwidth by not retrieving the contents of the path 
 .Retrieve sub-document value
 [source,php]
 ----
-$result = $collection->lookupIn("customer123", [
-    new \Couchbase\LookupGetSpec("addresses.delivery.country")
-]);
-$country = $result->content(0); //"United Kingdom"
+include::example$subdoc-lookupin.php[tag=lookupInGet]
 ----
 
 .Check existence of sub-document path
 [source,php]
+[source,php]
 ----
-$result = $collection->lookupIn("customer123", [
-    new \Couchbase\LookupExistsSpec("purchases.pending[-1]")
-]);
-printf("Path exists? %s\n", $result->exists(0) ? "true" : "false");
-// Path exists? false
+include::example$subdoc-lookupin.php[tag=lookupInExists]
 ----
 
 Multiple operations can be combined as well:
@@ -86,14 +80,7 @@ Multiple operations can be combined as well:
 .Combine multiple lookup operations
 [source,php]
 ----
-$result = $collection->lookupIn("customer123", [
-    new \Couchbase\LookupGetSpec("addresses.delivery.country"),
-    new \Couchbase\LookupExistsSpec("purchases.pending[-1]")
-]);
-printf("%s\n", $result->content(0));
-printf("Path exists? %s\n", $result->exists(1) ? "true" : "false");
-// United Kingdom
-// Path exists? false
+include::example$subdoc-lookupin.php[tag=lookupInMulti]
 ----
 
 == Mutating
@@ -104,9 +91,7 @@ The simplest of these operations is _subdoc-upsert_, which, similar to the fulld
 .Upserting a new sub-document
 [source,php]
 ----
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateUpsertSpec("fax", "311-555-0151")
-]);
+include::example$subdoc-mutatein.php[tag=mutateInUpsert]
 ----
 
 Likewise, the _subdoc-insert_ operation will only add the new value to the path if it does not exist:
@@ -114,10 +99,7 @@ Likewise, the _subdoc-insert_ operation will only add the new value to the path 
 .Inserting a sub-document
 [source,php]
 ----
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateInsertSpec("purchases.complete", [42, true, "None"])
-]);
-// SubdocPathExistsError
+include::example$subdoc-mutatein.php[tag=mutateInInsert]
 ----
 
 Dictionary values can also be replaced or removed, and you may combine any number of mutation operations within the same general _mutate-in_ API.
@@ -125,10 +107,7 @@ Here's an example of one which replaces one path and removes another.
 
 [source,php]
 ----
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateRemoveSpec("addresses.billing"),
-    new \Couchbase\MutateReplaceSpec("email", "dougr96@hotmail.com")
-]);
+include::example$subdoc-mutatein.php[tag=mutateInMulti]
 ----
 
 NOTE: `mutateIn` is an _atomic_ operation.
@@ -141,20 +120,12 @@ Unlike fulldoc _append_/_prepend_ operations (which simply concatenate bytes to 
 
 [source,php]
 ----
-$result = $collection->MutateIn("customer123", [
-    new \Couchbase\MutateArrayAppendSpec("purchases.complete", [777])
-]);
-
-# purchases.complete is now [339, 976, 442, 666, 777]
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayAppend]
 ----
 
 [source,php]
 ----
-$result = $collection->MutateIn("customer123", [
-    new \Couchbase\MutateArrayPrependspec("purchases.abandoned", [18])
-]);
-
-// purchases.abandoned is now [18, 157, 49, 999]
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayPrepend]
 ----
 
 If your document only needs to contain an array, you do not have to create a top-level object wrapper to contain it.
@@ -163,12 +134,7 @@ Simply initialize the document with an empty array and then use the empty path f
 .Creating and populating an array document
 [source,php]
 ----
-$result = $collection->upsert("my_array", []);
-$result = $collection->mutateIn("my_array", [
-    new \Couchbase\MutateArrayAppendSpec("", ["some element"])
-]);
-
-// the document my_array is now ["some element"]
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayDoc]
 ----
 
 If you wish to add multiple values to an array, you may do so by passing multiple values to the _array-append_, _array-prepend_, or _array-insert_ operations.
@@ -177,20 +143,13 @@ Be sure to know the difference between passing a collection of multiple elements
 .Add multiple elements to an array
 [source,php]
 ----
-$result = $collection->mutateIn("my_array", [
-    new \Couchbase\MutateArrayAppendSpec("", ["elem1", "elem2", "elem3"])
-]);
-
-// the document my_array is now ["some_element", "elem1", "elem2", "elem3"]
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayDocMulti]
 ----
 
 .Add single array as element to existing array
 [source,php]
 ----
-$result = $collection->mutateIn("my_array", [
-    new \Couchbase\MutateArrayAppendSpec("", [["elem1", "elem2", "elem3"]])
-]);
-// the document my_array is now ["some_element", ["elem1", "elem2", "elem3"]]
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayDocMultiSingle]
 ----
 
 Note that passing multiple values to a single _array-append_ operation results in greater performance increase and bandwidth savings than simply specifying a single _array-append_ for each element.
@@ -198,20 +157,14 @@ Note that passing multiple values to a single _array-append_ operation results i
 .Adding multiple elements to array (slow)
 [source,php]
 ----
-$result = $collection->mutateIn("my_array", [
-    new \Couchbase\MutateArrayAppendSpec("", ["elem1"]),
-    new \Couchbase\MutateArrayAppendSpec("", ["elem2"]),
-    new \Couchbase\MutateArrayAppendSpec("", ["elem3"]),
-]);
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayAppendMulti]
 ----
 
 If you wish to create an array if it does not exist and also push elements to it within the same operation you may use the <<subdoc-create-parents,_create-path_>> option:
 
 [source,php]
 ----
-$result = $collection->mutateIn("some_doc", [
-    new \Couchbase\MutateArrayAppendSpec("some.array", ["Hello", "World], false, true)
-]);
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayAppendCreatePath]
 ----
 // TODO: SDK will have fluent API to set spec options more verbosely like isXattr(false)->withCreateParents(true)
 
@@ -222,15 +175,7 @@ This will do a check to determine if the given value exists or not before actual
 
 [source,php]
 ----
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateArrayAddUniqueSpec("purchases.complete", 95)
-]);
-// => Success
-
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateArrayAddUniqueSpec("purchases.complete", 95)
-]);
-// => SubdocPathExists exception!
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayAddUnique]
 ----
 
 Note that currently the _addunique_ will fail with a _Path Mismatch_ error if the array contains JSON _floats_, _objects_, or _arrays_.
@@ -247,10 +192,7 @@ For example, to insert `"cruel"` as the second element in the array `["Hello", "
 
 [source,php]
 ----
-$result = $collection->upsert("array", ["Hello", "world"]);
-$result = $collection->mutateIn("array", [
-    new \Couchbase\MutateArrayInsertSpec("[1]", ["cruel"])
-]);
+include::example$subdoc-mutatein-arrays.php[tag=mutateInArrayInsert]
 ----
 
 // for your examples, above, CD: “I feel like somewhere in this we should also just a an example path like "my.path[1]" too, just to show how to use the index with a nested path. I don't think it's necessarily clear.”
@@ -265,11 +207,7 @@ These operations are logically similar to the _counter_ operation on an entire d
 
 [source,php]
 ----
-$result = $collections->mutateIn("customer123", [
-    new \Couchbase\MutateCounterSpec("logins", 1)
-]);
-
-printf("%d\n", $result->content(0)); // 1
+include::example$subdoc-counters.php[tag=mutateInIncrement]
 ----
 
 The _subdoc-counter_ operation performs simple arithmetic against a numeric value, either incrementing or decrementing the existing value.
@@ -277,13 +215,7 @@ The new value is returned.
 
 [source,php]
 ----
-$result = $collection->upsert("player432", ["gold" => 1000]);
-
-$result = $collection->mutateIn("player432", [
-    new \Couchbase\MutateCounterSpec("gold", -150)
-]);
-printf("player 432 now has %d gold remaining\n", $result->content(0));
-// => player 432 now has 850 gold remaining
+include::example$subdoc-counters.php[tag=mutateInDecrement]
 ----
 
 The existing value for _subdoc-counter_ operations must be within range of a 64 bit signed integer.
@@ -342,11 +274,7 @@ In this case, the _create-path_ option may be used.
 
 [source,php]
 ----
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateUpsertSpec("level_0.level_1.foo.bar.phone",
-                                    ["num" => "311-555-0101", "ext" => 16],
-                                    false, true)
-]);
+include::example$subdoc-mutatein.php[tag=mutateInCreatePath]
 ----
 // TODO: php sdk will have fluent APi for subdocument specs
 
@@ -354,47 +282,31 @@ $result = $collection->mutateIn("customer123", [
 
 Subdoc mostly eliminates the need for tracking the xref:concurrent-document-mutations.adoc[CAS] value.
 Subdoc operations are atomic and therefore if two different threads access two different sub-documents then no conflict will arise.
-For example the following two blocks can execute concurrently without any risk of conflict:
+For example the following two operations can execute concurrently without any risk of conflict:
 
 [source,php]
 ----
-$options = new \Couchbase\MutateInOptions();
-$options->cas("AABmBlI4oxU=");
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateArrayAppendSpec("purchases.complete", [999])
-], $options);
-----
-
-[source,php]
-----
-$options = new \Couchbase\MutateInOptions();
-$options->cas("AABmBlI4oxU=");
-$result = $collection->mutateIn("customer123", [
-    new \Couchbase\MutateArrayAppendSpec("purchases.complete", [998])
-], $options);
+include::example$subdoc-concurrent.php[tag=mutateInConcurrent]
 ----
 
 Even when modifying the _same_ part of the document, operations will not necessarily conflict.
 For example, two concurrent _subdoc-array-append_ operations to the same array will both succeed, never overwriting the other.
 
-While CAS is no longer so strongly required to ensure document updates are preserved, as Sub-Doc reduces the chance of losing a mutation, it may still be needed to ensure document state remains consistent over multiple invocations of _mutate-in_: Sometimes it's important to ensure the entire document didn't change state since the last operation, such as in the case _subdoc-remove_ operations to ensure that the element being removed was not already replaced by something else.
-
-
-== Durability
-
-Couchbase’s xref:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions[traditional 'client verified' durability], 
-using `PersistTo` and `ReplicateTo`, is still available, particularly for talking to Couchbase Server 6.0 and earlier:
+So in some cases the application will not need to supply a xref:concurrent-document-mutations.adoc[CAS] value to protect against concurrent modifications.
+If CAS is required then it can be provided like this:
 
 [source,php]
 ----
-// 6.0 durability snippet
+include::example$subdoc-mutatein.php[tag=mutateInCas]
 ----
+
+== Durability
 
 In Couchbase Server 6.5 and up, this is built upon with xref:concept-docs:durability-replication-failure-considerations.adoc#durable-writes[Durable Writes], which uses the concept of majority to indicate the number of configured Data Service nodes to which commitment is required:
 
 [source,php]
 ----
-// 6.5durability snippet
+include::example$subdoc-mutatein-durability.php[tag=mutateInDurableWrites]
 ----
 
 
