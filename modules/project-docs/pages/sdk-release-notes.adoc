@@ -21,13 +21,13 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0 or higher is required for PHP Client 3.0.3.
+version 3.0.0 or higher is required for PHP Client 3.0.4.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.4.tgz
 ----
 
 === Installing on Microsoft Windows
@@ -41,18 +41,18 @@ The packages do not include OpenSSL binaries, therefore they have to be installe
 
 |===
 |Platform|
-|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz[couchbase-3.0.3.tgz]
-|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.0.3.sha256sum[couchbase-3.0.3.sha256sum]
-|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.2-nts-x64.zip[php_couchbase-3.0.3-7.2-nts-x64.zip]
-|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.2-zts-x64.zip[php_couchbase-3.0.3-7.2-zts-x64.zip]
-|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-nts-x64.zip[php_couchbase-3.0.3-7.3-nts-x64.zip]
-|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-zts-x64.zip[php_couchbase-3.0.3-7.3-zts-x64.zip]
-|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-nts-x64.zip[php_couchbase-3.0.3-7.4-nts-x64.zip]
-|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-zts-x64.zip[php_couchbase-3.0.3-7.4-zts-x64.zip]
-|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-nts-x64-openssl.zip[php_couchbase-3.0.3-7.3-nts-x64-openssl.zip]
-|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.3-zts-x64-openssl.zip[php_couchbase-3.0.3-7.3-zts-x64-openssl.zip]
-|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-nts-x64-openssl.zip[php_couchbase-3.0.3-7.4-nts-x64-openssl.zip]
-|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.3-7.4-zts-x64-openssl.zip[php_couchbase-3.0.3-7.4-zts-x64-openssl.zip]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.4.tgz[couchbase-3.0.4.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.0.4.sha256sum[couchbase-3.0.4.sha256sum]
+|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.2-nts-x64.zip[php_couchbase-3.0.4-7.2-nts-x64.zip]
+|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.2-zts-x64.zip[php_couchbase-3.0.4-7.2-zts-x64.zip]
+|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-nts-x64.zip[php_couchbase-3.0.4-7.3-nts-x64.zip]
+|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-zts-x64.zip[php_couchbase-3.0.4-7.3-zts-x64.zip]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-nts-x64.zip[php_couchbase-3.0.4-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-zts-x64.zip[php_couchbase-3.0.4-7.4-zts-x64.zip]
+|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-nts-x64-openssl.zip[php_couchbase-3.0.4-7.3-nts-x64-openssl.zip]
+|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-zts-x64-openssl.zip[php_couchbase-3.0.4-7.3-zts-x64-openssl.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-nts-x64-openssl.zip[php_couchbase-3.0.4-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-zts-x64-openssl.zip[php_couchbase-3.0.4-7.4-zts-x64-openssl.zip]
 |===
 
 === Post Installation for All Platforms
@@ -91,26 +91,49 @@ extension=couchbase.dll
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
+== Version 3.0.4 (11 November 2020)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.4/index.html
+
+* https://issues.couchbase.com/browse/PCBC-722[PCBC-722]:
+  Fix boolean search query encoding
+
+* https://issues.couchbase.com/browse/PCBC-703[PCBC-703]:
+  Add support for query with FlexIndex (FTS)
+
+* https://issues.couchbase.com/browse/PCBC-719[PCBC-719]:
+  Enhance user management for collections
+
+* https://issues.couchbase.com/browse/PCBC-702[PCBC-702]:
+  Implement geopolygon FTS query
+
+* https://issues.couchbase.com/browse/PCBC-705[PCBC-705]:
+  Update eviction policy types. Now it covers ephemeral buckets
+
+* https://issues.couchbase.com/browse/PCBC-721[PCBC-721]:
+  Allow to fallback to bucket connection for older servers
+
+
 == Version 3.0.3 (17 June 2020)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3/index.html
 
-* https://issues.couchbase.com/browse/PCBC-696[PCBC-696]: 
+* https://issues.couchbase.com/browse/PCBC-696[PCBC-696]:
 Fixed encoding issue in QueryString search query.
 
-* https://issues.couchbase.com/browse/PCBC-667[PCBC-667]: 
+* https://issues.couchbase.com/browse/PCBC-667[PCBC-667]:
 Added maxExpiry for CollectionSpec of collection manager.
 
-* https://issues.couchbase.com/browse/PCBC-690[PCBC-690]: 
+* https://issues.couchbase.com/browse/PCBC-690[PCBC-690]:
 Increased refcount of arg in ViewOptions::keys().
 
-* https://issues.couchbase.com/browse/PCBC-688[PCBC-688]: 
+* https://issues.couchbase.com/browse/PCBC-688[PCBC-688]:
 Temporary strings are now copied in ViewOptions builder.
 
-* https://issues.couchbase.com/browse/PCBC-666[PCBC-666]: 
+* https://issues.couchbase.com/browse/PCBC-666[PCBC-666]:
 Fixed invalid memory access of Query result "meta".
 
-* https://issues.couchbase.com/browse/PCBC-665[PCBC-665]: 
+* https://issues.couchbase.com/browse/PCBC-665[PCBC-665]:
 Fixed build issue on Debian.
 
 * Documentation improvements:
