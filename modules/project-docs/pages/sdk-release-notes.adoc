@@ -27,8 +27,16 @@ After installing the C SDK, install the PHP SDK through your PHP distribution's 
 
 [source,console]
 ----
+$ pecl install couchbase
+----
+
+Or install from the Couchbase repository:
+
+[source,console]
+----
 $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.4.tgz
 ----
+
 
 === Installing on Microsoft Windows
 
