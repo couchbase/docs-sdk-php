@@ -91,27 +91,29 @@ extension=couchbase.dll
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
+
 == Version 3.0.4 (11 November 2020)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.4/index.html
 
 * https://issues.couchbase.com/browse/PCBC-722[PCBC-722]:
-  Fix boolean search query encoding
+Fixed boolean Search query encoding.
 
 * https://issues.couchbase.com/browse/PCBC-703[PCBC-703]:
-  Add support for query with FlexIndex (FTS)
+Added support for Query with FlexIndex (FTS).
 
 * https://issues.couchbase.com/browse/PCBC-719[PCBC-719]:
-  Enhance user management for collections
+Enhanced user management for Collections.
 
 * https://issues.couchbase.com/browse/PCBC-702[PCBC-702]:
-  Implement geopolygon FTS query
+Implemented geopolygon Search query.
 
 * https://issues.couchbase.com/browse/PCBC-705[PCBC-705]:
-  Update eviction policy types. Now it covers ephemeral buckets
+Updated eviction policy types. 
+It now covers ephemeral buckets.
 
 * https://issues.couchbase.com/browse/PCBC-721[PCBC-721]:
-  Allow to fallback to bucket connection for older servers
+Allow to fall back to bucket connection for older Server releases.
 
 
 == Version 3.0.3 (17 June 2020)
