@@ -60,6 +60,7 @@ Couchbase PHP SDK
 * https://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html[PHP API Reference]
 * xref:ref:client-settings.adoc[Client Settings]
 * xref:ref:error-codes.adoc[Error Messages]
+* xref:ref:glossary.adoc[Glossary]
 * xref:ref:travel-app-data-model.adoc[Travel Sample Data Model]
 
 .Project Docs
@@ -69,3 +70,4 @@ Couchbase PHP SDK
 * xref:project-docs:sdk-licenses.adoc[Licenses]
 * xref:project-docs:get-involved.adoc[Get involved]
  ** https://docs.couchbase.com/home/contribute/index.html[Improve the Docs]
+* xref:project-docs:metadoc-about-these-sdk-docs.adoc[About These Docs]
