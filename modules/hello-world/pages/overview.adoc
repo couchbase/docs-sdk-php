@@ -1,4 +1,4 @@
-= Couchbase Node.js SDK 3.0
+= Couchbase PHP SDK 3.0
 :page-type: landing-page
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
@@ -13,18 +13,15 @@
 [.column]
 ====== {empty}
 [.content]
-The Node.js SDK allows you to connect to a Couchbase Server cluster from Node.js. 
-The Node.js SDK is a native Node.js module that uses the very fast libcouchbase library to handle communicating with the cluster over the Couchbase binary protocol.
+The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP. 
+The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
 
 
 [.column]
 [.content]
-[source,javascript]
+[source,console]
 ----
-const queryResult = await cluster.query("SELECT * FROM `travel-sample` WHERE city=$1 LIMIT 10", { parameters: ['Paris']});
-queryResult.rows.forEach((row)=>{
-   console.log(row);
-});
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.3.tgz
 ----
 
 
@@ -35,7 +32,7 @@ queryResult.rows.forEach((row)=>{
 [.column]
 ====== {empty}
 
-== Couchbase Node.js SDK 3.0
+== Couchbase PHP SDK 3.0
 
 ++++
 <div class="card-row three-column-row">
@@ -48,8 +45,8 @@ queryResult.rows.forEach((row)=>{
 
 [.content]
 Dive right in with a xref:start-using-sdk.adoc[quick install and Hello World].
-Try out our xref:sample-application.adoc[Travel Sample Application].
-And take a look at the xref:howtos:working-with-collections.adoc[developer preview of Collections].
+// Try out our xref:sample-application.adoc[Travel Sample Application].
+// And take a look at the xref:howtos:working-with-collections.adoc[developer preview of Collections].
 
 
 [.column]
@@ -71,7 +68,7 @@ and the xref:howtos:subdocument-operations.adoc[Sub-Document API].
 [.content]
 The documentation supplements the practical Howto docs with references and xref:concept-docs:concepts.adoc[concept guides], for those who prefer a broader understanding before diving in and coding.
 []
-https://docs.couchbase.com/sdk-api/couchbase-node-client[API Docs^]
+https://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html[API Docs^]
 
 
 [.column]
@@ -79,9 +76,10 @@ https://docs.couchbase.com/sdk-api/couchbase-node-client[API Docs^]
 .What's Hot?
 
 [.content]
-The Couchbase Node.js SDK 3.0 is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area
--- and introducing a xref:howtos:concurrent-async-apis.adoc[promises API] to reduce the complexity of asynchronous JavaScript in client apps.
-It can be paired with the 3.0-compatible https://v2.ottomanjs.com/#introduction[updated Ottoman ODM^] for speedier, scalable development.
+The Couchbase PHP SDK 3.0 is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area, and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 6.5 as a developer preview).
+
+The Couchbase PHP SDK is compatible with PHP 7.2+.
+
 
 [.column]
 ====== {empty}
@@ -99,8 +97,8 @@ xref:project-docs:migrating-sdk-code-to-3.n.adoc[migration guide] for moving to 
 .Community
 
 [.content]
-For community help, visit the https://forums.couchbase.com/c/node-js-sdk/12[Couchbase forums^].
-The Node.js SDK can be combined with many other projects in the broader JavaScript ecosystem and beyond -- in the https://blog.couchbase.com/?s=Node.js[Couchbase Blog^] there are examples covering everything from Apache OpenWhisk to Vue.js.
+For community help, visit the https://forums.couchbase.com/c/php-sdk/8[Couchbase forums^].
+The PHP SDK can be combined with many other projects in the broader PHP ecosystem and beyond -- in the https://blog.couchbase.com/?s=PHP[Couchbase Blog^] there are several examples.
 
 ++++
 </div>
