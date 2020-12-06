@@ -101,32 +101,33 @@ extension=couchbase.dll
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
-== Version 3.0.5 (06 December 2020)
+== Version 3.0.5 (6 December 2020)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.5/index.html
 
 * https://issues.couchbase.com/browse/PCBC-699[PCBC-699]:
-  Add support for minimal durability settings for bucket manager
+Added support for minimal durability settings for bucket manager.
 
 * https://issues.couchbase.com/browse/PCBC-718[PCBC-718]:
-  Deprecate `expiry()` on `GetResult` and `LookupInResult`. `expiry()`   is deprecated in favour to `expiryTime()` which
-returns `DateTimeInterface`
+Deprecated `expiry()` on `GetResult` and `LookupInResult`. 
+`expiry()` is deprecated in favour of `expiryTime()` which returns `DateTimeInterface`.
 
 * https://issues.couchbase.com/browse/PCBC-715[PCBC-715]:
-  refactor document expiry duration
+Refactored document expiry duration:
 
-    - allow to specify `DateTimeInterface` objects as expiry value in mutation options
+    - Allowing one to specify `DateTimeInterface` objects as expiry value in mutation options;
 
-    - when expiration is set as long in seconds, treat the value as relative if it is less than 50 years in seconds. In
-      this case take current time and add to the expiration value
+    - When expiration is set as long in seconds, treat the value as relative if it is less than 50 years in seconds. 
+      In this case take the current time and add to the expiration value.
 
 * https://issues.couchbase.com/browse/PCBC-733[PCBC-733]:
-  Add missing fields for `SearchFacet` results
+Added missing fields for `SearchFacet` results
 
 * https://issues.couchbase.com/browse/PCBC-720[PCBC-720]:
-  Allow to disable FTS scoring
+Added option to disable search scoring.
 
-* Support PHP 8. Drop support for PHP older than 7.2
+* Support PHP 8. 
+Dropped support for PHP older than 7.2.
 
 
 == Version 3.0.4 (11 November 2020)
