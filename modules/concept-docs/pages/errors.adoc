@@ -4,7 +4,7 @@
 :page-aliases: 
 
 [abstract]
-When the unexpected happens, take a step-by-step approach. .
+When the unexpected happens, take a step-by-step approach.
 
 
 == General Approach to PHP Exceptions
