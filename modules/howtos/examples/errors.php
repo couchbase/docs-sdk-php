@@ -1,4 +1,5 @@
 <?php
+
 use \Couchbase\ClusterOptions;
 use \Couchbase\Cluster;
 
@@ -8,11 +9,51 @@ $cluster = new Cluster("couchbase://localhost", $opts);
 
 $collection = $cluster->bucket("travel-sample")->defaultCollection();
 
-// #tag::catch[]
+#tag::document-not-found-exception[]
 try {
     $collection->get("foo");
-} catch (\Couchbase\KeyNotFoundException $ex) {
-    printf("Document does not exist, creating");
+} catch (\Couchbase\DocumentNotFoundException $ex) {
+    printf("Document does not exist, creating. \n");
     $collection->upsert("foo", ["bar" => 42]);
 }
-// #end::catch[]
+#end::document-not-found-exception[]
+
+#tag::key-exists-exception[]
+try {
+    $collection->insert("foo", ["bar" => 43]);
+} catch (\Couchbase\KeyExistsException $ex) {
+    printf("Document already exists. \n");
+}
+#end::key-exists-exception[]
+
+$max_size = 1024 * 1024 * 20; # 20MB
+$big_object = str_repeat(' ', $max_size + 1);
+
+#tag::value-too-big-exception[]
+try {
+    $collection->insert("big", $big_object);
+} catch (\Couchbase\ValueTooBigException $ex) {
+    printf("Document is bigger than maximum size (20MB). \n");
+}
+#end::value-too-big-exception[]
+
+#tag::cas-mismatch-exception[]
+$result1 = $collection->get("foo");
+$original_cas = $result1->cas();
+
+$opts = new \Couchbase\ReplaceOptions();
+
+$result2 = $collection->replace("foo",
+                                ["bar" => 44],
+                                $opts->cas($original_cas));
+$updated_cas = $result2->cas();
+
+try {
+    $collection->replace("foo",
+                         ["bar" => 45],
+                         $opts->cas($original_cas));
+                         # oops, we should have used $updated_cas!
+} catch (\Couchbase\CasMismatchException $ex) {
+    printf("CAS mismatch error. \n");
+}
+#end::cas-mismatch-exception[]

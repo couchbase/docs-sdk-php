@@ -14,68 +14,93 @@ The developer’s job is to be prepared for whatever is likely to come up -- and
 Couchbase gives you a lot of flexibility, but it is recommended that you equip yourself with an understanding of the possibilities.
 
 
-As covered xref:concurrent-async-apis.adoc[here], the PHP SDK ships with two different APIs, allowing you to structure your application the way you want.
-That guide also covers how errors are actually returned and handled.
+// As covered xref:concurrent-async-apis.adoc[here], the PHP SDK ships with two different APIs, allowing you to structure your application the way you want.
+// That guide also covers how errors are actually returned and handled.
 //, so this document will focus instead on specific errors, along with a broader look at error handling strategies.
 
-// temporary section from migration guide, until code samples available for the page:
-==  Exception Handling
 
-SDK 3.x actively uses `Exceptions` to signal errors.
-Instead of using single `\Couchbase\Exception`, as in SDK 2.x, now we use a hierarchy of exceptions, which allows the handling of errors in a more reliable way:
+== How the SDK Handles Errors
 
-[source,php]
+Couchbase-specific exceptions are all derived from `\Couchbase\BaseException`.
+Errors that cannot be recovered by the SDK will be returned to the application.
+These unrecoverable errors are left to the application developer to handle -- this section covers handling many of the common error scenarios. 
+
+
+== Handling Errors
+
+The approach will depend upon the type of error thrown.
+Is it transient?
+Is it even recoverable?
+Below we examine error handling strategies in relation to the Couchbase SDKs, then take a practical walk through some common error scenarios you are likely to have to handle when working with a Couchbase cluster.
+
+
+=== Logging
+
+It is always important to log errors, but even more so with highly concurrent asynchronous applications.
+
+// Note that Logging has its own page.
+// xref:howtos:collecting-information-and-logging.adoc[Logging]
+
+// recommendation of good practice ADMONITION link
+
+
+[#retry]
+=== Retry
+
+Transient errors -- such as those caused by resource starvation -- are best tackled with one of the following retry strategies:
+
+* Retry immediately.
+* Retry with a fixed delay.
+* Retry with a linearly increasing delay.
+* Retry with an exponentially increasing delay.
+* Retry with a random delay.
+
+[source,csharp] // TODO
 ----
-include::example$errors.php[tag=catch]
+include::example$ErrorHandling.cs[tag=retry,indent=0]
 ----
 
-Instead of SDK 2.x's:
-
-[source,php]
-----
-try {
-  $bucket->get("foo");
-} catch (\Couchbase\Exception $ex) {
-  if ($ex->getCode() == COUCHBASE_KEYNOTFOUND) {
-    $bucket->upsert("foo", ["bar" => 42]);
-  }
-}
-----
-
-////
 == Key-Value Errors
 
-The KV Service exposes several common errors that can be encountered - both during development, and to be handled by the production app. Here we will cover some of the most common errors.
+The KV Service exposes several common errors that can be encountered -- both during development, and to be handled by the production app. Here we will cover some of the most common errors.
 
-If a particular key cannot be found it is raised as an `DocumentNotFoundException`:
+=== Key does not exist
 
-[source,scala]
-----
-include::example$ErrorHandling.scala[tag=key-not-found,indent=0]
-----
+If a particular key cannot be found it is raised as a `DocumentNotFoundException`:
 
-[source,scala]
+[source,php]
 ----
-include::example$ErrorHandling.scala[tag=get,indent=0]
+include::example$errors.php[tag=document-not-found-exception]
 ----
 
-On the other hand if the key already exists and should not (e.g. on an insert) then it is raised as a `DocumentExistsException`:
+=== Key already exists
 
-[source,scala]
+On the other hand if the key already exists and should not (e.g. on an insert) then it is raised as a `KeyExistsException`:
+
+[source,php]
 ----
-include::example$ErrorHandling.scala[tag=key-exists,indent=0]
+include::example$errors.php[tag=key-exists-exception]
+----
+
+=== Document body too large
+
+[source,php]
+----
+include::example$errors.php[tag=value-too-big-exception]
 ----
 
 === Concurrency
 Couchbase provides optimistic concurrency using CAS.
 Each document gets a CAS value on the server, which is changed on each mutation.
-When you get a document you automatically receive its CAS value, and when replacing the document, if you provide that CAS the server can check that the document has not been concurrently modified by another agent in-between.  If it has, it returns `CasMismatchException`, and the most appropriate response is to simply retry it:
+When you get a document you automatically receive its CAS value, and when replacing the document, if you provide that CAS the server can check that the document has not been concurrently modified by another agent in-between.  If it has, it returns `CasMismatchException`, and the most appropriate response is to simply retry:
 
-[source,scala]
+[source,php]
 ----
-include::example$ErrorHandling.scala[tag=cas,indent=0]
+include::example$errors.php[tag=cas-mismatch-exception, indent=0]
 ----
 
+
+////
 === Ambiguity
 There are situations with any distributed system in which it is simply impossible to know for sure if the operation completed successfully or not.
 Take this as an example: your application requests that a new document be created on Couchbase Server.  This completes, but, just before the server can notify the client that it was successful, a network switch dies and the application's connection to the server is lost.  The client will timeout waiting for a response and will raise a `TimeoutException`, but it's ambiguous to the app whether the operation succeeded or not.
