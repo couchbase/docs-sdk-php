@@ -25,9 +25,6 @@ Couchbase-specific exceptions are all derived from `\Couchbase\BaseException`.
 Errors that cannot be recovered by the SDK will be returned to the application.
 These unrecoverable errors are left to the application developer to handle -- this section covers handling many of the common error scenarios. 
 
-
-== Handling Errors
-
 The approach will depend upon the type of error thrown.
 Is it transient?
 Is it even recoverable?
@@ -38,8 +35,8 @@ Below we examine error handling strategies in relation to the Couchbase SDKs, th
 
 It is always important to log errors, but even more so with highly concurrent asynchronous applications.
 
-// Note that Logging has its own page.
-// xref:howtos:collecting-information-and-logging.adoc[Logging]
+See the logging page for more details:
+xref:howtos:collecting-information-and-logging.adoc[Logging]
 
 // recommendation of good practice ADMONITION link
 
@@ -55,9 +52,9 @@ Transient errors -- such as those caused by resource starvation -- are best tack
 * Retry with an exponentially increasing delay.
 * Retry with a random delay.
 
-[source,csharp] // TODO
+[source,php]
 ----
-include::example$ErrorHandling.cs[tag=retry,indent=0]
+include::example$errors.php[tag=retry]
 ----
 
 == Key-Value Errors
