@@ -15,16 +15,16 @@ use Couchbase\UpsertOptions;
 $options = new ClusterOptions();
 $options->credentials("Administrator", "password");
 
-// #tag::orphanLogging[]
+// tag::orphanLogging[]
 $connectionString = "couchbase://127.0.0.1?" .
     "tracing_orphaned_queue_flush_interval=5&"; /* every 5 seconds */
 
 $cluster = new Cluster($connectionString, $options);
 $bucket = $cluster->bucket("travel-sample");
 $collection = $bucket->defaultCollection();
-// #end::orphanLogging[]
+// end::orphanLogging[]
 
-// #tag::orphanTimeout[]
+// tag::orphanTimeout[]
 /*
  * Create a new document
  */
@@ -53,7 +53,7 @@ while (true) {
         }
     }
 }
-// #end::orphanTimeout[]
+// end::orphanTimeout[]
 
 /*
  * Messages like one below will appear in the log for the orphaned response
