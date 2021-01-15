@@ -5,9 +5,9 @@ declare(strict_types=1);
 /*
  * Make sure log level is high enough to display tracing messages
  */
-// #tag::logLevel[]
+// tag::logLevel[]
 ini_set("couchbase.log_level", "INFO");
-// #end::logLevel[]
+// end::logLevel[]
 
 use Couchbase\Cluster;
 use Couchbase\ClusterOptions;
@@ -17,7 +17,7 @@ use Couchbase\UpsertOptions;
 $options = new ClusterOptions();
 $options->credentials("Administrator", "password");
 
-// #tag::thresholdLogging[]
+// tag::thresholdLogging[]
 $connectionString = "couchbase://127.0.0.1?" .
     "tracing_threshold_queue_flush_interval=3&" . /* every 3 seconds */
     "tracing_threshold_kv=0.01"; /* 10 milliseconds */
@@ -25,9 +25,9 @@ $connectionString = "couchbase://127.0.0.1?" .
 $cluster = new Cluster($connectionString, $options);
 $bucket = $cluster->bucket("travel-sample");
 $collection = $bucket->defaultCollection();
-// #end::thresholdLogging[]
+// end::thresholdLogging[]
 
-// #tag::thresholdLongProcessing[]
+// tag::thresholdLongProcessing[]
 /*
  * Create a new document
  */
@@ -56,7 +56,7 @@ while (true) {
         }
     }
 }
-// #end::thresholdLongProcessing[]
+// end::thresholdLongProcessing[]
 
 /*
  * Threshold reports will be written like the following
