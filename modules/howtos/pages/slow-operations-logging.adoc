@@ -146,7 +146,7 @@ The table below describes all the allowed properties that can be set for tracing
 
 .Allowed Tracer Properties
 [.table-merge-cells] 
-[cols="1,1,1, 1"] 
+[cols="13,10,10, 14"] 
 |===
 | Key | Type | Default | Description
 
