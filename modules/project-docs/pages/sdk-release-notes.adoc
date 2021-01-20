@@ -21,7 +21,7 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0.0 or higher is required for PHP Client 3.0.4.
+version 3.0.0 or higher is required for PHP Client 3.1.0.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
@@ -34,9 +34,8 @@ Or install from the Couchbase repository:
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.4.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.0.tgz
 ----
-
 
 === Installing on Microsoft Windows
 
@@ -49,18 +48,18 @@ The packages do not include OpenSSL binaries, therefore they have to be installe
 
 |===
 |Platform|
-|Source          |https://packages.couchbase.com/clients/php/couchbase-3.0.4.tgz[couchbase-3.0.4.tgz]
-|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.0.4.sha256sum[couchbase-3.0.4.sha256sum]
-|PHP 7.2 VC14 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.2-nts-x64.zip[php_couchbase-3.0.4-7.2-nts-x64.zip]
-|PHP 7.2 VC14 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.2-zts-x64.zip[php_couchbase-3.0.4-7.2-zts-x64.zip]
-|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-nts-x64.zip[php_couchbase-3.0.4-7.3-nts-x64.zip]
-|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-zts-x64.zip[php_couchbase-3.0.4-7.3-zts-x64.zip]
-|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-nts-x64.zip[php_couchbase-3.0.4-7.4-nts-x64.zip]
-|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-zts-x64.zip[php_couchbase-3.0.4-7.4-zts-x64.zip]
-|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-nts-x64-openssl.zip[php_couchbase-3.0.4-7.3-nts-x64-openssl.zip]
-|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.3-zts-x64-openssl.zip[php_couchbase-3.0.4-7.3-zts-x64-openssl.zip]
-|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-nts-x64-openssl.zip[php_couchbase-3.0.4-7.4-nts-x64-openssl.zip]
-|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.0.4-7.4-zts-x64-openssl.zip[php_couchbase-3.0.4-7.4-zts-x64-openssl.zip]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.1.0.tgz[couchbase-3.1.0.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.1.0.sha256sum[couchbase-3.1.0.sha256sum]
+|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.3-nts-x64.zip[php_couchbase-3.1.0-7.3-nts-x64.zip]
+|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.3-zts-x64.zip[php_couchbase-3.1.0-7.3-zts-x64.zip]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.4-nts-x64.zip[php_couchbase-3.1.0-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.4-zts-x64.zip[php_couchbase-3.1.0-7.4-zts-x64.zip]
+|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.3-nts-x64-openssl.zip[php_couchbase-3.1.0-7.3-nts-x64-openssl.zip]
+|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.3-zts-x64-openssl.zip[php_couchbase-3.1.0-7.3-zts-x64-openssl.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.4-nts-x64-openssl.zip[php_couchbase-3.1.0-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-7.4-zts-x64-openssl.zip[php_couchbase-3.1.0-7.4-zts-x64-openssl.zip]
+|PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-8.0-nts-x64-openssl.zip[php_couchbase-3.1.0-8.0-nts-x64-openssl.zip]
+|PHP 8.0 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.1.0-8.0-zts-x64-openssl.zip[php_couchbase-3.1.0-8.0-zts-x64-openssl.zip]
 |===
 
 === Post Installation for All Platforms
@@ -72,11 +71,11 @@ extension. To do this:
 +
 [source,console]
 ----
- $ php --ini
- Configuration File (php.ini) Path: /usr/local/etc/php/7.4
- Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
- Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
- Additional .ini files parsed:      (none)
+$ php --ini
+Configuration File (php.ini) Path: /usr/local/etc/php/7.4
+Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
+Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
+Additional .ini files parsed:      (none)
 ----
 +
 2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section.
@@ -95,10 +94,47 @@ extension=couchbase.so
 extension=couchbase.dll
 ----
 
+=== PHP Client
+
+The second part of SDK is written asa  PHP library and hosted on https://packagist.org/packages/couchbase/couchbase[packagist.org]. 
+To add it to your project's dependency list, use the following composer command:
+
+[source,console]
+----
+$ composer require couchbase/couchbase
+----
+
 === Note on Extension Dependencies
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
+
+== Version 3.1.0 (20 January 2021)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0/index.html
+
+* https://issues.couchbase.com/browse/PCBC-599[PCBC-599]:
+  Implemented Datastructures in PHP library (available via composer):
+  ** `CouchbaseList`,
+  ** `CouchbaseMap`,
+  ** `CouchbaseQueue`,
+  ** `CouchbaseSet`.
+
+* https://issues.couchbase.com/browse/PCBC-742[PCBC-742]:
+  Propagate custom value transcoder to results.
+
+* https://issues.couchbase.com/browse/PCBC-707[PCBC-707]:
+  Added scope-level query and scope qualifier support for `QueryOptions`.
+
+* https://issues.couchbase.com/browse/PCBC-741[PCBC-741]:
+  Fixed memory leak in `Bucket::viewQuery()`.
+
+* https://issues.couchbase.com/browse/PCBC-734[PCBC-734]:
+  Fixed destruction of `SearchOptions`.
+
+* https://issues.couchbase.com/browse/PCBC-591[PCBC-591]:
+  Error handling howto documentation.
+  
 
 == Version 3.0.4 (11 November 2020)
 
@@ -117,7 +153,7 @@ Enhanced user management for Collections.
 Implemented geopolygon Search query.
 
 * https://issues.couchbase.com/browse/PCBC-705[PCBC-705]:
-Updated eviction policy types. 
+Updated eviction policy types.
 It now covers ephemeral buckets.
 
 * https://issues.couchbase.com/browse/PCBC-721[PCBC-721]:

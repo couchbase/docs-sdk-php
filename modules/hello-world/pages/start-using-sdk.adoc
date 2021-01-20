@@ -22,11 +22,11 @@ After installing the C SDK, install the PHP SDK through your PHP distribution's 
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.0.4.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.0.tgz
 ----
 
 Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
-In particular, look at the post-install instructions in light of the `.ini` practices for your platform, 
+In particular, look at the post-install instructions in light of the `.ini` practices for your platform,
 and note that the Couchbase SDK depends on the JSON module, therefore that module has to be loaded before the SDK.
 
 // installation and post-installation across platforms
@@ -76,7 +76,7 @@ $collection = $bucket->scope("myapp")->collection("my-collection");
 ----
 
 The 3.0 SDK is ready for the introduction of xref:6.5@server:developer-preview:collections/collections-overview.adoc[Collections] in an upcoming release of the Couchbase Data Platform.
-Couchbase Server 6.5 brings a limited xref:6.5@server:developer-preview:preview-mode.adoc[Developer Preview] of Collections, allowing Documents to be grouped by purpose or theme, according to a specified _Collection_. 
+Couchbase Server 6.5 brings a limited xref:6.5@server:developer-preview:preview-mode.adoc[Developer Preview] of Collections, allowing Documents to be grouped by purpose or theme, according to a specified _Collection_.
 Here we've used the `DefaultCollection`, which provides the same functionality as bucket-level operations did in previous versions of Couchbase Server.
 
 [source,php]
@@ -99,8 +99,8 @@ If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase C
 
 For developing on Couchbase Cloud, if you are not working from the same _Availability Zone_, refer to the following:
 
-* Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments], 
-* xref:project-docs:compatibility.adoc#network-requirements[Network Requirements], 
+* Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments],
+* xref:project-docs:compatibility.adoc#network-requirements[Network Requirements],
 * If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
 
 
