@@ -96,9 +96,8 @@ extension=couchbase.dll
 
 === PHP Client
 
-The second part of SDK is written as PHP library and hosted on
-https://packagist.org/packages/couchbase/couchbase[packagist.org]. To add it to your project's dependency list, use the
-following composer command.
+The second part of SDK is written asa  PHP library and hosted on https://packagist.org/packages/couchbase/couchbase[packagist.org]. 
+To add it to your project's dependency list, use the following composer command:
 
 [source,console]
 ----
@@ -109,31 +108,33 @@ $ composer require couchbase/couchbase
 
 The Couchbase SDK depends on the JSON module, therefore it has to be loaded before the SDK.
 
+
 == Version 3.1.0 (20 January 2021)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0/index.html
 
 * https://issues.couchbase.com/browse/PCBC-599[PCBC-599]:
   Implemented Datastructures in PHP library (available via composer):
-  * CouchbaseList
-  * CouchbaseMap
-  * CouchbaseQueue
-  * CouchbaseSet
+  ** `CouchbaseList`,
+  ** `CouchbaseMap`,
+  ** `CouchbaseQueue`,
+  ** `CouchbaseSet`.
 
 * https://issues.couchbase.com/browse/PCBC-742[PCBC-742]:
-  Propagate custom value transcoder to results
+  Propagate custom value transcoder to results.
 
 * https://issues.couchbase.com/browse/PCBC-707[PCBC-707]:
-  Add scope-level query and scope qualifier support for `QueryOptions`.
+  Added scope-level query and scope qualifier support for `QueryOptions`.
 
 * https://issues.couchbase.com/browse/PCBC-741[PCBC-741]:
-  Fix memory leak in `Bucket::viewQuery()`
+  Fixed memory leak in `Bucket::viewQuery()`.
 
 * https://issues.couchbase.com/browse/PCBC-734[PCBC-734]:
-  Fix destruction of `SearchOptions`.
+  Fixed destruction of `SearchOptions`.
 
 * https://issues.couchbase.com/browse/PCBC-591[PCBC-591]:
-  `KeyNotFoundException` is an alias for `DocumentNotFoundException`
+  Error handling howto documentation.
+  
 
 == Version 3.0.4 (11 November 2020)
 
