@@ -16,32 +16,36 @@ Our xref:hello-world:start-using-sdk.adoc[Getting Started] guide introduced basi
 
 [source,php]
 ----
-$connectionString = "couchbase://localhost";
-$options = new \Couchbase\ClusterOptions();
-$options->credentials("Administrator", "password");
-$cluster = new \Couchbase\Cluster($connectionString, $options);
+include::example$auth.php[tag=auth1,indent=0]
 ----
-////
-include::example$Auth.scala[tag=basic,indent=0]
-----
-////
 
 include::6.5@sdk:shared:partial$auth-overview.adoc[tag=rbac]
 
 include::6.5@sdk:shared:partial$auth-overview.adoc[tag=cert-auth]
 
-////
-== Authenticating a Scala Client by Certificate
+
+== Authenticating a PHP Client by Certificate
 
 For sample procedures whereby certificates can be generated and deployed, see xref:6.5@server:manage:manage-security/manage-certificates.adoc[Manage Certificates].
-The rest of this document assumes that the processes there, or something similar, have been followed.
-That is, a cluster certificate has been created and installed on the server, a client certificate has been created, and it is stored in a JVM keystore along with the cluster's certificate.
+The rest of this document assumes that the processes there, or something similar, have been followed:
 
-[source,scala]
+[source,php]
 ----
-include::example$Auth.scala[tag=auth,indent=0]
+include::example$auth.php[tag=auth2,indent=0]
 ----
-////
+
+Note the options passed into the connection string:
+
+* `truststorepath` specifies the path (on the local filesystem) to the server's SSL certificate truststore. The trust store is optional, and when missing, the library will use `certpath` as the location for verification, and expect any extra certificates to be concatenated in there.
+
+* `certpath` specifies the path (on the local filesystem) to the server's SSL certificate.
+
+* `keypath` specifies the path (on the local filesystem) to the client SSL private key.
+
 
 include::6.5@sdk:shared:partial$auth-overview.adoc[tag=ldap]
 
+[source,php]
+----
+include::example$auth.php[tag=auth3,indent=0]
+----
