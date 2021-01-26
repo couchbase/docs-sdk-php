@@ -36,7 +36,8 @@ include::example$auth.php[tag=auth2,indent=0]
 
 Note the options passed into the connection string:
 
-* `truststorepath` specifies the path (on the local filesystem) to the server's SSL certificate truststore. The trust store is optional, and when missing, the library will use `certpath` as the location for verification, and expect any extra certificates to be concatenated in there.
+* `truststorepath` specifies the path (on the local filesystem) to the server's SSL certificate truststore. 
+The trust store is optional, and when missing, the library will use `certpath` as the location for verification, and expect any extra certificates to be concatenated in there.
 
 * `certpath` specifies the path (on the local filesystem) to the server's SSL certificate.
 
