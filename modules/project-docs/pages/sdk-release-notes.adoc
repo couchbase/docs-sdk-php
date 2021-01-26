@@ -113,6 +113,14 @@ The Couchbase SDK depends on the JSON module, therefore it has to be loaded befo
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0/index.html
 
+[NOTE]
+.Behavioral Change
+====
+A bug, whereby when you store a string which is JSON, when it is read back, you would receive an object, not a string, was in all 3.0.x versions of the PHP Client.
+https://issues.couchbase.com/browse/PCBC-742[This bug] has now been fixed -- the client will now honor the xref:howtos:transcoders-nonjson.adoc[Common Flag] for any transcoder specified.
+====
+
+
 * https://issues.couchbase.com/browse/PCBC-599[PCBC-599]:
   Implemented Datastructures in PHP library (available via composer):
   ** `CouchbaseList`,
@@ -139,6 +147,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0
 == Version 3.0.4 (11 November 2020)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.4/index.html
+
 
 * https://issues.couchbase.com/browse/PCBC-722[PCBC-722]:
 Fixed boolean Search query encoding.
