@@ -7,5 +7,5 @@ Information on transcoders can be found in the https://docs.couchbase.com/sdk-ap
 [WARNING]
 ====
 A bug in the transcoder implementation in 3.0.x https://issues.couchbase.com/browse/PCBC-742[has been fixed in 3.1.0].
-Please use 3.1@php-sdk:howtos:transcoders-nonjson.adoc[3.1.0], or any later version.
+Please use xref:3.1@php-sdk:howtos:transcoders-nonjson.adoc[3.1.0], or any later version.
 ====
