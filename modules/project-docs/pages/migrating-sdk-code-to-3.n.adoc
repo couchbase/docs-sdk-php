@@ -51,7 +51,7 @@ include::6.5@sdk:shared:partial$migration.adoc[tag=lang]
 As with 2.x release, the primary source of artifacts is xref:sdk-release-notes.adoc[the release notes page], 
 where we publish links to pre-built binaries, as well as to source tarballs.
 
-SDK 3.x supports PHP interpreters from 7.2 upwards.
+SDK 3.x supports PHP interpreters from 7.3 upwards.
 
 From 3.0 onwards, binaries are available for Windows with the OpenSSL dependency. 
 Note, that OpenSSL DLLs are not distributed in the archive and must be installed separately (see the https://wiki.openssl.org/index.php/Binaries[official OpenSSL page] for more details).
