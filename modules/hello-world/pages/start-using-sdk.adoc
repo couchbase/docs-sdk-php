@@ -9,7 +9,7 @@ The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-perf
 
 The Couchbase PHP SDK 3.0 is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area, and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 6.5 as a xref:concept-docs:collections.adoc[developer preview]).
 
-The Couchbase PHP SDK is compatible with PHP 7.2+.
+The Couchbase PHP SDK 3.0 is compatible with PHP 7.2+.
 
 // tag::install[]
 
