@@ -6,7 +6,7 @@
 Features available in different SDK versions, and compatibility between Server and SDK.
 Plus notes on Cloud, networks, and AWS Lambda.
 
-The Couchbase PHP SDK is compatible with PHP 7.2, 7.3, 7.4, and 8.0..
+The Couchbase PHP SDK is compatible with PHP 7.2, 7.3, 7.4, and 8.0.
 
 
 == Couchbase Version/SDK Version Matrix
