@@ -178,6 +178,9 @@ If the DNS SRV records could not be loaded properly you'll get the message logge
 Also, if you pass in more than one node, DNS SRV bootstrap will not be initiated:
 
 
+// WaitUntilReady section to be added once it is in the SDK - PCBC-695 
+
+
 // Cloud connections
 include::6.6@sdk:shared:partial$managing-connections.adoc[tag=cloud]
 
