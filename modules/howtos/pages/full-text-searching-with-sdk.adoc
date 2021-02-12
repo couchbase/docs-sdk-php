@@ -70,9 +70,11 @@ Here we are iterating over the rows that were returned in the results (for conte
 ----
 foreach ($res->rows() as $row) {
     printf("id: %s, score: %f\n", $row['id'], $row['score']);
-}----
+}
+----
 
 === Facets
+
 Facets can only be accessed once `Close` has been called on rows.
 
 [source,php]
