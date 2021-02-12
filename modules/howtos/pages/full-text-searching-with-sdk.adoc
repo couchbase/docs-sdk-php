@@ -90,3 +90,13 @@ ensuring results contain information from updated indexes:
 ----
 include::example$search.php[tag=consistency]
 ----
+
+
+== Further Reading
+
+* More details on Search Queries can be found xref:6.6@server:fts:fts-query-types.adoc[in the Server docs].
+* More information can be found in the API docs for 
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_searchQuery[searchQuery^] and 
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-SearchResult.html[SearchResult^].
+
+
