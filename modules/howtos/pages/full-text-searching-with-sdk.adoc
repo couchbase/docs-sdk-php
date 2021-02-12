@@ -63,15 +63,16 @@ query.  Facets allow the aggregation of information collected on a particular re
 information not directly related to your query, such as success total hits and how long the query took to execute in the
 cluster.
 
-.Iterating Rows
-Here we are iterating over the rows that were returned in the results.
+=== Iterating Rows
+Here we are iterating over the rows that were returned in the results (for context, see the same in the two samples below this one):
 
 [source,php]
 ----
-include::example$search.php[tag=iterating]
-----
+foreach ($res->rows() as $row) {
+    printf("id: %s, score: %f\n", $row['id'], $row['score']);
+}----
 
-.Facets
+=== Facets
 Facets can only be accessed once `Close` has been called on rows.
 
 [source,php]
