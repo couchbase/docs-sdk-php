@@ -16,7 +16,7 @@ The Couchbase PHP SDK is compatible with PHP 7.3+.
 == Installing the SDK
 
 Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.0 or higher is required from PHP Client 3.0.
+version 3.0 or higher is required for PHP Client 3.1.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
 
@@ -75,8 +75,8 @@ $collection = $bucket->defaultCollection();
 $collection = $bucket->scope("myapp")->collection("my-collection");
 ----
 
-The 3.0 SDK is ready for the introduction of xref:6.5@server:developer-preview:collections/collections-overview.adoc[Collections] in an upcoming release of the Couchbase Data Platform.
-Couchbase Server 6.5 brings a limited xref:6.5@server:developer-preview:preview-mode.adoc[Developer Preview] of Collections, allowing Documents to be grouped by purpose or theme, according to a specified _Collection_.
+The 3.x SDK is ready for the introduction of xref:6.5@server:developer-preview:collections/collections-overview.adoc[Collections] in the xref:7.0@server:learn:data/scopes-and-collections.adoc[upcoming 7.0 release] of Couchbase Server.
+Couchbase Server 6.5 & 6.6 bring a limited xref:6.6@server:developer-preview:preview-mode.adoc[Developer Preview] of Collections, allowing Documents to be grouped by purpose or theme, according to a specified _Collection_.
 Here we've used the `DefaultCollection`, which provides the same functionality as bucket-level operations did in previous versions of Couchbase Server.
 
 [source,php]
