@@ -136,7 +136,7 @@ and pass it the path to the certificate file via '?trust_certificate=...' in the
 
 [source,php]
 ----
-include::example$managing_connections.php[tag=tls,indent=0]
+include::example$managing-connections.php[tag=tls,indent=0]
 ----
 
 Then use this custom `Cluster` when opening the connection to the cluster.
