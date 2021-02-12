@@ -11,7 +11,7 @@ $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
 $cluster = new Cluster("couchbase://192.168.1.101", $opts);
 
-// #tag::iteratingfacets
+// tag::iteratingfacets[]
 $query = (new TermSearchQuery("beer"))->field("type");
 $options = new SearchOptions();
 $options->facets([
@@ -48,7 +48,7 @@ foreach ($facet["numeric_ranges"] as $range) {
         printf(" * min %-4s ... %d\n", $range["min"], $range["count"]);
     }
 }
-// #end::iteratingfacets
+// end::iteratingfacets[]
 
 // Output
 //
