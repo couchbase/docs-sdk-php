@@ -15,19 +15,19 @@ $collection = $bucket->defaultCollection();
 $options = new \Couchbase\QueryOptions();
 $options->positionalParameters(["hotel"]);
 // NOTE: string is single-quoted to avoid PHP variable substitutions and pass '$1' as is
-$result = $bucket->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$1 LIMIT 10;', $options);
+$result = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$1 LIMIT 10;', $options);
 // #end::positionalParams[]
 
 // #tag::namedParams[]
 $options = new \Couchbase\QueryOptions();
 $options->namedParameters(['type' => "hotel"]);
-$result = $bucket->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$type LIMIT 10;', $options);
+$result = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$type LIMIT 10;', $options);
 // #end::namedParams[]
 
 // #tag::results[]
 $options = new \Couchbase\QueryOptions();
 $options->positionalParameters(["hotel"]);
-$result = $bucket->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$1 LIMIT 10;', $options);
+$result = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$1 LIMIT 10;', $options);
 
 foreach($result->rows() as $row) {
     printf("Name: %s, Address: %s, Description: %s\n", $row["name"], $row["address"], $row["description"]);
