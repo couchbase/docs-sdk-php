@@ -51,7 +51,7 @@ $options->credentials("Administrator", "password");
 $cluster = new \Couchbase\Cluster($connectionString, $options);
 ----
 
-The `Cluster` provides access to cluster-level operations like N1Ql queries, analytics, or full-text search.
+The `Cluster` provides access to cluster-level operations like N1QL queries, analytics, or full-text search.
 You will also find different management APIs on it.
 
 If you are connecting to Couchbase Cloud rather than a local Couchbase Server, then also refer to the <<cloud-connections, Cloud section>>, below.
