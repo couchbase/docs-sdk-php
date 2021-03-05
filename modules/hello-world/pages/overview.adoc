@@ -21,7 +21,7 @@ The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-perf
 [.content]
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.0.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.1.tgz
 ----
 
 
