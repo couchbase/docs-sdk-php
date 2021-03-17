@@ -104,7 +104,7 @@ $res = $usersCollection->upsert("user-key", $document, $opts);
 printf("document \"user-key\" has been created with CAS \"%s\"\n", $res->cas());
 // end::namedcollectionupsert[]
 
-// Cleanup `insert` example data to avoid errors when running locally.
+// Cleanup example data to avoid errors when running locally (mainly for inserts).
 $opts = new RemoveOptions();
 $collection->remove("document-key-new", $opts);
 $collection->remove("document-key", $opts);
