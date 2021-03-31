@@ -7,16 +7,16 @@ use \Couchbase\User;
 function getCollections($username, $password) {
     print "create-collection-manager\n";
 
-	// tag::create-collection-manager[]
+    // tag::create-collection-manager[]
     $options = new \Couchbase\ClusterOptions();
     $options->credentials($username, $password);
     $cluster = new \Couchbase\Cluster("localhost", $options);
     $bucket = $cluster->bucket("travel-sample");
 
     $collections = $bucket->collections();
-	// end::create-collection-manager[]
+    // end::create-collection-manager[]
 
-	return $collections;
+    return $collections;
 }
 
 function main() {
@@ -55,7 +55,7 @@ function main() {
     // end::create-scope[]
 
     print "scopeAdmin\n";
-	// tag::scopeAdmin[]
+    // tag::scopeAdmin[]
 
     $user = new \Couchbase\User();
     $user->setUsername("scopeAdmin");
@@ -67,7 +67,7 @@ function main() {
     ]);
 
     $users->upsertUser($user);
-	// end::scopeAdmin[]
+    // end::scopeAdmin[]
 
     $collections = getCollections("scopeAdmin", "password");
 
