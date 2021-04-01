@@ -1,9 +1,5 @@
 <?php
 
-use \Couchbase\ClusterOptions;
-use \Couchbase\Cluster;
-use \Couchbase\User;
-
 function getCollections($username, $password) {
     print "create-collection-manager\n";
 
