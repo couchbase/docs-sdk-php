@@ -4,48 +4,45 @@
 
 [abstract]
 Provisioning cluster resources is managed at the collection or bucket level, depending upon the service affected.
-Common use cases are outlined here, more recherché use cases are covered in the https://pkg.go.dev/github.com/couchbase/gocb/v2?tab=doc[API docs].
+Common use cases are outlined here, more recherché use cases are covered in the https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0/namespaces/couchbase.html[API docs].
 
 include::6.5@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
 
 The PHP SDK also comes with some convenience functionality for common Couchbase management requests.
-////
+
 Management operations in the SDK may be performed through several interfaces depending on the object:
 
-* BucketManager -- `Cluster.Buckets()`
-* UserManager -- `Cluster.Users()` // see xref
-* QueryIndexManager -- `Cluster.QueryIndexes()`
-* AnalyticsIndexManager -- `Cluster.AnalyticsIndexes()`
-* SearchIndexManager -- `Cluster.SearchIndexes()`
-* CollectionManager -- `Bucket.Collections()`
-* ViewIndexManager -- `Bucket.ViewIndexes()`.
-////
-NOTE: When using a Couchbase version earlier than 6.5, you must create a valid Bucket connection using `cluster.Bucket(name)` before you can use cluster level managers.
+* BucketManager -- `Cluster.buckets()`
+* UserManager -- `Cluster.users()`
+* QueryIndexManager -- `Cluster.queryIndexes()`
+// * AnalyticsIndexManager -- `Cluster.AnalyticsIndexes()` - this doesn't seem to be supported in the API?
+* SearchIndexManager -- `Cluster.searchIndexes()`
+* CollectionManager -- `Bucket.collections()`
+* ViewIndexManager -- `Bucket.viewIndexes()`
+
+NOTE: When using a Couchbase version earlier than 6.5, you must create a valid Bucket connection using `Cluster.bucket(name)` before you can use cluster level managers.
 
 
 == Creating and Removing Buckets
 
-The `ClusterManager` interface may be used to create and delete buckets from the Couchbase cluster.
-It is instantiated through the `Cluster.Buckets()` method.
+The `BucketManager` class may be used to create and delete buckets from the Couchbase cluster.
+It is instantiated through the `Cluster.buckets()` method.
 
-////
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=creatingbucketmgr]
+include::howtos:example$provisioning-resources-buckets.php[tag=createBucketMgr]
 ----
-////
 
-The `CreateBucketSettings` and `BucketSettings` structs are used for creating and updating buckets, `BucketSettings` is also used for exposing information about existing buckets.
+The `BucketSettings` class is used for creating/removing buckets and exposing information about existing ones.
 
 include::6.5@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning]
 
-////
 Here is the list of parameters available:
 
 |====
 | Name | Description | Can be updated
 | `Name string` | The name of the bucket, required for creation. | false
-| `FlushEnabled boolean` | Enables flushing to be performed on this bucket (see the <<go-flushing>> section below). | true
+| `FlushEnabled boolean` | Enables flushing to be performed on this bucket (see the <<php-flushing>> section below). | true
 | `ReplicaIndexDisabled boolean` | Whether or not to replicate indexes. | false
 | `RAMQuotaMB uint64` | How much memory should each node use for the bucket, required for creation. | true
 | `NumReplicas uint32` | The number of replicas to use for the bucket. | true
@@ -58,38 +55,31 @@ Here is the list of parameters available:
 
 The following example creates a "hello" bucket:
 
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=createBucket]	
-----
-
-We can now get this bucket and update it to enable Flush:
-
-[source,golang,indent=0]
-----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=updateBucket]
+include::howtos:example$provisioning-resources-buckets.php[tag=createBucket]
 ----
 
 Once you no longer need to use the bucket, you can remove it:
 
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=removeBucket]
+include::howtos:example$provisioning-resources-buckets.php[tag=removeBucket]
 ----
-////
 
-[#go-flushing]
+
+[#php-flushing]
 == Flushing Buckets
 
 include::6.5@sdk:shared:partial$flush-info-pars.adoc[tag=flush-intro]
 
 You can flush a bucket in the SDK by using the `flush()` method:
-////
-[source,golang,indent=0]
+
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=flushBucket]
+include::howtos:example$provisioning-resources-buckets.php[tag=flushBucket]
 ----
-////
+
 The `flush()` operation may fail if the bucket does not have https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-BucketSettings.html[flush enabled], in that case it will return an `ErrBucketNotFlushable`.
 
 
@@ -104,58 +94,51 @@ In general,you will rarely need to work with Index Managers from the SDK.
 For those occasions when you do, please see the relevant API docs:
 
 * QueryIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-QueryIndexManager.html[`QueryIndexManager`];
-// * AnalyticsIndexManager -- https://pkg.go.dev/github.com/couchbase/gocb/v2?tab=doc#Cluster.AnalyticsIndexes[``];
 * SearchIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-SearchIndexManager.html[`SearchIndexManager`];
 * ViewIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-ViewIndexManager.html[`ViewIndexManager`].
-
-
-// * Query
-
-// * Search - note & link to FTS page & API?
 
 == View Management
 
 include::6.5@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
 
-In the SDK, design documents are represented by the `DesignDocument` and `View` structs.
+In the SDK, design documents are represented by the `DesignDocument` and `View` classes.
 All operations on design documents are performed on the `ViewIndexManager` instance:
 
-////
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-views.go[tag=viewmgr]
+include::howtos:example$provisioning-resources-views.php[tag=createViewMgr]
 ----
 
 The following example upserts a design document with two views:
 
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-views.go[tag=createView]
+include::howtos:example$provisioning-resources-views.php[tag=createView]
 ----
 
 include::6.5@sdk:shared:partial$flush-info-pars.adoc[tag=one-view-update-warning]
 
-Note the use of `DesignDocumentNamespaceDevelopment`, the other option is `DesignDocumentNamespaceProduction`.
-This parameter specifies whether the design document should be created as development, or as production -- with the former running over only a small fraction of the documents.
+Note the name of the design document can be prefixed with `_design/dev_` or `_design/`. This indicates whether the design document should be created as development, or as production -- with the former running over only a small fraction of the documents.
 
 Now that we've created a design document we can fetch it:
 
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-views.go[tag=getView]
+include::howtos:example$provisioning-resources-views.php[tag=getView]
 ----
 
-We've created the design document using `DesignDocumentNamespaceDevelopment` and now want to push it to production, we can do this with:
+// Not able to see anything about publishing design documents in API docs:
+// https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-ViewIndexManager.html
+// We've created the design document using `_design/dev` namespace and now want to push it to production, we can do this with:
 
-[source,golang,indent=0]
-----
-include::devguide:example$go/provisioning-resources-views.go[tag=publishView]
-----
+// [source,php,indent=0]
+// ----
+// include::howtos:example$provisioning-resources-views.php[tag=publishView]
+// ----
 
 To remove this design document:
 
-[source,golang,indent=0]
+[source,php,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-views.go[tag=removeView]
+include::howtos:example$provisioning-resources-views.php[tag=removeView]
 ----
-////
