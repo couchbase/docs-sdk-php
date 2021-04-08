@@ -8,11 +8,13 @@ Key Value (KV) or data service offers the simplest way to retrieve or mutate dat
 Here we cover CRUD operations, document expiration, and optimistic locking with CAS.
 
 
-////
-The complete code sample used on this page can be downloaded from
-//  xref::example$document.cs[here]
-- from which you can see in context how to authenticate and connect to a Couchbase Cluster, then perform these Bucket operations.
-////
+The complete code samples used on this page can be found here:
+
+- https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/kv-crud.php[kv-crud.php]
+
+- https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/kv-expiry.php[kv-expiry.php]
+
+- https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/kv-counter.php[kv-counter.php]
 
 == Documents
 
@@ -93,7 +95,7 @@ The following example demonstrates using the newer durability features available
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=removewithdurability]
+include::example$kv-crud.php[tag=upsertwithdurability]
 ----
 
 To stress, durability is a useful feature but should not be the default for most applications, as there is a performance consideration,
@@ -104,7 +106,7 @@ and the default level of safety provided by Couchbase will be reasonable for the
 .Sub-Document Operations
 ====
 All of these operations involve fetching the complete document from the Cluster.
-Where the number of operations or other circumstances make bandwidth a significant issue, the SDK can work on just a specific _path_ of the document with xref:subdocument-operations.adoc[Sub-Docunent Operations].
+Where the number of operations or other circumstances make bandwidth a significant issue, the SDK can work on just a specific _path_ of the document with xref:subdocument-operations.adoc[Sub-Document Operations].
 ====
 
 == Retrieving full documents
@@ -191,6 +193,21 @@ include::example$kv-counter.php[tag=decrementwithoptions]
 ----
 
 NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change
+
+== Scoped KV Operations
+
+It is possible to perform scoped key value operations on named xref:7.0@server:learn:data/scopes-and-collections.adoc[`Collections`] _with the beta version of the next Couchbase Server release, 7.0β_.
+See the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html[API docs] for more information.
+
+CAUTION: This feature is marked xref:project-docs:compatibility.adoc#interface-stability[_Uncommitted_].
+Expect a promotion to _Committed_ API in a future minor release.
+
+Here is an example showing an upsert in the `users` collection, which lives in the `travel-sample.tenant_agent_00` keyspace:
+
+[source,php]
+----
+include::example$kv-crud.php[tag=namedcollectionupsert]
+----
 
 == Additional Resources
 
