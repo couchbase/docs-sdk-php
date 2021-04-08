@@ -60,7 +60,7 @@ The following example creates a "hello" bucket:
 
 [source,golang,indent=0]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=createBucket]	
+include::devguide:example$go/provisioning-resources-buckets.go[tag=createBucket]
 ----
 
 We can now get this bucket and update it to enable Flush:
@@ -95,7 +95,51 @@ The `flush()` operation may fail if the bucket does not have https://docs.couchb
 
 == Collection Management
 
-This is a xref:6.5@server:developer-preview:collections/collections-overview.adoc[Developer Preview feature], see the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-CollectionManager.html[API doc].
+[.status]#Developer Preview#
+
+The CollectionManager interface may be used to create and delete scopes and collections from the Couchbase cluster.
+It is instantiated through the `Bucket.Collections()` method.
+Refer to the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-CollectionManager.html[`CollectionManager` API documentation]
+for further details.
+
+[source,php]
+----
+include::example$collection-manager.php[tag=create-collection-manager,indent=0]
+----
+
+You can create a scope:
+
+[source,php]
+----
+include::example$collection-manager.php[tag=create-scope,indent=0]
+----
+
+You can then create a collection within that scope:
+
+[source,php]
+----
+include::example$collection-manager.php[tag=create-collection,indent=0]
+----
+
+Finally, you can drop unneeded collections and scopes:
+
+[source,php]
+----
+include::example$collection-manager.php[tag=drop-collection,indent=0]
+
+include::example$collection-manager.php[tag=drop-scope,indent=0]
+----
+
+Note that you require at least the https://docs.couchbase.com/server/7.0/learn/security/roles.html#bucket-admin[Bucket Admin] privilege to create or drop a Scope.
+The same role also lets you manage Collections, though a more minimal set of privileges is https://docs.couchbase.com/server/7.0/learn/security/roles.html#manage-collections-in-scope[Manage Collections in Scope] along with https://docs.couchbase.com/server/7.0/learn/security/roles.html#data-reader[Data Reader].
+
+You can create users with the appropriate RBAC programmatically:
+[source,php]
+----
+include::example$collection-manager.php[tag=bucketAdmin, indent=0]
+
+include::example$collection-manager.php[tag=scopeAdmin, indent=0]
+----
 
 
 == Index Management
