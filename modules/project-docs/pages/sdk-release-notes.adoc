@@ -1,11 +1,12 @@
 = Couchbase PHP Release Notes and Archives
+:description: Release notes, installation instructions, and download archive for the Couchbase PHP Client.
 :navtitle: Release Notes
 :page-topic-type: project-doc
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
 
 
 [abstract]
-Release notes, installation instructions, and download archive for the Couchbase PHP Client.
+{description}
 
 These pages cover the 3.0 versions of the Couchbase PHP SDK.
 For release notes, download links, and installation methods for 2.6 and earlier releases of the Couchbase PHP Client, please see the xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].

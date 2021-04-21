@@ -1,4 +1,5 @@
 = Transcoders & Non-JSON Documents
+:description: The PHP SDK supports common JSON document requirements out-of-the-box.
 :nav-title: Using Transcoders
 :page-topic-type: howtos
 
@@ -6,7 +7,7 @@ Information on transcoders can be found in the https://docs.couchbase.com/sdk-ap
 
 
 [abstract]
-The PHP SDK supports common JSON document requirements out-of-the-box.
+{description}
 Custom transcoders provide support for applications needing to perform advanced operations, including supporting non-JSON data.
 
 The PHP SDK uses the concept of encoder and decoder functions, which are used whenever data is sent to or retrieved from Couchbase Server.

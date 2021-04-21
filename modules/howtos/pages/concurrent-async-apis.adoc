@@ -1,12 +1,13 @@
 = Choosing an API
+:description: The PHP SDK offers only a blocking API -- but this is not necessarily a limitation.
 :navtitle: Choosing an API
 :page-topic-type: howto
 :page-aliases: ROOT:async-programming,ROOT:batching-operations,multiple-apis
 
 [abstract]
-The PHP SDK offers only a blocking API -- but this is not necessarily a limitation. 
-Using a combination of data batching and process forking or the batching API (not available just yet) 
-we can perform effective bulk operations over data. 
+{description}
+Using a combination of data batching and process forking or the batching API (not available just yet)
+we can perform effective bulk operations over data.
 
 Batching operations allows you to make better utilization of your network and speed up your application by increasing network throughput and reducing latency. 
 Batched operations work by pipelining requests over the network. 
