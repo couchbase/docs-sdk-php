@@ -15,8 +15,12 @@ The cluster in turn pipelines responses back to the client.
 When operations are batched, there are fewer IP packets to be sent over the network 
 (since there are fewer individual TCP segments).
 
+
+////
 == Batching with Multi Get, Multi Options
 Coming soon!
+////
+
 
 == Batching with process forks
 Bulk loading with multiple PHP processes provides a useful way of achieving the effectiveness of parallel operations. 
