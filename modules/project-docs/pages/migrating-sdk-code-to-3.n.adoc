@@ -242,6 +242,11 @@ foreach ($res->rows() as $row) {
 }
 ----
 
+=== Batching with Multi Get, Multi Options
+
+This feature of the 2.x SDK is not present in the 3.x SDK.
+See the xref:howtos:concurrent-async-apis.adoc[batching docs] for use of process forks.
+
 
 == Management APIs
 
