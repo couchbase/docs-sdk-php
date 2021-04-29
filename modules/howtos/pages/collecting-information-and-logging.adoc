@@ -1,9 +1,10 @@
 = Collecting Information and Logging in the PHP SDK with Couchbase Server
+:description: The PHP SDK logs its own and libcouchbase events using the default logger implementation in PHP.
 :navtitle: Collecting Information
 :page-topic-type: howto
 
 [abstract]
-The PHP SDK logs its own and libcouchbase events using the default logger implementation in PHP.
+{description}
 
 == Logging
 

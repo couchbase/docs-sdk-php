@@ -1,4 +1,5 @@
 = Handling Errors
+:description: Practical steps to handle errors and exceptions.
 :navtitle: Handling Errors
 :page-topic-type: howto
 :page-aliases: handling-error-conditions.adoc
@@ -6,7 +7,7 @@
 :lang: php
 
 [abstract]
-Practical steps to handle errors and exceptions.
+{description}
 
 
 Errors are inevitable.
