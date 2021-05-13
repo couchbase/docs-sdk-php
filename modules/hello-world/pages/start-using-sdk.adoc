@@ -22,7 +22,7 @@ After installing the C SDK, install the PHP SDK through your PHP distribution's 
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.1.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.2.tgz
 ----
 
 Further details can be found on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
