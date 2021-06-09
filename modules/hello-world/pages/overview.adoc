@@ -1,4 +1,4 @@
-= Couchbase PHP SDK 3.1
+= Couchbase PHP SDK 3.2
 :page-type: landing-page
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
@@ -32,7 +32,7 @@ $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.1.2.tgz
 [.column]
 ====== {empty}
 
-== Couchbase PHP SDK 3.1
+== Couchbase PHP SDK 3.2
 
 ++++
 <div class="card-row three-column-row">
