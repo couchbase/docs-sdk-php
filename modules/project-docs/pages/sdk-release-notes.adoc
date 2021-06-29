@@ -185,6 +185,35 @@ In 3.1.0 the issue https://issues.couchbase.com/browse/PCBC-742[has been fixed],
 * https://issues.couchbase.com/browse/PCBC-591[PCBC-591]:
   Updated error handling howto documentation.
 
+  
+== Version 3.0.5 (6 December 2020)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.5/index.html
+
+* https://issues.couchbase.com/browse/PCBC-699[PCBC-699]:
+Added support for minimal durability settings for bucket manager.
+
+* https://issues.couchbase.com/browse/PCBC-718[PCBC-718]:
+Deprecated `expiry()` on `GetResult` and `LookupInResult`. 
+`expiry()` is deprecated in favour of `expiryTime()` which returns `DateTimeInterface`.
+
+* https://issues.couchbase.com/browse/PCBC-715[PCBC-715]:
+Refactored document expiry duration:
+
+    - Allowing one to specify `DateTimeInterface` objects as expiry value in mutation options;
+
+    - When expiration is set as long in seconds, treat the value as relative if it is less than 50 years in seconds. 
+      In this case take the current time and add to the expiration value.
+
+* https://issues.couchbase.com/browse/PCBC-733[PCBC-733]:
+Added missing fields for `SearchFacet` results
+
+* https://issues.couchbase.com/browse/PCBC-720[PCBC-720]:
+Added option to disable search scoring.
+
+* Support PHP 8. 
+Dropped support for PHP older than 7.2.
+
 
 == Version 3.0.4 (11 November 2020)
 
