@@ -105,8 +105,9 @@ Configuring transcoders can be done in multiple ways.
 === INI file
 Configuration via the ini file is done using the key `couchbase.encoder.format`.
 The values allowed are:
-    * json - will use the `\Couchbase\defaultEncoder` and `\Couchbase\defaultDecoder`
-    * php - will use the `\Couchbase\passThruEncoder` and `\Couchbase\passThruDecoder`
+
+* json - will use the `\Couchbase\defaultEncoder` and `\Couchbase\defaultDecoder`
+* php - will use the `\Couchbase\passThruEncoder` and `\Couchbase\passThruDecoder`
 
 An additional field of `couchbase.decoder.json_arrays` is also available for use with the `\Couchbase\defaultDecoder`.
 This field specifies how JSON objects are decoded by `json_decode`:
