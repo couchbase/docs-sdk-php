@@ -11,11 +11,11 @@ Here we cover CRUD operations, document expiration, and optimistic locking with 
 
 The complete code samples used on this page can be found here:
 
-- https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/kv-crud.php[kv-crud.php]
+- https://github.com/couchbase/docs-sdk-php/blob/release/3.2/modules/howtos/examples/kv-crud.php[kv-crud.php]
 
-- https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/kv-expiry.php[kv-expiry.php]
+- https://github.com/couchbase/docs-sdk-php/blob/release/3.2/modules/howtos/examples/kv-expiry.php[kv-expiry.php]
 
-- https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/kv-counter.php[kv-counter.php]
+- https://github.com/couchbase/docs-sdk-php/blob/release/3.2/modules/howtos/examples/kv-counter.php[kv-counter.php]
 
 == Documents
 
@@ -63,7 +63,7 @@ The example above also shows how to handle the case when optimistic falure will 
 Expiration sets an explicit time to live (TTL) for a document.
 We'll discuss modifying `expiry` in more details xref:#expiration-ttl[below].
 For a discussion of item (Document) _vs_ Bucket expiration, see the
-xref:6.5@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
+xref:7.0@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
 
 [source,php]
 ----
@@ -163,7 +163,7 @@ Another way to change expiration time is to use `getAndTouch()` method of the co
 include::example$kv-expiry.php[tag=getandtouch]
 ----
 
-include::6.5@sdk:shared:partial$documents.adoc[tag=exp-note]
+include::7.0@sdk:shared:partial$documents.adoc[tag=exp-note]
 
 
 == Atomic Counters

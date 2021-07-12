@@ -24,7 +24,7 @@ $connectionString = "couchbase://127.0.0.1?" .
 
 $cluster = new Cluster($connectionString, $options);
 $bucket = $cluster->bucket("travel-sample");
-$collection = $bucket->defaultCollection();
+$collection = $bucket->scope("inventory")->collection("airport");
 // end::thresholdLogging[]
 
 // tag::thresholdLongProcessing[]

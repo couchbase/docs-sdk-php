@@ -55,10 +55,10 @@ function lockingAndCas(Collection $collection, string $userId) {
 
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
-$cluster = new Cluster("couchbase://192.168.1.101", $opts);
+$cluster = new Cluster("couchbase://localhost", $opts);
 
-$bucket = $cluster->bucket("default");
-$collection = $bucket->defaultCollection();
+$bucket = $cluster->bucket("travel-sample");
+$collection = $bucket->scope("inventory")->collection("airport");
 
 $collection->upsert("userId", ["visit_count" => 0]);
 

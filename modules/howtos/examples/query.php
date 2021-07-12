@@ -11,25 +11,25 @@ $options->credentials("Administrator", "password");
 $cluster = new Cluster("couchbase://localhost", $options);
 
 $bucket = $cluster->bucket("travel-sample");
-$collection = $bucket->defaultCollection();
+$collection = $bucket->scope("inventory")->collection("hotel");
 
 // tag::positionalParams[]
 $options = new QueryOptions();
-$options->positionalParameters(["hotel"]);
+$options->positionalParameters(["France"]);
 // NOTE: string is single-quoted to avoid PHP variable substitutions and pass '$1' as is
-$result = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$1 LIMIT 10;', $options);
+$result = $cluster->query('SELECT x.* FROM `travel-sample`.inventory.hotel x WHERE x.`country`=$1 LIMIT 10;', $options);
 // end::positionalParams[]
 
 // tag::namedParams[]
 $options = new QueryOptions();
-$options->namedParameters(['type' => "hotel"]);
-$result = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$type LIMIT 10;', $options);
+$options->namedParameters(['country' => "France"]);
+$result = $cluster->query('SELECT x.* FROM `travel-sample`.inventory.hotel x WHERE x.`country`=$country LIMIT 10;', $options);
 // end::namedParams[]
 
 // tag::results[]
 $options = new QueryOptions();
-$options->positionalParameters(["hotel"]);
-$result = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`=$1 LIMIT 10;', $options);
+$options->positionalParameters(["France"]);
+$result = $cluster->query('SELECT x.* FROM `travel-sample`.inventory.hotel x WHERE x.`country`=$1 LIMIT 10;', $options);
 
 foreach ($result->rows() as $row) {
     printf("Name: %s, Address: %s, Description: %s\n", $row["name"], $row["address"], $row["description"]);
@@ -37,7 +37,7 @@ foreach ($result->rows() as $row) {
 // end::results[]
 
 // tag::scan[]
-$query = 'SELECT x.* FROM `travel-sample` x WHERE x.`type`="hotel" LIMIT 10';
+$query = 'SELECT x.* FROM `travel-sample`.inventory.hotel x WHERE x.`country`="France" LIMIT 10';
 $opts = new QueryOptions();
 $opts->scanConsistency(QueryScanConsistency::REQUEST_PLUS);
 $res = $cluster->query($query, $opts);
@@ -48,25 +48,28 @@ foreach ($res->rows() as $row) {
 }
 printf("Execution Time: %d\n", $res->metaData()->metrics()['executionTime']);
 
+// NOTE: This currently fails with Couchbase Internal Server error.
+// Server issue tracked here: https://issues.couchbase.com/browse/MB-46876
+// Add back in once Couchbase Server 7.0.1 is available, which will fix this issue.
 // tag::consistentWith[]
 // create/update document (mutation)
-$res = $collection->upsert("id", ["name" => "somehotel", "type" => "hotel"]);
-
-// create mutation state from mutation results
-$state = new MutationState();
-$state->add($res);
-
-// use mutation state with query optionss
-$opts = new QueryOptions();
-$opts->consistentWith($state);
-$res = $cluster->query('SELECT x.* FROM `travel-sample` x WHERE x.`type`="hotel" AND x.name LIKE "%hotel%" LIMIT 10', $opts);
-// end::consistentWith[]
-$idx = 1;
-foreach ($res->rows() as $row) {
-    printf("%d. %s\n", $idx++, $row['name']);
-}
-
-printf("Execution Time: %d\n", $res->metaData()->metrics()['executionTime']);
+//$res = $collection->upsert("id", ["name" => "somehotel", "type" => "hotel"]);
+//
+//// create mutation state from mutation results
+//$state = new MutationState();
+//$state->add($res);
+//
+//// use mutation state with query optionss
+//$opts = new QueryOptions();
+//$opts->consistentWith($state);
+//$res = $cluster->query('SELECT x.* FROM `travel-sample`.inventory.hotel x WHERE x.`country`="United States" AND x.city LIKE "%pool%" LIMIT 10', $opts);
+//// end::consistentWith[]
+//$idx = 1;
+//foreach ($res->rows() as $row) {
+//    printf("%d. %s\n", $idx++, $row['name']);
+//}
+//
+//printf("Execution Time: %d\n", $res->metaData()->metrics()['executionTime']);
 
 // tag::scope-level-query[]
 $opts = new QueryOptions();

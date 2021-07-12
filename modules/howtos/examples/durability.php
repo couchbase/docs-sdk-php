@@ -6,9 +6,9 @@ use \Couchbase\DurabilityLevel;
 
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
-$cluster = new Cluster("couchbase://192.168.1.101", $opts);
+$cluster = new Cluster("couchbase://localhost", $opts);
 
-$collection = $cluster->bucket("travel-sample")->defaultCollection();
+$collection = $cluster->bucket("travel-sample")->scope("inventory")->collection("airport");
 
 // #tag::enhanced[]
 $document = ["foo" => "bar", "bar" => "foo"];
