@@ -96,7 +96,7 @@ The `flush()` operation may fail if the bucket does not have https://docs.couchb
 
 == Collection Management
 
-[.status]#Developer Preview#
+[.status]
 
 The CollectionManager interface may be used to create and delete scopes and collections from the Couchbase cluster.
 It is instantiated through the `Bucket.Collections()` method.
