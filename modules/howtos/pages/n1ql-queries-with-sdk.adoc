@@ -12,13 +12,13 @@ Querying can solve typical programming tasks such as finding a user profile by e
 
 Our query service uses N1QL, which will be fairly familiar to anyone who's used any dialect of SQL.
 xref:#additional_resources[Further resources] for learning about N1QL are listed at the bottom of the page.
-Before you get started you may wish to checkout the xref:6.0@server:n1ql:n1ql-language-reference/index.adoc[N1QL intro page], or just dive in with a query against our travel sample data set.
+Before you get started you may wish to checkout the xref:7.0@server:n1ql:n1ql-language-reference/index.adoc[N1QL intro page], or just dive in with a query against our travel sample data set.
 In this case, the one thing that you need to know is that in order to make a Bucket queryable, it must have at least one index defined.
 You can define a _primary_ index on a bucket.
 When a primary index is defined you can issue non-covered queries on the bucket as well.
 
 Use
-xref:6.5@server::tools/cbq-shell.html[cbq], our interactive Query shell.
+xref:7.0@server::tools/cbq-shell.html[cbq], our interactive Query shell.
 Open it, and enter the following:
 
 [source,n1ql]
@@ -51,7 +51,7 @@ include::example$query.php[tag=positionalParams]
 include::example$query.php[tag=namedParams]
 ----
 
-The complete code for this page's examples can be found https://github.com/couchbase/docs-sdk-php/blob/release/3.1/modules/howtos/examples/query.php:[here]
+The complete code for this page's examples can be found https://github.com/couchbase/docs-sdk-php/blob/release/3.2/modules/howtos/examples/query.php:[here]
 
 
 == Handling Results
@@ -84,6 +84,10 @@ Select this when consistency is always more important than performance.
 include::example$query.php[tag=scan]
 ----
 
+// Due to https://issues.couchbase.com/browse/MB-46876 this section won’t work with named scopes and collections,
+// we need to omit this information until Couchbase Server 7.0.1 is available, which will contain the fix for this bug.
+// We should avoid showing the user this information until then.
+////
 More granular consistency requirement could be achieved with `consistentWith` query option, which accepts
 `MutationState` object that contains mutations the system must wait for before process the query
 
@@ -91,6 +95,7 @@ More granular consistency requirement could be achieved with `consistentWith` qu
 ----
 include::example$query.php[tag=consistentWith]
 ----
+////
 
 == Querying at Scope Level
 
@@ -115,7 +120,7 @@ Be sure to check that your use case fits your selection of query service.
 
 // For a deeper dive into N1QL from the SDK, refer to our xref:[N1QL SDK concept doc].
 
-The xref:6.0@server:n1ql:n1ql-language-reference/index.adoc[Server doc N1QL intro] introduces up a complete guide to the N1QL language, including all of the latest additions.
+The xref:7.0@server:n1ql:n1ql-language-reference/index.adoc[Server doc N1QL intro] introduces up a complete guide to the N1QL language, including all of the latest additions.
 
 The http://query.pub.couchbase.com/tutorial/#1[N1QL interactive tutorial] is a good introduction to the basics of N1QL use.
 

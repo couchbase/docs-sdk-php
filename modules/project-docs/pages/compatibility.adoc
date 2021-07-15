@@ -113,7 +113,7 @@ Although installable or compilable on many other platforms, we cannot provide su
 |===
 
 
-include::6.5@sdk:shared:partial$network-requirements.adoc[]
+include::7.0@sdk:shared:partial$network-requirements.adoc[]
 
 
-include::6.5@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]
+include::7.0@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]

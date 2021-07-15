@@ -29,7 +29,7 @@ For example, the script below:
 [source,php]
 ----
 $cluster = new CouchbaseCluster('couchbase://localhost');
-$bucket = $cluster->openBucket('default');
+$bucket = $cluster->openBucket('travel-sample');
 $bucket->get('foo');
 ----
 

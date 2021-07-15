@@ -8,22 +8,21 @@
 
  
 
-For complex and long-running queries, involving large ad hoc join, set, aggregation, and grouping operations, Couchbase Data Platform offers the xref:6.5@server:analytics:introduction.adoc[Couchbase Analytics Service (CBAS)].
+For complex and long-running queries, involving large ad hoc join, set, aggregation, and grouping operations, Couchbase Data Platform offers the xref:7.0@server:analytics:introduction.adoc[Couchbase Analytics Service (CBAS)].
 This is the analytic counterpart to our xref:n1ql-queries-with-sdk.adoc[operational data focussed Query Service].
 The analytics service is available in Couchbase Data Platform 6.0 and later (developer preview in 5.5).
 
 
 == Getting Started
 
-After familiarizing yourself with our xref:6.5@server:analytics:primer-beer.adoc[introductory primer],
+After familiarizing yourself with our xref:7.0@server:analytics:primer-beer.adoc[introductory primer],
 in particular creating a dataset and linking it to a bucket to shadow the operational data, 
 try Couchbase Analytics using the PHP SDK.
 Intentionally, the API for analytics is very similar to that of the query service. 
 In these examples we will be using an `airports` dataset created on the `travel-sample` bucket.
 
-// TODO: update when valid
-// In PHP SDK 2.x, Analytics was only available on the `Bucket` object;
-// in PHP SDK 3.0, Analytics queries are submitted using the Cluster reference, not a Bucket or Collection:
+In PHP SDK 2.x, Analytics was only available on the `Bucket` object;
+in PHP SDK 3.x, Analytics queries are submitted using the Cluster reference, not a Bucket or Collection:
 
 [source,php]
 ----
@@ -85,7 +84,7 @@ include::example$analytics.php[tag=options]
 
 The analytics query result may contain various sorts of data and metadata, 
 depending upon the nature of the query, 
-as you will have seen when working through our xref:6.5@server:analytics:primer-beer.adoc[introductory primer]. 
+as you will have seen when working through our xref:7.0@server:analytics:primer-beer.adoc[introductory primer].
 
 [source,php]
 ----
@@ -117,3 +116,32 @@ include::example$analytics.php[tag=metadata]
 
 
 For a listing of available `Metrics` in `MetaData`, see the xref:concept-docs:analytics-for-sdk-users.adoc[Understanding Analytics] SDK doc.
+
+
+== Scoped Queries on Named Collections
+
+In addition to creating a dataset with a WHERE clause to filter the results to documents with certain characteristics, you can also create a dataset against a named collection, for example:
+
+[source,n1ql]
+----
+ALTER COLLECTION `travel-sample`.inventory.airport ENABLE ANALYTICS;
+
+-- NB: this is more or less equivalent to:
+CREATE DATAVERSE `travel-sample`.inventory;
+CREATE DATASET `travel-sample`.inventory.airport ON `travel-sample`.inventory.airport;
+----
+
+We can then query the Dataset as normal, using the fully qualified keyspace:
+
+[source,php]
+----
+include::example$analytics.php[tag=handle-collection,indent=0]
+----
+
+Note that using the `CREATE DATASET` syntax we could choose any Dataset name in any Dataverse, including the default.
+However the SDK supports this standard convention, allowing us to query from the Scope object:
+
+[source,php]
+----
+include::example$analytics.php[tag=handle-scope,indent=0]
+----

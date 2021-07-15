@@ -7,7 +7,7 @@ $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
 $cluster = new Cluster("couchbase://localhost", $opts);
 
-$collection = $cluster->bucket("travel-sample")->defaultCollection();
+$collection = $cluster->bucket("travel-sample")->scope("inventory")->collection("airport");
 
 
 // tag::document-not-found-exception[]

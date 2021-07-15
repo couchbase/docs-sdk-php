@@ -7,7 +7,8 @@
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
 It is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
 
-The Couchbase PHP SDK 3.x is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area, and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 6.5 as a xref:concept-docs:collections.adoc[developer preview]).
+The Couchbase PHP SDK 3.x is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area,
+and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 7.0).
 
 The Couchbase PHP SDK is compatible with PHP 7.3+.
 
@@ -35,7 +36,7 @@ and note that the Couchbase SDK depends on the JSON module, therefore that modul
 
 == Hello Couchbase
 
-Couchbase uses xref:6.5@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
+Couchbase uses xref:7.0@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
 Here we will use the _Full Admin_ role created during installation of the Couchbase Data Platform.
 For production client code, you will want to use xref:howtos:managing-connections.adoc#rbac[more appropriate, restrictive settings], but here we want to get you up and running quickly.
 If you're developing client code on the same VM or machine as the Couchbase Server, your URI can be _localhost_.
@@ -68,17 +69,26 @@ If you installed the travel sample data bucket, substitute _travel-sample_ for _
 
 [source,php]
 ----
-// get a collection reference
+// get a default collection reference
 $collection = $bucket->defaultCollection();
 
 // or for named collection
 $collection = $bucket->scope("myapp")->collection("my-collection");
 ----
 
-The 3.x SDK is ready for the introduction of xref:6.5@server:developer-preview:collections/collections-overview.adoc[Collections] in the xref:7.0@server:learn:data/scopes-and-collections.adoc[upcoming 7.0 release] of Couchbase Server.
-Couchbase Server 6.5 & 6.6 bring a limited xref:6.6@server:developer-preview:preview-mode.adoc[Developer Preview] of Collections, allowing Documents to be grouped by purpose or theme, according to a specified _Collection_.
-Here we've used the `DefaultCollection`, which provides the same functionality as bucket-level operations did in previous versions of Couchbase Server.
+The 3.2 SDK supports full integration with the xref:7.0@server:learn:data:scopes-and-collections.adoc[Collections] feature in the latest release of the Couchbase Data Platform, Couchbase Server 7.0.
+This brings complete support of Collections, allowing Documents to be grouped by purpose or theme, according to a specified Scope.
+Here we will use the `users` collection within the `tenant_agent_00` scope from `travel-sample` bucket as an example.
 
+[source,php]
+----
+$scope = $bucket->scope("tenant_agent_00");
+$collection = $agentScope->collection("users");
+----
+
+The code shows how you would use a named collection and scope. A named or default collection will provide the same functionality as bucket-level operations did in previous versions of Couchbase Server.
+
+The `defaultCollection` must be used when connecting to a 6.6 cluster or earlier.
 [source,php]
 ----
 // upsert document

@@ -53,7 +53,7 @@ use \Couchbase\MutationState;
  */
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
-$cluster = new Cluster("couchbase://192.168.1.101", $opts);
+$cluster = new Cluster("couchbase://localhost", $opts);
 
 // #tag::matchquery[]
 $matchQuery = new MatchSearchQuery("swanky");
@@ -93,7 +93,7 @@ foreach ($res->rows() as $row) {
 
 // #tag::consistency[]
 // Create new hotel document and demonstrate query with consistency requirement
-$collection = $cluster->bucket('travel-sample')->defaultCollection();
+$collection = $cluster->bucket('travel-sample')->scope("inventory")->collection("hotel");
 $hotel = [
     "name" => "super hotel",
     "reviews" => [

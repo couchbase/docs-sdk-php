@@ -16,4 +16,4 @@ and the https://docs.couchbase.com/sdk-api/couchbase-c-client/group__lcb-cntl-se
 
 // section on wide area network support
 
-include::6.5@sdk:shared:partial$client-settings-wide-network.adoc[]
+include::7.0@sdk:shared:partial$client-settings-wide-network.adoc[]

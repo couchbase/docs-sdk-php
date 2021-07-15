@@ -29,8 +29,8 @@ $cluster = new Cluster('couchbase://localhost', $options);
 /*
  * We open the default bucket to store our cached data in.
  */
-$bucket = $cluster->bucket("default");
-$collection = $bucket->defaultCollection();
+$bucket = $cluster->bucket("travel-sample");
+$collection = $bucket->scope("inventory")->collection("airport");
 
 /*
  * Some flags for differentiating what kind of data is stored so our

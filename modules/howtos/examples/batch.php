@@ -43,8 +43,8 @@ use \Couchbase\ClusterOptions;
 function upload_batch($id, $batch) {
   $options = new ClusterOptions();
   $options->credentials("Administrator", "password");
-  $cluster = new Cluster("couchbase://10.112.193.101", $options);
-  $collection = $cluster->bucket("default")->defaultCollection();
+  $cluster = new Cluster("couchbase://localhost", $options);
+  $collection = $cluster->bucket("travel-sample")->scope("inventory")->collection("airport");
   foreach ($batch as $path) {
     $collection->upsert($path, json_decode(file_get_contents($path)));
   }

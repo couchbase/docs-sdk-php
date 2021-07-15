@@ -6,7 +6,7 @@ $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
 $cluster = new Cluster("couchbase://localhost", $opts);
 
-$collection = $cluster->bucket("default")->defaultCollection();
+$collection = $cluster->bucket("travel-sample")->scope("tenant_agent_00")->collection("users");
 
 printf("Creating customer123 document\n");
 $customer123 = json_decode(file_get_contents("customer123.json"));
@@ -14,7 +14,7 @@ $collection->upsert("customer123", $customer123);
 printf("Created customer123 document\n");
 
 // #tag::mutateInIncrement[]
-$result = $collections->mutateIn("customer123", [
+$result = $collection->mutateIn("customer123", [
     new \Couchbase\MutateCounterSpec("logins", 1)
 ]);
 
