@@ -1,4 +1,4 @@
-= MapReduce Views Using the .NET SDK with Couchbase Server
+= MapReduce Views Using the PHP SDK with Couchbase Server
 :description: You can use MapReduce views to create queryable indexes in Couchbase Data Platform.
 :navtitle: MapReduce Views
 :page-topic-type: howto
@@ -7,10 +7,12 @@
 [abstract]
 {description}
 
- 
-////
-include::6.5@sdk:shared:partial$views.adoc[tag=views-intro]
+include::6.6@sdk:shared:partial$views.adoc[tag=views-intro]
 
+
+You can find further information https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-ViewResult.html[in the API docs].
+
+////
 include::6.5@sdk:shared:partial$views.adoc[tag=example-beer]
 
 
