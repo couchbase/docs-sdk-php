@@ -99,7 +99,7 @@ include::example$query.php[tag=consistentWith]
 
 == Querying at Scope Level
 
-It is possible to query off the xref:7.0@server:learn:data/scopes-and-collections.adoc[`Scope` level] _with the beta version of the next Couchbase Server release, 7.0β_,
+It is possible to query off the xref:7.0@server:learn:data/scopes-and-collections.adoc[`Scope` level] _with the new Couchbase Server release, 7.0_,
 using the `query()` method.
 It takes the statement as a required argument, and then allows additional options if needed.
 
