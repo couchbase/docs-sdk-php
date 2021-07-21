@@ -7,6 +7,10 @@
 [abstract]
 {description}
 
+// include::{version-server}@sdk:shared:partial$views.adoc[tag=deprecate]
+include::7.0@sdk:shared:partial$views.adoc[tag=deprecate]
+
+
 include::7.0@sdk:shared:partial$views.adoc[tag=views-intro]
 
 
