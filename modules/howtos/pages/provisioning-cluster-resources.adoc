@@ -96,10 +96,8 @@ The `flush()` operation may fail if the bucket does not have https://docs.couchb
 
 == Collection Management
 
-[.status]
-
 The CollectionManager interface may be used to create and delete scopes and collections from the Couchbase cluster.
-It is instantiated through the `Bucket.Collections()` method.
+It is instantiated through the `Bucket.collections()` method.
 Refer to the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-CollectionManager.html[`CollectionManager` API documentation]
 for further details.
 
@@ -132,18 +130,29 @@ include::example$collection-manager.php[tag=drop-scope,indent=0]
 
 ----
 
-Note that you require at least the https://docs.couchbase.com/server/7.0/learn/security/roles.html#bucket-admin[Bucket Admin] privilege to create or drop a Scope.
-The same role also lets you manage Collections, though a more minimal set of privileges is https://docs.couchbase.com/server/7.0/learn/security/roles.html#manage-collections-in-scope[Manage Collections in Scope] along with https://docs.couchbase.com/server/7.0/learn/security/roles.html#data-reader[Data Reader].
+Note that the most minimal permissions to create and drop a Scope or Collection is
+xref:server:learn:security/roles.adoc#manage-scopes[Manage Scopes]
+along with xref:server:learn:security/roles.adoc#data-reader[Data Reader].
 
 You can create users with the appropriate RBAC programmatically:
 [source,php]
 ----
-include::example$collection-manager.php[tag=bucketAdmin, indent=0]
-
 include::example$collection-manager.php[tag=scopeAdmin, indent=0]
 
 ----
 
+////
+=== Listing the Scopes and Collections available
+
+You can enumerate Scopes and Collections using
+the `CollectionManager` and the properties of the
+`ScopeSpec` and `CollectionSpec` objects retrieved.
+
+[source,php]
+----
+include::example$collection-manager.php[tag=listing-scope-collection,indent=0]
+----
+////
 
 == Index Management
 
