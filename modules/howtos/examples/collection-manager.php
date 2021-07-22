@@ -15,7 +15,7 @@ function main() {
 
     $user = new \Couchbase\User();
     $user->setUsername("scopeAdmin");
-    $user->setDisplayName("Manage Collections in Scope [travel-sample:*]");
+    $user->setDisplayName("Manage Scopes [travel-sample]");
     $user->setPassword("password");
     $user->setRoles([
         (new \Couchbase\Role)->setName("scope_admin")->setBucket("travel-sample"),
@@ -59,6 +59,18 @@ function main() {
         print $e;
     }
     // end::create-collection[]
+    
+    print "listing-scope-collection\n";
+    // tag::listing-scope-collection[]
+    $scopes = $collections->getAllScopes();
+    foreach ($scopes as $scope) {
+        print "Scope {$scope->name()}\n";
+        
+        foreach ($scope->collections() as $collection) {
+            print " - {$collection->name()}\n";
+        }
+    }
+    // end::listing-scope-collection[]
 
     print "drop-collection\n";
     // tag::drop-collection[]

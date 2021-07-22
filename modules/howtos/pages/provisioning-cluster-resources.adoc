@@ -141,7 +141,6 @@ include::example$collection-manager.php[tag=scopeAdmin, indent=0]
 
 ----
 
-////
 === Listing the Scopes and Collections available
 
 You can enumerate Scopes and Collections using
@@ -152,7 +151,6 @@ the `CollectionManager` and the properties of the
 ----
 include::example$collection-manager.php[tag=listing-scope-collection,indent=0]
 ----
-////
 
 == Index Management
 
