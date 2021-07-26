@@ -8,7 +8,7 @@
 [abstract]
 {description}
 
-These pages cover the 3.2 versions of the Couchbase PHP SDK.
+These pages cover the 3.x versions of the Couchbase PHP SDK.
 For release notes, download links, and installation methods for 2.6 and earlier releases of the Couchbase PHP Client, please see the xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
 
 // include::start-using-sdk.adoc[tag=prep]
