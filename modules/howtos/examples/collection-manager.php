@@ -1,20 +1,5 @@
 <?php
 
-function getCollections($username, $password) {
-    print "create-collection-manager\n";
-
-    // tag::create-collection-manager[]
-    $options = new \Couchbase\ClusterOptions();
-    $options->credentials($username, $password);
-    $cluster = new \Couchbase\Cluster("localhost", $options);
-    $bucket = $cluster->bucket("travel-sample");
-
-    $collections = $bucket->collections();
-    // end::create-collection-manager[]
-
-    return $collections;
-}
-
 function main() {
     $connectionString = "couchbase://localhost";
     $options = new \Couchbase\ClusterOptions();
@@ -23,23 +8,34 @@ function main() {
 
     $bucket = $cluster->bucket("travel-sample");
 
+
+    print "scopeAdmin\n";
+    // tag::scopeAdmin[]
     $users = $cluster->users();
 
-    print "bucketAdmin\n";
-    // tag::bucketAdmin[]
     $user = new \Couchbase\User();
-    $user->setUsername("bucketAdmin");
-    $user->setDisplayName("Bucket Admin [travel-sample]");
+    $user->setUsername("scopeAdmin");
+    $user->setDisplayName("Manage Scopes [travel-sample]");
     $user->setPassword("password");
     $user->setRoles([
-        (new \Couchbase\Role)->setName("bucket_admin")->setBucket("travel-sample")
+        (new \Couchbase\Role)->setName("scope_admin")->setBucket("travel-sample"),
+        (new \Couchbase\Role)->setName("data_reader")->setBucket("travel-sample")
     ]);
 
     $users->upsertUser($user);
-    // end::bucketAdmin[]
+    // end::scopeAdmin[]
 
-    $collections = getCollections("bucketAdmin", "password");
+    print "create-collection-manager\n";
 
+    // tag::create-collection-manager[]
+    $options = new \Couchbase\ClusterOptions();
+    $options->credentials("scopeAdmin", "password");
+    $cluster = new \Couchbase\Cluster("localhost", $options);
+    $bucket = $cluster->bucket("travel-sample");
+
+    $collections = $bucket->collections();
+    // end::create-collection-manager[]
+    
     print "create-scope\n";
     // tag::create-scope[]
     try {
@@ -49,23 +45,6 @@ function main() {
         print $e;
     }
     // end::create-scope[]
-
-    print "scopeAdmin\n";
-    // tag::scopeAdmin[]
-
-    $user = new \Couchbase\User();
-    $user->setUsername("scopeAdmin");
-    $user->setDisplayName("Manage Collections in Scope [travel-sample:*]");
-    $user->setPassword("password");
-    $user->setRoles([
-        (new \Couchbase\Role)->setName("scope_admin")->setBucket("travel-sample")->setScope("example-scope"),
-        (new \Couchbase\Role)->setName("data_reader")->setBucket("travel-sample")
-    ]);
-
-    $users->upsertUser($user);
-    // end::scopeAdmin[]
-
-    $collections = getCollections("scopeAdmin", "password");
 
     print "create-collection\n";
     // tag::create-collection[]
@@ -80,6 +59,18 @@ function main() {
         print $e;
     }
     // end::create-collection[]
+    
+    print "listing-scope-collection\n";
+    // tag::listing-scope-collection[]
+    $scopes = $collections->getAllScopes();
+    foreach ($scopes as $scope) {
+        print "Scope {$scope->name()}\n";
+        
+        foreach ($scope->collections() as $collection) {
+            print " - {$collection->name()}\n";
+        }
+    }
+    // end::listing-scope-collection[]
 
     print "drop-collection\n";
     // tag::drop-collection[]
