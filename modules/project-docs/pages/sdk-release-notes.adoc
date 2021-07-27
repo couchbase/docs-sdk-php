@@ -21,7 +21,7 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 
 // needs updating for 3.0
 
-Before installing the PHP SDK, you must install the xref:3.0@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
+Before installing the PHP SDK, you must install the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
 version 3.2.0 or higher is required for PHP Client 3.2.
 
 After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
@@ -116,40 +116,40 @@ Version 3.2.0 is the first release of the 3.2 series, bringing new features and 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.0/index.html
 
 * https://issues.couchbase.com/browse/PCBC-750[PCBC-750]:
-  Deprecate `getScope` in collections manager.
+  Deprecate `getScope` in collections manager, in favour of `getAllScopes`.
 
 * https://issues.couchbase.com/browse/PCBC-725[PCBC-725]:
   Add support for collections to Full Text Search.
 
 * https://issues.couchbase.com/browse/PCBC-764[PCBC-764]:
-  Serialize `BooleanSearchQuery->mustNot` to `"must_not"`.
+  Fix parsing error using `BooleanSearchQuery->mustNot` Query by correcting serialisation.
 
 * https://issues.couchbase.com/browse/PCBC-709[PCBC-709]:
-  Add scope level analytics queries.
+  Add Scope level Analytics Queries.
 
 * https://issues.couchbase.com/browse/PCBC-732[PCBC-732]:
-  Expose partition information for query indexes.
+  Expose Partition Information in Query Management API.
 
-* https://issues.couchbase.com/browse/PCBC-733[PCBC-733]:
-  Add analytics index manager.
+* https://issues.couchbase.com/browse/PCBC-773[PCBC-773]:
+  Add Analytics Index Manager.
 
 * https://issues.couchbase.com/browse/PCBC-769[PCBC-769]:
-  Do not allow using CAS with counter operations, which are always atomic.
+  Do not allow CAS option with Increment/Decrement counter operations, which are always atomic.
 
 * https://issues.couchbase.com/browse/PCBC-767[PCBC-767]:
-  Fix URL for collection create method.
+  Fix error creating Scopes/Collections by constructing URL correctly.
 
 * https://issues.couchbase.com/browse/PCBC-738[PCBC-738]:
-  Add `preserveExpiry` support for mutations (`replace`, `upsert` and `mutateIn`).
+  Enable document updates without resetting Expiry time by adding `preserveExpiry` support for mutations (`replace`, `upsert` and `mutateIn`).
 
 * https://issues.couchbase.com/browse/PCBC-700[PCBC-700]:
-  Manage remote links for analytics service.
+  Manage Remote Links for Analytics service.
 
 * https://issues.couchbase.com/browse/PCBC-706[PCBC-706]:
-  Provide tracing interface.
+  Provide Tracing interface.
 
 * https://issues.couchbase.com/browse/PCBC-743[PCBC-743]:
-  Provide metrics interface.
+  Provide Metrics interface using OpenTelemetry.
 
 == Version 3.1.2 (13 May 2021)
 
