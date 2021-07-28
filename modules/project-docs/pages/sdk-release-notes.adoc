@@ -122,7 +122,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.0
   Add support for collections to Full Text Search.
 
 * https://issues.couchbase.com/browse/PCBC-764[PCBC-764]:
-  Fix parsing error using `BooleanSearchQuery->mustNot` Query by correcting serialisation.
+  Fix parsing error using `BooleanSearchQuery->mustNot` Query by correcting serialization.
 
 * https://issues.couchbase.com/browse/PCBC-709[PCBC-709]:
   Add Scope level Analytics Queries.
@@ -149,7 +149,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.0
   Provide Tracing interface.
 
 * https://issues.couchbase.com/browse/PCBC-743[PCBC-743]:
-  Provide Metrics interface using OpenTelemetry.
+  Provide Metrics interface using `OpenTelemetry`.
 
 == Version 3.1.2 (13 May 2021)
 
