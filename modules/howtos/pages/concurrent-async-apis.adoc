@@ -8,7 +8,7 @@
 {description}
 Using process forks we can perform effective bulk operations over data.
 
-Batching operations allows you to make better utilization of your network and speed up your application by increasing network throughput and reducing latency. 
+Process forks give an improvement in performance -- but at the cost of increased use of CPU, memory, and network traffic.
 
 // original text to fix and reinstate if multi-get is added to the API once more:
 ////
