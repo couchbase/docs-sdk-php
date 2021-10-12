@@ -55,6 +55,8 @@ The packages do not include OpenSSL binaries, therefore they have to be installe
 |PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-7.3-zts-x64.zip[php_couchbase-3.2.0-7.3-zts-x64.zip]
 |PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-7.4-nts-x64.zip[php_couchbase-3.2.0-7.4-nts-x64.zip]
 |PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-7.4-zts-x64.zip[php_couchbase-3.2.0-7.4-zts-x64.zip]
+|PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-8.0-nts-x64.zip[php_couchbase-3.2.0-8.0-nts-x64.zip]
+|PHP 8.0 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-8.0-zts-x64.zip[php_couchbase-3.2.0-8.0-zts-x64.zip]
 |PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-7.3-nts-x64-openssl.zip[php_couchbase-3.2.0-7.3-nts-x64-openssl.zip]
 |PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-7.3-zts-x64-openssl.zip[php_couchbase-3.2.0-7.3-zts-x64-openssl.zip]
 |PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.0-7.4-nts-x64-openssl.zip[php_couchbase-3.2.0-7.4-nts-x64-openssl.zip]
