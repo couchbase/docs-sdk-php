@@ -121,7 +121,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.1
   Fixed memory leak while decoding subdoc JSON.
 
 * https://issues.couchbase.com/browse/PCBC-782[PCBC-782]:
-  PCBC-782: Updated minimal requirement for libcouchbase to 3.2.2.
+  Updated minimal requirement for libcouchbase to 3.2.2.
 
 * Other memory fixes and improvements.
 
