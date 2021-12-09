@@ -117,7 +117,7 @@ The Couchbase SDK depends on the JSON module, which must be loaded before the SD
 Version 3.2.2 is the third release of the 3.2 series, bringing new features and fixes. 
 This is the first release that supports PHP 8.1.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.2/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.2/
 
 * https://issues.couchbase.com/browse/PCBC-799[PCBC-799]: 
 Implemented `Collection#getMulti`, `Collection#upsertMulti`,  and `Collection#removeMulti` to perform operations in batches.
@@ -135,7 +135,7 @@ Added storage backend option for bucket manager.
 
 Version 3.2.1 is the second release of the 3.2 series, bringing new fixes.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.1/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.1/
 
 * https://issues.couchbase.com/browse/PCBC-770[PCBC-770]:
   Fixed memory leak while decoding subdoc JSON.
@@ -149,7 +149,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.1
 
 Version 3.2.0 is the first release of the 3.2 series, bringing new features and fixes.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.0/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.0/
 
 * https://issues.couchbase.com/browse/PCBC-750[PCBC-750]:
   Deprecate `getScope` in collections manager, in favour of `getAllScopes`.
@@ -192,7 +192,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.0
 
 Version 3.1.2 is the third release of the 3.1 series, bringing stabilizations and enhancements over 3.1.0.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.2/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.2/
 
 * https://issues.couchbase.com/browse/PCBC-761[PCBC-761]:
 Fixed return interface for `expiryTime` methods.
@@ -214,7 +214,7 @@ Updated URLs for Collections management API.
 
 Version 3.1.1 is the second release of the 3.1 series, bringing stabilizations and enhancements over 3.1.0.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.1/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.1/
 
 * https://issues.couchbase.com/browse/PCBC-745[PCBC-745]:
 Throw `BadInputException` when string cannot be used as CAS in mutation operations.
@@ -231,7 +231,7 @@ Fixed return value of `expiry()` methods for `ReplaceOptions`, `IncrementOptions
 Version 3.1.0 is the first GA release of the 3.1 series, bringing stabilizations and enhancements over 3.0.10 and the 3.0 SDK,
 and adding features to support Couchbase Server 6.6 and 7.0β.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.1.0/
 
 [NOTE]
 .Behavioral Change
@@ -266,7 +266,7 @@ In 3.1.0 the issue https://issues.couchbase.com/browse/PCBC-742[has been fixed],
 
 == Version 3.0.5 (6 December 2020)
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.5/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.5/
 
 * https://issues.couchbase.com/browse/PCBC-699[PCBC-699]:
 Added support for minimal durability settings for bucket manager.
@@ -297,7 +297,7 @@ Dropped support for PHP older than 7.2.
 
 Version 3.0.4 is the fifth release of the 3.0 series, bringing enhancements and bugfixes over the last stable release.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.4/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.4/
 
 * https://issues.couchbase.com/browse/PCBC-722[PCBC-722]:
 Fixed boolean Search query encoding.
@@ -323,7 +323,7 @@ Allow to fall back to bucket connection for older Server releases.
 
 Version 3.0.3 is the fourth release of the 3.0 series, bringing enhancements and bugfixes over the last stable release.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3/index.html
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3/
 
 * https://issues.couchbase.com/browse/PCBC-696[PCBC-696]:
 Fixed encoding issue in QueryString search query.
