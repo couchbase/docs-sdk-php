@@ -128,7 +128,7 @@ PHP SDK now handles error codes for rate and quota limit conditions   generated 
 * https://issues.couchbase.com/browse/PCBC-796[PCBC-796]: 
 Added storage backend option for bucket manager.
 
-* Updated `jsonSerialize` methods to stop showing deprecation errors in php 8.1.
+* Updated `jsonSerialize` methods to stop showing deprecation errors in PHP 8.1.
 
 
 == Version 3.2.1 (14 October 2021)
