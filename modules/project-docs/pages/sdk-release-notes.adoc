@@ -35,7 +35,7 @@ Or install from the Couchbase repository:
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.1.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
 ----
 
 === Installing on Microsoft Windows
@@ -49,20 +49,20 @@ The packages do not include OpenSSL binaries, therefore they have to be installe
 
 |===
 |Platform|
-|Source          |https://packages.couchbase.com/clients/php/couchbase-3.2.1.tgz[couchbase-3.2.1.tgz]
-|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.1.sha256sum[couchbase-3.2.1.sha256sum]
-|PHP 7.3 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.3-nts-x64.zip[php_couchbase-3.2.1-7.3-nts-x64.zip]
-|PHP 7.3 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.3-zts-x64.zip[php_couchbase-3.2.1-7.3-zts-x64.zip]
-|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.4-nts-x64.zip[php_couchbase-3.2.1-7.4-nts-x64.zip]
-|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.4-zts-x64.zip[php_couchbase-3.2.1-7.4-zts-x64.zip]
-|PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-8.0-nts-x64.zip[php_couchbase-3.2.1-8.0-nts-x64.zip]
-|PHP 8.0 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-8.0-zts-x64.zip[php_couchbase-3.2.1-8.0-zts-x64.zip]
-|PHP 7.3 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.3-nts-x64-openssl.zip[php_couchbase-3.2.1-7.3-nts-x64-openssl.zip]
-|PHP 7.3 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.3-zts-x64-openssl.zip[php_couchbase-3.2.1-7.3-zts-x64-openssl.zip]
-|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.4-nts-x64-openssl.zip[php_couchbase-3.2.1-7.4-nts-x64-openssl.zip]
-|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-7.4-zts-x64-openssl.zip[php_couchbase-3.2.1-7.4-zts-x64-openssl.zip]
-|PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-8.0-nts-x64-openssl.zip[php_couchbase-3.2.1-8.0-nts-x64-openssl.zip]
-|PHP 8.0 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.1-8.0-zts-x64-openssl.zip[php_couchbase-3.2.1-8.0-zts-x64-openssl.zip]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz[couchbase-3.2.2.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64.zip[php_couchbase-3.2.2-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64.zip[php_couchbase-3.2.2-7.4-zts-x64.zip]
+|PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64.zip[php_couchbase-3.2.2-8.0-nts-x64.zip]
+|PHP 8.0 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64.zip[php_couchbase-3.2.2-8.0-zts-x64.zip]
+|PHP 8.1 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64.zip[php_couchbase-3.2.2-8.1-nts-x64.zip]
+|PHP 8.1 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64.zip[php_couchbase-3.2.2-8.1-zts-x64.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64-openssl.zip[php_couchbase-3.2.2-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64-openssl.zip[php_couchbase-3.2.2-7.4-zts-x64-openssl.zip]
+|PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64-openssl.zip[php_couchbase-3.2.2-8.0-nts-x64-openssl.zip]
+|PHP 8.0 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64-openssl.zip[php_couchbase-3.2.2-8.0-zts-x64-openssl.zip]
+|PHP 8.1 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64-openssl.zip[php_couchbase-3.2.2-8.1-nts-x64-openssl.zip]
+|PHP 8.1 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64-openssl.zip[php_couchbase-3.2.2-8.1-zts-x64-openssl.zip]
 |===
 
 === Post Installation for All Platforms
@@ -110,6 +110,24 @@ $ composer require couchbase/couchbase
 === Note on Extension Dependencies
 
 The Couchbase SDK depends on the JSON module, which must be loaded before the SDK.
+
+== Version 3.2.2 (8 December 2021)
+
+Version 3.2.2 is the third release of the 3.2 series, bringing new features and fixes. Also this is the first release
+that supports PHP 8.1.
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.2/index.html
+
+* https://issues.couchbase.com/browse/PCBC-799[PCBC-799]: Implemented `Collection#getMulti`, `Collection#upsertMulti`
+  and `Collection#removeMulti` to perform operations in batches.
+
+* https://issues.couchbase.com/browse/PCBC-788[PCBC-788]: PHP SDK now handles error codes for rate and quota limit conditions
+  generated by the server.
+
+* https://issues.couchbase.com/browse/PCBC-796[PCBC-796]: Added storage backend option for bucket manager.
+
+* Updated `jsonSerialize` methods to stop showing deprecation errors in php 8.1.
+
 
 == Version 3.2.1 (14 October 2021)
 
