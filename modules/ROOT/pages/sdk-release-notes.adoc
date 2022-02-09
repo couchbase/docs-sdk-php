@@ -74,7 +74,7 @@ This warning is safe to ignore if you are not planning to use igbinary serializa
 
 This release contains bug fixes and build infrastructure improvements.
 
-https://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.2/files/couchbase.html[API Reference]
+https://docs.couchbase.com/sdk-api/couchbase-php-client-2.6.2/namespaces/couchbase.html[API Reference]
 
 * fixed possible segfault in N1QL request
 * fixed windows build for PHP 7.4
