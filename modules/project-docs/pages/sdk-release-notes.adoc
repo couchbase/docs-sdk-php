@@ -17,14 +17,14 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 
 == SDK Installation
 
-=== Installing on Linux-like systems
+=== Installing on Unix-Like systems
 
 // needs updating for 3.0
 
 Before installing the PHP SDK, you must install the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
 version 3.2.0 or higher is required for PHP Client 3.2.
 
-After installing the C SDK, install the PHP SDK through your PHP distribution's pecl command:
+After installing `libcouchbase`, install the Couchbase PHP SDK through your PHP distribution's `pecl` command:
 
 [source,console]
 ----
@@ -40,12 +40,23 @@ $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
 
 === Installing on Microsoft Windows
 
-When using Microsoft Windows, instead of using PECL, download a pre-built binary matching your environment.
-You may also download the https://github.com/couchbase/php-couchbase[source] for the SDK and build it directly in your environment if you have a complete build toolchain.
+When using Microsoft Windows, instead of using PECL, download a pre-built binary package matching your environment.
+You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
-Binaries labeled with *(TLS)* contain libcouchbase.dll, which is linked against OpenSSL 1.1.1d (MSVC15) to support TLS connections to Couchbase.
+Binaries labeled with *(TLS)* are linked against **OpenSSL 1.1.1d (MSVC15)** to support TLS connections to Couchbase.
+Simply download the correct version according to your installation details and then copy the
+corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the
+`extension_dir` as configured in your `php.ini` configuration.
 
-The packages do not include OpenSSL binaries, therefore they have to be installed in the PATH (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
+Depending on your installation details, you may also have to add the `extension_dir` to your `PATH` variable.
+
+The packages do not include OpenSSL binaries, therefore they have to be installed in the `PATH` (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
+
+[source,console]
+----
+$ copy /b libcouchbase.dll C:\php\ext
+$ copy /b php_couchbase.dll C:\php\ext
+----
 
 |===
 |Platform|
@@ -67,10 +78,10 @@ The packages do not include OpenSSL binaries, therefore they have to be installe
 
 === Post Installation for All Platforms
 
-Once the PHP SDK has been installed, you need to specify that the PHP interpreter should load the Couchbase SDK as an extension.
+Once the PHP SDK has been installed, you need to specify that the PHP interpreter should load the Couchbase PHP SDK as an extension.
 To do this:
 
-1. Locate your php.ini file. This can be done using the command `php --ini`
+1. Locate your `php.ini` file. This can be done using the command `php --ini`
 +
 [source,console]
 ----
@@ -81,20 +92,22 @@ Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
 Additional .ini files parsed:      (none)
 ----
 +
-2. Insert a line in the php.ini file specifying the extension to be loaded; this should be in the `[PHP]` section.
+2. Insert a line in the `php.ini` file specifying the extension to be loaded; this should be in the `[PHP]` section.
 If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
 Note that the line differs for Linux/Mac OS from Microsoft Windows.
 
+> Note that, on PHP version 7.2.0 and up, simply using the extension name is preferred.
+
 .Mac & Linux
-[source,toml]
+[source,ini]
 ----
-extension=couchbase.so
+extension=couchbase
 ----
 
 .Windows
-[source,toml]
+[source,ini]
 ----
-extension=couchbase.dll
+extension=couchbase
 ----
 
 === PHP Composer
@@ -109,23 +122,24 @@ $ composer require couchbase/couchbase
 
 === Note on Extension Dependencies
 
-The Couchbase SDK depends on the JSON module, which must be loaded before the SDK.
+The Couchbase SDK depends on the https://www.php.net/manual/en/json.installation.php[JSON extension],
+which must be loaded before the SDK. However, it is already included on PHP 8.0.0+ as a core extension.
 
 
 == Version 3.2.2 (8 December 2021)
 
-Version 3.2.2 is the third release of the 3.2 series, bringing new features and fixes. 
+Version 3.2.2 is the third release of the 3.2 series, bringing new features and fixes.
 This is the first release that supports PHP 8.1.
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.2/
 
-* https://issues.couchbase.com/browse/PCBC-799[PCBC-799]: 
+* https://issues.couchbase.com/browse/PCBC-799[PCBC-799]:
 Implemented `Collection#getMulti`, `Collection#upsertMulti`,  and `Collection#removeMulti` to perform operations in batches.
 
-* https://issues.couchbase.com/browse/PCBC-788[PCBC-788]: 
+* https://issues.couchbase.com/browse/PCBC-788[PCBC-788]:
 PHP SDK now handles error codes for rate and quota limit conditions   generated by the server.
 
-* https://issues.couchbase.com/browse/PCBC-796[PCBC-796]: 
+* https://issues.couchbase.com/browse/PCBC-796[PCBC-796]:
 Added storage backend option for bucket manager.
 
 * Updated `jsonSerialize` methods to stop showing deprecation errors in PHP 8.1.
