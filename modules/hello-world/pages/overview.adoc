@@ -1,4 +1,4 @@
-= Couchbase PHP SDK 3.2
+= Couchbase PHP SDK 4.0
 :page-type: landing-page
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
