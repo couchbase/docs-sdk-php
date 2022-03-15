@@ -21,7 +21,7 @@ The Couchbase PHP SDK is a native PHP extension and uses the Couchbase high-perf
 [.content]
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 ----
 
 
@@ -32,7 +32,7 @@ $ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
 [.column]
 ====== {empty}
 
-== Couchbase PHP SDK 3.2
+== Couchbase PHP SDK 4.0
 
 ++++
 <div class="card-row three-column-row">
@@ -90,7 +90,7 @@ Those useful nuts-and-bolts guides to
 xref:project-docs:compatibility.adoc[compatibility tables];
 xref:project-docs:sdk-release-notes.adoc[release notes];
 xref:project-docs:get-involved.adoc[contribution guide]; and the
-xref:project-docs:migrating-sdk-code-to-3.n.adoc[migration guide] for moving to the 3.0 API.
+xref:project-docs:migrating-sdk-code-to-3.n.adoc[migration guide] for moving to the 3.3 API.
 
 [.column]
 ====== {empty}
