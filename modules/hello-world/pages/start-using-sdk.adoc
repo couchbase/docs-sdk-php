@@ -19,15 +19,15 @@ The Couchbase PHP SDK is compatible with PHP 7.3+.
 The Couchbase PHP SDK depends on the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
 version 3.2.0 or higher is required for PHP Client 3.2.
 
-On **Unix-Like** systems (including **macOS**) `libcouchbase` is installed separately as a system library.
+On **Linux** and **macOS**, `libcouchbase` is installed separately as a system library.
 On **Windows** systems `libcouchbase` is included in our binary distribution.
 
 [{tabs}]
 ====
-Unix-Like::
+Linux and MacOS::
 +
 --
-On most **Unix-Like** systems you can simply install `libcouchbase` and then use
+On MacOS and most Linux systems you can simply install `libcouchbase` and then use
 the `pecl` command to install the Couchbase PHP SDK.
 
 [source,console]
@@ -69,7 +69,6 @@ $ copy /b libcouchbase.dll C:\php\ext
 $ copy /b php_couchbase.dll C:\php\ext
 ----
 --
-
 ====
 
 Refer to the additional details on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
