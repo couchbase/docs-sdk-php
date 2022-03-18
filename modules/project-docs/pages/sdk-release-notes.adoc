@@ -19,8 +19,6 @@ For release notes, download links, and installation methods for 2.6 and earlier 
 
 === Installing on Mac and Linux systems
 
-// needs updating for 3.0
-
 Before installing the PHP SDK, you must install the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
 version 3.2.0 or higher is required for PHP Client 3.2.
 
@@ -43,7 +41,7 @@ Then follow the <<post-installation,post-installation steps>>.
 ==== Alpine Linux
 
 **Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
-As a result, the installation is a little different than other Unix-Like systems
+As a result, the installation is a little different from other Unix-Like systems,
 and `pecl` equivalent packages are used instead.
 
 Using `apk`, you would install your preferred `php` version, install `libcouchbase`,
@@ -64,13 +62,13 @@ When using Microsoft Windows, instead of using PECL, download the pre-built bina
 You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
 Binaries labeled with *(TLS)* are linked against **OpenSSL 1.1.1d (MSVC15)** to support TLS connections to Couchbase.
-Simply download the correct version according to your installation details and then copy the
-corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the
-`extension_dir` as configured in your `php.ini` configuration.
+Simply download the correct version according to your installation details 
+and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
 
 Depending on your installation details, you may also have to add the `extension_dir` to your `PATH` variable.
 
-The packages do not include OpenSSL binaries, therefore they have to be installed in the `PATH` (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
+The packages do not include OpenSSL binaries, 
+therefore they have to be installed in the `PATH` (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
 
 [source,console]
 ----
@@ -125,7 +123,7 @@ extension=couchbase
 ----
 +
 NOTE: on PHP version 7.2.0 and up, simply using the extension name is preferred.
-Previously, you might have used `couchbase.so` or `couchbase.dll` depending on your platform.
+Previously, you might have used `couchbase.so` or `couchbase.dll`, depending on your platform.
 
 === PHP Composer
 
