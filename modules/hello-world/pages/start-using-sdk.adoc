@@ -40,8 +40,7 @@ Alpine Linux::
 +
 --
 **Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
-As a result, the installation is a little different than other Unix-Like systems
-and `pecl` equivalent packages are used instead.
+As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
 
 Using `apk`, you would install your preferred `php` version, install `libcouchbase`,
 and then install the equivalent `pecl` package for the version of `php` that you're using.
@@ -59,9 +58,8 @@ Windows::
 --
 On **Windows** systems the version of `libcouchbase` verified at release is included in the distribution.
 
-Simply download the correct version according to your installation details and then copy the
-corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the
-`extension_dir` as configured in your `php.ini` configuration.
+Simply download the correct version according to your installation details, 
+and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
 
 [source,console]
 ----
@@ -73,8 +71,8 @@ $ copy /b php_couchbase.dll C:\php\ext
 
 Refer to the additional details on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
 In particular, **follow the post-install instructions** according to the `.ini` practices for your platform.
-Also notice that the Couchbase PHP SDK depends on the
-https://www.php.net/manual/en/json.installation.php[JSON extension], and it must be loaded before the SDK.
+Also notice that the Couchbase PHP SDK depends on the https://www.php.net/manual/en/json.installation.php[JSON extension], 
+and it must be loaded before the SDK.
 
 
 // installation and post-installation across platforms
