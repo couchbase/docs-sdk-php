@@ -27,7 +27,7 @@ On **Windows** systems `libcouchbase` is included in our binary distribution.
 Linux and MacOS::
 +
 --
-On MacOS and most Linux systems you can simply install `libcouchbase` and then use
+On macOS and most Linux systems you can simply install `libcouchbase` and then use
 the `pecl` command to install the Couchbase PHP SDK.
 
 [source,console]
