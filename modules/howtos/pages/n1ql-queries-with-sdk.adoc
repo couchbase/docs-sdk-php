@@ -63,6 +63,13 @@ In most cases your query will return more than one result, and you may be lookin
 include::example$query.php[tag=results]
 ----
 
+You can also get metrics for your query.
+See the https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.2/classes/Couchbase-QueryMetaData.html#method_metrics[QueryMetaData API docs] for further details.
+
+[source,php]
+----
+include::example$query.php[tag=metrics]
+----
 
 == Scan Consistency
 

@@ -46,7 +46,9 @@ $idx = 1;
 foreach ($res->rows() as $row) {
     printf("%d. %s, \"%s\"\n", $idx++, $row['country'], $row['name']);
 }
+// tag::metrics[]
 printf("Execution Time: %d\n", $res->metaData()->metrics()['executionTime']);
+// end::metrics[]
 
 // NOTE: This currently fails with Couchbase Internal Server error.
 // Server issue tracked here: https://issues.couchbase.com/browse/MB-46876

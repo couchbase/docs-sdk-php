@@ -138,7 +138,11 @@ The `BinaryCollection` mentioned above could be retrieved from the regular colle
 
 ==== Query
 
-Ib SDK 3.x, the API for Query was improved and now it is more consistent with other endpoints.
+In SDK 3.x, the API for Query was improved and now it is more consistent with other endpoints.
+
+NOTE: In particular, `->rows()` is now a method rather than a property,
+and returns an array of fields to index with `['field-name']` instead of
+an object with custom property names for each field.
 
 .SDK 2
 [source,php]
