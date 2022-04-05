@@ -58,7 +58,7 @@ Windows::
 --
 On **Windows** systems the version of `libcouchbase` verified at release is included in the distribution.
 
-Simply download the correct version according to your installation details, 
+Simply xref:project-docs:sdk-release-notes.adoc#installing-on-microsoft-windows[download] the correct version according to your installation details, 
 and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
 
 [source,console]
