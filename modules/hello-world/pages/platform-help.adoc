@@ -1,0 +1,171 @@
+= Setting Up Couchbase PHP SDK with VSCode
+:description: pass:q[Discover how to get up and running developing applications with the Couchbase PHP SDK 4.0+ using `Visual Studio Code`.]
+:navtitle: Setting Up the PHP SDK
+
+[abstract]
+{description}
+
+
+A simple PHP orientation intro for _non-PHP_ folk who are evaluating the Couchbase PHP SDK.
+
+
+[IMPORTANT]
+.Is This Page for You?
+====
+This page is to help evaluate the Couchbase PHP SDK, if PHP is not where you spend the majority of your working day. 
+It is aimed at Software Architects, QE folk, managers, and anyone else who needs to run through using the PHP SDK without necessarily being comfortable with the PHP environment.
+If this is not you, head back to the xref:overview.adoc[rest of the Couchbase PHP SDK documentation].
+====
+
+
+== Installing PHP and the Couchbase PHP SDK
+
+The Couchbase PHP SDK generally tracks PHP's own https://www.php.net/supported-versions.php[supported versions].
+As of April 2022, it is compatible with PHP 7.4, 8.0, and 8.1.
+
+In this section, we'll recommend a known good installation path here for *the purposes of evaluating* Couchbase.
+Though we'll call out some key sections where you may wish to override that for your needs, you and your in-house PHP experts will want to make a decision for ongoing development and deployment.
+
+The https://www.php.net/manual/en/install.php[PHP install page] has full details and many options for installing PHP on various operating systems.
+
+Couchbase generally tracks https://www.php.net/supported-versions.php[PHP supported versions],
+and will recommend using the most up-to-date fully supported version (currently 8.1)
+unless otherwise specified in our xref:project-docs:sdk-release-notes.adoc[release notes] or xref:project-docs:compatibility.adoc[compatibility page].
+
+
+[{tabs}]
+====
+Mac::
++
+--
+Install PHP using Homebrew.
+Once you have installed PHP, simply use `pecl` to install the Couchbase PHP SDK.
+
+
+[source,console]
+----
+$ brew install php
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+----
+--
+Linux::
++
+--
+https://www.php.net/manual/en/install.unix.php has information on installing on various Linux systems.
+Where there are no specific instructions on the official PHP page, or in our tested guidance below, it is worth consulting your distro's trusted documentation, as there may be known-good repositories with PHP binaries to evaluate.
+
+Once you have installed PHP, simply use `pecl` to install the Couchbase PHP SDK.
+
+[source,console]
+----
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+----
+
+On *Debian*, you can do:
+
+[source,console]
+----
+$ apt install php php-common php-cli
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+----
+
+*Alpine Linux* is very slim and uses `musl libc` and the `apk` package manager.
+As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
+
+[source,console]
+----
+$ apk add php7
+$ apk add libcouchbase
+$ apk add php7-pecl-couchbase
+----
+--
+Windows::
++
+--
+Windows downloads for PHP are available from https://windows.php.net/download/
+A handy sidebar on the left explores the various considerations you will want to consider.
+For most environments, the first option (PHP 8.1 VS16 x64 Non Thread Safe) should be fine for evaluation purposes.
+
+Windows downloads and instructions for the PHP SDK are available from xref:project-docs:sdk-release-notes.adoc#installing-on-microsoft-windows[the installation page].
+// TODO: move above link to installation page.
+
+--
+====
+
+
+== Next Steps
+
+If you're just starting with PHP then https://www.php.net/manual/en/index.php[the official PHP Manual] is a great resource.
+
+
+[#vscode]
+== Using a Code Editor (Visual Studio Code) 
+
+Visual Studio Code is a free code editor which runs on Windows, Linux and MacOS and can be downloaded link:https://code.visualstudio.com/[here]. Once downloaded, follow the installation details for the relevant platform:
+
+ * https://code.visualstudio.com/docs/setup/setup-overview
+
+NOTE: we've given instructions for VS Code as it's a currently popular, cross-platform, multi-language editor that's seeing widespread use, and is easy to set up and get started.
+If you're planning to primarily develop in PHP, you may prefer to look into using a full IDE like https://www.jetbrains.com/phpstorm/[PhpStorm].
+
+
+=== Adding PHP Development Support
+
+VSCode is a flexible editor, with support for various programming languages. Though basic syntax highlighting for PHP is included in the box, you'll find it useful to add an extension with support for development -- debugging, discovery, and navigation -- in your chosen programming language.
+
+For PHP, we suggest using https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client[PHP Intelephense].
+
+. You can install from within VSCode itself:
+* Open VSCode
+** Select the `Extensions` button on the left hand side.
+** Type `bmewburn.vscode-intelephense-client` into the `Search Extensions in Marketplace` textbox and hit enter.
+** Select and install the language extension into the editor.
+
+. Alternatively, use the VSCode marketplace:
+* Start by opening https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client
+* Clicking on the `Install` button will prompt you to `Open Visual Studio Code` which will then install the extension.
+
+
+=== Adding the `code` command
+
+If you work from the command-line, you'll want to add the `code` command to allow you to edit a file directly.
+
+In VSCode, View the Command Palette (kbd:[Ctrl+Shift+P] or kbd:[Cmd+Shift+P]) and search for `Shell command: Install 'code' command in PATH` and press Enter.
+
+You can now type `code MyExample.php` to open a single file in VSCode, or `code .` to view the current directory.
+
+
+=== Creating a project
+
+In the following example, we'll open our terminal, make a new directory, set up a bare-bones project and run the scaffolding code.
+
+[source,console]
+----
+$ mkdir CouchbaseExample
+$ cd CouchbaseExample
+$ code example.php
+----
+
+Create a file with some sample PHP.
+(You will want to alter the username and password details to match your local database.)
+
+[source,php]
+----
+include::howtos:examples:auth.php[tags=**]
+----
+
+=== Running Couchbase examples
+
+Simply use the `php` command from the terminal:
+
+[source,console]
+----
+$ php example.php
+----
+
+As you read through the docs, you will see that many code examples link to the link:https://github.com/couchbase/docs-sdk-php/[PHP SDK docs Github repository]. If you wish to run those examples to try things out for yourself, you can clone this repository and run the examples in any directory that contains a .php file, as above.
+
+
+== Next steps
+
+That's it! You are now ready to xref:start-using-sdk.adoc[start developing your Couchbase application].
