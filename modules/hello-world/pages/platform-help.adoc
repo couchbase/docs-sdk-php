@@ -44,8 +44,8 @@ Once you have installed PHP, simply use `pecl` to install the Couchbase PHP SDK.
 
 [source,console]
 ----
-brew install php
-pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+$ brew install php
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 ----
 --
 Linux::
@@ -58,15 +58,15 @@ Once you have installed PHP, simply use `pecl` to install the Couchbase PHP SDK.
 
 [source,console]
 ----
-pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 ----
 
 On *Debian*, you can do:
 
 [source,console]
 ----
-apt install php php-common php-cli
-pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+$ apt install php php-common php-cli
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 ----
 
 *Alpine Linux* is very slim and uses `musl libc` and the `apk` package manager.
@@ -74,9 +74,9 @@ As a result, the installation is a little different from other Unix-Like systems
 
 [source,console]
 ----
-apk add php7
-apk add libcouchbase
-apk add php7-pecl-couchbase
+$ apk add php7
+$ apk add libcouchbase
+$ apk add php7-pecl-couchbase
 ----
 --
 Windows::
