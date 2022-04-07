@@ -3,69 +3,99 @@
 :page-aliases: ROOT:getting-started,ROOT:start-using,ROOT:hello-couchbase,ROOT:start-using-sdk
 :navtitle: Start Using the SDK
 
+include::project-docs:partial$attributes.adoc[]
+
 [abstract]
+{description}
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
 It is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
 
-The Couchbase PHP SDK 3.x is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area,
-and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 7.0).
+== Hello Couchbase
 
-The Couchbase PHP SDK is compatible with PHP 7.3+.
+On this page we show you how to quickly get up and running -- installing the Couchbase PHP  SDK, and trying out the _Hello World_ code example against Couchbase Capella, or against a local Couchbase cluster.
 
-// tag::install[]
+We will go through the code sample step by step, but for those in a hurry to see it, here it is:
 
-== Installing the SDK
+[{tabs}] 
+==== 
+Couchbase Capella Sample::
++
+--
+To connect to xref:cloud::index.adoc[Couchbase Capella], be sure to get the correct endpoint as well as user, password, certificate and `couchbasecloudbucket`  -- and see the <<cloud-connections, Cloud section>>, below.
 
-The Couchbase PHP SDK depends on the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.2.0 or higher is required for PHP Client 3.2.
+[source,php]
+----
+include::hello-world:example$cloud.php[tag=cloud_connect]
+----
+--
 
-On **Linux** and **MacOS**, `libcouchbase` is installed separately as a system library.
-On **Windows** systems `libcouchbase` is included in our binary distribution.
+Local Couchbase Server::
++ 
+-- 
+[source,php]
+----
+$connectionString = "couchbase://localhost";
+$options = new \Couchbase\ClusterOptions();
+$options->credentials("Administrator", "password");
+$cluster = new \Couchbase\Cluster($connectionString, $options);
+
+// get a bucket reference
+$bucket = $cluster->bucket("bucket-name");
+
+// get a default collection reference
+$collection = $bucket->defaultCollection();
+
+// or for named collection
+$collection = $bucket->scope("myapp")->collection("my-collection");
+
+$scope = $bucket->scope("tenant_agent_00");
+$collection = $agentScope->collection("users");
+
+// upsert document
+$upsertResult = $collection->upsert("my-document", ["name" => "mike"]);
+
+// get document
+$getResult = $collection->get("my-document");
+----
+As well as the Python SDK (see below), and a running instance of Couchbase Server, you will need to load up the Travel Sample Bucket
+using either the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-ui[Web interface]
+or the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-cli[command line].
+--
+====
+
+
+== Quick Installation
+
+A more detailed guide in our xref:project-pages:sdk-full-installation.adoc[Installation page] covers every supported platform, but this section should be enough to get up and running in most cases.
 
 [{tabs}]
 ====
-Linux and MacOS::
+Mac and Linux::
 +
 --
-On macOS and most Linux systems you can simply install `libcouchbase` and then use
-the `pecl` command to install the Couchbase PHP SDK.
+On Mac and most Linux distributions,
+simply use `pecl` to install the Couchbase PHP SDK.
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 ----
 --
-
 Alpine Linux::
 +
 --
-**Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
+*Alpine Linux* is very slim and uses `musl libc` and the `apk` package manager.
 As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
-
-Using `apk`, you would install your preferred `php` version, install `libcouchbase`,
-and then install the equivalent `pecl` package for the version of `php` that you're using.
 
 [source,console]
 ----
-$ apk add php7
-$ apk add libcouchbase
 $ apk add php7-pecl-couchbase
 ----
 --
-
 Windows::
 +
 --
-On **Windows** systems the version of `libcouchbase` verified at release is included in the distribution.
-
-Simply xref:project-docs:sdk-release-notes.adoc#installing-on-microsoft-windows[download] the correct version according to your installation details, 
-and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
-
-[source,console]
-----
-$ copy /b libcouchbase.dll C:\php\ext
-$ copy /b php_couchbase.dll C:\php\ext
-----
+Windows downloads and instructions for the PHP SDK are available from xref:project-docs:sdk-full-installation.adoc#installing-on-microsoft-windows[the installation page].
 --
 ====
 
@@ -79,7 +109,18 @@ and it must be loaded before the SDK.
 
 // end::install[]
 
-== Hello Couchbase
+
+== Cloud Connections
+
+If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella], be sure to get the correct endpoint as well as user, password, and `couchbasecloudbucket`
+
+For developing on Capella, if you are not working from the same _Availability Zone_, refer to the following:
+
+* Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments],
+* xref:project-docs:compatibility.adoc#network-requirements[Network Requirements],
+* If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
+
+=== Preamble XXXX
 
 Couchbase uses xref:7.0@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
 Here we will use the _Full Admin_ role created during installation of the Couchbase Data Platform.
@@ -87,7 +128,7 @@ For production client code, you will want to use xref:howtos:managing-connection
 If you're developing client code on the same VM or machine as the Couchbase Server, your URI can be _localhost_.
 
 
-// initialize cluster
+=== Connection
 
 [source,php]
 ----
@@ -147,16 +188,6 @@ KV Operations are described in detail on the xref:howtos:kv-operations.adoc[KV O
 Now that you know the basics, you may wish to go straight to that page -- or first see a complete worked example of
 using the Couchbase php client, our xref:hello-world:sample-application.adoc[Travel Sample Application].
 
-
-== Cloud Connections
-
-If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella], be sure to get the correct endpoint as well as user, password, and `couchbasecloudbucket`
-
-For developing on Capella, if you are not working from the same _Availability Zone_, refer to the following:
-
-* Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments],
-* xref:project-docs:compatibility.adoc#network-requirements[Network Requirements],
-* If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
 
 
 == Additional Resources
