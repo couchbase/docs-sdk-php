@@ -1,18 +1,37 @@
-= Migrating from SDK2 to SDK3 API
-:description: The 3.x API breaks the existing 2.x APIs in order to provide a number of improvements. \
+= Migrating from SDK API 2 to SDK API 3
+:description: The SDK API 3 (used in PHP SDK 3.x and 4.x) introduces breaking changes to the previous SDK API 2 APIs (used in PHP SDK 2.x) in order to provide a number of improvements. \
 Collections and Scopes are introduced.
-:nav-title: Migrating to PHP SDK 3.x API
+:nav-title: Migrating to SDK API 3.x
 :page-topic-type: concept
 :page-aliases: ROOT:migrate
+
+include::partial$attributes.adoc[]
 
 [abstract]
 {description}
 The Document class and structure has been completely removed from the API, and the returned value is now `Result`.
 Retry behaviour is more proactive, and lazy bootstrapping moves all error handling to a single place.
-Individual behaviour changes across services are explained here.
 
+The current PHP SDK 4.0 is also based on the xref:project-docs:compatibility.adoc#sdk3.2[SDK API 3.2 specification], and offers an entirely new backend (couchbase++) with better support for upcoming features like Distributed ACID Transactions.
+We have increased the major version to reflect the importance of this implementation change as per https://semver.org/[semantic versioning].
 
-include::7.0@sdk:shared:partial$migration.adoc[tag=intro]
+The intent of this migration guide is to provide detail information on the changes and what to look for while upgrading the SDK.
+
+NOTE: if you are an existing PHP SDK 3._x_ user considering migrating to SDK 4.0,
+you may wish to skip to the <<sdk4-specifics,SDK 4.0 specifics>> below.
+
+include::{version-server}@sdk:shared:partial$api-version.adoc[tag=api-version]
+
+// include::{version-server}@sdk:shared:partial$migration.adoc[tag=intro]
+// tag::intro[]
+
+== Fundamentals
+
+Before this guide dives into the language-specific technical component of the migration, it is important to understand the high level changes first.
+As a migration guide, this document assumes you are familiar with the previous generation of the SDK and does not re-introduce SDK API 2 concepts.
+We recommend familiarizing yourself with the new SDK first by reading at least the xref:hello-world:start-using-sdk.adoc[getting started guide], and browsing through the other chapters a little.
+
+// end::intro[]
 
 
 include::7.0@sdk:shared:partial$migration.adoc[tag=terms]
@@ -49,10 +68,8 @@ include::7.0@sdk:shared:partial$migration.adoc[tag=lang]
 
 ===  Installation and Configuration
 
-As with 2.x release, the primary source of artifacts is xref:sdk-release-notes.adoc[the release notes page], 
+The primary source of artifacts is xref:installation.adoc[the installation page], 
 where we publish links to pre-built binaries, as well as to source tarballs.
-
-SDK 3.x supports PHP interpreters from 7.3 upwards.
 
 From 3.0 onwards, binaries are available for Windows with the OpenSSL dependency. 
 Note, that OpenSSL DLLs are not distributed in the archive and must be installed separately (see the https://wiki.openssl.org/index.php/Binaries[official OpenSSL page] for more details).
@@ -62,18 +79,18 @@ Note, that OpenSSL DLLs are not distributed in the archive and must be installed
 Bootstrapping the SDK is staged now, so the application has to create a Cluster object first, and then open the Bucket and
 Collection if necessary.
 
-As in SDK 2.x there is no explicit shutdown, and all underlying connections still kept in the cache, for reusing in
+As in SDK API 2.x there is no explicit shutdown, and all underlying connections still kept in the cache, for reusing in
 future requests. 
 The connection idle time is controlled by the `couchbase.pool.max_idle_time_sec` PHP INI setting.
 
-SDK 3.x allows the performance of Queries on the Cluster level, so it is not necessary to open a bucket anymore.
+SDK API 3.x allows the performance of Queries on the Cluster level, so it is not necessary to open a bucket anymore.
 
-SDK 3.x does not allow the use of SASL PLAIN mechanism by default, instead it restricts to `SCRAM-SHA{1,256,512}`.
+SDK API 3.x does not allow the use of SASL PLAIN mechanism by default, instead it restricts to `SCRAM-SHA{1,256,512}`.
 
 ===  Exception Handling
 
-SDK 3.x actively uses `Exceptions` to signal errors. 
-Instead of using single `\Couchbase\Exception`, as in SDK 2.x, now we use a hierarchy of exceptions, which allows the handling of errors in a more reliable way:
+SDK API 3.x actively uses `Exceptions` to signal errors. 
+Instead of using single `\Couchbase\Exception`, as in SDK API 2.x, now we use a hierarchy of exceptions, which allows the handling of errors in a more reliable way:
 
 [source,php]
 ----
@@ -84,7 +101,7 @@ try {
 }
 ----
 
-Instead of SDK 2.x's:
+Instead of SDK API 2's:
 
 [source,php]
 ----
@@ -99,25 +116,27 @@ try {
 
 === Serialization and Transcoding
 
-SDK 3.x still relies on native types and supports the `json_encode` API from the standard `json.so` module (therefore it still has to be loaded before `couchbase.so`). 
+SDK API 3.x still relies on native types and supports the `json_encode` API from the standard `json.so` module (therefore it still has to be loaded before `couchbase.so`). 
 But the `igbinary.so` transcoder is no longer supported.
+
+NOTE: The `json` module is a core extension from PHP 8.0.0.
 
 ===  Migrating Services
 
 ==== Key Value
 
-Most of the KV APIs have moved from bucket-level (in SDK 2.x) to collection-level (in SDK 3.x). 
+Most of the KV APIs have moved from bucket-level (in SDK API 2.x) to collection-level (in SDK API 3.x). 
 For servers which don't support collections, the application should obtain the default collection using the `bucket\->defaultCollection()` function.
 
-The following table describes the SDK 2 KV APIs and their equivalents in SDK 3:
+The following table describes the mappings from SDK API 2 KV to those of SDK API 3:
 
-.SDK 2.x KV API vs. SDK 3.x KV API
+.KV changes
 [options="header"]
 |====
-| SDK 2                          | SDK 3
+| SDK API 2                       | SDK API 3
 |`Bucket\->upsert`                | `Collection\->upsert`
 |`Bucket\->get`                   | `Collection\->get`
-|-                               | `Collection\->exists`
+|-                                | `Collection\->exists`
 |`Bucket\->getFromReplica`        | `Collection\->getAnyReplica` and `Collection.getAllReplicas`
 |`Bucket\->getAndLock`            | `Collection\->getAndLock`
 |`Bucket\->getAndTouch`           | `Collection\->getAndTouch`
@@ -144,7 +163,7 @@ NOTE: In particular, `->rows()` is now a method rather than a property,
 and returns an array of fields to index with `['field-name']` instead of
 an object with custom property names for each field.
 
-.SDK 2
+.SDK API 2
 [source,php]
 ----
 $query = N1qlQuery::fromString('SELECT airportname FROM `travel-sample` WHERE city=$city AND type=$type');
@@ -155,7 +174,7 @@ foreach ($result->rows as $row) {
 }
 ----
 
-.SDK 3
+.SDK API 3
 [source,php]
 ----
 $options = new QueryOptions();
@@ -168,9 +187,9 @@ foreach ($result->rows() as $row) {
 
 ==== Analytics
 
-Analytics queries in SDK3 have their own API entry point.
+Analytics queries in SDK API 3 have their own API entry point.
 
-.SDK 2
+.SDK API 2
 [source,php]
 ----
 $query = AnalyticsQuery::fromString('SELECT * FROM dataset WHERE type = $type');
@@ -181,7 +200,7 @@ foreach ($result->rows as $row) {
 }
 ----
 
-.SDK 3
+.SDK API 3
 [source,php]
 ----
 $options = new AnalyticsQueryOptions();
@@ -194,9 +213,9 @@ foreach ($result->rows() as $row) {
 
 ==== Search
 
-In SDK 3, query options and index name has been extracted from the query object.
+In SDK API 3, query options and index name has been extracted from the query object.
 
-.SDK 2
+.SDK API 2
 [source,php]
 ----
 $queryPart = SearchQuery::matchPhrase("hop beer");
@@ -209,7 +228,7 @@ foreach ($result->hits() as $hit) {
 }
 ----
 
-.SDK 3
+.SDK API 3
 [source,php]
 ----
 $query = new MatchPhraseSearchQuery("hop beer");
@@ -223,9 +242,9 @@ foreach ($result->rows() as $row) {
 
 ==== Views
 
-The most noticeable change in the Views API for SDK 3.x is the change of names for consistency control settings.
+The most noticeable change in the Views API for SDK API 3.x is the change of names for consistency control settings.
 
-.SDK 2
+.SDK API 2
 [source,php]
 ----
 $query = ViewQuery::from('design_name', 'test');
@@ -236,7 +255,7 @@ foreach ($res->rows as $row) {
 }
 ----
 
-.SDK 3
+.SDK API 3
 [source,php]
 ----
 $options = new ViewOptions();
@@ -249,26 +268,26 @@ foreach ($res->rows() as $row) {
 
 === Batching with Multi Get, Multi Options
 
-This feature of the 2.x SDK is not present in the 3.x SDK.
+This feature of the SDK API 2 is not present in SDK API 3.
 See the xref:howtos:concurrent-async-apis.adoc[batching docs] for use of process forks.
 
 
 == Management APIs
 
-In SDK 2, the management APIs were centralized in the `ClusterManager` at the cluster level and the `BucketManager` at the bucket level.
-Since SDK 3 provides more management APIs, they have been split up into their respective domains.
-For example, when in SDK 2 you needed to remove a bucket you would call `ClusterManager.removeBucket` -- you will now find it under `BucketManager.dropBucket`.
+In SDK API 2, the management APIs were centralized in the `ClusterManager` at the cluster level and the `BucketManager` at the bucket level.
+Since SDK API 3 provides more management APIs, they have been split up into their respective domains.
+For example, when in SDK API 2 you needed to remove a bucket you would call `ClusterManager.removeBucket` -- you will now find it under `BucketManager.dropBucket`.
 And, creating a N1QL index now lives in the `QueryIndexManager`, which is accessible through the `Cluster`.
 
-The following table provides a mapping from the SDK 2 management APIs to those of SDK 3:
+The following tables provide a mapping from the SDK API 2 management APIs to those of SDK API 3:
 
-.SDK 2.x vs SDK 3.x ClusterManager
+.`ClusterManager` changes
 [options="header"]
 |====
-| SDK 2                          | SDK 3
+| SDK API 2                       | SDK API 3
 |`ClusterManager\->info`          | removed
 |`ClusterManager\->listBuckets`   | `BucketManager\->getAllBuckets`
-|-                               | `BucketManager\->getBucket`
+|-                                | `BucketManager\->getBucket`
 |`ClusterManager\->createBucket`  | `BucketManager\->createBucket`
 |`ClusterManager\->removeBucket`  | `BucketManager\->removeBucket`
 |`ClusterManager\->upsertUser`    | `UserManager\->upsertUser`
@@ -277,10 +296,10 @@ The following table provides a mapping from the SDK 2 management APIs to those o
 |`ClusterManager\->getUser`       | `UserManager\->getUser`
 |====
 
-.SDK 2.x vs SDK 3.x BucketManager
+.`BucketManager` changes
 [options="header"]
 |====
-| SDK 2                                    | SDK 3
+| SDK API 2                                  | SDK API 3
 |`BucketManager\->info`                      | removed
 |`BucketManager\->flush`                     | `BucketManager\->flushBucket`
 |`BucketManager\->listDesignDocuments`       | `ViewIndexManager\->getAllDesignDocuments`
@@ -294,3 +313,28 @@ The following table provides a mapping from the SDK 2 management APIs to those o
 |`BucketManager\->dropN1qlIndex`             | `QueryIndexManager\->dropIndex`
 |`BucketManager\->dropN1qlPrimaryIndex`      | `QueryIndexManager\->dropPrimaryIndex`
 |====
+
+
+[#sdk4-specifics]
+== SDK 4.x specifics
+
+PHP SDK 4.0 implements the SDK API 3 spec, so all the steps above also apply to a migration from a PHP SDK 2.x directly to PHP SDK 4.0.
+
+Additionally, the PHP SDK 4.0 offers a new backend (Couchbase++) with support for 
+xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[multi-document ACID transactions],
+as well as the capabilities required for upcoming features.
+You should be aware of the following considerations arising from this new backend implementation.
+
+The following features are unsupported in 4.0. 
+They are available in 3.2, and will be available in a later 4.x release.
+
+* xref:concept-docs:response-time-observability.adoc[Response Time Availability]
+* xref:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions[Legacy durability]
+* Log forwarding
+* Replica reads
+
+In addition:
+
+* `get` requests on locked documents now retry rather than fast-fail.
+* The changes to xref:ref:client-settings.adoc[Client Settings] are not currently documented.
+* The changes to xref:howtos:managing-connections.adoc#connection-strings[Connection Strings] are not currently documented.
