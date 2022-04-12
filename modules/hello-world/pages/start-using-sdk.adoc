@@ -66,7 +66,7 @@ or the xref:{version-server}@server:manage:manage-settings/install-sample-bucket
 
 == Quick Installation
 
-A more detailed guide in our xref:project-pages:sdk-full-installation.adoc[Installation page] covers every supported platform, but this section should be enough to get up and running in most cases.
+A more detailed guide in our xref:project-docs:pages:sdk-full-installation.adoc[Installation page] covers every supported platform, but this section should be enough to get up and running in most cases.
 
 [{tabs}]
 ====
@@ -162,9 +162,9 @@ $collection = $bucket->defaultCollection();
 $collection = $bucket->scope("myapp")->collection("my-collection");
 ----
 
-The 3.2 SDK supports full integration with the xref:7.0@server:learn:data:scopes-and-collections.adoc[Collections] feature in the latest release of the Couchbase Data Platform, Couchbase Server 7.0.
+The PHP SDK (from version 3.2 onwards) supports full integration with the xref:7.0@server:learn:data:scopes-and-collections.adoc[Collections] feature introduced in Couchbase Server 7.0.
 This brings complete support of Collections, allowing Documents to be grouped by purpose or theme, according to a specified Scope.
-Here we will use the `users` collection within the `tenant_agent_00` scope from `travel-sample` bucket as an example.
+Here we will use the `users` collection within the `tenant_agent_00` scope from the `travel-sample` bucket as an example.
 
 [source,php]
 ----
@@ -189,13 +189,12 @@ Now that you know the basics, you may wish to go straight to that page -- or fir
 using the Couchbase php client, our xref:hello-world:sample-application.adoc[Travel Sample Application].
 
 
-
 == Additional Resources
 
 The API reference is generated for each release and can be found http://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html[here^].
 Older API references are linked from their respective sections in the xref:project-docs:sdk-release-notes.adoc[Release Notes].
 
-xref:project-docs:migrating-sdk-code-to-3.n.adoc[The Migrating from SDK2 to 3 page] highlights the main differences to be aware of when migrating your code.
+xref:project-docs:migrating-sdk-code-to-3.n.adoc[The Migrating to SDK API 3 page] highlights the main differences to be aware of when migrating your code.
 
 Couchbase welcomes community contributions to the PHP SDK.
 The PHP SDK source code is available on https://github.com/couchbase/php-couchbase[GitHub].
