@@ -1,5 +1,5 @@
-= Couchbase PHP Release Notes and Archives
-:description: Release notes, installation instructions, and download archive for the Couchbase PHP Client.
+= Couchbase PHP Release Notes
+:description: Release notesfor the Couchbase PHP Client.
 :navtitle: Release Notes
 :page-topic-type: project-doc
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
@@ -11,11 +11,6 @@
 These pages cover the 4.x versions of the Couchbase PHP SDK.
 
 For download instructions, see the xref:sdk-full-installation.adoc xref:installation.adoc[installation page].
-
-For release notes, download links, and installation methods for earlier releases of the Couchbase PHP Client, please see:
-
-* the xref:3.2@php-sdk::sdk-release-notes.adoc[3.x PHP Release Notes & Download Archive].
-* the xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
 
 // include::start-using-sdk.adoc[tag=prep]
 
@@ -32,13 +27,6 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0
 Sample ticket XXXXXX
 
 
+include::sdk-full-installation.adoc[tag=older-releases]
 
-
-== Older Releases
-
-See:
-
-* The xref:3.2@php-sdk::sdk-release-notes.adoc[3.x PHP Release Notes & Download Archive].
-* The xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
-* Although https://www.couchbase.com/support-policy/enterprise-software[no longer supported], documentation for older releases continues to be available in our https://docs-archive.couchbase.com/home/index.html[docs archive].
 // end::all[]

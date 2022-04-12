@@ -1,0 +1,157 @@
+= Couchbase PHP Installation Instructions and Archives
+:description: Installation instructions, and download archive for the Couchbase PHP Client.
+:navtitle: Installation
+:page-topic-type: project-doc
+:page-status: UNDER CONSTRUCTION
+
+// tag::all[]
+[abstract]
+{description}
+
+For release notes, download links, and installation methods for <<older-releases,earlier releases of the Couchbase PHP Client>>, see below.
+
+
+// include::start-using-sdk.adoc[tag=prep]
+
+// include::start-using-sdk.adoc[tag=install]
+
+// TODO
+WARNING: this page needs extensive update for 4.0
+
+== SDK Installation
+
+=== Installing on Mac and Linux systems
+
+Before installing the PHP SDK, you must install the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
+version 3.2.0 or higher is required for PHP Client 3.2.
+
+After installing `libcouchbase`, install the Couchbase PHP SDK through your PHP distribution's `pecl` command:
+
+[source,console]
+----
+$ pecl install couchbase
+----
+
+Or install from the Couchbase repository:
+
+[source,console]
+----
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
+----
+
+Then follow the <<post-installation,post-installation steps>>.
+
+==== Alpine Linux
+
+**Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
+As a result, the installation is a little different from other Unix-Like systems,
+and `pecl` equivalent packages are used instead.
+
+Using `apk`, you would install your preferred `php` version, install `libcouchbase`,
+and then install the equivalent `pecl` package for the version of `php` that you're using.
+
+[source,console]
+----
+$ apk add php7
+$ apk add libcouchbase
+$ apk add php7-pecl-couchbase
+----
+
+Then follow the <<post-installation,post-installation steps>>.
+
+=== Installing on Microsoft Windows
+
+When using Microsoft Windows, instead of using PECL, download the pre-built binary package matching your environment below.
+You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
+
+Binaries labeled with *(TLS)* are linked against **OpenSSL 1.1.1d (MSVC15)** to support TLS connections to Couchbase.
+Simply download the correct version according to your installation details 
+and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
+
+Depending on your installation details, you may also have to add the `extension_dir` to your `PATH` variable.
+
+The packages do not include OpenSSL binaries, 
+therefore they have to be installed in the `PATH` (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
+
+[source,console]
+----
+$ copy /b libcouchbase.dll C:\php\ext
+$ copy /b php_couchbase.dll C:\php\ext
+----
+
+|===
+|Platform|
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz[couchbase-3.2.2.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64.zip[php_couchbase-3.2.2-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64.zip[php_couchbase-3.2.2-7.4-zts-x64.zip]
+|PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64.zip[php_couchbase-3.2.2-8.0-nts-x64.zip]
+|PHP 8.0 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64.zip[php_couchbase-3.2.2-8.0-zts-x64.zip]
+|PHP 8.1 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64.zip[php_couchbase-3.2.2-8.1-nts-x64.zip]
+|PHP 8.1 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64.zip[php_couchbase-3.2.2-8.1-zts-x64.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64-openssl.zip[php_couchbase-3.2.2-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64-openssl.zip[php_couchbase-3.2.2-7.4-zts-x64-openssl.zip]
+|PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64-openssl.zip[php_couchbase-3.2.2-8.0-nts-x64-openssl.zip]
+|PHP 8.0 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64-openssl.zip[php_couchbase-3.2.2-8.0-zts-x64-openssl.zip]
+|PHP 8.1 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64-openssl.zip[php_couchbase-3.2.2-8.1-nts-x64-openssl.zip]
+|PHP 8.1 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64-openssl.zip[php_couchbase-3.2.2-8.1-zts-x64-openssl.zip]
+|===
+
+Then follow the post-installation steps.
+
+[#post-installation]
+=== Post Installation for All Platforms
+
+Once the PHP SDK has been installed, you need to specify that the PHP interpreter should load the Couchbase PHP SDK as an extension.
+To do this:
+
+1. Locate your `php.ini` file. This can be done using the command `php --ini`
++
+[source,console]
+----
+$ php --ini
+Configuration File (php.ini) Path: /usr/local/etc/php/7.4
+Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
+Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
+Additional .ini files parsed:      (none)
+----
++
+2. Insert a line in the `php.ini` file specifying the extension to be loaded; this should be in the `[PHP]` section.
+If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
++
+[source,ini]
+----
+extension=json      ; not needed with PHP 8.0.0+
+extension=couchbase
+----
++
+NOTE: on PHP version 7.2.0 and up, simply using the extension name is preferred.
+Previously, you might have used `couchbase.so` or `couchbase.dll`, depending on your platform.
+
+=== PHP Composer
+
+Once the PHP extension is installed, it may be used as any other PHP library through composer as posted at https://packagist.org/packages/couchbase/couchbase[packagist.org].
+To add it to your project's dependency list, use the following composer command:
+
+[source,console]
+----
+$ composer require couchbase/couchbase
+----
+
+=== Note on Extension Dependencies
+
+The Couchbase SDK depends on the https://www.php.net/manual/en/json.installation.php[JSON extension],
+which must be loaded before the SDK. However, it is already included on PHP 8.0.0+ as a core extension.
+
+
+// tag::older-releases[]
+== Older Releases
+
+See:
+
+* The xref:3.2@php-sdk::sdk-release-notes.adoc[3.x PHP Release Notes & Download Archive].
+* The xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
+* Although https://www.couchbase.com/support-policy/enterprise-software[no longer supported], documentation for older releases continues to be available in our https://docs-archive.couchbase.com/home/index.html[docs archive].
+// end::older-releases[]
+
+// end::all[]
