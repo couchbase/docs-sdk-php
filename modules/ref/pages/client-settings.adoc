@@ -3,6 +3,7 @@
 :nav-title: Client Settings
 :page-topic-type: reference
 :page-aliases: ROOT:client-settings
+:page-status: UNDER CONSTRUCTION
 
 [abstract]
 {description}

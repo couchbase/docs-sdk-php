@@ -1,11 +1,16 @@
 = Slow Operations Logging
 :description: Tracing information on slow operations can be found in the logs as threshold logging, orphan logging, and other span metrics.
 :page-topic-type: howto
+:page-status: UNDER CONSTRUCTION
+
 // :page-aliases: ROOT:
 
 [abstract]
 {description}
 Change the settings to alter how much information you collect.
+
+WARNING: the Logging implementation has changed substantially in 4.0 and is not currently fully documented.
+This will be resolved in a future 4.x release.
 
 To improve debuggability certain metrics are automatically measured and logged.
 These include slow queries, responses taking beyond a certain threshold, and orphaned responses.

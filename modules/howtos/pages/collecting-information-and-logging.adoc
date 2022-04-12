@@ -2,11 +2,15 @@
 :description: The PHP SDK logs its own and libcouchbase events using the default logger implementation in PHP.
 :navtitle: Collecting Information
 :page-topic-type: howto
+:page-status: UNDER CONSTRUCTION
 
 [abstract]
 {description}
 
 == Logging
+
+WARNING: the Logging implementation has changed substantially in 4.0 and is not currently fully documented.
+This will be resolved in a future 4.x release.
 
 The Couchbase PHP SDK has no hard dependency on a specific logger implementation.
 By default it uses built-in means to report events.
