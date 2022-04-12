@@ -60,9 +60,8 @@ The PHP SDK is built on top of libcouchbase (the C SDK), which is tested and sup
 === GNU/Linux
 
 * Amazon Linux 2.
-* Red Hat Enterprise Linux 7 & 8;
-+
-& CentOS 7 & 8.
+* Red Hat Enterprise Linux 7 (Server only -- see Capella note below) & RHEL 8.
+* CentOS 7 (Server only -- see Capella note below) & CentOS 8.
 * Ubuntu (LTS) 16.04 (_Xenial_), 18.04 (_Bionic_), & 20.04 (_Focal_).
 * Debian 9 (_Stretch_) & 10 (_Buster_).
 
@@ -79,6 +78,16 @@ At time of writing (July 2021): 10.14 (_Mojave_), 10.15 (_Catalina_), and 11 (_B
 ****
 
 Although installable or compilable on many other platforms, we cannot provide support for untested combinations.
+
+[NOTE]
+.Capella Compatibility
+====
+Couchbase Capella mandates TLS 1.3 as a minimum secure standard for client connection.
+TLS 1.3 needs `OpenSSL 1.1.1` -- or more recent -- on your platform.
+
+RHEL 7x and CentOS 7 do not provide a supported way to install `OpenSSL 1.1.1` and a compatible PHP, and are thus not supported with Capella.
+====
+
 
 
 == Couchbase New Feature Availability Matrix
