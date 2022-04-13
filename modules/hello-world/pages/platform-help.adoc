@@ -75,7 +75,6 @@ As a result, the installation is a little different from other Unix-Like systems
 [source,console]
 ----
 $ apk add php7
-$ apk add libcouchbase
 $ apk add php7-pecl-couchbase
 ----
 --
@@ -86,8 +85,7 @@ Windows downloads for PHP are available from https://windows.php.net/download/
 A handy sidebar on the left explores the various considerations you will want to consider.
 For most environments, the first option (PHP 8.1 VS16 x64 Non Thread Safe) should be fine for evaluation purposes.
 
-Windows downloads and instructions for the PHP SDK are available from xref:project-docs:sdk-release-notes.adoc#installing-on-microsoft-windows[the installation page].
-// TODO: move above link to installation page.
+Windows downloads and instructions for the PHP SDK are available from xref:project-docs:sdk-full-installation.adoc#installing-on-microsoft-windows[the installation page].
 
 --
 ====
