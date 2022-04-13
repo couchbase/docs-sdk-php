@@ -122,7 +122,7 @@ For developing on Capella, if you are not working from the same _Availability Zo
 
 === Preamble XXXX
 
-Couchbase uses xref:7.0@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
+Couchbase uses xref:7.1@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
 Here we will use the _Full Admin_ role created during installation of the Couchbase Data Platform.
 For production client code, you will want to use xref:howtos:managing-connections.adoc#rbac[more appropriate, restrictive settings], but here we want to get you up and running quickly.
 If you're developing client code on the same VM or machine as the Couchbase Server, your URI can be _localhost_.
@@ -162,7 +162,7 @@ $collection = $bucket->defaultCollection();
 $collection = $bucket->scope("myapp")->collection("my-collection");
 ----
 
-The PHP SDK (from version 3.2 onwards) supports full integration with the xref:7.0@server:learn:data:scopes-and-collections.adoc[Collections] feature introduced in Couchbase Server 7.0.
+The PHP SDK (from version 3.2 onwards) supports full integration with the xref:7.1@server:learn:data:scopes-and-collections.adoc[Collections] feature introduced in Couchbase Server 7.0.
 This brings complete support of Collections, allowing Documents to be grouped by purpose or theme, according to a specified Scope.
 Here we will use the `users` collection within the `tenant_agent_00` scope from the `travel-sample` bucket as an example.
 

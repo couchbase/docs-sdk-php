@@ -22,7 +22,7 @@ IMPORTANT: The sub-document operations described on this page are for _Key-Value
 (Sub-document N1QL queries are explained in the section xref:n1ql-queries-with-sdk.adoc[Querying with N1QL].)
 
 In order to use sub-document operations you need to specify a _path_ indicating the location of the sub-document.
-The _path_ follows N1QL syntax xref:#[below^], and xref:7.0@server:n1ql:n1ql-intro/queriesandresults.adoc[N1QL Queries and Results]).
+The _path_ follows N1QL syntax xref:#[below^], and xref:7.1@server:n1ql:n1ql-intro/queriesandresults.adoc[N1QL Queries and Results]).
 Considering the document:
 
 .customer123.json
@@ -383,7 +383,7 @@ NOTE: Currently, paths cannot exceed 1024 characters, and cannot be more than 32
 
 
 // xattrs
-include::7.0@sdk:shared:partial$sdk-xattr-overview.adoc[tag=extended_attributes]
+include::7.1@sdk:shared:partial$sdk-xattr-overview.adoc[tag=extended_attributes]
 
 
 == XDCR

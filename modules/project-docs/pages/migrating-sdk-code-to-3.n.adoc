@@ -34,7 +34,7 @@ We recommend familiarizing yourself with the new SDK first by reading at least t
 // end::intro[]
 
 
-include::7.0@sdk:shared:partial$migration.adoc[tag=terms]
+include::7.1@sdk:shared:partial$migration.adoc[tag=terms]
 
 As an example here is a KeyValue document fetch:
 
@@ -50,13 +50,13 @@ Compare this to a N1QL query:
 $queryResult = $cluster->query("select 1=1", (new QueryOptions())->timeout(3000000));
 ----
 
-include::7.0@sdk:shared:partial$migration.adoc[tag=terms2]
+include::7.1@sdk:shared:partial$migration.adoc[tag=terms2]
 
 
-include::7.0@sdk:shared:partial$migration.adoc[tag=new]
+include::7.1@sdk:shared:partial$migration.adoc[tag=new]
 
 
-include::7.0@sdk:shared:partial$migration.adoc[tag=lang]
+include::7.1@sdk:shared:partial$migration.adoc[tag=lang]
 
 
 

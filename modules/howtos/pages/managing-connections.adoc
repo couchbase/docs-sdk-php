@@ -79,7 +79,7 @@ If your Couchbase Server cluster is running in a containerized, port mapped, or 
 Both the client and server require special configuration in this case.
 
 On the server side, each server node must be configured to advertise its external address as well as any custom port mapping.
-This is done with the `setting-alternate-address` xref:7.0@server:cli:cbcli/couchbase-cli-setting-alternate-address.adoc[CLI command] introduced in Couchbase Server 6.5.
+This is done with the `setting-alternate-address` xref:7.1@server:cli:cbcli/couchbase-cli-setting-alternate-address.adoc[CLI command] introduced in Couchbase Server 6.5.
 A node configured in this way will advertise two addresses: one for connecting from the same network, and another for connecting from an external network.
 
 On the client side, the externally visible ports must be used when connecting.
@@ -164,7 +164,7 @@ E.....@.@.............+....Z.'yZ..#........
 
 
 // DNS-SRV
-include::7.0@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv]
+include::7.1@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv]
 
 DNS SRV bootstrapping is available in the PHP SDK from version 3.0.
 In order to make the SDK actually use the SRV records, you need to enable DNS SRV on the environment and pass in the host name from your records (here `example.com`):
@@ -187,9 +187,9 @@ Also, if you pass in more than one node, DNS SRV bootstrap will not be initiated
 
 
 // Cloud connections
-include::7.0@sdk:shared:partial$managing-connections.adoc[tag=cloud]
+include::7.1@sdk:shared:partial$managing-connections.adoc[tag=cloud]
 
 
 == Further Reading
 
-For more on RBAC, refer to the xref:7.0@server:learn:security/authorization-overview.adoc[Server docs].
+For more on RBAC, refer to the xref:7.1@server:learn:security/authorization-overview.adoc[Server docs].

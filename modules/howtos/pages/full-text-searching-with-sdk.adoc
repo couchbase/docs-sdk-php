@@ -40,7 +40,7 @@ include::example$search.php[tag=matchquery]
 ----
 
 All simple query types are created in the same manner, although some have additional properties, which can be seen in
-common query type descriptions.  Couchbase FTS's xref:7.0@server:fts:fts-query-types.adoc[range of query types] enable
+common query type descriptions.  Couchbase FTS's xref:7.1@server:fts:fts-query-types.adoc[range of query types] enable
 powerful searching using multiple options, to ensure results are just within the range wanted.  Here is a numeric range
 query that looks for hotels with `"Cleanliness"` ratings higher than `5`:
 
@@ -97,7 +97,7 @@ include::example$search.php[tag=consistency]
 
 == Further Reading
 
-* More details on Search Queries can be found xref:7.0@server:fts:fts-query-types.adoc[in the Server docs].
+* More details on Search Queries can be found xref:7.1@server:fts:fts-query-types.adoc[in the Server docs].
 * More information can be found in the API docs for 
 https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_searchQuery[searchQuery^] and 
 https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-SearchResult.html[SearchResult^].
