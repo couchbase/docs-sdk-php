@@ -2,92 +2,133 @@
 :description: Installing the Couchbase PHP SDK & a Hello World example program.
 :page-aliases: ROOT:getting-started,ROOT:start-using,ROOT:hello-couchbase,ROOT:start-using-sdk
 :navtitle: Start Using the SDK
+:page-status: UNDER CONSTRUCTION
+
+include::project-docs:partial$attributes.adoc[]
 
 [abstract]
+{description}
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
-It is a native PHP extension and uses the Couchbase high-performance C library to handle communicating to the cluster over Couchbase binary protocols.
+It is a native PHP extension and uses the Couchbase++ high-performance C++ library to handle communicating to the cluster over Couchbase binary protocols.
 
-The Couchbase PHP SDK 3.x is a complete rewrite of the API, reducing the number of overloads to present a simplified surface area,
-and adding support for future Couchbase Server features like Collections and Scopes (available in Couchbase Server 7.0).
-
-The Couchbase PHP SDK is compatible with PHP 7.3+.
-
-// tag::install[]
-
-== Installing the SDK
-
-The Couchbase PHP SDK depends on the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
-version 3.2.0 or higher is required for PHP Client 3.2.
-
-On **Linux** and **MacOS**, `libcouchbase` is installed separately as a system library.
-On **Windows** systems `libcouchbase` is included in our binary distribution.
-
-[{tabs}]
-====
-Linux and MacOS::
-+
---
-On macOS and most Linux systems you can simply install `libcouchbase` and then use
-the `pecl` command to install the Couchbase PHP SDK.
-
-[source,console]
-----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
-----
---
-
-Alpine Linux::
-+
---
-**Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
-As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
-
-Using `apk`, you would install your preferred `php` version, install `libcouchbase`,
-and then install the equivalent `pecl` package for the version of `php` that you're using.
-
-[source,console]
-----
-$ apk add php7
-$ apk add libcouchbase
-$ apk add php7-pecl-couchbase
-----
---
-
-Windows::
-+
---
-On **Windows** systems the version of `libcouchbase` verified at release is included in the distribution.
-
-Simply download the correct version according to your installation details, 
-and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
-
-[source,console]
-----
-$ copy /b libcouchbase.dll C:\php\ext
-$ copy /b php_couchbase.dll C:\php\ext
-----
---
-====
-
-Refer to the additional details on the xref:project-docs:sdk-release-notes.adoc[Release Notes & Archives page].
-In particular, **follow the post-install instructions** according to the `.ini` practices for your platform.
-Also notice that the Couchbase PHP SDK depends on the https://www.php.net/manual/en/json.installation.php[JSON extension], 
-and it must be loaded before the SDK.
-
-
-// installation and post-installation across platforms
-
-// end::install[]
+WARNING: TODO PHP example (especially Cloud example) needs rework and fuller explanation below
 
 == Hello Couchbase
 
-Couchbase uses xref:7.0@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
+On this page we show you how to quickly get up and running -- installing the Couchbase PHP  SDK, and trying out the _Hello World_ code example against Couchbase Capella, or against a local Couchbase cluster.
+
+We will go through the code sample step by step, but for those in a hurry to see it, here it is:
+
+[{tabs}] 
+==== 
+Couchbase Capella Sample::
++
+--
+To connect to xref:cloud::index.adoc[Couchbase Capella], be sure to get the correct endpoint as well as user, password, certificate and `couchbasecloudbucket`  -- and see the <<cloud-connections, Cloud section>>, below.
+
+[source,php]
+----
+include::hello-world:example$cloud.php[tag=cloud_connect]
+// kv timeout extended example needed
+----
+--
+
+Local Couchbase Server::
++ 
+-- 
+[source,php]
+----
+$connectionString = "couchbase://localhost";
+$options = new \Couchbase\ClusterOptions();
+$options->credentials("Administrator", "password");
+$cluster = new \Couchbase\Cluster($connectionString, $options);
+
+// get a bucket reference
+$bucket = $cluster->bucket("bucket-name");
+
+// get a default collection reference
+$collection = $bucket->defaultCollection();
+
+// or for named collection
+$collection = $bucket->scope("myapp")->collection("my-collection");
+
+$scope = $bucket->scope("tenant_agent_00");
+$collection = $agentScope->collection("users");
+
+// upsert document
+$upsertResult = $collection->upsert("my-document", ["name" => "mike"]);
+
+// get document
+$getResult = $collection->get("my-document");
+----
+As well as the PHP SDK (see below), and a running instance of Couchbase Server, you will need to load up the Travel Sample Bucket
+using either the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-ui[Web interface]
+or the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-cli[command line].
+--
+====
+
+The Couchbase Capella free trial version comes with the Travel Sample Bucket, and its Query indexes, loaded and ready.
+
+== Quick Installation
+
+A more detailed guide in our xref:project-docs:sdk-full-installation.adoc[Installation page] covers every supported platform, but this section should be enough to get up and running in most cases.
+
+[{tabs}]
+====
+Mac and Linux::
++
+--
+On Mac and most Linux distributions,
+simply use `pecl` to install the Couchbase PHP SDK.
+
+[source,console]
+----
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+----
+--
+Alpine Linux::
++
+--
+*Alpine Linux* is very slim and uses `musl libc` and the `apk` package manager.
+As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
+
+[source,console]
+----
+$ apk add php7-pecl-couchbase
+----
+--
+Windows::
++
+--
+Windows downloads and instructions for the PHP SDK are available from xref:project-docs:sdk-full-installation.adoc#installing-on-microsoft-windows[the installation page].
+--
+====
+
+TODO: XXXX **follow the post-install instructions** according to the `.ini` practices for your platform.
+
+If there are any problems, refer to the full xref:project-pages:sdk-full-installation.adoc[Installation page].
+
+TIP: If you are evaluating the PHP SDK as a tester, architect, or otherwise not a regular PHP developer, our xref:platform-help.adoc[Platform Help] pages may help get you over any humps in the road.
+
+== Step-by-step
+
+At this point we want to transition from the terminal to your code editor of choice.
+
+Let's now create an empty file named `cb-test.php` and walk through adding code step-by-step:
+
+* Connect to a cluster, bucket, and default collection;
+* Add and retrieve a new document;
+* Look up (SQL-type query) the new document by attribute value.
+
+=== Preamble XXXX
+
+Couchbase uses xref:7.1@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
 Here we will use the _Full Admin_ role created during installation of the Couchbase Data Platform.
 For production client code, you will want to use xref:howtos:managing-connections.adoc#rbac[more appropriate, restrictive settings], but here we want to get you up and running quickly.
 If you're developing client code on the same VM or machine as the Couchbase Server, your URI can be _localhost_.
 
 
-// initialize cluster
+=== Connection
 
 [source,php]
 ----
@@ -121,9 +162,9 @@ $collection = $bucket->defaultCollection();
 $collection = $bucket->scope("myapp")->collection("my-collection");
 ----
 
-The 3.2 SDK supports full integration with the xref:7.0@server:learn:data:scopes-and-collections.adoc[Collections] feature in the latest release of the Couchbase Data Platform, Couchbase Server 7.0.
+The PHP SDK (from version 3.2 onwards) supports full integration with the xref:7.1@server:learn:data:scopes-and-collections.adoc[Collections] feature introduced in Couchbase Server 7.0.
 This brings complete support of Collections, allowing Documents to be grouped by purpose or theme, according to a specified Scope.
-Here we will use the `users` collection within the `tenant_agent_00` scope from `travel-sample` bucket as an example.
+Here we will use the `users` collection within the `tenant_agent_00` scope from the `travel-sample` bucket as an example.
 
 [source,php]
 ----
@@ -148,23 +189,23 @@ Now that you know the basics, you may wish to go straight to that page -- or fir
 using the Couchbase php client, our xref:hello-world:sample-application.adoc[Travel Sample Application].
 
 
-== Cloud Connections
-
-If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella], be sure to get the correct endpoint as well as user, password, and `couchbasecloudbucket`
-
-For developing on Capella, if you are not working from the same _Availability Zone_, refer to the following:
-
-* Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments],
-* xref:project-docs:compatibility.adoc#network-requirements[Network Requirements],
-* If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
-
-
 == Additional Resources
 
 The API reference is generated for each release and can be found http://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html[here^].
 Older API references are linked from their respective sections in the xref:project-docs:sdk-release-notes.adoc[Release Notes].
 
-xref:project-docs:migrating-sdk-code-to-3.n.adoc[The Migrating from SDK2 to 3 page] highlights the main differences to be aware of when migrating your code.
+xref:project-docs:migrating-sdk-code-to-3.n.adoc[The Migrating to SDK API 3 page] highlights the main differences to be aware of when migrating your code.
 
 Couchbase welcomes community contributions to the PHP SDK.
 The PHP SDK source code is available on https://github.com/couchbase/php-couchbase[GitHub].
+
+
+=== Troubleshooting
+
+* Couchbase Server is designed to work in the same WAN or availability zone as the client application.
+If you're running the SDK on your laptop against a Capella cluster, see further information on:
+** Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments].
+** xref:project-docs:compatibility.adoc#network-requirements[Network Requirements].
+** If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
+* 
+* Our https://forums.couchbase.com/c/php-sdk/8[community forum] is a great source of help.

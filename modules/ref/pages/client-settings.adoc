@@ -3,17 +3,19 @@
 :nav-title: Client Settings
 :page-topic-type: reference
 :page-aliases: ROOT:client-settings
+:page-status: UNDER CONSTRUCTION
 
 [abstract]
 {description}
 
- 
+WARNING: The backend implementation of client settings changed substantially in 4.0 and is not currently fully documented.
+This will be resolved in a future 4.x release.
+See xref:project-docs:migrating-sdk-code-to-3.n.adoc#sdk4-specifics[more details on migrating to 4.0].
 
-Beyond the connection string, most settings are changed by calls to libcouchbase -- 
-refer to the https://docs.couchbase.com/sdk-api/couchbase-c-client/group\__lcb-cntl.html[API doc on `lcb_cntl()`] 
-and the https://docs.couchbase.com/sdk-api/couchbase-c-client/group__lcb-cntl-settings.html[settings list].
+Some details from the old `libcouchbase`
+https://docs.couchbase.com/sdk-api/couchbase-c-client/group__lcb-cntl-settings.html[settings list] may be useful for reference.
 // == Timeout Options
 
 // section on wide area network support
 
-include::7.0@sdk:shared:partial$client-settings-wide-network.adoc[]
+include::7.1@sdk:shared:partial$client-settings-wide-network.adoc[]

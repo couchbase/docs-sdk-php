@@ -3,6 +3,8 @@
 :page-topic-type: concept
 :page-aliases: ROOT:failure-considerations,ROOT:durability
 
+include::project-docs:partial$attributes.adoc[]
+
 
 [abstract]
 {description}
@@ -12,16 +14,24 @@ It is the responsibility of the development team and the software architect to e
 
  
 
-include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=intro]
+include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=intro]
 
-include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=syncrep]
-include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=syncrep3]
+include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=syncrep]
+include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=syncrep3]
 
-include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=older]
 
-include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=performance]
+== Older Server Versions
+// include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=older]
+If a version of Couchbase Server lower than 6.5 is being used then the fallback is 'client verified' durability.
 
-// include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=txns]
+WARNING: Client Verified durability is supported in xref:3.2@durability-replication-failure-considerations.adoc#older-server-versions[PHP SDK 3.2] but not in 4.0.
+Legacy support will be available in a later 4.x release.
+See the xref:project-docs:migrating-sdk-code-to-3.n.adoc#sdk4-specifics[SDK 4.0 migration considerations].
 
-// include::7.0@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=failover]
+
+include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=performance]
+
+include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=txns]
+
+// include::{version-server}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=failover]
 

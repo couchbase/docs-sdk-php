@@ -8,17 +8,17 @@
 {description}
 
 // include::{version-server}@sdk:shared:partial$views.adoc[tag=deprecate]
-include::7.0@sdk:shared:partial$views.adoc[tag=deprecate]
+include::7.1@sdk:shared:partial$views.adoc[tag=deprecate]
 
 
-include::7.0@sdk:shared:partial$views.adoc[tag=views-intro]
+include::7.1@sdk:shared:partial$views.adoc[tag=views-intro]
 
 
 You can find further information https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-ViewResult.html[in the API docs].
 
  
 ////
-include::7.0@sdk:shared:partial$views.adoc[tag=example-beer]
+include::7.1@sdk:shared:partial$views.adoc[tag=example-beer]
 
 
 [source,php]
@@ -29,7 +29,7 @@ $options->range("A", NULL)
 $result = $bucket->viewQuery("beer", "brewery_beers", $options);
 ----
 
-include::7.0@sdk:shared:partial$views.adoc[tag=example-travel]
+include::7.1@sdk:shared:partial$views.adoc[tag=example-travel]
 
 
 [source,php]
@@ -39,7 +39,7 @@ $options->key("<landmark-name>");
 $result = $bucket->viewQuery("landmarks", "by_name", $options);
 ----
 
-include::7.0@sdk:shared:partial$views.adoc[tag=example-geo-travel]
+include::7.1@sdk:shared:partial$views.adoc[tag=example-geo-travel]
 
 [source,php]
 ---

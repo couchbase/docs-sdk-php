@@ -20,9 +20,9 @@ Our xref:hello-world:start-using-sdk.adoc[Getting Started] guide introduced basi
 include::example$auth.php[tag=auth1,indent=0]
 ----
 
-include::7.0@sdk:shared:partial$auth-overview.adoc[tag=rbac]
+include::7.1@sdk:shared:partial$auth-overview.adoc[tag=rbac]
 
-include::7.0@sdk:shared:partial$auth-overview.adoc[tag=cert-auth]
+include::7.1@sdk:shared:partial$auth-overview.adoc[tag=cert-auth]
 
 
 == Authenticating a PHP Client by Certificate
@@ -45,7 +45,7 @@ The trust store is optional, and when missing, the library will use `certpath` a
 * `keypath` specifies the path (on the local filesystem) to the client SSL private key.
 
 
-include::7.0@sdk:shared:partial$auth-overview.adoc[tag=ldap]
+include::7.1@sdk:shared:partial$auth-overview.adoc[tag=ldap]
 
 [source,php]
 ----
