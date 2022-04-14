@@ -15,7 +15,7 @@ For download instructions, see the xref:sdk-full-installation.adoc[installation 
 
 == Version 4.0.0 (XXX April 2022)
 
-Version 4.0.0 is the first major release of the next generation Node.js SDK, built on the Couchbase++ library -- featuring multi-document distributed ACID transactions, and bringing a number of improvements related to internal connection behavior.
+Version 4.0.0 is the first major release of the next generation PHP SDK, built on the Couchbase++ library -- featuring multi-document distributed ACID transactions, and bringing a number of improvements related to internal connection behavior.
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0/
 
