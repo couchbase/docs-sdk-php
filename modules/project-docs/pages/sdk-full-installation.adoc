@@ -10,6 +10,7 @@
 
 For release notes, download links, and installation methods for <<older-releases,earlier releases of the Couchbase PHP Client>>, see below.
 
+include::partial$supported-versions.adoc[]
 
 // include::start-using-sdk.adoc[tag=prep]
 
@@ -144,14 +145,7 @@ The Couchbase SDK depends on the https://www.php.net/manual/en/json.installation
 which must be loaded before the SDK. However, it is already included on PHP 8.0.0+ as a core extension.
 
 
-// tag::older-releases[]
-== Older Releases
+include::partial$older-releases.adoc[]
 
-See:
-
-* The xref:3.2@php-sdk::sdk-release-notes.adoc[3.x PHP Release Notes & Download Archive].
-* The xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
-* Although https://www.couchbase.com/support-policy/enterprise-software[no longer supported], documentation for older releases continues to be available in our https://docs-archive.couchbase.com/home/index.html[docs archive].
-// end::older-releases[]
 
 // end::all[]

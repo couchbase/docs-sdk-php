@@ -9,7 +9,7 @@ include::partial$attributes.adoc[]
 [abstract]
 {description}
 
-The Couchbase PHP SDK is generally compatible with the https://www.php.net/supported-versions.php[supported versions of PHP]PHP -- currently 7.4, 8.0, and 8.1.
+include::partial$supported-versions.adoc[]
 
 == Couchbase Version/SDK Version Matrix
 

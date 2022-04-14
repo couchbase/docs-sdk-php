@@ -20,17 +20,12 @@ If this is not you, head back to the xref:overview.adoc[rest of the Couchbase PH
 
 == Installing PHP and the Couchbase PHP SDK
 
-The Couchbase PHP SDK generally tracks PHP's own https://www.php.net/supported-versions.php[supported versions].
-As of April 2022, it is compatible with PHP 7.4, 8.0, and 8.1.
+include::project-docs:partial$supported-versions.adoc[]
 
 In this section, we'll recommend a known good installation path here for *the purposes of evaluating* Couchbase.
 Though we'll call out some key sections where you may wish to override that for your needs, you and your in-house PHP experts will want to make a decision for ongoing development and deployment.
 
 The https://www.php.net/manual/en/install.php[PHP install page] has full details and many options for installing PHP on various operating systems.
-
-Couchbase generally tracks https://www.php.net/supported-versions.php[PHP supported versions],
-and will recommend using the most up-to-date fully supported version (currently 8.1)
-unless otherwise specified in our xref:project-docs:sdk-release-notes.adoc[release notes] or xref:project-docs:compatibility.adoc[compatibility page].
 
 
 [{tabs}]
