@@ -52,27 +52,29 @@ See the notes there for Support details.
 
 The PHP SDK is tested and supported on the following platforms:
 
+
 ****
 [discrete]
 === GNU/Linux
 
 * Amazon Linux 2.
-* Red Hat Enterprise Linux 8;
-+
-& CentOS 7 & 8.
-* Ubuntu (LTS) 18.04 (_Bionic_), & 20.04 (_Focal_).
+* Red Hat Enterprise Linux 7 & 8;
+* CentOS 7 & 8.
+* Ubuntu (LTS) 16.04 (_Xenial_), 18.04 (_Bionic_), & 20.04 (_Focal_).
 * Debian 9 (_Stretch_) & 10 (_Buster_).
+* Alpine Linux -- see xref:sdk-full-installation.adoc#alpine-linux[installation].
 
 [discrete]
 === Microsoft Windows
 
-Any MS-supported version compatible with Visual Studio 2022 (VC17) 
+Microsoft Windows 10 / All LTS releases from Windows Server 2016.
 
 [discrete]
 === Mac OS X
 
-The current and previous two releases of OS X. 
-At time of writing (February 2022): 10.15 (_Catalina_), 11 (_Big Sur_), and 12 (_Monterey_).
+The current and previous two releases of OS X.
+At time of writing (April 2022): 10.15 (_Catalina_), 11 (_Big Sur_), and 12 (_Monterey_).
+M1 ARM  architecture is fully supported in the 4.0 Python SDK.
 ****
 
 Although installable or compilable on many other platforms, we cannot provide support for untested combinations.
