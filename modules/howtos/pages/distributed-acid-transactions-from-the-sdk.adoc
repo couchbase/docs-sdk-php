@@ -43,8 +43,6 @@ include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=creating
 include::example$transactions-example.php[tag=create,indent=0]
 ----
 
-// TODO: this partial may need to be reviewed
-// TODO: see https://docs.couchbase.com/java-sdk/current/howtos/distributed-acid-transactions-from-the-sdk.html#:~:text=The%20lambda%20gets%20passed%20an%20AttemptContext%20object%2C%20generally%20referred%20to%20as%20ctx%20here.
 include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=lambda-ctx]
 
 == Examples
@@ -66,10 +64,9 @@ include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=mechanic
 
 === Replacing
 
-// TODO check PHP relevance of following
-Replacing a document requires a `ctx.get()` call first.
+Replacing a document requires a `$ctx->get()` call first.
 This is necessary so the transaction can check that the document is not involved in another transaction.
-If it is, then the transaction will handle this at the `ctx.replace()` point.
+If it is, then the transaction will handle this at the `$ctx->replace()` point.
 Generally, this involves rolling back what has been done so far, and retrying the lambda.
 Handling errors should be done through try/catch as in the example above.
 
@@ -80,8 +77,7 @@ include::example$transactions-example.php[tag=replace,indent=0]
 
 === Removing
 
-// TODO check PHP relevance of following
-As with replaces, removing a document requires a `ctx.get()` call first.
+As with replaces, removing a document requires a `$ctx->get()` call first.
 
 [source,php]
 ----
@@ -104,9 +100,7 @@ From a transaction context you may get a document:
 include::example$transactions-example.php[tag=get,indent=0]
 ----
 
-// TODO check PHP relevance of following
-`get` will cause the transaction to fail with `TransactionFailed` (after rolling back any changes, of course).
-It is provided as a convenience method so the developer does not have to check the `Optional` if the document must exist for the transaction to succeed.
+`get` will cause the transaction to fail with `TransactionOperationFailedException` (after rolling back any changes, of course).
 
 Gets will 'read your own writes', e.g. this will succeed:
 
@@ -123,7 +117,7 @@ If you already use N1QL from the PHP SDK, then its use in transactions is very s
 it returns the same `QueryResult` you are used to, and takes most of the same options.
 
 // TODO check PHP relevance of following
-You must take care to write `ctx.query()` inside the lambda however, rather than `cluster.query()` or `scope.query()`.
+You must take care to write `$ctx->query()` inside the lambda however, rather than `$cluster->query()` or `$scope->query()`.
 
 An example of SELECTing some rows from the `travel-sample` bucket:
 
@@ -132,6 +126,8 @@ An example of SELECTing some rows from the `travel-sample` bucket:
 include::example$transactions-example.php[tag=queryExamplesSelect,indent=0]
 ----
 
+// TODO the Scope reference stuff doesn't seem to work
+////
 Rather than specifying the full "`travel-sample`.inventory.hotel" name each time, it is easier to pass a reference to the inventory `Scope`:
 
 [source,php]
@@ -145,8 +141,9 @@ An example using a `Scope` for an UPDATE:
 ----
 include::example$transactions-example.php[tag=queryExamplesUpdate,indent=0]
 ----
+////
 
-And an example combining SELECTs and UPDATEs.
+Here is an example combining SELECTs and UPDATEs.
 It's possible to call regular PHP functions from the lambda, as shown here, permitting complex logic to be performed.
 Just remember that since the lambda may be called multiple times, so may the method.
 
@@ -177,7 +174,7 @@ In this example we insert a document with Key-Value, and read it with a SELECT.
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=queryRyow,indent=0]
+include::example$transactions-example.php[tag=queryRYOW,indent=0]
 ----
 
 <1> As with the 'Read Your Own Writes' example, here the insert is only staged, and so it is not visible to other transactions or non-transactional actors.
@@ -185,7 +182,6 @@ include::example$transactions-example.php[tag=queryRyow,indent=0]
 
 === Query Options
 
-// TODO check PHP relevance of following
 Query options can be provided via `TransactionsQueryOptions`, which provides a subset of the options in the PHP SDK's `QueryOptions`.
 
 [source,php]
@@ -193,11 +189,11 @@ Query options can be provided via `TransactionsQueryOptions`, which provides a s
 include::example$transactions-example.php[tag=queryOptions,indent=0]
 ----
 
-// TODO: check this partial to see if it matches up across SDKs.  otherwise, make it a table?
-include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=query-options]
+// // TODO: check this partial to see if it matches up across SDKs.  otherwise, make it a table?
+// include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=query-options]
 
 // TODO check PHP relevance of following
-See the xref:howtos:n1ql-queries-with-sdk.adoc#query-options[QueryOptions documentation] for details on these.
+See the xref:howtos:n1ql-queries-with-sdk.adoc#query-options[QueryOptions documentation] for full details on the supported parameters.
 
 // TODO: Replace the section below with this when we ensure that the shared partials in common are truly generic.
 // include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=query-perf]
@@ -234,8 +230,7 @@ include::example$transactions-example.php[tag=querySingle,indent=0]
 
 == Committing
 
-// TODO check PHP relevance of following
-Committing is automatic: if there is no explicit call to `ctx.commit()` at the end of the transaction logic callback, and no exception is thrown, it will be committed.
+Committing is automatic: if there is no explicit call to `$ctx->commit()` at the end of the transaction logic callback, and no exception is thrown, it will be committed.
 Committing is automatic at the end of the code block with the transaction context.
 If no exception is thrown, it will be committed.
 If you want to rollback the transaction, simply throw an exception.
@@ -260,7 +255,6 @@ include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=example]
 include::example$transactions-example.php[tag=full,indent=0]
 ----
 
-// TODO: this partial has some Java specific things in it
 // concurrency
 include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=concurrency]
 
