@@ -3,6 +3,7 @@
 Plus notes on Cloud, networks, and AWS Lambda.
 :navtitle: Compatibility
 :page-aliases: ROOT:overview,ROOT:compatibility-versions-features,compatibility-versions-features
+:page-toclevels: 2
 
 include::partial$attributes.adoc[]
 
@@ -78,6 +79,10 @@ M1 ARM  architecture is fully supported in the 4.0 Python SDK.
 ****
 
 Although installable or compilable on many other platforms, we cannot provide support for untested combinations.
+
+=== ARM Processor Support
+
+Python 4.0 SDK supports AWS Amazon Graviton2 and Apple M1 ARM processors.
 
 
 == Couchbase New Feature Availability Matrix
