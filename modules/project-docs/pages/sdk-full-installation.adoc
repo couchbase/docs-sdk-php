@@ -3,6 +3,7 @@
 :navtitle: Installation
 :page-topic-type: project-doc
 :page-status: UNDER CONSTRUCTION
+:page-toclevels: 2
 
 // tag::all[]
 [abstract]
