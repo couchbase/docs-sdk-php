@@ -12,26 +12,20 @@ include::partial$attributes.adoc[]
 The Document class and structure has been completely removed from the API, and the returned value is now `Result`.
 Retry behaviour is more proactive, and lazy bootstrapping moves all error handling to a single place.
 
-The current PHP SDK 4.0 is also based on the xref:project-docs:compatibility.adoc#sdk3.2[SDK API 3.2 specification], and offers an entirely new backend (couchbase++) with better support for upcoming features like Distributed ACID Transactions.
+The current PHP SDK 4.0 is also based on the xref:project-docs:compatibility.adoc#sdk3.3[SDK API 3.3 specification], and offers an entirely new backend (Couchbase++) with better support for new features like Distributed ACID Transactions.
 We have increased the major version to reflect the importance of this implementation change as per https://semver.org/[semantic versioning].
 
 The intent of this migration guide is to provide detail information on the changes and what to look for while upgrading the SDK.
 
-NOTE: if you are an existing PHP SDK 3._x_ user considering migrating to SDK 4.0,
+NOTE: For the most part, migration from SDK API 2._x_ versions remains the same.
+The few 4.0-specific changes can be found at the end of this document.
+If you are an existing PHP SDK 3._x_ user considering migrating to SDK 4.0,
 you may wish to skip to the <<sdk4-specifics,SDK 4.0 specifics>> below.
 
 include::{version-server}@sdk:shared:partial$api-version.adoc[tag=api-version]
 
-// include::{version-server}@sdk:shared:partial$migration.adoc[tag=intro]
-// tag::intro[]
 
-== Fundamentals
-
-Before this guide dives into the language-specific technical component of the migration, it is important to understand the high level changes first.
-As a migration guide, this document assumes you are familiar with the previous generation of the SDK and does not re-introduce SDK API 2 concepts.
-We recommend familiarizing yourself with the new SDK first by reading at least the xref:hello-world:start-using-sdk.adoc[getting started guide], and browsing through the other chapters a little.
-
-// end::intro[]
+include::{version-server}@sdk:shared:partial$migration.adoc[tag=intro]
 
 
 include::7.1@sdk:shared:partial$migration.adoc[tag=terms]
