@@ -5,6 +5,7 @@
 
 Couchbase welcomes community contributions to the PHP SDK.
 The https://github.com/couchbase/php-couchbase[PHP SDK source code^] is available on GitHub.
+// https://github.com/couchbase/couchbase-php-client
 Please see the https://github.com/couchbase/php-couchbase/blob/master/README.md[README^] file for further information.
 
 include::7.1@sdk:shared:partial$contrib.adoc[tag=contrib]
