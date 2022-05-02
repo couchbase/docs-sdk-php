@@ -2,7 +2,8 @@
 :description: Installing the Couchbase PHP SDK & a Hello World example program.
 :page-aliases: ROOT:getting-started,ROOT:start-using,ROOT:hello-couchbase,ROOT:start-using-sdk
 :navtitle: Start Using the SDK
-:page-status: UNDER CONSTRUCTION
+:page-toclevels: 2
+
 
 include::project-docs:partial$attributes.adoc[]
 
@@ -11,7 +12,6 @@ include::project-docs:partial$attributes.adoc[]
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
 It is a native PHP extension and uses the Couchbase++ high-performance C++ library to handle communicating to the cluster over Couchbase binary protocols.
 
-WARNING: TODO PHP example (especially Cloud example) needs rework and fuller explanation below
 
 == Hello Couchbase
 
@@ -24,12 +24,14 @@ We will go through the code sample step by step, but for those in a hurry to see
 Couchbase Capella Sample::
 +
 --
-To connect to xref:cloud::index.adoc[Couchbase Capella], be sure to get the correct endpoint as well as user, password, certificate and `couchbasecloudbucket`  -- and see the <<cloud-connections, Cloud section>>, below.
+If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella], be sure to get the correct endpoint as well as user, password -- and see the <<cloud-connections, Cloud section>>, below.
 
 [source,php]
 ----
-include::hello-world:example$cloud.php[tag=cloud_connect]
+include::hello-world:example$cloud.php[tags=**]
 ----
+
+The Couchbase Capella free trial version comes with the Travel Sample Bucket, and its Query indexes, loaded and ready.
 --
 
 Local Couchbase Server::
@@ -37,36 +39,14 @@ Local Couchbase Server::
 -- 
 [source,php]
 ----
-$connectionString = "couchbase://localhost";
-$options = new \Couchbase\ClusterOptions();
-$options->credentials("Administrator", "password");
-$cluster = new \Couchbase\Cluster($connectionString, $options);
-
-// get a bucket reference
-$bucket = $cluster->bucket("bucket-name");
-
-// get a default collection reference
-$collection = $bucket->defaultCollection();
-
-// or for named collection
-$collection = $bucket->scope("myapp")->collection("my-collection");
-
-$scope = $bucket->scope("tenant_agent_00");
-$collection = $agentScope->collection("users");
-
-// upsert document
-$upsertResult = $collection->upsert("my-document", ["name" => "mike"]);
-
-// get document
-$getResult = $collection->get("my-document");
+include::hello-world:example$start-using.php[tags=**]
 ----
+
 As well as the PHP SDK (see below), and a running instance of Couchbase Server, you will need to load up the Travel Sample Bucket
 using either the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-ui[Web interface]
 or the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-cli[command line].
 --
 ====
-
-The Couchbase Capella free trial version comes with the Travel Sample Bucket, and its Query indexes, loaded and ready.
 
 == Quick Installation
 
@@ -103,89 +83,121 @@ Windows downloads and instructions for the PHP SDK are available from xref:proje
 --
 ====
 
-TODO: XXXX **follow the post-install instructions** according to the `.ini` practices for your platform.
+Make sure to add the extension details to your `php.ini`.
+See xref:project-docs:sdk-full-installation.adoc#post-installation[post-installation instructions] for full details:
+
+[source,ini]
+----
+extension=json      ; not needed with PHP 8.0.0+
+extension=couchbase
+----
 
 If there are any problems, refer to the full xref:project-docs:sdk-full-installation.adoc[Installation page].
 
-TIP: If you are evaluating the PHP SDK as a tester, architect, or otherwise not a regular PHP developer, our xref:platform-help.adoc[Platform Help] pages may help get you over any humps in the road.
-
 == Step-by-step
 
-At this point we want to transition from the terminal to your code editor of choice.
 
-Let's now create an empty file named `cb-test.php` and walk through adding code step-by-step:
+Start a new project (in VS Code or PhpStorm, etc.) and create a file `cb-test.php`.
 
-* Connect to a cluster, bucket, and default collection;
-* Add and retrieve a new document;
-* Look up (SQL-type query) the new document by attribute value.
+Go to our xref:platform-help.adoc[Platform Introduction] if you don't already have an editor or IDE setup for working with PHP -- e.g. you are evaluating the PHP SDK, but it is not your normal platform.
 
-=== Preamble XXXX
+=== Prerequisites
 
-Couchbase uses xref:7.1@server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
+Install the latest 4.x https://pecl.php.net/package/couchbase[couchbase] SDK package -- see <<quick-install,above>>.
+
+The following code samples assume:
+
+* Couchbase xref:cloud:ROOT:index.adoc[Capella] cluster, or Couchbase Server is installed and accessible locally (xref:server:getting-started:do-a-quick-install.adoc[Do a Quick Install] if you don't already have Couchbase Server installed).
+
+* You have create a bucket (perhaps using the xref:server:manage:manage-settings/install-sample-buckets.adoc[travel-sample dataset], or by creating a new bucket).
+Note, the Travel Sample bucket is installed automatically by the Capella free trial
+
+* You have created a Couchbase user named "username" [change as appropriate] with permissions to access the cluster (at least Application Access permissions).
+
+NOTE: Couchbase uses xref:server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
 Here we will use the _Full Admin_ role created during installation of the Couchbase Data Platform.
 For production client code, you will want to use xref:howtos:managing-connections.adoc#rbac[more appropriate, restrictive settings], but here we want to get you up and running quickly.
 If you're developing client code on the same VM or machine as the Couchbase Server, your URI can be _localhost_.
 
+Firstly, you will need to have a few `import` statements at the top of your PHP program:
+
+[source,php]
+----
+include::hello-world:example$start-using.php[tag=imports]
+----
 
 === Connection
 
+Then you can connect to the cluster:
+
+[{tabs}] 
+====
+Capella Connection::
++
+--
+[source,csharp]
+----
+include::example$cloud.php[tag=connect,indent=0]
+----
+
+From 4.0, the PHP SDK includes Capella's standard certificates by default, so you do not need to additional configuration.
+You do need to enable TLS, which can be done by simply using `couchbases:` in the Connection String as in this example.
+--
+Local Server Connection::
++
+--
 [source,php]
 ----
-$connectionString = "couchbase://localhost";
-$options = new \Couchbase\ClusterOptions();
-$options->credentials("Administrator", "password");
-$cluster = new \Couchbase\Cluster($connectionString, $options);
+include::example$start-using.php[tag=connect,indent=0]
 ----
 
-The `Cluster` provides access to cluster-level operations like N1QL queries, analytics, or full-text search.
-You will also find different management APIs on it.
+For developing locally on the same machine as the Couchbase Server, your URI can be _couchbase://localhost_ as here. But for Production deployments, you will want to use a secure server,
+with `couchbases://`.
+--
+====
 
-If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella] rather than a local Couchbase Server, then also refer to the <<cloud-connections, Cloud section>>, below.
+See xref:howtos:managing-connections.adoc[Managing Connections] for full configuration details.
 
-To access the KV (Key/Value) API or to query views, you need to open a `Bucket`:
+Couchbase uses xref:server:learn:security/roles.adoc[Role Based Access Control (RBAC)] to control access to resources.
+
+
+=== Bucket, Scopes, and Collections
+
+Open the bucket:
+[source,php]
+----
+include::example$start-using.php[tag=bucket,indent=0]
+----
+
+Collections allow Documents to be grouped by purpose or theme, according to specified _Scope_.
+Our Travel Sample bucket has separate scopes for inventory (flights, etc.), and for tenants (different travel agents).
 
 [source,php]
 ----
-// get a bucket reference
-$bucket = $cluster->bucket("bucket-name");
+include::example$start-using.php[tag=collection,indent=0]
 ----
 
-If you installed the travel sample data bucket, substitute _travel-sample_ for _bucket-name_.
+To get you started the following code creates a new document in a custom scope and collection and then fetches it again, printing the result.
 
 [source,php]
 ----
-// get a default collection reference
-$collection = $bucket->defaultCollection();
-
-// or for named collection
-$collection = $bucket->scope("myapp")->collection("my-collection");
+include::example$start-using.php[tag=upsert-get,indent=0]
 ----
 
-The PHP SDK (from version 3.2 onwards) supports full integration with the xref:7.1@server:learn:data:scopes-and-collections.adoc[Collections] feature introduced in Couchbase Server 7.0.
-This brings complete support of Collections, allowing Documents to be grouped by purpose or theme, according to a specified Scope.
-Here we will use the `users` collection within the `tenant_agent_00` scope from the `travel-sample` bucket as an example.
+[NOTE]
+====
+Other possible key/value CRUD Operations are described in detail on the xref:howtos:kv-operations.adoc[KV Operations page].
+====
+
+You can also perform a N1QL query with the cluster object:
 
 [source,php]
 ----
-$scope = $bucket->scope("tenant_agent_00");
-$collection = $agentScope->collection("users");
+include::example$start-using.php[tag=n1ql-query,indent=0]
 ----
 
-The code shows how you would use a named collection and scope. A named or default collection will provide the same functionality as bucket-level operations did in previous versions of Couchbase Server.
+You can learn more about N1QL queries on the xref:howtos:n1ql-queries-with-sdk.adoc[Query page].
 
-The `defaultCollection` must be used when connecting to a 6.6 cluster or earlier.
-[source,php]
-----
-// upsert document
-$upsertResult = $collection->upsert("my-document", ["name" => "mike"]);
-
-// get document
-$getResult = $collection->get("my-document");
-----
-
-KV Operations are described in detail on the xref:howtos:kv-operations.adoc[KV Operations page].
-Now that you know the basics, you may wish to go straight to that page -- or first see a complete worked example of
-using the Couchbase php client, our xref:hello-world:sample-application.adoc[Travel Sample Application].
 
 
 == Additional Resources
@@ -206,5 +218,4 @@ If you're running the SDK on your laptop against a Capella cluster, see further 
 ** Notes on xref:ref:client-settings.adoc#constrained-network-environments[Constrained Network Environments].
 ** xref:project-docs:compatibility.adoc#network-requirements[Network Requirements].
 ** If you have a consumer-grade router which has problems with DNS-SRV records review our xref:howtos:troubleshooting-cloud-connections.adoc#troubleshooting-host-not-found[Troubleshooting Guide].
-* 
 * Our https://forums.couchbase.com/c/php-sdk/8[community forum] is a great source of help.
