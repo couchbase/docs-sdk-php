@@ -12,7 +12,7 @@ use \Couchbase\QueryOptions;
 use \Couchbase\QueryScanConsistency;
 use \Couchbase\MutationState;
 
-$CB_USER = getenv('CB_USER') ?: 'Administrator';
+$CB_USER = getenv('CB_USER') ?: 'username';
 $CB_PASS = getenv('CB_PASS') ?: 'password';
 $CB_HOST = getenv('CB_HOST') ?: 'couchbase://db';
 $durabilityLevel = Couchbase\DurabilityLevel::NONE; // TODO
@@ -313,7 +313,7 @@ function queryOptions($cluster) {
   $cluster->transactions()->run(
     function (TransactionAttemptContext $ctx) {
       $txQo = TransactionQueryOptions::build()
-        ->timeout(1000)
+        ->readonly(false)
         ->positionalParameters(["key", "value"]);
         
       $ctx->query(
@@ -339,8 +339,8 @@ function querySingle($cluster) {
   catch (\Couchbase\Exception\TransactionException $e) { 
     echo "Transaction possibly committed\n";
   }
+  // end::querySingle[]
 }
-// end::querySingle[]
 
 // SKIP querySingleScoped till checked Scoped examples above!
 // async function querySingleScoped() {
@@ -354,11 +354,7 @@ function querySingle($cluster) {
 //   const travelSample = cluster.bucket("travel-sample")
 //   const inventory = travelSample.scope("inventory")
 //   // TODO: enable after implementation
-//   // cluster.transactions().query(bulkLoadStatement, {scope: inventory})
-//   // end::querySingleScoped[]
-//   // Bucket travelSample = cluster.bucket("travel-sample");
-//   // Scope inventory = travelSample.scope("inventory");
-//   // transactions.query(inventory, bulkLoadStatement);
+//   // cluster.query(bulkLoadStatement, queryOptions().asTransaction())
 //   // // end::querySingleScoped[]
 // }
 

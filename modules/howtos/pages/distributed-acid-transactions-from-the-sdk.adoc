@@ -189,9 +189,6 @@ Query options can be provided via `TransactionsQueryOptions`, which provides a s
 include::example$transactions-example.php[tag=queryOptions,indent=0]
 ----
 
-// // TODO: check this partial to see if it matches up across SDKs.  otherwise, make it a table?
-// include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=query-options]
-
 // TODO check PHP relevance of following
 See the xref:howtos:n1ql-queries-with-sdk.adoc#query-options[QueryOptions documentation] for full details on the supported parameters.
 
@@ -230,9 +227,8 @@ include::example$transactions-example.php[tag=querySingle,indent=0]
 
 == Committing
 
-Committing is automatic: if there is no explicit call to `$ctx->commit()` at the end of the transaction logic callback, and no exception is thrown, it will be committed.
-Committing is automatic at the end of the code block with the transaction context.
-If no exception is thrown, it will be committed.
+Committing is automatic: 
+If no exception is thrown, the transaction will be committed at the end of the code block with the transaction context.
 If you want to rollback the transaction, simply throw an exception.
 Transactions may rollback from the transaction logic itself, various failure conditions, or from your application logic by throwing an exception.
 

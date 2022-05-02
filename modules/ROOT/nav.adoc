@@ -17,6 +17,7 @@ Couchbase PHP SDK
 .Advanced Data Operations
 * xref:howtos:concurrent-async-apis.adoc[Batching]
 * xref:howtos:concurrent-document-mutations.adoc[Concurrent Document Mutations]
+* xref:howtos:distributed-acid-transactions-from-the-sdk.adoc[Distributed ACID Transactions]
 // * xref:howtos:durability.adoc[Durability]
 * xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON]
 * xref:howtos:working-with-collections.adoc[Working with Collections]
