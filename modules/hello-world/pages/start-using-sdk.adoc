@@ -29,7 +29,6 @@ To connect to xref:cloud::index.adoc[Couchbase Capella], be sure to get the corr
 [source,php]
 ----
 include::hello-world:example$cloud.php[tag=cloud_connect]
-// kv timeout extended example needed
 ----
 --
 
@@ -106,7 +105,7 @@ Windows downloads and instructions for the PHP SDK are available from xref:proje
 
 TODO: XXXX **follow the post-install instructions** according to the `.ini` practices for your platform.
 
-If there are any problems, refer to the full xref:project-pages:sdk-full-installation.adoc[Installation page].
+If there are any problems, refer to the full xref:project-docs:sdk-full-installation.adoc[Installation page].
 
 TIP: If you are evaluating the PHP SDK as a tester, architect, or otherwise not a regular PHP developer, our xref:platform-help.adoc[Platform Help] pages may help get you over any humps in the road.
 
