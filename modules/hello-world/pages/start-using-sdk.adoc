@@ -121,6 +121,7 @@ If you're developing client code on the same VM or machine as the Couchbase Serv
 
 Firstly, you will need to have a few `import` statements at the top of your PHP program:
 
+[#imports]
 [source,php]
 ----
 include::hello-world:example$start-using.php[tag=imports]
