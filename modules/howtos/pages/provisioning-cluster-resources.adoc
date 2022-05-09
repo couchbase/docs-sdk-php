@@ -2,177 +2,251 @@
 :description: Provisioning cluster resources is managed at the collection or bucket level, depending upon the service affected.
 :navtitle: Provisioning Cluster Resources
 :page-aliases: ROOT:managing-clusters
+:page-toclevels: 2
+
+// API refs
+:bucket-api-reference: pass:q[BucketManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_buckets[`Cluster::buckets()`]]
+:user-api-reference: pass:q[UserManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_users[`Cluster::users()`]]
+:query-api-reference: pass:q[QueryIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_queryIndexes[`Cluster::queryIndexes()`]]
+:analytics-api-reference: pass:q[AnalyticsIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_analyticsIndexes[`Cluster::analyticsIndexes()`]]
+:search-api-reference: pass:q[SearchIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_searchIndexes[`Cluster::searchIndexes()`]]
+:collection-api-reference: pass:q[CollectionManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Bucket.html#method_collections[`Bucket::collections()`]]
+:view-api-reference: pass:q[ViewIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Bucket.html#method_viewIndexes[`Bucket::viewIndexes()`]]
+
+// one-view-update-warning common partial
+:upsertDesignDocument: pass:q[`upsertDesignDocument` method]
+:getDesignDocument: pass:q[`getDesignDocument`]
+
+include::project-docs:partial$attributes.adoc[]
 
 [abstract]
 {description}
 Common use cases are outlined here, less common use cases are covered in the https://pkg.go.dev/github.com/couchbase/gocb/v2?tab=doc[API docs].
 
-include::7.1@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
+include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=management-intro]
 
 The PHP SDK also comes with some convenience functionality for common Couchbase management requests.
-////
+
 Management operations in the SDK may be performed through several interfaces depending on the object:
 
-* BucketManager -- `Cluster.Buckets()`
-* UserManager -- `Cluster.Users()` // see xref
-* QueryIndexManager -- `Cluster.QueryIndexes()`
-* AnalyticsIndexManager -- `Cluster.AnalyticsIndexes()`
-* SearchIndexManager -- `Cluster.SearchIndexes()`
-* CollectionManager -- `Bucket.Collections()`
-* ViewIndexManager -- `Bucket.ViewIndexes()`.
-////
-NOTE: When using a Couchbase version earlier than 6.5, you must create a valid Bucket connection using `cluster.Bucket(name)` before you can use cluster level managers.
+* {bucket-api-reference}
+* {user-api-reference}
+* {query-api-reference} 
+* {analytics-api-reference}
+* {search-api-reference}
+* {collection-api-reference}
+* {view-api-reference}
 
+NOTE: When using a Couchbase version earlier than 6.5, you must create a valid Bucket connection using `Cluster::bucket(name)` before you can use cluster level managers.
 
-== Creating and Removing Buckets
+[WARNING]
+====
+Since SDK 4.0 uses the `Couchbase++` library rather than `libcouchbase`, some management APIs have not been fully implemented, in particular:
 
-The `ClusterManager` interface may be used to create and delete buckets from the Couchbase cluster.
-It is instantiated through the `Cluster.Buckets()` method.
+* `AnalyticsIndexManager`
+* `SearchIndexManager`
+* `ViewIndexManager`
+* `CollectionManager`
 
-////
-[source,golang,indent=0]
+Any attempt to use them will raise an `UnsupportedOperationException` error.
+The APIs will be available in a future 4.x release.
+====
+
+== Bucket Management
+
+The `BucketManager` interface may be used to create and delete buckets from the Couchbase cluster.
+It is instantiated through the `Cluster::buckets()` method.
+
+[source,php]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=creatingbucketmgr]
+include::howtos:example$provisioning-resources-buckets.php[tag=creating-bucket-mgr,indent=0]
 ----
-////
 
-The `CreateBucketSettings` and `BucketSettings` structs are used for creating and updating buckets, `BucketSettings` is also used for exposing information about existing buckets.
+The `BucketSettings` class is used for creating and updating buckets, and for exposing information about existing buckets.
 
-include::7.1@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning]
+include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=update-bucket-warning,indent=0]
 
-////
 Here is the list of parameters available:
 
 |====
 | Name | Description | Can be updated
-| `Name string` | The name of the bucket, required for creation. | false
-| `FlushEnabled boolean` | Enables flushing to be performed on this bucket (see the <<go-flushing>> section below). | true
-| `ReplicaIndexDisabled boolean` | Whether or not to replicate indexes. | false
-| `RAMQuotaMB uint64` | How much memory should each node use for the bucket, required for creation. | true
-| `NumReplicas uint32` | The number of replicas to use for the bucket. | true
-| `BucketType BucketType` | The type of the bucket, required for creation. | false
-| `EvictionPolicy EvictionPolicyType` | The type of the eviction to use for the bucket, defaults to `valueOnly`. | true (note: changing will cause the bucket to restart causing temporary inaccessibility)
-| `MaxTTL time.Duration` | The default maximum time-to-live to apply to documents in the bucket. (note: This option is only available for Couchbase and Ephemeral buckets in Couchbase Enterprise Edition.) | true
-| `CompressionMode CompressionMode` | The compression mode to apply to documents in the bucket. (note: This option is only available for Couchbase and Ephemeral buckets in Couchbase Enterprise Edition.) | true
-| `ConflictResolutionType ConflictResolutionType` | The conflict resolution type to apply to conflicts on the bucket, defaults to `seqno` | false
+| `name() string` | The name of the bucket, required for creation. | false
+| `flushEnabled() boolean` | Enables flushing to be performed on this bucket (see the <<Flushing Buckets>> section below). | true
+| `enableReplicaIndexes() boolean` | Whether or not to replicate indexes. | false
+| `ramQuotaMb() int` | How much memory should each node use for the bucket, required for creation. | true
+| `numReplicas() int` | The number of replicas to use for the bucket. | true
+| `bucketType() string` | The type of the bucket, required for creation. | false
+| `evictionPolicy string` | The type of the eviction to use for the bucket, defaults to `VALUE_ONLY`. | true (note: changing will cause the bucket to restart causing temporary inaccessibility)
+| `maxTtl() int` | The default maximum time-to-live to apply to documents in the bucket. (note: This option is only available for Couchbase and Ephemeral buckets in Couchbase Enterprise Edition.) | true
+| `compressionMode() string` | The compression mode to apply to documents in the bucket. (note: This option is only available for Couchbase and Ephemeral buckets in Couchbase Enterprise Edition.) | true
+| `ConflictResolutionType ConflictResolutionType` | The conflict resolution type to apply to conflicts on the bucket, defaults to `SEQUENCE_NUMBER` | false
 |====
 
 The following example creates a "hello" bucket:
 
-[source,golang,indent=0]
+[source,php]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=createBucket]
+include::howtos:example$provisioning-resources-buckets.php[tag=create-bucket,indent=0]
 ----
 
 We can now get this bucket and update it to enable Flush:
 
-[source,golang,indent=0]
+[source,php]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=updateBucket]
+include::howtos:example$provisioning-resources-buckets.php[tag=update-bucket,indent=0]
 ----
 
 Once you no longer need to use the bucket, you can remove it:
 
-[source,golang,indent=0]
+[source,php]
 ----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=removeBucket]
+include::howtos:example$provisioning-resources-buckets.php[tag=remove-bucket,indent=0]
 ----
-////
 
-[#go-flushing]
-== Flushing Buckets
+=== Flushing Buckets
 
-include::7.1@sdk:shared:partial$flush-info-pars.adoc[tag=flush-intro]
+include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=flush-intro]
 
 You can flush a bucket in the SDK by using the `flush()` method:
-////
-[source,golang,indent=0]
-----
-include::devguide:example$go/provisioning-resources-buckets.go[tag=flushBucket]
-----
-////
-The `flush()` operation may fail if the bucket does not have https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-BucketSettings.html[flush enabled], in that case it will return an `ErrBucketNotFlushable`.
-
-
-== Collection Management
-
-The CollectionManager interface may be used to create and delete scopes and collections from the Couchbase cluster.
-It is instantiated through the `Bucket.collections()` method.
-Refer to the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-CollectionManager.html[`CollectionManager` API documentation]
-for further details.
 
 [source,php]
 ----
-include::example$collection-manager.php[tag=create-collection-manager,indent=0]
+include::howtos:example$provisioning-resources-buckets.php[tag=flush-bucket,indent=0]
 ----
 
-You can create a scope:
+The `flush()` operation may fail if the bucket does not have https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Management-BucketSettings.html#method_flushEnabled[flush enabled], in that case it will return an `BucketNotFlushableException`.
 
-[source,php]
-----
-include::example$collection-manager.php[tag=create-scope,indent=0]
-----
-
-You can then create a collection within that scope:
-
-[source,php]
-----
-include::example$collection-manager.php[tag=create-collection,indent=0]
-----
-
-Finally, you can drop unneeded collections and scopes:
-
-[source,php]
-----
-include::example$collection-manager.php[tag=drop-collection,indent=0]
-
-include::example$collection-manager.php[tag=drop-scope,indent=0]
-
-----
-
-Note that the most minimal permissions to create and drop a Scope or Collection is
-xref:server:learn:security/roles.adoc#manage-scopes[Manage Scopes]
-along with xref:server:learn:security/roles.adoc#data-reader[Data Reader].
-
-You can create users with the appropriate RBAC programmatically:
-[source,php]
-----
-include::example$collection-manager.php[tag=scopeAdmin, indent=0]
-
-----
-
-=== Listing the Scopes and Collections available
-
-You can enumerate Scopes and Collections using
-the `CollectionManager` and the properties of the
-`ScopeSpec` and `CollectionSpec` objects retrieved.
-
-[source,php]
-----
-include::example$collection-manager.php[tag=listing-scope-collection,indent=0]
-----
+// TODO: Put Collections management documentation back when the SDK supports it again.
+// Currently not supported in SDK 4.0.
+//== Collection Management
+//
+//The CollectionManager interface may be used to create and delete scopes and collections from the Couchbase cluster.
+//It is instantiated through the `Bucket::collections()` method.
+//Refer to the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-CollectionManager.html[`CollectionManager` API documentation]
+//for further details.
+//
+//[source,php]
+//----
+//include::example$collection-manager.php[tag=create-collection-manager,indent=0]
+//----
+//
+//You can create a scope:
+//
+//[source,php]
+//----
+//include::example$collection-manager.php[tag=create-scope,indent=0]
+//----
+//
+//You can then create a collection within that scope:
+//
+//[source,php]
+//----
+//include::example$collection-manager.php[tag=create-collection,indent=0]
+//----
+//
+//Finally, you can drop unneeded collections and scopes:
+//
+//[source,php]
+//----
+//include::example$collection-manager.php[tag=drop-collection,indent=0]
+//
+//include::example$collection-manager.php[tag=drop-scope,indent=0]
+//
+//----
+//
+//Note that the most minimal permissions to create and drop a Scope or Collection is
+//xref:server:learn:security/roles.adoc#manage-scopes[Manage Scopes]
+//along with xref:server:learn:security/roles.adoc#data-reader[Data Reader].
+//
+//You can create users with the appropriate RBAC programmatically:
+//[source,php]
+//----
+//include::example$collection-manager.php[tag=scopeAdmin, indent=0]
+//
+//----
+//
+//You can enumerate Scopes and Collections using the `CollectionManager` and the properties of the `ScopeSpec` and `CollectionSpec` objects retrieved.
+//
+//[source,php]
+//----
+//include::example$collection-manager.php[tag=listing-scope-collection,indent=0]
+//----
 
 == Index Management
 
-In general,you will rarely need to work with Index Managers from the SDK.
-For those occasions when you do, please see the relevant API docs:
+include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=index-management-intro]
 
-* QueryIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-QueryIndexManager.html[`QueryIndexManager`];
-// * AnalyticsIndexManager -- https://pkg.go.dev/github.com/couchbase/gocb/v2?tab=doc#Cluster.AnalyticsIndexes[``];
-* SearchIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-SearchIndexManager.html[`SearchIndexManager`];
-* ViewIndexManager -- https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-ViewIndexManager.html[`ViewIndexManager`].
+=== QueryIndexManager
 
+The `QueryIndexManager` interface contains the means for managing indexes used for queries.
+It can be instantiated through the `Cluster::queryIndexes()` method.
 
-// * Query
+[source,php]
+----
+include::howtos:example$query-index-manager.php[tag=creating-index-mgr,indent=0]
+----
+
+include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=query-index-manager-intro]
+
+The example below shows how to create a simple primary index, restricted to a named scope and collection, by calling the `create_primary_index()` method.
+Note that you cannot provide a named scope or collection separately, both must be set for the `QueryIndexManager` to create an index on the relevant keyspace path. 
+
+.Creating a primary index
+
+[source,php]
+----
+include::howtos:example$query-index-manager.php[tag=primary,indent=0]
+----
+
+When a primary index name is not specified, the SDK will create the index as `#primary` by default.
+However, if you wish to provide a custom name, you can simply set an `indexName` property in the `CreatePrimaryQueryIndexOptions` class.
+
+You may have noticed that the example also sets the `ignoreIfExists` boolean flag.
+When set to `true`, this optional argument ensures that an error is not thrown if an index under the same name already exists.
+
+Creating a _secondary_ index follows a similar approach, with some minor differences:
+
+.Creating a secondary index
+
+[source,php]
+----
+include::howtos:example$query-index-manager.php[tag=secondary,indent=0]
+----
+
+The `createIndex()` method requires an index name to be provided, along with the fields to create the index on.
+Like the _primary_ index, you can restrict a _secondary_ index to a named scope and collection by passing some options.
+
+Indexes can easily take a long time to build if they contain a lot of documents.
+In these situations, it is more ideal to build indexes in the background.
+To achieve this we can use the `deferred` boolean option, and set it to `true`.
+
+.Deferring index creation
+
+[source,php]
+----
+include::howtos:example$query-index-manager.php[tag=defer-indexes,indent=0]
+----
+
+To delete a query index you can use the `dropIndex()` or `dropPrimaryIndex()` methods.
+Which one you use depends on the type of query index you wish to drop from the database.
+
+.Deleting an index
+
+[source,php]
+----
+include::howtos:example$query-index-manager.php[tag=drop-primary-or-secondary-index,indent=0]
+----
 
 // * Search - note & link to FTS page & API?
 
-== View Management
+// TODO: Put Views documentation back when the SDK supports it again.
+// Currently not supported in SDK 4.0.
+//== Views Management
 
-include::7.1@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
-
-In the SDK, design documents are represented by the `DesignDocument` and `View` structs.
-All operations on design documents are performed on the `ViewIndexManager` instance:
+//include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=view-management]
+//
+//In the SDK, design documents are represented by the `DesignDocument` and `View` objects.
+//All operations on design documents are performed on the `ViewIndexManager` instance.
 
 ////
 [source,golang,indent=0]
