@@ -35,7 +35,7 @@ In the following example we will look at loading a set of JSON files and uploadi
 To begin with, let's look at loading the data from one of the Couchbase sample datasets, the beer dataset. 
 This dataset is around 7300 JSON files, each file representing a document. 
 This sample looks for the dataset in the default location for a GNU/Linux install, 
-you can find the default locations for other Operating Systems in our xref:https://docs.couchbase.com/server/7.0/cli/cli-intro.html[CLI reference].
+you can find the default locations for other Operating Systems in our xref:https://docs.couchbase.com/server/7.1/cli/cli-intro.html[CLI reference].
 
 [source,php]
 ----
