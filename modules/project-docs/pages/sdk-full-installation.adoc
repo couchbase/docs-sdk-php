@@ -21,7 +21,7 @@ include::partial$supported-versions.adoc[]
 === Installing on Mac and Linux systems
 
 Before installing the PHP SDK, the following dependencies must be installed.
-We recommend using OS specific utilities such as `brew`, `apt-get`, and similar package management utilities (depending on your environment).
+We recommend using OS specific utilities such as `brew`, `apt-get`, and similar package management utilities (depending on your environment):
 
 * cmake >= 3.20.0+
 
@@ -29,7 +29,7 @@ We recommend using OS specific utilities such as `brew`, `apt-get`, and similar 
 
 * openssl >= 1.1+
 
-[WARNING]
+[IMPORTANT]
 ====
 When installing OpenSSL via `brew install` on *macOS*, the command will not be sufficient to be able to build.
 The easiest way to fix this is to add the `OPENSSL_ROOT_DIR` env variable to your exports (e.g., .zshenv). 
@@ -39,7 +39,7 @@ The easiest way to fix this is to add the `OPENSSL_ROOT_DIR` env variable to you
 $ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl/
 ----
 
-If you still have issues setting this up, see the other tips mentioned when you run `brew info openssl`.
+If you have any issues setting this up, see the tips mentioned when you run `brew info openssl`.
 ====
 
 Now, install the Couchbase PHP SDK through your PHP distribution's `pecl` command:
@@ -78,12 +78,11 @@ Then follow the <<post-installation,post-installation steps>>.
 
 === Installing on Microsoft Windows
 
-IMPORTANT:
 Currently there are no pre-built binaries for the Windows platform of PHP SDK 4.0.0.
-But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[WINDOWS.md], that describe how to build an
-extension along with the PHP interpreter.
+Instead, you will need to follow https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[these steps] to build an extension along with the PHP interpreter.
 This process will be simplified in a future 4.0.x release where the pre-compiled binaries will be published.
 
+// TODO: Add this back when this is available in a future 4.0.x release
 // When using Microsoft Windows, instead of using PECL, download the pre-built binary package matching your environment below.
 // You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
@@ -152,15 +151,16 @@ extension=couchbase
 NOTE: on PHP version 7.2.0 and up, simply using the extension name is preferred.
 Previously, you might have used `couchbase.so` or `couchbase.dll`, depending on your platform.
 
-=== PHP Composer
+// TODO: unclear if this is still valid, there is no 4.0.0 package available at https://packagist.org/packages/couchbase/couchbase
+// === PHP Composer
 
-Once the PHP extension is installed, it may be used as any other PHP library through composer as posted at https://packagist.org/packages/couchbase/couchbase[packagist.org].
-To add it to your project's dependency list, use the following composer command:
+// Once the PHP extension is installed, it may be used as any other PHP library through composer as posted at https://packagist.org/packages/couchbase/couchbase[packagist.org].
+// To add it to your project's dependency list, use the following composer command:
 
-[source,console]
-----
-$ composer require couchbase/couchbase
-----
+// [source,console]
+// ----
+// $ composer require couchbase/couchbase
+// ----
 
 === Note on Extension Dependencies
 
