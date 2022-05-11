@@ -13,15 +13,25 @@ These pages cover the 4.x versions of the Couchbase PHP SDK.
 For download instructions, see the xref:sdk-full-installation.adoc[installation page].
 
 
-== Version 4.0.0 (XXX April 2022)
+== Version 4.0.0 (11 May 2022)
 
-Version 4.0.0 is the first major release of the next generation PHP SDK, built on the Couchbase++ library -- featuring multi-document distributed ACID transactions, and bringing a number of improvements related to internal connection behavior.
+Version 4.0.0 is the first major release of the next generation PHP SDK, built on the Couchbase++ library -- featuring
+multi-document distributed ACID transactions, and bringing a number of improvements related to internal connection
+behavior.
 
-API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0/
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0
 
-* https://issues.couchbase.com/browse/PCBC-123[PCBC-123]: 
-Sample ticket XXXXXX
+|===
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz[couchbase-4.0.0.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.0.0.sha256sum[couchbase-4.0.0.sha256sum]
+|===
 
+== Caveats
+
+There are no pre-built binaries for the Windows platform of PHP SDK 4.0.0.
+But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[WINDOWS.md], that describe how to build an
+extension along with PHP interpreter.
+The next SDK 4.0.x release will simplify this process and the pre-compiled binaries will be published.
 
 include::partial$older-releases.adoc[]
 
