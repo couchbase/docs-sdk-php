@@ -148,19 +148,14 @@ extension=json      ; not needed with PHP 8.0.0+
 extension=couchbase
 ----
 +
-NOTE: on PHP version 7.2.0 and up, simply using the extension name is preferred.
+NOTE: On PHP version 7.2.0 and up, simply using the extension name is preferred.
 Previously, you might have used `couchbase.so` or `couchbase.dll`, depending on your platform.
 
-// TODO: unclear if this is still valid, there is no 4.0.0 package available at https://packagist.org/packages/couchbase/couchbase
-// === PHP Composer
+=== PHP Composer
 
-// Once the PHP extension is installed, it may be used as any other PHP library through composer as posted at https://packagist.org/packages/couchbase/couchbase[packagist.org].
-// To add it to your project's dependency list, use the following composer command:
-
-// [source,console]
-// ----
-// $ composer require couchbase/couchbase
-// ----
+Given that SDK 4.x is a combination of PHP and C++ code, we no longer use https://packagist.org/packages/couchbase/couchbase[packagist] -- which only hosts pure PHP libraries.
+The code that is hosted on the packagist is for previous 3.x releases, and only implements data structures.
+This code is now fully integrated into SDK 4.x.
 
 === Note on Extension Dependencies
 
