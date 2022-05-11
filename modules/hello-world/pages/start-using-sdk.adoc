@@ -9,8 +9,9 @@ include::project-docs:partial$attributes.adoc[]
 
 [abstract]
 {description}
+
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
-It is a native PHP extension and uses the Couchbase++ high-performance C++ library to handle communicating to the cluster over Couchbase binary protocols.
+It is a native PHP extension and uses the `Couchbase++` high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
 
 
 == Hello Couchbase
