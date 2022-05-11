@@ -22,17 +22,16 @@ behavior.
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0
 
 |===
-|Platform|
 |Source          |https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz[couchbase-4.0.0.tgz]
 |Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.0.0.sha256sum[couchbase-4.0.0.sha256sum]
 |===
 
 == Caveats
 
-There are no pre-built binaries for Windows platform of PHP SDK 4.0.0. But there are steps in
-https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[WINDOWS.md], that describe how to build an
-extension along with PHP interpreter. Next release will simplify this process and pre-compiled binaries will be
-published.
+There are no pre-built binaries for the Windows platform of PHP SDK 4.0.0.
+But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[WINDOWS.md], that describe how to build an
+extension along with PHP interpreter.
+The next SDK 4.0.x release will simplify this process and the pre-compiled binaries will be published.
 
 include::partial$older-releases.adoc[]
 
