@@ -1,0 +1,6 @@
+{
+    "require": {
+        "couchbase/couchbase": "^4.0",
+        "ext-couchbase": "^4.0"
+    }
+}

@@ -25,7 +25,7 @@ We will go through the code sample step by step, but for those in a hurry to see
 Couchbase Capella Sample::
 +
 --
-If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella], be sure to get the correct endpoint as well as user, password -- and see the <<cloud-connections, Cloud section>>, below.
+If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase Capella], be sure to get the correct endpoint as well as the username and password.
 
 [source,php]
 ----
@@ -93,6 +93,18 @@ extension=json      ; not needed with PHP 8.0.0+
 extension=couchbase
 ----
 
+Additionally, if you are using https://getcomposer.org/doc/00-intro.md[Composer], simply update your `composer.json` file with the following dependencies:
+
+[source,json]
+----
+"require": {
+  ...
+  "ext-couchbase": "^4.0",
+  "couchbase/couchbase": "^4.0"
+}
+----
+
+And run the `composer update` command.
 If there are any problems, refer to the full xref:project-docs:sdk-full-installation.adoc[Installation page].
 
 == Step-by-step
@@ -200,7 +212,14 @@ include::example$start-using.php[tag=n1ql-query,indent=0]
 
 You can learn more about N1QL queries on the xref:howtos:n1ql-queries-with-sdk.adoc[Query page].
 
+== Next Steps
 
+Now you're up and running, try one of the following:
+
+* Our xref:hello-world:sample-application.adoc[Travel Sample Application] demonstrates all the basics you need to know;
+* Explore xref:howtos:kv-operations.adoc[Key Value Operations] against a document database;
+* Or xref:howtos:n1ql-queries-with-sdk.adoc[Query] with our SQL-based N1QL language;
+* Or read up on xref:concept-docs:data-services.adoc[which service fits your use case].
 
 == Additional Resources
 
