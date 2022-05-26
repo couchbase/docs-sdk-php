@@ -1,20 +1,21 @@
 <?php
 
 // tag::imports[]
-require_once 'Couchbase/autoload.php';
+// NOTE: Change the below vendor path to your own.
+require_once '../../../vendor/autoload.php';
 
-use \Couchbase\ClusterOptions;
-use \Couchbase\Cluster;
+use Couchbase\ClusterOptions;
+use Couchbase\Cluster;
 // end::imports[]
 
 // tag::connect[]
 // Update these credentials for your Capella instance!
-$connectionString = "couchbases://cb.njg8j7mwqnvwjqah.cloud.couchbase.com";
-$options = new \Couchbase\ClusterOptions();
+$connectionString = "couchbases://cb.<your-instance>.cloud.couchbase.com";
+$options = new ClusterOptions();
 
 $options->credentials("username", "Password!123");
 $options->keyValueTimeout(10 * 1000);
-$cluster = new \Couchbase\Cluster($connectionString, $options);
+$cluster = new Cluster($connectionString, $options);
 // end::connect[]
 
 // tag::bucket[]
@@ -23,7 +24,7 @@ $bucket = $cluster->bucket("travel-sample");
 // end::bucket[]
 
 // tag::collection[]
-// get a user-defined collection reference$scope = $bucket->scope("tenant_agent_00");
+// get a user-defined collection reference
 $scope = $bucket->scope("tenant_agent_00");
 $collection = $scope->collection("users");
 // end::collection[]

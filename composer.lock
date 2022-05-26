@@ -1,0 +1,61 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "047a90a8259ab5d68d59eec8da1dc090",
+    "packages": [
+        {
+            "name": "couchbase/couchbase",
+            "version": "4.0.0",
+            "source": {
+                "type": "git",
+                "url": "git@github.com:couchbase/couchbase-php-client.git",
+                "reference": "12ca305b72d36cc60ebffca0aa2c7e1cfc3ab803"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/couchbase/couchbase-php-client/zipball/12ca305b72d36cc60ebffca0aa2c7e1cfc3ab803",
+                "reference": "12ca305b72d36cc60ebffca0aa2c7e1cfc3ab803",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "require-dev": {
+                "ext-sockets": "*",
+                "phpunit/phpunit": "^9"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Couchbase\\": "Couchbase/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sergey Avseyev",
+                    "email": "sergey.avseyev@gmail.com"
+                }
+            ],
+            "description": "The PHP client library provides fast access to documents stored in a Couchbase Server.",
+            "time": "2022-05-11T08:48:37+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "ext-couchbase": "^4.0"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}
