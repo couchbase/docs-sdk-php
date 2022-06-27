@@ -334,3 +334,5 @@ In addition:
 * The changes to xref:howtos:managing-connections.adoc#connection-strings[Connection Strings] are not currently documented.
 * Because of the change to the backend Couchbase++ library, an Autoload is needed, as in xref:hello-world:start-using-sdk.adoc#imports[this imports example].
 If you are managing your Autoloads with Composer, as recommended, this process should be trivial, and not require any additional manual addition of `require_once` statements throughout your codebase.
+
+include::7.1@sdk:shared:partial$archive.adoc[tag=migration]
