@@ -2,6 +2,7 @@
 :description: Key Value (KV) or data service offers the simplest way to retrieve or mutate data where the key is known.
 :navtitle: KV Operations
 :page-topic-type: howto
+:page-toclevels: 2
 :page-aliases: document-operations.adoc
 
 [abstract]
@@ -194,6 +195,10 @@ include::example$kv-counter.php[tag=decrementwithoptions]
 ----
 
 NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change
+
+
+include::7.1@sdk:shared:partial$atomic.adoc[tag=xdcr]
+
 
 == Scoped KV Operations
 
