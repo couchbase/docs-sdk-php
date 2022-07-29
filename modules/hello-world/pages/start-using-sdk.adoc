@@ -63,7 +63,7 @@ simply use `pecl` to install the Couchbase PHP SDK.
 
 [source,console]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+$ pecl install couchbase
 ----
 --
 Alpine Linux::
