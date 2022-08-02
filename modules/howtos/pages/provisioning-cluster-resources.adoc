@@ -188,7 +188,7 @@ include::howtos:example$query-index-manager.php[tag=creating-index-mgr,indent=0]
 
 include::{version-server}@sdk:shared:partial$flush-info-pars.adoc[tag=query-index-manager-intro]
 
-The example below shows how to create a simple primary index, restricted to a named scope and collection, by calling the `create_primary_index()` method.
+The example below shows how to create a simple primary index, restricted to a named scope and collection, by calling the `createPrimaryIndex()` method.
 Note that you cannot provide a named scope or collection separately, both must be set for the `QueryIndexManager` to create an index on the relevant keyspace path. 
 
 .Creating a primary index
