@@ -54,6 +54,15 @@ Note the https://www.couchbase.com/support-policy[End of Life dates^] for Couchb
 See the notes there for Support details.
 
 
+=== Capella Compatibility
+
+At time of release, the Couchbase 4.0 PHP SDK is fully compatible with Couchbase Capella, our fully-hosted database-as-a-service. 
+To make development easier, the 4.0 PHP SDK includes the Capella client certificate ready installed.
+
+include::{version-server}@sdk:shared:partial$capella.adoc[tag=cloud]
+
+
+
 == Platform Compatibility
 
 The PHP SDK is tested and supported on the following platforms:
