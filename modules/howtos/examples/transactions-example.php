@@ -12,11 +12,11 @@ use Couchbase\QueryOptions;
 use Couchbase\QueryScanConsistency;
 use Couchbase\MutationState;
 
+// tag::config[]
 $CB_USER = getenv('CB_USER') ?: 'Administrator';
 $CB_PASS = getenv('CB_PASS') ?: 'password';
 $CB_HOST = getenv('CB_HOST') ?: 'couchbase://localhost';
 
-// tag::config[]
 $options = new ClusterOptions();
 $options->credentials($CB_USER, $CB_PASS);
 
@@ -89,6 +89,18 @@ try {
   echo "Transaction possibly committed: $e\n";
 }
 // end::create[]
+
+echo "Running: create-simple example\n";
+// tag::create-simple[]
+$cluster->transactions()->run(
+  function (TransactionAttemptContext $ctx) use ($collection) {
+    $ctx->insert($collection, 'doc1', ['hello' => 'world']);
+
+    $doc = $ctx->get($collection, 'doc1');
+    $ctx->replace($doc, ['foo' => 'bar']);
+  }
+);
+// end::create-simple[]
 
 echo "\nRunning: examples\n";
 // tag::examples[]

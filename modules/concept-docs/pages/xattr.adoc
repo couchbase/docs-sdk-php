@@ -7,15 +7,16 @@
 [abstract]
 {description}
 
-include::6.5@sdk:shared:partial$sdk-xattr-overview.adoc[tag=intro_extended_attributes]
+include::project-docs:partial$attributes.adoc[]
 
-include::6.5@sdk:shared:partial$sdk-xattr-overview.adoc[tag=using_extended_attributes]
+include::{version-server}@sdk:shared:partial$sdk-xattr-overview.adoc[tag=using_extended_attributes]
 
-include::6.5@sdk:shared:partial$sdk-xattr-overview.adoc[tag=virtual_extended_attributes]
+include::{version-server}@sdk:shared:partial$sdk-xattr-overview.adoc[tag=virtual_extended_attributes]
 
-[source,java]
-----
-bucket.lookupIn(key).get("$document.exptime", new SubdocOptionsBuilder().xattr(true)).execute()
-----
+// TODO: Update this to PHP
+//[source,java]
+//----
+//bucket.lookupIn(key).get("$document.exptime", new SubdocOptionsBuilder().xattr(true)).execute()
+//----
 
 // See the xref:howtos:sdk-xattr-example.adoc#virtual-extended-attributes-example[example page] for a complete code sample.
