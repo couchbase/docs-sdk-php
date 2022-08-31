@@ -56,7 +56,7 @@ include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag={lambda}
 
 include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=creating-error]
 
-== Logging
+=== Logging
 
 To aid troubleshooting, raise the log level on the SDK.
 // TODO: need to add logging details
