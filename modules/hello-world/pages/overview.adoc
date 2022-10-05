@@ -104,4 +104,4 @@ The PHP SDK can be combined with many other projects in the broader PHP ecosyste
 </div>
 ++++
 
-include::7.1@sdk:shared:partial$archive.adoc[tag=link]
+include::{version-common}@sdk:shared:partial$archive.adoc[tag=link]

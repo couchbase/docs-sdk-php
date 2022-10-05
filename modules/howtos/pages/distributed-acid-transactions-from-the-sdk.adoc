@@ -41,20 +41,20 @@ Refer to the xref:{version-server}@server:learn:security/roles.adoc[Roles] page 
 --
 ====
 
-include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=requirements]
+include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=requirements]
 
 == Creating a Transaction
 
-include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=creating]
+include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=creating]
 
 [source,php]
 ----
 include::example$transactions-example.php[tag=examples,indent=0]
 ----
 
-include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag={lambda}-ctx]
+include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag={lambda}-ctx]
 
-include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=creating-error]
+include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=creating-error]
 
 === Logging
 
@@ -247,7 +247,7 @@ For example, if you want to change the level of durability which must be attaine
 include::example$transactions-example.php[tag=config,indent=0]
 ----
 
-include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=config]
+include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=config]
 
 == Additional Resources
 

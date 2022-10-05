@@ -1,10 +1,12 @@
 = Get Involved
 :navtitle: Get Involved
 
+include::project-docs:partial$attributes.adoc[]
+
 == Contributing
 
 Couchbase welcomes community contributions to the PHP SDK.
 The https://github.com/couchbase/couchbase-php-client[PHP SDK source code^] is available on GitHub.
 Please see the https://github.com/couchbase/php-couchbase/blob/master/README.md[README^] file for further information.
 
-include::7.1@sdk:shared:partial$contrib.adoc[tag=contrib]
+include::{version-common}@sdk:shared:partial$contrib.adoc[tag=contrib]

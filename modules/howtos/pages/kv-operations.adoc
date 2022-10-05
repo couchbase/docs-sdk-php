@@ -5,6 +5,8 @@
 :page-toclevels: 2
 :page-aliases: document-operations.adoc
 
+include::project-docs:partial$attributes.adoc[]
+
 [abstract]
 {description}
 Here we cover CRUD operations, document expiration, and optimistic locking with CAS.
@@ -164,7 +166,7 @@ Another way to change expiration time is to use `getAndTouch()` method of the co
 include::example$kv-expiry.php[tag=getandtouch]
 ----
 
-include::7.1@sdk:shared:partial$documents.adoc[tag=exp-note]
+include::{version-common}@sdk:shared:partial$documents.adoc[tag=exp-note]
 
 
 == Atomic Counters
@@ -197,7 +199,7 @@ include::example$kv-counter.php[tag=decrementwithoptions]
 NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change
 
 
-include::7.1@sdk:shared:partial$atomic.adoc[tag=xdcr]
+include::{version-common}@sdk:shared:partial$atomic.adoc[tag=xdcr]
 
 
 == Scoped KV Operations
