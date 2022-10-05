@@ -1,6 +1,7 @@
-= Setting Up Couchbase PHP SDK with VSCode
+= Platform Introduction
 :description: pass:q[Discover how to get up and running developing applications with the Couchbase PHP SDK 4.0+ using `Visual Studio Code`.]
-:navtitle: Setting Up the PHP SDK
+:page-topic-type: tutorial
+:page-pagination: next
 
 [abstract]
 {description}

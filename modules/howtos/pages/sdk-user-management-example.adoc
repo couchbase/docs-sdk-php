@@ -1,6 +1,6 @@
 = User Management
 :description: pass:q[The PHP SDK lets you create _users_, assign them _roles_ and associated _privileges_, and remove them from the system.]
-:navtitle: Provisioning Cluster Resources
+:page-topic-type: howto
 
 [abstract]
 {description}

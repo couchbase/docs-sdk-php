@@ -1,7 +1,6 @@
-= Couchbase PHP Release Notes
+= Release Notes
 :description: Release notes for the Couchbase PHP Client.
-:navtitle: Release Notes
-:page-topic-type: project-doc
+:page-topic-type: reference
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
 
 // tag::all[]

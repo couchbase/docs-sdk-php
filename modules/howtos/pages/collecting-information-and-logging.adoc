@@ -1,6 +1,5 @@
-= Collecting Information and Logging in the PHP SDK with Couchbase Server
+= Logging
 :description: Logging with the SDK using the default logger implementation in PHP.
-:navtitle: Collecting Information
 :page-topic-type: howto
 :page-status: UNDER CONSTRUCTION
 

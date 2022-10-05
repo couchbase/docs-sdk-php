@@ -1,9 +1,9 @@
-= Distributed Transactions from the PHP SDK
+= Using Couchbase Transactions
 :description: Distributed ACID Transactions in Couchbase SDKs
-:navtitle: ACID Transactions
 :page-topic-type: howto
 :page-toclevels: 2
 :page-pagination: next
+:page-topic-type: howto
 
 include::project-docs:partial$attributes.adoc[]
 include::partial$acid-transactions-attributes.adoc[]
@@ -13,7 +13,7 @@ include::partial$acid-transactions-attributes.adoc[]
 
 This guide will show you examples of how to perform multi-document ACID (atomic, consistent, isolated, and durable) database transactions within your application, using the Couchbase PHP SDK.
 
-Refer to the xref:concept-docs:transactions.adoc[Distributed ACID Transactions] concept material for a high-level overview.
+Refer to the xref:concept-docs:transactions.adoc[] material for a high-level overview.
 
 == Prerequisites
 
