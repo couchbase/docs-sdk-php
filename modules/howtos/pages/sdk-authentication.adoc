@@ -4,6 +4,8 @@
 :page-edition: Enterprise Edition
 :page-aliases: ROOT:sdk-authentication-overview
 
+include::project-docs:partial$attributes.adoc[]
+
 [abstract]
 {description}
 
@@ -20,9 +22,9 @@ Our xref:hello-world:start-using-sdk.adoc[Getting Started] guide introduced basi
 include::example$auth.php[tag=auth1,indent=0]
 ----
 
-include::7.1@sdk:shared:partial$auth-overview.adoc[tag=rbac]
+include::{version-common}@sdk:shared:partial$auth-overview.adoc[tag=rbac]
 
-include::7.1@sdk:shared:partial$auth-overview.adoc[tag=cert-auth]
+include::{version-common}@sdk:shared:partial$auth-overview.adoc[tag=cert-auth]
 
 
 == Authenticating a PHP Client by Certificate
@@ -45,7 +47,7 @@ The trust store is optional, and when missing, the library will use `certpath` a
 * `keypath` specifies the path (on the local filesystem) to the client SSL private key.
 
 
-include::7.1@sdk:shared:partial$auth-overview.adoc[tag=ldap]
+include::{version-common}@sdk:shared:partial$auth-overview.adoc[tag=ldap]
 
 [source,php]
 ----

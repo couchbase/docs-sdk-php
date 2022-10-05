@@ -22,13 +22,13 @@ The few 4.0-specific changes can be found at the end of this document.
 If you are an existing PHP SDK 3._x_ user considering migrating to SDK 4.0,
 you may wish to skip to the <<sdk4-specifics,SDK 4.0 specifics>> below.
 
-include::{version-server}@sdk:shared:partial$api-version.adoc[tag=api-version]
+include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
 
 
-include::{version-server}@sdk:shared:partial$migration.adoc[tag=intro]
+include::{version-common}@sdk:shared:partial$migration.adoc[tag=intro]
 
 
-include::7.1@sdk:shared:partial$migration.adoc[tag=terms]
+include::{version-common}@sdk:shared:partial$migration.adoc[tag=terms]
 
 As an example here is a KeyValue document fetch:
 
@@ -44,13 +44,13 @@ Compare this to a N1QL query:
 $queryResult = $cluster->query("select 1=1", (new QueryOptions())->timeout(3000000));
 ----
 
-include::7.1@sdk:shared:partial$migration.adoc[tag=terms2]
+include::{version-common}@sdk:shared:partial$migration.adoc[tag=terms2]
 
 
-include::7.1@sdk:shared:partial$migration.adoc[tag=new]
+include::{version-common}@sdk:shared:partial$migration.adoc[tag=new]
 
 
-include::7.1@sdk:shared:partial$migration.adoc[tag=lang]
+include::{version-common}@sdk:shared:partial$migration.adoc[tag=lang]
 
 
 
@@ -335,4 +335,4 @@ In addition:
 * Because of the change to the backend Couchbase++ library, an Autoload is needed, as in xref:hello-world:start-using-sdk.adoc#imports[this imports example].
 If you are managing your Autoloads with Composer, as recommended, this process should be trivial, and not require any additional manual addition of `require_once` statements throughout your codebase.
 
-include::7.1@sdk:shared:partial$archive.adoc[tag=migration]
+include::{version-common}@sdk:shared:partial$archive.adoc[tag=migration]

@@ -4,6 +4,8 @@
 :page-topic-type: howto
 :page-aliases: ROOT:managing-connections,howtos:multi-network,ROOT:connecting,ROOT:connection-advanced
 
+include::project-docs:partial$attributes.adoc[]
+
 [abstract]
 {description}
 It contains best practices as well as information on TLS/SSL and other advanced connection options.
@@ -164,7 +166,7 @@ E.....@.@.............+....Z.'yZ..#........
 
 
 // DNS-SRV
-include::7.1@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv]
+include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv]
 
 DNS SRV bootstrapping is available in the PHP SDK from version 3.0.
 In order to make the SDK actually use the SRV records, you need to enable DNS SRV on the environment and pass in the host name from your records (here `example.com`):
@@ -187,7 +189,7 @@ Also, if you pass in more than one node, DNS SRV bootstrap will not be initiated
 
 
 // Cloud connections
-include::7.1@sdk:shared:partial$managing-connections.adoc[tag=cloud]
+include::{version-common}@sdk:shared:partial$managing-connections.adoc[tag=cloud]
 
 
 == Further Reading

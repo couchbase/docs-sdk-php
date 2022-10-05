@@ -10,7 +10,7 @@
 //[abstract]
 //{description}
 //
-//include::{version-server}@sdk:shared:partial$acid-transactions.adoc[tag=single-query-transactions-intro]
+//include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=single-query-transactions-intro]
 //
 //// TODO: Ensure the example shows a single query transaction, current one seems incorrect?
 //[source,php]

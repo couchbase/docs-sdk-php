@@ -4,6 +4,8 @@
 :page-topic-type: howto
 :page-aliases: ROOT:sdk-xattr-example.adoc
 
+include::project-docs:partial$attributes.adoc[]
+
 [abstract]
 {description}
 Sub-document operations may be quicker and more network-efficient than _full-document_ operations such as _upsert_, _replace_ and _get_ because they only transmit the accessed sections of the document over the network.
@@ -383,7 +385,7 @@ NOTE: Currently, paths cannot exceed 1024 characters, and cannot be more than 32
 
 
 // xattrs
-include::7.1@sdk:shared:partial$sdk-xattr-overview.adoc[tag=extended_attributes]
+include::{version-common}@sdk:shared:partial$sdk-xattr-overview.adoc[tag=extended_attributes]
 
 
 == XDCR

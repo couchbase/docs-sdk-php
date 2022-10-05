@@ -8,7 +8,7 @@
 [abstract]
 {description}
 
-// include::{version-server}@sdk:shared:partial$rto.adoc[tag=rto]
+// include::{version-common}@sdk:shared:partial$rto.adoc[tag=rto]
 WARNING: Response Time Observability is not supported in PHP SDK 4.0.
 View xref:3.2@response-time-observability[the Node.js SDK 3.2 docs]
 RTO support will be available in a later 4.x release.
