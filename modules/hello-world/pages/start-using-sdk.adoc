@@ -1,9 +1,9 @@
-= Install and Start Using the PHP SDK with Couchbase Server
+= Start Using the PHP SDK
 :description: Installing the Couchbase PHP SDK & a Hello World example program.
 :page-aliases: ROOT:getting-started,ROOT:start-using,ROOT:hello-couchbase,ROOT:start-using-sdk
-:navtitle: Start Using the SDK
 :page-toclevels: 2
-
+:page-pagination: full
+:page-topic-type: tutorial
 
 include::project-docs:partial$attributes.adoc[]
 
@@ -11,7 +11,7 @@ include::project-docs:partial$attributes.adoc[]
 {description}
 
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
-It is a native PHP extension and uses the `Couchbase++` high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
+It is a native PHP extension and uses the `{cbpp}` high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
 
 
 == Hello Couchbase

@@ -1,6 +1,5 @@
-= Sub-Document Operations with the PHP SDK
+= Sub-Document Operations
 :description: pass:q[_Sub-document_ operations can be used to efficiently access _parts_ of documents.]
-:navtitle: Sub-Doc Operations
 :page-topic-type: howto
 :page-aliases: ROOT:sdk-xattr-example.adoc
 

@@ -1,6 +1,5 @@
-= Transcoders & Non-JSON Documents
+= Transcoders and Non-JSON Documents
 :description: The PHP SDK supports common JSON document requirements out-of-the-box.
-:nav-title: Using Transcoders
 :page-topic-type: howtos
 
 Information on transcoders can be found in the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Bucket.html#method_setTranscoder[API documentation].

@@ -1,7 +1,6 @@
-= Couchbase PHP Installation Instructions and Archives
+= Full Installation
 :description: Installation instructions, and download archive for the Couchbase PHP Client.
-:navtitle: Installation
-:page-topic-type: project-doc
+:page-topic-type: howto
 :page-toclevels: 2
 
 // tag::all[]
