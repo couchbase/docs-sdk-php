@@ -24,7 +24,7 @@
 * xref:howtos:concurrent-async-apis.adoc[]
 * xref:howtos:concurrent-document-mutations.adoc[]
 // * xref:howtos:durability.adoc[Durability]
-* xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON]
+* xref:howtos:transcoders-nonjson.adoc[Transcoders & Non-JSON Documents]
 * xref:howtos:working-with-collections.adoc[Working with Collections]
 
 .Managing Couchbase
