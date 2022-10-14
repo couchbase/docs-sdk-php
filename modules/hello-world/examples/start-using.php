@@ -37,10 +37,11 @@ print_r($getResult->content());
 // end::upsert-get[]
 
 // tag::n1ql-query[]
-$queryResult = $cluster->query("select \"Hello World\" as greeting");
+$inventoryScope = $bucket->scope("inventory");
+$queryResult = $inventoryScope->query("SELECT * FROM airline WHERE id = 10");
 
-// Iterate over the rows to access result data and print to the terminal.
+// Print result data to the terminal.
 foreach ($queryResult->rows() as $row) {
-    printf("%s\n", $row["greeting"]);
+    print_r($row);
 }
 // end::n1ql-query[]

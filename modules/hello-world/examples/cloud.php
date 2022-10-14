@@ -14,7 +14,7 @@ $connectionString = "couchbases://cb.<your-instance>.cloud.couchbase.com";
 $options = new ClusterOptions();
 
 $options->credentials("username", "Password!123");
-$options->keyValueTimeout(10 * 1000);
+$options->applyProfile("wan_development");
 $cluster = new Cluster($connectionString, $options);
 // end::connect[]
 
@@ -38,10 +38,11 @@ print_r($getResult->content());
 // end::upsert-get[]
 
 // tag::n1ql-query[]
-$queryResult = $cluster->query("select \"Hello World\" as greeting");
+$inventoryScope = $bucket->scope("inventory");
+$queryResult = $inventoryScope->query("SELECT * FROM airline WHERE id = 10");
 
-// Iterate over the rows to access result data and print to the terminal.
+// Print result data to the terminal.
 foreach ($queryResult->rows() as $row) {
-    printf("%s\n", $row["greeting"]);
+    print_r($row);
 }
 // end::n1ql-query[]
