@@ -14,6 +14,9 @@ $connectionString = "couchbases://cb.<your-instance>.cloud.couchbase.com";
 $options = new ClusterOptions();
 
 $options->credentials("username", "Password!123");
+// Sets a pre-configured profile called "wan_development" to help avoid latency issues
+// when accessing Capella from a different Wide Area Network
+// or Availability Zone (e.g. your laptop).
 $options->applyProfile("wan_development");
 $cluster = new Cluster($connectionString, $options);
 // end::connect[]
