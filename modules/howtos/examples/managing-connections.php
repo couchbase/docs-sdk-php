@@ -23,7 +23,7 @@ $cluster = new Cluster($connectionString, $opts);
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
 
-$connectionString = "couchbases://localhost?truststorepath=/path/to/ca/certificates.pem";
+$connectionString = "couchbases://localhost?trustCertificate=/path/to/ca/certificates.pem";
 $cluster = new Cluster($connectionString, $opts);
 // end::tls[]
 
