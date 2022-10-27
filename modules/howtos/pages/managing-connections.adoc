@@ -95,7 +95,7 @@ TIP: In a deployment that uses multi-dimensional scaling, a custom KV port is on
 A custom manager port may be specified regardless of which services are running on the node.
 
 In many cases the client is able to automatically select the correct set of addresses to use when connecting to a cluster that advertises multiple addresses.
-If the detection heuristic fails in your environment, you can override it by setting the `io.networkResolution` client setting to `default` if the client and server are on the same network, or `external` if they're on different networks
+If the detection heuristic fails in your environment, you can override it by setting the `io.networkResolution` client setting to `default` if the client and server are on the same network, or `external` if they're on different networks.
 
 NOTE: Any TLS certificates must be set up at the point where the connections are being made.
 // todo what does that mean in practice? Also, should this be in the TLS docs section instead?
