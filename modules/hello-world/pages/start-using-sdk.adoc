@@ -137,7 +137,7 @@ In a production scenario, we strongly recommend setting up users with more granu
 Local Couchbase Server::
 +
 --
-* xref:{version-server}@server:getting-started/do-a-quick-install.adoc[Couchbase Server] is installed and accessible locally.
+* xref:{version-server}@server:getting-started:do-a-quick-install.adoc[Couchbase Server] is installed and accessible locally.
 
 * You have created your own bucket, or loaded the Travel Sample dataset using the xref:{version-server}@server:manage:manage-settings/install-sample-buckets.adoc#install-sample-buckets-with-the-ui[Web interface].
 
