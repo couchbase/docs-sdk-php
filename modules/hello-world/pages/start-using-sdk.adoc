@@ -79,7 +79,7 @@ As a result, the installation is a little different from other Unix-Like systems
 
 [source,console]
 ----
-$ apk add php7-pecl-couchbase
+$ apk add php81-pecl-couchbase
 ----
 --
 Windows::
