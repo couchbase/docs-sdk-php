@@ -68,9 +68,8 @@ and then install the equivalent `pecl` package for the version of `php` that you
 
 [source,console]
 ----
-$ apk add php7
-$ apk add libcouchbase
-$ apk add php7-pecl-couchbase
+$ apk add php81
+$ apk add php81-pecl-couchbase
 ----
 
 Then follow the <<post-installation,post-installation steps>>.
@@ -103,7 +102,7 @@ This process will be simplified in a future 4.0.x release where the pre-compiled
 // |===
 // |Platform|
 // |Source          |https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz[couchbase-3.2.2.tgz]
-// |Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
+'  // |Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
 // |PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64.zip[php_couchbase-3.2.2-7.4-nts-x64.zip]
 // |PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64.zip[php_couchbase-3.2.2-7.4-zts-x64.zip]
 // |PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64.zip[php_couchbase-3.2.2-8.0-nts-x64.zip]
@@ -132,9 +131,9 @@ This can be done using the command `php --ini`
 [source,console]
 ----
 $ php --ini
-Configuration File (php.ini) Path: /usr/local/etc/php/7.4
-Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
-Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
+Configuration File (php.ini) Path: /usr/local/etc/php/8.1
+Loaded Configuration File:         /usr/local/etc/php/8.1/php.ini
+Scan for additional .ini files in: /usr/local/etc/php/8.1/conf.d
 Additional .ini files parsed:      (none)
 ----
 +
