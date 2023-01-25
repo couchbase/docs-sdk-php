@@ -57,6 +57,16 @@ $ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 
 Then follow the <<post-installation,post-installation steps>>.
 
+IMPORTANT
+.New SDK Versions on Old Operating System Versions
+====
+This SDK runs on top of the {cpp} core, Couchbase{plus}{plus}, which requires a {cpp} 17 compiler, such as GCC 8.0, or more recent versions. 
+
+Older versions of Debian and Ubuntu ship with an older version of GCC -- and RHEL and CentOS also lack a supported version of PHP.
+  
+Workarounds are available for installing a newer build chain for RHEL and CentOS with https://fedoraproject.org/wiki/EPEL[EPEL^], but this may not be within your company’s policy, so also take a look at container options.
+====
+
 ==== Alpine Linux
 
 **Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
@@ -68,9 +78,8 @@ and then install the equivalent `pecl` package for the version of `php` that you
 
 [source,console]
 ----
-$ apk add php7
-$ apk add libcouchbase
-$ apk add php7-pecl-couchbase
+$ apk add php81
+$ apk add php81-pecl-couchbase
 ----
 
 Then follow the <<post-installation,post-installation steps>>.
@@ -132,9 +141,9 @@ This can be done using the command `php --ini`
 [source,console]
 ----
 $ php --ini
-Configuration File (php.ini) Path: /usr/local/etc/php/7.4
-Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
-Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
+Configuration File (php.ini) Path: /usr/local/etc/php/8.1
+Loaded Configuration File:         /usr/local/etc/php/8.1/php.ini
+Scan for additional .ini files in: /usr/local/etc/php/8.1/conf.d
 Additional .ini files parsed:      (none)
 ----
 +

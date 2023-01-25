@@ -77,9 +77,11 @@ Alpine Linux::
 *Alpine Linux* is very slim and uses `musl libc` and the `apk` package manager.
 As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
 
+// Update usingpage for our SDK inside Alpine Linux: https://pkgs.alpinelinux.org/packages?name=php*-pecl-couchbase&branch=edge 
+
 [source,console]
 ----
-$ apk add php7-pecl-couchbase
+$ apk add php81-pecl-couchbase
 ----
 --
 Windows::
