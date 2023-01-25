@@ -62,8 +62,8 @@ IMPORTANT
 ====
 This SDK runs on top of the {cpp} core, Couchbase{plus}{plus}, which requires a {cpp} 17 compiler, such as GCC 8.0, or more recent versions. 
 
-Older versions of Debian and Ubuntu ship with an older version of GCC -- and RHEL and CentOS also lack a supported version of PHPs
-.  
+Older versions of Debian and Ubuntu ship with an older version of GCC -- and RHEL and CentOS also lack a supported version of PHP.
+  
 Workarounds are available for installing a newer build chain for RHEL and CentOS with https://fedoraproject.org/wiki/EPEL[EPEL^], but this may not be within your company’s policy, so also take a look at container options.
 ====
 
