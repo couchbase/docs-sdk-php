@@ -112,7 +112,7 @@ This process will be simplified in a future 4.0.x release where the pre-compiled
 // |===
 // |Platform|
 // |Source          |https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz[couchbase-3.2.2.tgz]
-'  // |Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
+// |Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
 // |PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64.zip[php_couchbase-3.2.2-7.4-nts-x64.zip]
 // |PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64.zip[php_couchbase-3.2.2-7.4-zts-x64.zip]
 // |PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64.zip[php_couchbase-3.2.2-8.0-nts-x64.zip]
