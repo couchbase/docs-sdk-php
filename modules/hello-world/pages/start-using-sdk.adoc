@@ -106,8 +106,8 @@ Additionally, if you are using https://getcomposer.org/doc/00-intro.md[Composer]
 ----
 "require": {
   ...
-  "ext-couchbase": "^4.0",
-  "couchbase/couchbase": "^4.0"
+  "ext-couchbase": "^4.1",
+  "couchbase/couchbase": "^4.1"
 }
 ----
 
