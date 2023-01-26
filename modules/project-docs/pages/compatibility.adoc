@@ -25,7 +25,7 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
-[cols="40,20,25,20"]
+[cols="30,20,25,30"]
 |===
 | | SDK 2.6  | SDK 3.0, 3.1 | SDK 3.2, 4.0, 4.1
 
@@ -74,7 +74,7 @@ The PHP SDK is tested and supported on the following platforms:
 * Debian 9 (_Stretch_) & 10 (_Buster_).
 * Alpine Linux -- see xref:sdk-full-installation.adoc#alpine-linux[installation].
 
-Note, for stability reasons, CentOS and Red Hat ship with far older versions of PHP and GCC than the ones needed to run the latest Python SDK.
+Note, for stability reasons, CentOS and Red Hat ship with far older versions of PHP and GCC than the ones needed to run the latest PHP SDK.
 See the xref:project-docs:sdk-full-installation.adoc[full installation page] for details of using the EPEL repo, and other workarounds.
 
 [discrete]
