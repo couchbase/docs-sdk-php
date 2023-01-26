@@ -57,7 +57,7 @@ $ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
 
 Then follow the <<post-installation,post-installation steps>>.
 
-IMPORTANT
+[IMPORTANT]
 .New SDK Versions on Old Operating System Versions
 ====
 This SDK runs on top of the {cpp} core, Couchbase{plus}{plus}, which requires a {cpp} 17 compiler, such as GCC 8.0, or more recent versions. 
