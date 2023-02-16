@@ -77,7 +77,7 @@ The PHP SDK is tested and supported on the following platforms:
 * CentOS 7 & 8.
 * Ubuntu (LTS) 16.04 (_Xenial_), 18.04 (_Bionic_), & 20.04 (_Focal_).
 * Debian 9 (_Stretch_) & 10 (_Buster_).
-* Alpine Linux -- see xref:sdk-full-installation.adoc#alpine-linux[installation].
+* Alpine Linux (since PHP SDK 3.1.2) -- see xref:sdk-full-installation.adoc#alpine-linux[installation].
 
 [discrete]
 === Microsoft Windows
