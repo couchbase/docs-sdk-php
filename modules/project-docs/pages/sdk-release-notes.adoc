@@ -12,7 +12,73 @@ These pages cover the 4.x versions of the Couchbase PHP SDK.
 For download instructions, see the xref:sdk-full-installation.adoc[installation page].
 
 
+== Version 4.1.1 (22 February 2023)
 
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.1
+
+|===
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.1.tgz[couchbase-4.0.1.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.1.sha256sum[couchbase-4.0.1.sha256sum]
+|===
+
+=== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-869[PCBC-869]:
+  Implemented `changePassword` for management API (https://github.com/couchbase/docs-sdk-php/pull/55[#55],  https://github.com/couchbase/docs-sdk-php/pull/56[#56])
+* https://issues.couchbase.com/browse/PCBC-891[PCBC-891]:
+  Append extension version info to HELLO indentifier (https://github.com/couchbase/docs-sdk-php/pull/58[#58])
+* https://issues.couchbase.com/browse/PCBC-901[PCBC-901]:
+  Attach error details to management exceptions (https://github.com/couchbase/docs-sdk-php/pull/71[#71])
+* Increase required PHP version up to 8.0 (https://github.com/couchbase/docs-sdk-php/pull/76[#76])
+
+=== Fixes
+
+* https://issues.couchbase.com/browse/PCBC-890[PCBC-890]:
+  Scope must implement ScopeInterface (https://github.com/couchbase/docs-sdk-php/pull/57[#57])
+* https://issues.couchbase.com/browse/PCBC-899[PCBC-899]:
+  Ensure the connection will be closed on error (https://github.com/couchbase/docs-sdk-php/pull/70[#70])
+* https://issues.couchbase.com/browse/PCBC-900[PCBC-900]:
+  Don't set "function" property on exceptions. (https://github.com/couchbase/docs-sdk-php/pull/74[#74])
+* https://issues.couchbase.com/browse/PCBC-905[PCBC-905]:
+  Don't dereference empty optional if option is not set (https://github.com/couchbase/docs-sdk-php/pull/75[#75])
+* https://issues.couchbase.com/browse/PCBC-907[PCBC-907]:
+  Assign meta to view query result (https://github.com/couchbase/docs-sdk-php/pull/79[#79])
+* Fix missing header for GCC 13 (https://github.com/couchbase/docs-sdk-php/pull/63[#63])
+
+=== Underlying C++ SDK Core
+
+==== Notable Changes in C++ SDK 1.0.0-dp.4
+
+* https://issues.couchbase.com/browse/CXXCBC-275[CXXCBC-275]:
+Update implementation query context fields passed to the server. In future versions of the server versions it will become mandatory to specify context of the statement (bucket, scope and collection).
+This change ensures that both future and current server releases supported transparently.
+* https://issues.couchbase.com/browse/CXXCBC-296[CXXCBC-296]:
+Force PLAIN SASL auth if TLS enabled. Using SCRAM SASL mechanisms over TLS protocol is unnecesary complication, that slows down initial connection bootstrap and potentially limits server ability to improve security and evolve credentials management.
+* https://issues.couchbase.com/browse/CXXCBC-295[CXXCBC-295]:
+The `get with projections` opration should not fail if one of the the paths is missing in the document, because the semantics is "get the partial document" and not "get individual fields" like in `lookup_in` operation.
+* https://issues.couchbase.com/browse/CXXCBC-294[CXXCBC-294]:
+In the Public API, if `get` operation requested to return expiry time, zero expiry should not be interpreted as absolute expiry timestamp (zero seconds from UNIX epoch), but rather as absense of the expiry.
+* https://issues.couchbase.com/browse/CXXCBC-291[CXXCBC-291]:
+Allow to disable mutation tokens for Key/Value mutations (use `enable_mutation_tokens` in connection string).
+* Resource management and performance improvements:
+** Fix tracer and meter ref-counting (https://github.com/couchbaselabs/couchbase-cxx-client/pull/370[#370])
+** Replace `minstd_rand` with `mt19937_64`, as it gives less collisions (https://github.com/couchbaselabs/couchbase-cxx-client/pull/356[#356])
+** https://issues.couchbase.com/browse/CXXCBC-285[CXXCBC-285]:
+Write to sockets from IO threads, to eliminate potential race conditions. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/348[#348])
+** Eliminate looping transform in `mcbp_parser::next` (https://github.com/couchbaselabs/couchbase-cxx-client/pull/347[#347])
+** https://issues.couchbase.com/browse/CXXCBC-295[CXXCBC-205]:
+Use thread-local UUID generator (https://github.com/couchbaselabs/couchbase-cxx-client/pull/340[#340])
+** https://issues.couchbase.com/browse/CXXCBC-293[CXXCBC-293]:
+Performance improvements:
+*** Speed up UUID serialization to string (https://github.com/couchbaselabs/couchbase-cxx-client/pull/346[#346])
+*** Don't allow to copy `mcbp_message` objects (https://github.com/couchbaselabs/couchbase-cxx-client/pull/345[#345])
+*** Avoid extra allocation and initialization (https://github.com/couchbaselabs/couchbase-cxx-client/pull/344[#344])
+* Build system fixes:
+** Fix build with gcc-13 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/372[#372])
+** Fix gcc 12 issue (https://github.com/couchbaselabs/couchbase-cxx-client/pull/367[#367])
+* Enhancements:
+** Include bucketless KV service when ping is requested. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/339[#339])
+** Include OS name in SDK identifier (https://github.com/couchbaselabs/couchbase-cxx-client/pull/349[#349])
 
 == Version 4.1.0 (20 January 2023)
 
@@ -24,6 +90,8 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.0
 |Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.0.tgz[couchbase-4.0.0.tgz]
 |Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.0.sha256sum[couchbase-4.0.0.sha256sum]
 |===
+
+
 
 === New Features
 
@@ -40,14 +108,14 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.0
 === Caveats
 
 There are no pre-built binaries for the Windows platform of PHP SDK 4.1.0.
-But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.1.0/WINDOWS.md[WINDOWS.md], 
+But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.1.0/WINDOWS.md[WINDOWS.md],
 that describe how to build an extension along with PHP interpreter.
 
 
 
 == Version 4.0.0 (11 May 2022)
 
-Version 4.0.0 is the first major release of the next generation PHP SDK, built on the Couchbase++ library -- 
+Version 4.0.0 is the first major release of the next generation PHP SDK, built on the Couchbase++ library --
 featuring multi-document distributed ACID transactions, and bringing a number of improvements related to internal connection behavior.
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0
@@ -66,7 +134,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0
 === Caveats
 
 There are no pre-built binaries for the Windows platform of PHP SDK 4.0.0.
-But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[WINDOWS.md], 
+But there are steps in https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[WINDOWS.md],
 that describe how to build an extension along with PHP interpreter.
 
 include::partial$older-releases.adoc[]
