@@ -17,8 +17,8 @@ For download instructions, see the xref:sdk-full-installation.adoc[installation 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.1
 
 |===
-|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.1.tgz[couchbase-4.0.1.tgz]
-|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.1.sha256sum[couchbase-4.0.1.sha256sum]
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.1.tgz[couchbase-4.1.1.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.1.sha256sum[couchbase-4.1.1.sha256sum]
 |===
 
 === Enhancements
