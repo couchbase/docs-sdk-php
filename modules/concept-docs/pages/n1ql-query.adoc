@@ -152,10 +152,10 @@ LINQ is a community project.
 Although it works well with Couchbase, it is not part of the officially-supported product.
 
 LINQ (Language Integrated Query), is a powerful way to guide you in building your statements: 
-you obtain Type safety and auto completion of relevant methods and SQL++ clauses. 
+you obtain Type safety and auto completion of relevant methods and {sqlpp} clauses. 
 It implements https://msdn.microsoft.com/en-us/library/mt693024.aspx[Microsoft’s language integrated query extensions to the C# language], 
 and is similar to other LINQ providers like Linq2SQL, Entity Framework and NHibernate. 
-The difference is that it emits SQL++ in place of SQL. 
+The difference is that it emits {sqlpp} in place of SQL. 
 If you have used any other LINQ provider, you will find its familiarity and consistency make it an easy transition.
 
 _Linq2Couchbase_, the LINQ provider for the Couchbase .NET SDK, is a stand-alone project which depends on Couchbase .NET SDK 
@@ -166,7 +166,7 @@ and can be found on https://www.nuget.org/packages/linq2Couchbase[NuGet] -- and 
 PM> Install-Package Linq2Couchbase
 ----
 
-Once you have included the dependency, you can construct queries just like any other LINQ provider in a SQL-like fashion. Nearly all SQL++ statements and functions are supported, for example:
+Once you have included the dependency, you can construct queries just like any other LINQ provider in a SQL-like fashion. Nearly all {sqlpp} statements and functions are supported, for example:
 
 * INNER, LEFT Outer, and Index JOINs
 * Math and Date functions
@@ -175,6 +175,6 @@ Once you have included the dependency, you can construct queries just like any o
 * META keyword, NEST and UNNEST
 * Etc.
 
-In addition to SQL++ language features, Linq2Coucbase supports ORM features like Change-tracking, and mapping of JSON fields to keys and other POCO properties. 
+In addition to {sqlpp} language features, Linq2Coucbase supports ORM features like Change-tracking, and mapping of JSON fields to keys and other POCO properties. 
 The provider’s core object is the `BucketContext`, which is a Unit of Work (UoW) type object for performing querying and mutations on a per request basis. 
 ////
