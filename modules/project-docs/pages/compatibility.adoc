@@ -118,7 +118,7 @@ AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu 20.04 (from S
 | Developer Preview in 6.6, SDK 3.0
 | Since 3.0.5footnote:[With C SDK 3.0.7; since PHP SDK 3.1.0 with C SDK 3.1.3.]
 
-| Scope-Level N1QL Queries & all Collections features
+| Scope-Level {sqlpp} (formerly N1QL) Queries & all Collections features
 | Not Supported
 | Since SDK 3.2.0
 

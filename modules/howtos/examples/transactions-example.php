@@ -78,7 +78,7 @@ try {
   $cluster->transactions()->run(
     function (TransactionAttemptContext $ctx) {
       // `$ctx` is a TransactionAttemptContext which permits getting, inserting,
-      // removing and replacing documents, performing N1QL queries, etc.
+      // removing and replacing documents, performing SQL++ (N1QL) queries, etc.
       // … Your transaction logic here …
       // Committing is implicit at the end of the lambda.
     }
@@ -126,7 +126,7 @@ try {
       $docC = $ctx->get($collection, 'doc-c');
       $ctx->remove($docC);
 
-      // Performing a SELECT N1QL query:
+      // Performing a SELECT SQL++ (N1QL) query:
       $selectQuery = 'SELECT * FROM `travel-sample`.inventory.hotel WHERE country = $1 LIMIT 5';
       $qr = $ctx->query(
         $selectQuery,
@@ -137,7 +137,7 @@ try {
         printf("Name: %s, Country: %s\n", $row["hotel"]["name"], $row["hotel"]["country"]);
       }
 
-      // Performing an UPDATE N1QL query:
+      // Performing an UPDATE SQL++ (N1QL) query:
       $updateQuery = 'UPDATE `travel-sample`.inventory.route SET airlineid = $1 WHERE airline = $2 LIMIT 5';
       $ctx->query(
         $updateQuery,
@@ -388,7 +388,7 @@ function queryOptions($cluster)
 //   try {
 //     $cluster->transactions()->run(
 //       function (TransactionAttemptContext $ctx) {
-//         $bulkLoadStatement = "..."; // a bulk-loading N1QL statement not provided here
+//         $bulkLoadStatement = "..."; // a bulk-loading SQL++ (N1QL) statement not provided here
 
 //         $ctx->query($bulkLoadStatement);
 //       }

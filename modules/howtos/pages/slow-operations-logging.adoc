@@ -162,7 +162,7 @@ The table below describes all the allowed properties that can be set for tracing
 | *tracing_threshold_queue_size*           | int      |     128 | Size of threshold queue in default tracer.
 | *tracing_threshold_queue_flush_interval* | duration |    10.0 | Flush interval for spans with total time over threshold in default tracer.
 | *tracing_threshold_kv*                   | duration |     0.5 | Minimum time for the tracing span of KV service to be considered by threshold tracer.
-| *tracing_threshold_query*                | duration |     1.0 | Minimum time for the tracing span of N1QL service to be considered by threshold tracer.
+| *tracing_threshold_query*                | duration |     1.0 | Minimum time for the tracing span of QUERY service to be considered by threshold tracer.
 | *tracing_threshold_view*                 | duration |     1.0 | Minimum time for the tracing span of VIEW service to be considered by threshold tracer.
 | *tracing_threshold_search*               | duration |     1.0 | Minimum time for the tracing span of FTS service to be considered by threshold tracer.
 | *tracing_threshold_analytics*            | duration |     1.0 | Minimum time for the tracing span of ANALYTICS service to be considered by threshold tracer.
