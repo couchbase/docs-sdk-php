@@ -12,6 +12,36 @@ These pages cover the 4.x versions of the Couchbase PHP SDK.
 For download instructions, see the xref:sdk-full-installation.adoc[installation page].
 
 
+== Version 4.1.2 (20 March 2023)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.2
+
+|===
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.2.tgz[couchbase-4.1.2.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.2.sha256sum[couchbase-4.1.2.sha256sum]
+|===
+
+=== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-888[PCBC-888]:
+Added new method `Collection#queryIndexes` that allows to manage query indexes defined for the collection. (https://github.com/couchbase/couchbase-php-client/pull/68[#68])
+
+* Added optional context to `CouchbaseException` constructor (https://github.com/couchbase/couchbase-php-client/pull/85[#85])
+
+=== Underlying C++ SDK Core
+
+* OpenSSL and CentOS 7 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/382[#382])
+* https://issues.couchbase.com/browse/CXXCBC-144[CXXCBC-144]:
+  Search query on collections should not require you to pass in the scope name (https://github.com/couchbaselabs/couchbase-cxx-client/pull/379[#379])
+* https://issues.couchbase.com/browse/CXXCBC-145[CXXCBC-145]:
+  Search query request raw option not used (https://github.com/couchbaselabs/couchbase-cxx-client/pull/380[#380])
+* https://issues.couchbase.com/browse/CXXCBC-194[CXXCBC-194]:
+  Support ExtThreadSafe transaction extension. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/374[#374], https://github.com/couchbaselabs/couchbase-cxx-client/pull/376[#376])
+* https://issues.couchbase.com/browse/CXXCBC-316[CXXCBC-316]:
+  Core txn get_optional after query issue (https://github.com/couchbaselabs/couchbase-cxx-client/pull/385[#385])
+* https://issues.couchbase.com/browse/CXXCBC-310[CXXCBC-310]:
+  Fixed race condition in transaction_context state machine (https://github.com/couchbaselabs/couchbase-cxx-client/pull/386[#386], https://github.com/couchbaselabs/couchbase-cxx-client/pull/378[#378])
+
 == Version 4.1.1 (22 February 2023)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.1
@@ -24,26 +54,26 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.1
 === Enhancements
 
 * https://issues.couchbase.com/browse/PCBC-869[PCBC-869]:
-  Implemented `changePassword` for management API (https://github.com/couchbase/docs-sdk-php/pull/55[#55],  https://github.com/couchbase/docs-sdk-php/pull/56[#56])
+  Implemented `changePassword` for management API (https://github.com/couchbase/couchbase-php-client/pull/55[#55],  https://github.com/couchbase/couchbase-php-client/pull/56[#56])
 * https://issues.couchbase.com/browse/PCBC-891[PCBC-891]:
-  Append extension version info to HELLO indentifier (https://github.com/couchbase/docs-sdk-php/pull/58[#58])
+  Append extension version info to HELLO indentifier (https://github.com/couchbase/couchbase-php-client/pull/58[#58])
 * https://issues.couchbase.com/browse/PCBC-901[PCBC-901]:
-  Attach error details to management exceptions (https://github.com/couchbase/docs-sdk-php/pull/71[#71])
-* Increase required PHP version up to 8.0 (https://github.com/couchbase/docs-sdk-php/pull/76[#76])
+  Attach error details to management exceptions (https://github.com/couchbase/couchbase-php-client/pull/71[#71])
+* Increase required PHP version up to 8.0 (https://github.com/couchbase/couchbase-php-client/pull/76[#76])
 
 === Fixes
 
 * https://issues.couchbase.com/browse/PCBC-890[PCBC-890]:
-  Scope must implement ScopeInterface (https://github.com/couchbase/docs-sdk-php/pull/57[#57])
+  Scope must implement ScopeInterface (https://github.com/couchbase/couchbase-php-client/pull/57[#57])
 * https://issues.couchbase.com/browse/PCBC-899[PCBC-899]:
-  Ensure the connection will be closed on error (https://github.com/couchbase/docs-sdk-php/pull/70[#70])
+  Ensure the connection will be closed on error (https://github.com/couchbase/couchbase-php-client/pull/70[#70])
 * https://issues.couchbase.com/browse/PCBC-900[PCBC-900]:
-  Don't set "function" property on exceptions. (https://github.com/couchbase/docs-sdk-php/pull/74[#74])
+  Don't set "function" property on exceptions. (https://github.com/couchbase/couchbase-php-client/pull/74[#74])
 * https://issues.couchbase.com/browse/PCBC-905[PCBC-905]:
-  Don't dereference empty optional if option is not set (https://github.com/couchbase/docs-sdk-php/pull/75[#75])
+  Don't dereference empty optional if option is not set (https://github.com/couchbase/couchbase-php-client/pull/75[#75])
 * https://issues.couchbase.com/browse/PCBC-907[PCBC-907]:
-  Assign meta to view query result (https://github.com/couchbase/docs-sdk-php/pull/79[#79])
-* Fix missing header for GCC 13 (https://github.com/couchbase/docs-sdk-php/pull/63[#63])
+  Assign meta to view query result (https://github.com/couchbase/couchbase-php-client/pull/79[#79])
+* Fix missing header for GCC 13 (https://github.com/couchbase/couchbase-php-client/pull/63[#63])
 
 === Underlying C++ SDK Core
 
