@@ -24,13 +24,15 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.3
 === Enhancements
 
 * https://issues.couchbase.com/browse/PCBC-915[PCBC-915]:
-Fixed timestamp as expiry in mutation options (https://github.com/couchbase/couchbase-php-client/pull/88[#88]).
+Fixed incorrect handling of timestamps as expiry in mutation options 
+(https://github.com/couchbase/couchbase-php-client/pull/88[#88]).
 
 * https://issues.couchbase.com/browse/PCBC-828[PCBC-828]:
-Implemented collection management (https://github.com/couchbase/couchbase-php-client/pull/89[#89]).
+Implemented collection management 
+(https://github.com/couchbase/couchbase-php-client/pull/89[#89]).
 
 * https://issues.couchbase.com/browse/PCBC-918[PCBC-918]:
-Extra attributes in ExistsResult now optional (deleted, expiry, flags, and sequenceNumber)
+Extra attributes in `ExistsResult` (`deleted`, `expiry`, `flags`, and `sequenceNumber`) are now optional
 (https://github.com/couchbase/couchbase-php-client/pull/95[#95]).
 
 
@@ -38,16 +40,19 @@ Extra attributes in ExistsResult now optional (deleted, expiry, flags, and seque
 
 
 * https://issues.couchbase.com/browse/CXXCBC-31[CXXCBC-31]:
-Allow to use schema-less connection strings (https://github.com/couchbaselabs/couchbase-cxx-client/pull/394[#394])
+Allow the use of schemaless connection strings (e.g. `"cb1.example.com,cb2.example.com"`)
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/395[#394]).
 
 * https://issues.couchbase.com/browse/CXXCBC-318[CXXCBC-318]:
-Always try TCP if UDP fails in DNS-SRV resolver (https://github.com/couchbaselabs/couchbase-cxx-client/pull/390[#390])
+Always try TCP if UDP fails in DNS-SRV resolver (https://github.com/couchbaselabs/couchbase-cxx-client/pull/390[#390]).
 
 * https://issues.couchbase.com/browse/CXXCBC-320[CXXCBC-320]:
-Negative expiry in atr can 'stuck' docs. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/393[#393])
+Negative expiry in atr was leaving docs in a stuck state -- this has been fixed, with expiry atr now becoming an `int32_t`  
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/393[#393]).
 
 * https://issues.couchbase.com/browse/CXXCBC-310[CXXCBC-310]:
-Improve shutdown of the LostTxnCleanup thread. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/389[#389])
+Improved shutdown of the `LostTxnCleanup` thread 
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/389[#389]).
 
 
 == Version 4.1.2 (20 March 2023)
