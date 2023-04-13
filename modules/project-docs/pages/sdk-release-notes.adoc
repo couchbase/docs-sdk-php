@@ -12,6 +12,49 @@ These pages cover the 4.x versions of the Couchbase PHP SDK.
 For download instructions, see the xref:sdk-full-installation.adoc[installation page].
 
 
+== Version 4.1.3 (13 April 2023)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.3
+
+|===
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.3.tgz[couchbase-4.1.3.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.3.sha256sum[couchbase-4.1.3.sha256sum]
+|===
+
+=== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-915[PCBC-915]:
+Fixed incorrect handling of timestamps as expiry in mutation options 
+(https://github.com/couchbase/couchbase-php-client/pull/88[#88]).
+
+* https://issues.couchbase.com/browse/PCBC-828[PCBC-828]:
+Implemented collection management 
+(https://github.com/couchbase/couchbase-php-client/pull/89[#89]).
+
+* https://issues.couchbase.com/browse/PCBC-918[PCBC-918]:
+Extra attributes in `ExistsResult` (`deleted`, `expiry`, `flags`, and `sequenceNumber`) are now optional
+(https://github.com/couchbase/couchbase-php-client/pull/95[#95]).
+
+
+=== Underlying C++ SDK Core
+
+
+* https://issues.couchbase.com/browse/CXXCBC-31[CXXCBC-31]:
+Allow the use of schemaless connection strings (e.g. `"cb1.example.com,cb2.example.com"`)
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/395[#394]).
+
+* https://issues.couchbase.com/browse/CXXCBC-318[CXXCBC-318]:
+Always try TCP if UDP fails in DNS-SRV resolver (https://github.com/couchbaselabs/couchbase-cxx-client/pull/390[#390]).
+
+* https://issues.couchbase.com/browse/CXXCBC-320[CXXCBC-320]:
+Negative expiry in atr was leaving docs in a stuck state -- this has been fixed, with expiry atr now becoming an `int32_t`  
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/393[#393]).
+
+* https://issues.couchbase.com/browse/CXXCBC-310[CXXCBC-310]:
+Improved shutdown of the `LostTxnCleanup` thread 
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/389[#389]).
+
+
 == Version 4.1.2 (20 March 2023)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.2
