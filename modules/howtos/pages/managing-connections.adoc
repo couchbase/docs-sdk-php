@@ -110,15 +110,19 @@ Make sure you have the Enterprise Edition of Couchbase Server, or a Couchbase Ca
 
 For TLS verification the SDK uses the following certificates:
 
-* The certificates in the Mozilla Root CA bundle (bundled with the SDK as of 4.1.4 and obtained from https://curl.se/docs/caextract.html[curl])
-* The certificates in OpenSSL’s default certificate store (as of 4.1.0)
-* The self-signed root certificate that is used to sign Capella Certificates (bundled with the SDK as of 4.0.0)
+* The certificates in the Mozilla Root CA bundle (bundled with the SDK as of 4.1.4 and obtained from https://curl.se/docs/caextract.html[curl]).
+* The certificates in OpenSSL’s default certificate store (as of 4.1.0).
+* The self-signed root certificate that is used to sign Capella Certificates (bundled with the SDK as of 4.0.0).
 
-The OpenSSL defaults can be overridden using the `SSL_CERT_DIR` and `SSL_CERT_FILE` environment variables. `The SSL_CERT_DIR` variable is used to set a specific directory in which the client should look for individual certificate files, whereas the `SSL_CERT_FILE` environment variable is used to point to a single file containing one or more certificates. More information can be found in the relevant https://www.openssl.org/docs/man1.1.1/man3/SSL_CTX_load_verify_locations.html[OpenSSL documentation].
+The OpenSSL defaults can be overridden using the `SSL_CERT_DIR` and `SSL_CERT_FILE` environment variables. 
+`The SSL_CERT_DIR` variable is used to set a specific directory in which the client should look for individual certificate files, 
+whereas the `SSL_CERT_FILE` environment variable is used to point to a single file containing one or more certificates. 
+More information can be found in the relevant https://www.openssl.org/docs/man1.1.1/man3/SSL_CTX_load_verify_locations.html[OpenSSL documentation].
 
 Loading the Mozilla certificates can be disabled using the `disable_mozilla_ca_certificates` connection string parameter.
 
-The {cbpp} core’s metadata provide information about where OpenSSL’s default certificate store is located, which version of the Mozilla Root CA store is bundled with the SDK, and other useful details. You can obtain the metadata using the following command:
+The {cbpp} core’s metadata provide information about where OpenSSL’s default certificate store is located, which version of the Mozilla Root CA store is bundled with the SDK, and other useful details. 
+You can obtain the metadata using the following command:
 
 ====
 [source,console]
@@ -142,7 +146,8 @@ $  php -r 'print_r(Couchbase\Extension\version());'
 }
 ----
 ====
-With debug-level logging enabled, if the Mozilla certificates have been loaded, a message with the information about the version of the Mozilla CA certificate store will be outputted. For example:
+With debug-level logging enabled, if the Mozilla certificates have been loaded, a message with the information about the version of the Mozilla CA certificate store will be outputted. 
+For example:
 
 [source,console]
 ----
@@ -163,7 +168,8 @@ However, as the certificate is bundled with the SDK, it is trusted by default.
 Couchbase Server::
 +
 --
-Certificates from the Mozilla Root CA store are now bundled with the SDK. If the server's certificate is signed by a well-known CA (e.g., GoDaddy, Verisign, etc.), you no longer need to configure the `trust_certiciate` path in your connection string.
+Certificates from the Mozilla Root CA store are now bundled with the SDK. 
+If the server's certificate is signed by a well-known CA (e.g., GoDaddy, Verisign, etc.), you don't need to configure the `trust_certiciate` path in your connection string.
 
 You can still provide a certificate explicitly if necessary:
 
