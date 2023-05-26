@@ -23,6 +23,7 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.4
 
 === Enhancements
 
+* Added `couchbase::` namespace to `durability_level`, which fixes using Sync Durability.
 (https://github.com/couchbase/couchbase-php-client/pull/102[#102])
 
 * https://issues.couchbase.com/browse/PCBC-934[PCBC-934]:
