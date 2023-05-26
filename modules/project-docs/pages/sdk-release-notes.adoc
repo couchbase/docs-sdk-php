@@ -21,32 +21,34 @@ API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.4
 |Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.4.sha256sum[couchbase-4.1.4.sha256sum]
 |===
 
-Enhancements
-------------
+=== Enhancements
 
-* Add `couchbase::` namespace to `durability_level`, fixes using Sync Durability.
 (https://github.com/couchbase/couchbase-php-client/pull/102[#102])
 
 * https://issues.couchbase.com/browse/PCBC-934[PCBC-934]:
-Fixed setting timeout for transaction.
+Fixed setting timeout for transactions.
 
-Notable changes in core C++
----------------------------
+=== Underlying C++ SDK Core
+
 
 * https://issues.couchbase.com/browse/CXXCBC-327[CXXCBC-327]:
-Bundle Mozilla certificates with the library.
-(https://github.com/couchbaselabs/couchbase-cxx-client/pull/405[#405], https://github.com/couchbaselabs/couchbase-cxx-client/pull/408[#408])
+Bundled Mozilla certificates with the library
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/405[#405],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/408[#408]).
+Source: https://curl.se/docs/caextract.html. 
+Use the `disable_mozilla_ca_certificates` connection string option to disable the bundled certificates. 
 
 * https://issues.couchbase.com/browse/CXXCBC-324[CXXCBC-324]:
-Check port and network name on session restart.
-(https://github.com/couchbaselabs/couchbase-cxx-client/pull/401[#401])
+Port and network name now checked on session restart, improving performance during rebalance
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/401[#401]).
 
 * https://issues.couchbase.com/browse/CXXCBC-323[CXXCBC-323]:
-Parse `bootstrap_timeout` and `resolve_timeout` in connection string.
-(https://github.com/couchbaselabs/couchbase-cxx-client/pull/400[#400])
+`bootstrap_timeout` and `resolve_timeout` can now be used in the connection string
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/400[#400]).
 
-* Introduce option `dump_configuration` for debugging.
+* Introduced `dump_configuration` option for debugging.
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/398[#398])
+It logs cluster configuration at trace level.
 
 
 == Version 4.1.3 (13 April 2023)
