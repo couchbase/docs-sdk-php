@@ -4,4 +4,287 @@
 :page-topic-type: project-doc
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
 
-include::3.2@php-sdk:project-docs:page$sdk-release-notes.adoc[tag=all]
+// tag::all[]
+[abstract]
+{description}
+
+These pages cover the 3.x versions of the Couchbase PHP SDK.
+For release notes, download links, and installation methods for 2.6 and earlier releases of the Couchbase PHP Client, please see the xref:2.6@php-sdk::sdk-release-notes.adoc[2.x PHP Release Notes & Download Archive].
+
+// include::start-using-sdk.adoc[tag=prep]
+
+// include::start-using-sdk.adoc[tag=install]
+
+== SDK Installation
+
+=== Installing on Mac and Linux systems
+
+Before installing the PHP SDK, you must install the xref:3.2@c-sdk:hello-world:start-using-sdk.adoc[C SDK -- _libcouchbase_ (LCB)];
+version 3.2.0 or higher is required for PHP Client 3.2.
+
+After installing `libcouchbase`, install the Couchbase PHP SDK through your PHP distribution's `pecl` command:
+
+[source,console]
+----
+$ pecl install couchbase
+----
+
+Or install from the Couchbase repository:
+
+[source,console]
+----
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz
+----
+
+Then follow the <<post-installation,post-installation steps>>.
+
+==== Alpine Linux
+
+**Alpine Linux** is very slim and uses `musl libc` and the `apk` package manager.
+As a result, the installation is a little different from other Unix-Like systems,
+and `pecl` equivalent packages are used instead.
+
+Using `apk`, you would install your preferred `php` version, install `libcouchbase`,
+and then install the equivalent `pecl` package for the version of `php` that you're using.
+
+[source,console]
+----
+$ apk add php7
+$ apk add libcouchbase
+$ apk add php7-pecl-couchbase
+----
+
+Then follow the <<post-installation,post-installation steps>>.
+
+=== Installing on Microsoft Windows
+
+When using Microsoft Windows, instead of using PECL, download the pre-built binary package matching your environment below.
+You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
+
+Binaries labeled with *(TLS)* are linked against **OpenSSL 1.1.1d (MSVC15)** to support TLS connections to Couchbase.
+Simply download the correct version according to your installation details 
+and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
+
+Depending on your installation details, you may also have to add the `extension_dir` to your `PATH` variable.
+
+The packages do not include OpenSSL binaries, 
+therefore they have to be installed in the `PATH` (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
+
+[source,console]
+----
+$ copy /b libcouchbase.dll C:\php\ext
+$ copy /b php_couchbase.dll C:\php\ext
+----
+
+|===
+|Platform|
+|Source          |https://packages.couchbase.com/clients/php/couchbase-3.2.2.tgz[couchbase-3.2.2.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-3.2.2.sha256sum[couchbase-3.2.2.sha256sum]
+|PHP 7.4 VC15 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64.zip[php_couchbase-3.2.2-7.4-nts-x64.zip]
+|PHP 7.4 VC15 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64.zip[php_couchbase-3.2.2-7.4-zts-x64.zip]
+|PHP 8.0 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64.zip[php_couchbase-3.2.2-8.0-nts-x64.zip]
+|PHP 8.0 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64.zip[php_couchbase-3.2.2-8.0-zts-x64.zip]
+|PHP 8.1 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64.zip[php_couchbase-3.2.2-8.1-nts-x64.zip]
+|PHP 8.1 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64.zip[php_couchbase-3.2.2-8.1-zts-x64.zip]
+|PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64-openssl.zip[php_couchbase-3.2.2-7.4-nts-x64-openssl.zip]
+|PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64-openssl.zip[php_couchbase-3.2.2-7.4-zts-x64-openssl.zip]
+|PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64-openssl.zip[php_couchbase-3.2.2-8.0-nts-x64-openssl.zip]
+|PHP 8.0 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64-openssl.zip[php_couchbase-3.2.2-8.0-zts-x64-openssl.zip]
+|PHP 8.1 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64-openssl.zip[php_couchbase-3.2.2-8.1-nts-x64-openssl.zip]
+|PHP 8.1 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64-openssl.zip[php_couchbase-3.2.2-8.1-zts-x64-openssl.zip]
+|===
+
+Then follow the post-installation steps.
+
+[#post-installation]
+=== Post Installation for All Platforms
+
+Once the PHP SDK has been installed, you need to specify that the PHP interpreter should load the Couchbase PHP SDK as an extension.
+To do this:
+
+1. Locate your `php.ini` file. This can be done using the command `php --ini`
++
+[source,console]
+----
+$ php --ini
+Configuration File (php.ini) Path: /usr/local/etc/php/7.4
+Loaded Configuration File:         /usr/local/etc/php/7.4/php.ini
+Scan for additional .ini files in: /usr/local/etc/php/7.4/conf.d
+Additional .ini files parsed:      (none)
+----
++
+2. Insert a line in the `php.ini` file specifying the extension to be loaded; this should be in the `[PHP]` section.
+If you don't know where that is, simply search for existing commented or uncommented `extension=` entries in the file.
++
+[source,ini]
+----
+extension=json      ; not needed with PHP 8.0.0+
+extension=couchbase
+----
++
+NOTE: on PHP version 7.2.0 and up, simply using the extension name is preferred.
+Previously, you might have used `couchbase.so` or `couchbase.dll`, depending on your platform.
+
+=== PHP Composer
+
+Once the PHP extension is installed, it may be used as any other PHP library through composer as posted at https://packagist.org/packages/couchbase/couchbase[packagist.org].
+To add it to your project's dependency list, use the following composer command:
+
+[source,console]
+----
+$ composer require couchbase/couchbase
+----
+
+=== Note on Extension Dependencies
+
+The Couchbase SDK depends on the https://www.php.net/manual/en/json.installation.php[JSON extension],
+which must be loaded before the SDK. However, it is already included on PHP 8.0.0+ as a core extension.
+
+
+
+== Version 3.0.5 (6 December 2020)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.5/
+
+* https://issues.couchbase.com/browse/PCBC-699[PCBC-699]:
+Added support for minimal durability settings for bucket manager.
+
+* https://issues.couchbase.com/browse/PCBC-718[PCBC-718]:
+Deprecated `expiry()` on `GetResult` and `LookupInResult`.
+`expiry()` is deprecated in favour of `expiryTime()` which returns `DateTimeInterface`.
+
+* https://issues.couchbase.com/browse/PCBC-715[PCBC-715]:
+Refactored document expiry duration:
+
+    - Allowing one to specify `DateTimeInterface` objects as expiry value in mutation options;
+
+    - When expiration is set as long in seconds, treat the value as relative if it is less than 50 years in seconds.
+      In this case take the current time and add to the expiration value.
+
+* https://issues.couchbase.com/browse/PCBC-733[PCBC-733]:
+Added missing fields for `SearchFacet` results
+
+* https://issues.couchbase.com/browse/PCBC-720[PCBC-720]:
+Added option to disable search scoring.
+
+* Support PHP 8.
+Dropped support for PHP older than 7.2.
+
+
+== Version 3.0.4 (11 November 2020)
+
+Version 3.0.4 is the fifth release of the 3.0 series, bringing enhancements and bugfixes over the last stable release.
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.4/
+
+* https://issues.couchbase.com/browse/PCBC-722[PCBC-722]:
+Fixed boolean Search query encoding.
+
+* https://issues.couchbase.com/browse/PCBC-703[PCBC-703]:
+Added support for Query with FlexIndex (FTS).
+
+* https://issues.couchbase.com/browse/PCBC-719[PCBC-719]:
+Enhanced user management for Collections.
+
+* https://issues.couchbase.com/browse/PCBC-702[PCBC-702]:
+Implemented geopolygon Search query.
+
+* https://issues.couchbase.com/browse/PCBC-705[PCBC-705]:
+Updated eviction policy types.
+It now covers ephemeral buckets.
+
+* https://issues.couchbase.com/browse/PCBC-721[PCBC-721]:
+Allow to fall back to bucket connection for older Server releases.
+
+
+== Version 3.0.3 (17 June 2020)
+
+Version 3.0.3 is the fourth release of the 3.0 series, bringing enhancements and bugfixes over the last stable release.
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-3.0.3/
+
+* https://issues.couchbase.com/browse/PCBC-696[PCBC-696]:
+Fixed encoding issue in QueryString search query.
+
+* https://issues.couchbase.com/browse/PCBC-667[PCBC-667]:
+Added maxExpiry for CollectionSpec of collection manager.
+
+* https://issues.couchbase.com/browse/PCBC-690[PCBC-690]:
+Increased refcount of arg in ViewOptions::keys().
+
+* https://issues.couchbase.com/browse/PCBC-688[PCBC-688]:
+Temporary strings are now copied in ViewOptions builder.
+
+* https://issues.couchbase.com/browse/PCBC-666[PCBC-666]:
+Fixed invalid memory access of Query result "meta".
+
+* https://issues.couchbase.com/browse/PCBC-665[PCBC-665]:
+Fixed build issue on Debian.
+
+* Documentation improvements:
+
+   - https://issues.couchbase.com/browse/PCBC-683[PCBC-683]: update documentation steps
+
+   - https://issues.couchbase.com/browse/PCBC-675[PCBC-675]: Add API docs for exceptions
+
+   - Update API ref to add docs for results objects
+
+   - Update API reference for remaining undocument query API
+
+   - https://issues.couchbase.com/browse/PCBC-672[PCBC-672]: Add API docs for KV functions
+
+   - https://issues.couchbase.com/browse/PCBC-671[PCBC-671]: Add API reference docs for cluster/bucket etc.
+
+   - https://issues.couchbase.com/browse/PCBC-694[PCBC-694]: Remove \ namespace prefix in return type and argument definitions
+
+   - https://issues.couchbase.com/browse/PCBC-694[PCBC-694]: Allow null to be passed to nullable options
+
+   - https://issues.couchbase.com/browse/PCBC-693[PCBC-693]: replace GetAllReplicaOptions with GetAllReplicasOptions
+
+   - https://issues.couchbase.com/browse/PCBC-692[PCBC-692]: Use MutationResult instead of StoreResult
+
+   - https://issues.couchbase.com/browse/PCBC-691[PCBC-691]: Use "|null" instead of "?" in phpdoc.
+
+
+== Version 3.0.2 (4 March 2020)
+
+Version 3.0.2 is the third release of the 3.0 series, bringing enhancements and bugfixes over the last stable release.
+
+* https://issues.couchbase.com/browse/PCBC-660[PCBC-660]:
+Fixed detection of replace with CAS, so `CasMismatchException` now raised where necessary instead of `KeyExistsException`.
+
+* https://issues.couchbase.com/browse/PCBC-663[PCBC-663]:
+Search method now increases refcounter of search object, avoiding double-free error in the script termination handler.
+
+* Fixed memory leaks.
+
+* Fixed manifest issue leading to install failure.
+
+
+== Version 3.0.1 (4 February 2020)
+
+Version 3.0.1 is the second release of the 3.0 series, bringing enhancements and bugfixes over the last stable release.
+
+* Exposed manager APIs on Cluster level:
+    - Cluster#queryIndexes() -> QueryIndexManager
+    - Cluster#searchIndexes() -> SearchIndexManager
+    - Cluster#users() -> UserManager
+    - Cluster#buckets() -> BucketManager
+* Exposed manager APIs on Bucket level:
+    - Bucket#collections() -> CollectionManager
+    - Bucket#viewIndexes() -> ViewIndexManager
+
+== Version 3.0.0 (21 January 2020)
+
+This is the first GA release of the third generation PHP SDK.
+
+
+== Pre-releases
+
+Numerous _Alpha_ and _Beta_ releases were made in the run-up to the 3.0 release, and although unsupported, the release notes and download links are retained for archive purposes xref:3.0-pre-release-notes.adoc[here].
+
+
+== Older Releases
+
+Although https://www.couchbase.com/support-policy/enterprise-software[no longer supported], documentation for older releases continues to be available in our https://docs-archive.couchbase.com/home/index.html[docs archive].
+// end::all[]
