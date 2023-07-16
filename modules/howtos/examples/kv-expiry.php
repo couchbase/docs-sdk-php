@@ -48,7 +48,7 @@ sleep(2); // wait until the document will expire
 
 try {
     $collection->get($key);
-} catch (Couchbase\DocumentNotFoundException $ex) {
+} catch (Couchbase\Exception\DocumentNotFoundException $ex) {
     printf("The document does not exist\n");
 }
 // end::getandtouch[]
