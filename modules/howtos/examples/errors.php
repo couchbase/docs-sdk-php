@@ -13,7 +13,7 @@ $collection = $cluster->bucket("travel-sample")->scope("inventory")->collection(
 // tag::document-not-found-exception[]
 try {
     $collection->get("foo");
-} catch (\Couchbase\DocumentNotFoundException $ex) {
+} catch (\Couchbase\Exception\DocumentNotFoundException $ex) {
     printf("Document does not exist, creating. \n");
     $collection->upsert("foo", ["bar" => 42]);
 }
@@ -70,7 +70,7 @@ for ($attempt = 1; $attempt <= $max_attempts; $attempt++) {
         $result = $collection->get("expected-document");
         break;
     }
-    catch (\Couchbase\DocumentNotFoundException $ex) {
+    catch (\Couchbase\Exception\DocumentNotFoundException $ex) {
         printf("Document still not created. \n");
         usleep(100);
         continue;
