@@ -38,7 +38,7 @@ $invalidCas = "776t3gAAAAA=";
 $opts->cas($invalidCas);
 try {
     $collection->replace("document-key", $document, $opts);
-} catch (\Couchbase\CasMismatchException $ex) {
+} catch (\Couchbase\Exception\CasMismatchException $ex) {
     printf("document \"document-key\" cannot be replaced with CAS \"%s\"\n", $invalidCas);
 }
 
