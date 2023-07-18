@@ -56,7 +56,7 @@ try {
                          ["bar" => 45],
                          $opts->cas($original_cas));
                          # oops, we should have used $updated_cas!
-} catch (\Couchbase\CasMismatchException $ex) {
+} catch (\Couchbase\Exception\CasMismatchException $ex) {
     printf("CAS mismatch error. \n");
 }
 // end::cas-mismatch-exception[]
