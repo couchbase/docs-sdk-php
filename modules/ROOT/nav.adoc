@@ -83,7 +83,7 @@ Couchbase PHP SDK
 * xref:project-docs:compatibility.adoc[Compatibility]
 ** xref:project-docs:migrating-sdk-code-to-3.n.adoc[Migrating to SDK 3 API]
 * xref:project-docs:sdk-full-installation.adoc[Full Installation]
-* xref:hello-world:platform-help.adoc[PHP Platform Help]
+** xref:hello-world:platform-help.adoc[PHP Platform Help]
 * https://docs-archive.couchbase.com/home/index.html[Older Versions Archive]
 * xref:project-docs:sdk-licenses.adoc[Licenses]
 * xref:project-docs:get-involved.adoc[Get involved]
