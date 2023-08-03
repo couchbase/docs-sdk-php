@@ -86,9 +86,9 @@ Then follow the <<post-installation,post-installation steps>>.
 
 === Installing on Microsoft Windows
 
-Currently there are no pre-built binaries for the Windows platform of PHP SDK 4.0.0.
+Currently there are no pre-built binaries for the Windows platform of PHP SDK 4.x.
 Instead, you will need to follow https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[these steps] to build an extension along with the PHP interpreter.
-This process will be simplified in a future 4.0.x release where the pre-compiled binaries will be published.
+This process will be simplified in a future 4.x release where the pre-compiled binaries will be published.
 
 // TODO: Add this back when this is available in a future 4.0.x release
 // When using Microsoft Windows, instead of using PECL, download the pre-built binary package matching your environment below.
