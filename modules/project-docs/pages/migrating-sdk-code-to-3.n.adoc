@@ -3,6 +3,7 @@
 Collections and Scopes are introduced.
 :nav-title: Migrating to SDK API 3.x
 :page-topic-type: concept
+:page-toclevels: 2
 :page-aliases: ROOT:migrate
 
 include::partial$attributes.adoc[]
