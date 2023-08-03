@@ -334,8 +334,8 @@ They are available in 3.2, and will be available in a later 4.x release.
 In addition:
 
 * `get` requests on locked documents now retry rather than fast-fail.
-* The changes to xref:ref:client-settings.adoc[Client Settings] are not currently documented.
-* The changes to xref:howtos:managing-connections.adoc#connection-strings[Connection Strings] are not currently documented.
+* The changes to xref:ref:client-settings.adoc[Client Settings] can be found in the https://docs.couchbase.com/sdk-api/couchbase-php-client-4.0.0/classes/Couchbase-ClusterOptions.html[API reference].
+* The changes to xref:howtos:managing-connections.adoc#connection-strings[Connection Strings] can be found in the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Cluster.html#method_connect[API reference].
 * Because of the change to the backend Couchbase++ library, an Autoload is needed, as in xref:hello-world:start-using-sdk.adoc#imports[this imports example].
 If you are managing your Autoloads with Composer, as recommended, this process should be trivial, and not require any additional manual addition of `require_once` statements throughout your codebase.
 
