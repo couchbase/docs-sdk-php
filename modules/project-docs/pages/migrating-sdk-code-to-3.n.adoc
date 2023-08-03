@@ -2,6 +2,7 @@
 :description: The SDK API 3 (used in PHP SDK 3.x and 4.x) introduces breaking changes to the previous SDK API 2 APIs (used in PHP SDK 2.x) in order to provide a number of improvements. \
 Collections and Scopes are introduced.
 :page-topic-type: concept
+:page-toclevels: 2
 :page-aliases: ROOT:migrate
 
 include::partial$attributes.adoc[]
