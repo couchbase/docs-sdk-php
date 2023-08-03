@@ -249,8 +249,12 @@ foreach ($res->rows() as $row) {
 
 === Batching with Multi Get, Multi Options
 
-This feature of the 2.x SDK is not present in the 3.x SDK.
-See the xref:howtos:concurrent-async-apis.adoc[batching docs] for use of process forks.
+This feature of the SDK API 2 was re-introduced to the PHP SDK in release 3.2.2 -- see the API ref for 
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html#method_getMulti[getMulti],
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html#method_upsertMulti[upsertMulti],
+and https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html#method_removeMulti[removeMulti].
+
+For earlier SDKs, see the xref:howtos:concurrent-async-apis.adoc[batching docs] for use of process forks.
 
 
 == Management APIs
