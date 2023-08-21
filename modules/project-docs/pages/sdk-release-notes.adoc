@@ -12,6 +12,64 @@ These pages cover the 4.x versions of the Couchbase PHP SDK.
 For download instructions, see the xref:sdk-full-installation.adoc[installation page].
 
 
+== Version 4.1.5 (21 August 2023)
+
+API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.5
+
+Full Changelog: https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5
+
+|===
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.5.tgz[couchbase-4.1.5.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.5.sha256sum[couchbase-4.1.5.sha256sum]
+|===
+
+=== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-939[PCBC-939]:
+Added support for query with read from replica (https://github.com/couchbaselabs/couchbase-cxx-client/pull/118[#118]).
+
+* https://issues.couchbase.com/browse/PCBC-831[PCBC-831]:
+Implemented search index management (https://github.com/couchbaselabs/couchbase-cxx-client/pull/115[#115]).
+
+* https://issues.couchbase.com/browse/PCBC-945[PCBC-945]:
+Expiry options for increment/decrement are now exposed, as they were before 4.0.0 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/120[#120]).
+
+* https://issues.couchbase.com/browse/PCBC-937[PCBC-937]:
+Fixed `removeMulti`, which now correctly removes documents (https://github.com/couchbaselabs/couchbase-cxx-client/pull/123[#123]).
+
+* https://issues.couchbase.com/browse/PCBC-938[PCBC-938]:
+Override exception constructor in PHP Extension, which allows to initialize context in derived classes (https://github.com/couchbaselabs/couchbase-cxx-client/pull/117[#117]).
+
+* https://issues.couchbase.com/browse/PCBC-940[PCBC-940]:
+Added support for subdoc read from replica (https://github.com/couchbaselabs/couchbase-cxx-client/pull/121[#121]).
+
+* https://issues.couchbase.com/browse/PCBC-884[PCBC-884]:
+Added support for Native KV range scans (https://github.com/couchbaselabs/couchbase-cxx-client/pull/122[#122], https://github.com/couchbaselabs/couchbase-cxx-client/pull/127[#127]).
+
+=== Underlying C++ SDK Core
+
+* https://issues.couchbase.com/browse/CXXCBC-333[CXXCBC-333]:
+Fixed parsing 'resolv.conf' on Linux (https://github.com/couchbaselabs/couchbase-cxx-client/pull/416[#416]).
+** The library might not ignore trailing characters when reading nameserver address from the file.
+
+* https://issues.couchbase.com/browse/CXXCBC-335[CXXCBC-335]:
+now logging connection options for visibility (https://github.com/couchbaselabs/couchbase-cxx-client/pull/417[#417]).
+
+* https://issues.couchbase.com/browse/CXXCBC-343[CXXCBC-343]: Continue bootsrap if DNS-SRV resolution fails (https://github.com/couchbaselabs/couchbase-cxx-client/pull/422[#422]).
+
+* https://issues.couchbase.com/browse/CXXCBC-242[CXXCBC-242]:
+SDK Support for Native KV Range Scans (https://github.com/couchbaselabs/couchbase-cxx-client/pull/419[#419], https://github.com/couchbaselabs/couchbase-cxx-client/pull/423[#423], 
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/424[#424], 
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/426[#426], 
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/428[#428], 
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/431[#431], 
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/432[#432], 
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/433[#433],  
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/434[#434]).
+
+* https://issues.couchbase.com/browse/CXXCBC-339[CXXCBC-339]: Disable older TLS protocols (https://github.com/couchbaselabs/couchbase-cxx-client/pull/418[#418]).
+
+
 == Version 4.1.4 (26 May 2023)
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.4
@@ -36,8 +94,8 @@ Fixed setting timeout for transactions.
 Bundled Mozilla certificates with the library
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/405[#405],
 https://github.com/couchbaselabs/couchbase-cxx-client/pull/408[#408]).
-Source: https://curl.se/docs/caextract.html. 
-Use the `disable_mozilla_ca_certificates` connection string option to disable the bundled certificates. 
+Source: https://curl.se/docs/caextract.html.
+Use the `disable_mozilla_ca_certificates` connection string option to disable the bundled certificates.
 
 * https://issues.couchbase.com/browse/CXXCBC-324[CXXCBC-324]:
 Port and network name now checked on session restart, improving performance during rebalance
