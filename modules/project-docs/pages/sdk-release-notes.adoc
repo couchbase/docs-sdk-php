@@ -2,7 +2,6 @@
 :description: Release notes for the Couchbase PHP Client.
 :page-topic-type: reference
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
-:fouronefive: https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5
 
 // tag::all[]
 [abstract]
@@ -17,7 +16,7 @@ For download instructions, see the xref:sdk-full-installation.adoc[installation 
 
 API documentation: https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.5
 
-Full Changelog: {fouronefive}[{fouronefive}]
+Full Changelog: link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5++[https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5]
 
 |===
 |Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.5.tgz[couchbase-4.1.5.tgz]
