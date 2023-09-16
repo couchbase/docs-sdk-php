@@ -301,7 +301,7 @@ that describe how to build an extension along with PHP interpreter.
 
 
 
-=== PHP SDK 4.0 Releases
+== PHP SDK 4.0 Releases
 
 === Version 4.0.0 (11 May 2022)
 
