@@ -22,10 +22,58 @@ All patch releases for each dot minor release should be API compatible, and safe
 any changes to expected behavior are noted in the release notes that follow.
 
 
+=== Version 4.1.6 (10 October 2023)
+
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.6[API documentation] 
+| link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.5...4.1.6++[Full Changelog]
+
+|===
+|Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.6.tgz[couchbase-4.1.6.tgz]
+|Checksum        |https://packages.couchbase.com/clients/php/couchbase-4.1.6.sha256sum[couchbase-4.1.6.sha256sum]
+|===
+
+==== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-956[PCBC-956]:
+Updated wrapper-side bucket settings -- to now use new `BucketSettings` optional fields in underlying {cpp} core
+(https://github.com/couchbase/couchbase-php-client/pull/132[#132]).
+* https://issues.couchbase.com/browse/PCBC-950[PCBC-950]:
+Added support to bucket settings for no dedup feature 
+(https://github.com/couchbase/couchbase-php-client/pull/131[#131]).
+* https://issues.couchbase.com/browse/PCBC-955[PCBC-955]:
+Preventing trailing garbage in encoded CAS value 
+(https://github.com/couchbase/couchbase-php-client/pull/134[#134]).
+* Updates to support PHP 8.3: `zend_bool` was removed from 8.3.
+
+==== Underlying C++ SDK Core Changes
+
+* https://issues.couchbase.com/browse/CXXCBC-376[CXXCBC-376]: 
+Changed what 'create' and 'update' bucket operations send to the server. 
+Unrequired `BucketSettings` fields are now set to optional, and are not sent unless the settings are explicitly specified. 
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/451[#451]).
+* https://issues.couchbase.com/browse/CXXCBC-374[CXXCBC-374]: 
+The SDK should now return a 'bucket_exists' error when the bucket already exists during a 'create' operation. 
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/449[#449]).
+* https://issues.couchbase.com/browse/CXXCBC-359[CXXCBC-359]: 
+Reduced the default timeout for idle HTTP connections to 1 second. 
+The previous default (4.5 seconds) was too close to the 5-second server-side timeout, and could lead to spurious request failures.
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/448[#448]).
+* https://issues.couchbase.com/browse/CXXCBC-367[CXXCBC-367], 
+https://issues.couchbase.com/browse/CXXCBC-370[CXXCBC-370]: 
+Added history retention settings to buckets/collection management
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/446[#446]).
+* https://issues.couchbase.com/browse/CXXCBC-119[CXXCBC-119]: 
+Return booleans for subdocument 'exists' operation, instead of error code
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/444[#444],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/452[#452]).
+* Detect `collection_not_found` error in `update_collection` response
+(https://github.com/couchbaselabs/couchbase-cxx-client/pull/450[#450]).
+
 
 === Version 4.1.5 (21 August 2023)
 
-https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.5[API documentation] | link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5++[Full Changelog]
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.5[API documentation] 
+| link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5++[Full Changelog]
 
 |===
 |Source          |https://packages.couchbase.com/clients/php/couchbase-4.1.5.tgz[couchbase-4.1.5.tgz]
@@ -67,13 +115,13 @@ now logging connection options for visibility (https://github.com/couchbaselabs/
 * https://issues.couchbase.com/browse/CXXCBC-343[CXXCBC-343]: Continue bootsrap if DNS-SRV resolution fails (https://github.com/couchbaselabs/couchbase-cxx-client/pull/422[#422]).
 
 * https://issues.couchbase.com/browse/CXXCBC-242[CXXCBC-242]:
-SDK Support for Native KV Range Scans (https://github.com/couchbaselabs/couchbase-cxx-client/pull/419[#419], https://github.com/couchbaselabs/couchbase-cxx-client/pull/423[#423], 
-https://github.com/couchbaselabs/couchbase-cxx-client/pull/424[#424], 
-https://github.com/couchbaselabs/couchbase-cxx-client/pull/426[#426], 
-https://github.com/couchbaselabs/couchbase-cxx-client/pull/428[#428], 
-https://github.com/couchbaselabs/couchbase-cxx-client/pull/431[#431], 
-https://github.com/couchbaselabs/couchbase-cxx-client/pull/432[#432], 
-https://github.com/couchbaselabs/couchbase-cxx-client/pull/433[#433],  
+SDK Support for Native KV Range Scans (https://github.com/couchbaselabs/couchbase-cxx-client/pull/419[#419], https://github.com/couchbaselabs/couchbase-cxx-client/pull/423[#423],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/424[#424],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/426[#426],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/428[#428],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/431[#431],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/432[#432],
+https://github.com/couchbaselabs/couchbase-cxx-client/pull/433[#433],
 https://github.com/couchbaselabs/couchbase-cxx-client/pull/434[#434]).
 
 * https://issues.couchbase.com/browse/CXXCBC-339[CXXCBC-339]: Disable older TLS protocols (https://github.com/couchbaselabs/couchbase-cxx-client/pull/418[#418]).
