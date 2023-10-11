@@ -66,7 +66,7 @@ Added history retention settings to buckets/collection management
 Return booleans for subdocument 'exists' operation, instead of error code
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/444[#444],
 https://github.com/couchbaselabs/couchbase-cxx-client/pull/452[#452]).
-* Detect 'collection_not_found' error in 'update_collection' response
+* Detect `collection_not_found` error in `update_collection` response
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/450[#450]).
 
 
