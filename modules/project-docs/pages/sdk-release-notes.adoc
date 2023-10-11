@@ -21,6 +21,9 @@ We always recommend using the latest version of the SDK -- it contains all of th
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
+PHP SDK 4.1 is written to xref:compatibility.adoc#api-version[version 3.4 of the SDK API specification]
+(and matching the features available in Couchbase 7.1 and earlier).
+
 
 === Version 4.1.6 (10 October 2023)
 
@@ -350,6 +353,10 @@ that describe how to build an extension along with PHP interpreter.
 
 
 == PHP SDK 4.0 Releases
+
+PHP SDK 4.0 is written to xref:compatibility.adoc#api-version[version 3.3 of the SDK API specification]
+(and matching the features available in Couchbase 7.1 and earlier).
+
 
 === Version 4.0.0 (11 May 2022)
 
