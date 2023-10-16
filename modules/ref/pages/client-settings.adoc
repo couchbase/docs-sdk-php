@@ -63,3 +63,5 @@ This profile changes the default timeouts.
 | `managementTimeout`
 | 120s
 |===
+
+*Do not* set `kvDurableTimeout` above 65s, which is the maximum possible `SyncWrite` timeout on the Server side.
