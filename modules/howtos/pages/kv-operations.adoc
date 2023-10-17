@@ -147,6 +147,8 @@ include::example$kv-crud.php[tag=removewithoptions]
 By default, Couchbase documents do not expire, but transient or temporary data may be needed for user sessions, caches, or other temporary documents.
 Using `Touch()`, you can set expiration values on documents to handle transient data:
 
+NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change.
+
 [source,php]
 ----
 include::example$kv-expiry.php[tag=touch]
@@ -173,6 +175,8 @@ include::{version-common}@sdk:shared:partial$documents.adoc[tag=exp-note]
 
 The value of a document can be increased or decreased atomically using `Binary.Increment()` and `.Binary.Decrement()`.
 
+NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change.
+
 .Increment
 [source,php]
 ----
@@ -196,8 +200,10 @@ include::example$kv-counter.php[tag=decrement]
 include::example$kv-counter.php[tag=decrementwithoptions]
 ----
 
-NOTE: Increment & Decrement are considered part of the ‘binary’ API and as such may still be subject to change
+TIP: Setting the document expiry time only works when a document is created, and it is not possible to update the expiry time of an existing counter document with the Increment method -- to do this during an increment, use with the `Touch()` method.
 
+
+// Atomicity Across Data Centers
 
 include::{version-common}@sdk:shared:partial$atomic.adoc[tag=xdcr]
 
