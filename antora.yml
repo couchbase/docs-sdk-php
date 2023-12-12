@@ -8,7 +8,7 @@ asciidoc:
   attributes:
     server_version: '7.6'
     sdk_current_version: '4.2.0'
-    sdk_dot_minor:'4.2'
+    sdk_dot_minor: '4.2'
     sdk_dot_major: '4.x'
     version-server: '7.6'
     version-common: '7.5'
