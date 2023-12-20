@@ -1,5 +1,6 @@
 = Distributed Transactions from the PHP SDK
 :description: Distributed ACID Transactions in Couchbase SDKs
+:page-aliases: transactions-single-query.adoc
 :navtitle: ACID Transactions
 :page-topic-type: howto
 :page-toclevels: 2
