@@ -1,5 +1,6 @@
 = Using Couchbase Transactions
 :description: Distributed ACID Transactions in Couchbase SDKs
+:page-aliases: transactions-single-query.adoc
 :page-topic-type: howto
 :page-toclevels: 2
 :page-pagination: next
