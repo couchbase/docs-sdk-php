@@ -16,7 +16,7 @@ Full details can be found in https://docs.couchbase.com/sdk-api/couchbase-php-cl
 
 // section on wide area network support
 
-include::{version-common}@sdk:shared:partial$client-settings-wide-network.adoc[]
+include::{version-common}@sdk:shared:partial$client-settings-nowait.adoc[]
 
 == Configuration Profiles
 
