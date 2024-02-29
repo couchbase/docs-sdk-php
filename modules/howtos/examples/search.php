@@ -125,27 +125,32 @@ $vectorQuery = [];
 $anotherVectorQuery = [];
 
 // #tag::singlevectorquery[]
-$request = SearchRequest::build(VectorSearch::build(
-    [VectorQuery::build("vector_field", $vectorQuery)]));
+$request = SearchRequest::build(VectorSearch::build([
+    VectorQuery::build("vector_field", $vectorQuery)
+]));
 
 $result = $scope->search("vector-index", $request);
 // #end::singlevectorquery[]
 
 // #tag::multiplevectorqueries[]
-$request = SearchRequest::build(VectorSearch::build(
-    [VectorQuery::build("vector_field", $vectorQuery)->numCandidates(2)->boost(0.3),
-    VectorQuery::build("vector_field", $anotherVectorQuery)->numCandidates(5)->boost(0.7)]));
+$request = SearchRequest::build(VectorSearch::build([
+    VectorQuery::build("vector_field", $vectorQuery)->numCandidates(2)->boost(0.3),
+    VectorQuery::build("vector_field", $anotherVectorQuery)->numCandidates(5)->boost(0.7)
+]));
 
 $result = $scope->search("vector-index", $request);
 // #end::multiplevectorqueries[]
 
 // #tag::combinedvectorquery[]
-$request = SearchRequest::build(MatchAllSearchQuery::build())
-    ->vectorSearch(VectorSearch::build(
-        [VectorQuery::build("vector_field", $vectorQuery)]));
+$request = SearchRequest::build(MatchAllSearchQuery::build());
+$request->vectorSearch(VectorSearch::build([
+    VectorQuery::build("vector_field", $vectorQuery)
+]));
 
 $result = $scope->search("vector-and-fts-index", $request);
 // #end::combinedvectorquery[]
+
+
 
 // #tag::traditionalftsquery[]
 $request = SearchRequest::build(MatchAllSearchQuery::build());
