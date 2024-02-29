@@ -95,7 +95,7 @@ foreach ($res->rows() as $row) {
 // #tag::consistency[]
 // Create new hotel document and demonstrate query with consistency requirement
 $scope = $cluster->bucket('travel-sample')->scope('inventory');
-$collection = $scope->collection("hotel");
+$collection = $scope->collection('hotel');
 $hotel = [
     "name" => "super hotel",
     "reviews" => [

@@ -146,7 +146,7 @@ You can combine a traditional FTS query with vector queries:
 include::example$search.php[tag=combinedvectorquery]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `vectorQueryCombination()` in VectorSearchOptions.
+How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions->vectorQueryCombination()`.
 
 ==== FTS queries
 And note that traditional FTS queries, without vector search, are also supported with the new `cluster.search()` / `scope.search()` APIs:
