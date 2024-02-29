@@ -150,8 +150,6 @@ $request->vectorSearch(VectorSearch::build([
 $result = $scope->search("vector-and-fts-index", $request);
 // #end::combinedvectorquery[]
 
-
-
 // #tag::traditionalftsquery[]
 $request = SearchRequest::build(MatchAllSearchQuery::build());
 
