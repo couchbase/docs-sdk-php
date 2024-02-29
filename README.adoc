@@ -10,7 +10,7 @@ endif::[]
 :url-playbook: {url-org}/docs-site
 
 This repository hosts the documentation source for the Couchbase PHP SDK.
-You are in the branch for the new 3.2 API.
+You are in the branch for the new 4.1 API.
 
 == Contributing
 
