@@ -136,7 +136,7 @@ You can run multiple vector queries together:
 include::example$search.php[tag=multiplevectorqueries]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `vectorQueryCombination()` in VectorSearchOptions.
+How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions->vectorQueryCombination()`.
 
 ==== Combining FTS and vector queries
 You can combine a traditional FTS query with vector queries:
