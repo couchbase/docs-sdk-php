@@ -280,6 +280,27 @@ include::example$subdoc-mutatein.php[tag=mutateInCreatePath]
 ----
 // TODO: php sdk will have fluent APi for subdocument specs
 
+[#subdoc-from-replica]
+== Reading Sub-Documents From Replicas
+
+Couchbase Server 7.6 and later support Sub-Doc lookup from replicas.
+
+The `Collection->lookupinAnyReplica()` method returns the first response -- from active or replica:
+
+.Sub-Document read from any replica
+[source,php]
+----
+include::example$subdoc-lookupin.php[tag=lookupinanyreplica]
+----
+
+The `Collection->lookupInAllReplicas()` method fetches all available replicas (and the active copy), and returns all responses:
+
+.Sub-Document read from all replicas
+[source,php]
+----
+include::example$subdoc-lookupin.php[tag=lookupinallreplicas]
+----
+
 == CAS Semantics
 
 Subdoc mostly eliminates the need for tracking the xref:concurrent-document-mutations.adoc[CAS] value.

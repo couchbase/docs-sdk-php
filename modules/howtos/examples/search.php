@@ -1,6 +1,7 @@
 <?php
 use \Couchbase\ClusterOptions;
 use \Couchbase\Cluster;
+use Couchbase\MatchAllSearchQuery;
 use \Couchbase\MatchSearchQuery;
 use \Couchbase\NumericRangeSearchQuery;
 use \Couchbase\ConjunctionSearchQuery;
@@ -93,7 +94,8 @@ foreach ($res->rows() as $row) {
 
 // #tag::consistency[]
 // Create new hotel document and demonstrate query with consistency requirement
-$collection = $cluster->bucket('travel-sample')->scope("inventory")->collection("hotel");
+$scope = $cluster->bucket('travel-sample')->scope('inventory');
+$collection = $scope->collection('hotel');
 $hotel = [
     "name" => "super hotel",
     "reviews" => [
@@ -117,6 +119,42 @@ foreach ($res->rows() as $row) {
     printf("id: %s, score: %f\n", $row['id'], $row['score']);
 }
 // #end::consistency[]
+
+// this should come from an external source, such as an embeddings API
+$vectorQuery = [];
+$anotherVectorQuery = [];
+
+// #tag::singlevectorquery[]
+$request = SearchRequest::build(VectorSearch::build([
+    VectorQuery::build("vector_field", $vectorQuery)
+]));
+
+$result = $scope->search("vector-index", $request);
+// #end::singlevectorquery[]
+
+// #tag::multiplevectorqueries[]
+$request = SearchRequest::build(VectorSearch::build([
+    VectorQuery::build("vector_field", $vectorQuery)->numCandidates(2)->boost(0.3),
+    VectorQuery::build("vector_field", $anotherVectorQuery)->numCandidates(5)->boost(0.7)
+]));
+
+$result = $scope->search("vector-index", $request);
+// #end::multiplevectorqueries[]
+
+// #tag::combinedvectorquery[]
+$request = SearchRequest::build(MatchAllSearchQuery::build());
+$request->vectorSearch(VectorSearch::build([
+    VectorQuery::build("vector_field", $vectorQuery)
+]));
+
+$result = $scope->search("vector-and-fts-index", $request);
+// #end::combinedvectorquery[]
+
+// #tag::traditionalftsquery[]
+$request = SearchRequest::build(MatchAllSearchQuery::build());
+
+$result = $scope->search("travel-sample-index", $request);
+// #end::traditionalftsquery[]
 
 // Output
 //

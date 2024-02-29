@@ -40,3 +40,23 @@ printf("Path exists? %s\n", $result->exists(1) ? "true" : "false");
 // United Kingdom
 // Path exists? false
 // #end::lookupInMulti[]
+// #tag::lookupinanyreplica[]
+$result = $collection->lookupInAnyReplica("customer123", [
+    new \Couchbase\LookupGetSpec("addresses.delivery.country")
+]);
+printf("%s\n", $result->content(0));
+// United Kingdom
+printf("Is replica? %s", $result->isReplica() ? "true" : "false");
+// Is replica?: false|true
+// #end::lookupinanyreplica[]
+// #tag::lookupinallreplicas[]
+$results = $collection->lookupInAllReplicas("customer123", [
+    new \Couchbase\LookupGetSpec("addresses.delivery.country")
+]);
+foreach ($results as $result) {
+    printf("%s\n", $result->content(0));
+    // United Kingdom
+    printf("Is replica? %s\n", $result->isReplica() ? "true" : "false");
+    // Is replica? false|true
+}
+// #end::lookupinallreplicas[]

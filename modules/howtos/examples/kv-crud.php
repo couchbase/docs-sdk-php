@@ -108,3 +108,33 @@ printf("document \"user-key\" has been created with CAS \"%s\"\n", $res->cas());
 $opts = new RemoveOptions();
 $collection->remove("document-key-new", $opts);
 $collection->remove("document-key", $opts);
+
+// tag::rangescanalldocuments[]
+$results = $collection->scan(RangeScan::build());
+foreach ($results as $result) {
+    printf("\n ID: %s, content:\n ", $result->id());
+    print_r($result->content());
+}
+// end::rangescanalldocuments[]
+// tag::rangescanalldocumentids[]
+$results = $collection->scan(RangeScan::build(), ScanOptions::build()->idsOnly(true));
+foreach ($results as $result) {
+    printf("ID: %s \n", $result->id());
+}
+// end::rangescanalldocumentids[]
+// tag::rangescanprefix[]
+$results = $collection->scan(PrefixScan::build("alice::"));
+foreach ($results as $result) {
+    printf("\n ID: %s, content:\n ", $result->id());
+    print_r($result->content());
+}
+
+// end::rangescanprefix[]
+
+// tag::rangescansample[]
+$results = $collection->scan(SamplingScan::build(100));
+foreach ($results as $result) {
+    printf("\n ID: %s, content:\n ", $result->id());
+    print_r($result->content());
+}
+// end::rangescansample[]
