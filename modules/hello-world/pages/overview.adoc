@@ -1,9 +1,9 @@
-= Couchbase PHP SDK 4.1
+= Couchbase PHP SDK 4.2
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
 :!sectids:
 
-= Couchbase PHP SDK 4.1
+= Couchbase PHP SDK 4.2
 
 [source,console]
 ----

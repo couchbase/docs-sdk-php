@@ -26,16 +26,137 @@ PHP SDK 4.1 is written to xref:compatibility.adoc#api-version[version 3.4 of the
 (and matching the features available in Couchbase 7.1 and earlier).
 
 
-=== Version 4.2.0 (15 March 2024)
+=== Version 4.2.0 (17 March 2024)
 
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.0[API documentation]
+| link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.6...4.2.0++[Full Changelog]
 
+|===
+|Checksum |               |         |     |https://packages.couchbase.com/clients/php/couchbase-4.2.0.sha256sum[couchbase-4.2.0.sha256sum]
+|Source   |               |         |     |https://packages.couchbase.com/clients/php/couchbase-4.2.0.tgz[couchbase-4.2.0.tgz]
+|Linux    | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-nts-linux-x86_64.tgz[couchbase-4.2.0-php8.1-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-zts-linux-x86_64.tgz[couchbase-4.2.0-php8.1-zts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-nts-linux-x86_64.tgz[couchbase-4.2.0-php8.2-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-zts-linux-x86_64.tgz[couchbase-4.2.0-php8.2-zts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-nts-linux-x86_64.tgz[couchbase-4.2.0-php8.3-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-zts-linux-x86_64.tgz[couchbase-4.2.0-php8.3-zts-linux-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-nts-linux-musl-x86_64.tgz[couchbase-4.2.0-php8.1-nts-linux-musl-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-nts-linux-musl-x86_64.tgz[couchbase-4.2.0-php8.2-nts-linux-musl-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-nts-linux-musl-x86_64.tgz[couchbase-4.2.0-php8.3-nts-linux-musl-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-nts-macos-x86_64.tgz[couchbase-4.2.0-php8.1-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-zts-macos-x86_64.tgz[couchbase-4.2.0-php8.1-zts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-nts-macos-x86_64.tgz[couchbase-4.2.0-php8.2-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-zts-macos-x86_64.tgz[couchbase-4.2.0-php8.2-zts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-nts-macos-x86_64.tgz[couchbase-4.2.0-php8.3-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-zts-macos-x86_64.tgz[couchbase-4.2.0-php8.3-zts-macos-x86_64.tgz]
+|MacOS    | arm64         | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-nts-macos-arm64.tgz[couchbase-4.2.0-php8.1-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.1-zts-macos-arm64.tgz[couchbase-4.2.0-php8.1-zts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-nts-macos-arm64.tgz[couchbase-4.2.0-php8.2-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.2-zts-macos-arm64.tgz[couchbase-4.2.0-php8.2-zts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-nts-macos-arm64.tgz[couchbase-4.2.0-php8.3-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.0-php8.3-zts-macos-arm64.tgz[couchbase-4.2.0-php8.3-zts-macos-arm64.tgz]
+|===
 
+==== Enhancements
+
+* https://issues.couchbase.com/browse/PCBC-979[PCBC-979]: Add static helpers to SearchQuery types (https://github.com/couchbase/couchbase-php-client/pull/149[#149])
+* https://issues.couchbase.com/browse/PCBC-970[PCBC-970]: SDK Support for Scoped Search Indexes (https://github.com/couchbase/couchbase-php-client/pull/147[#147])
+* https://issues.couchbase.com/browse/PCBC-968[PCBC-968]: Support for maxTTL value of -1 for collection "no expiry" (https://github.com/couchbase/couchbase-php-client/pull/144[#144])
+* https://issues.couchbase.com/browse/PCBC-967[PCBC-967]: Support for vector search (https://github.com/couchbase/couchbase-php-client/pull/143[#143])
+* https://issues.couchbase.com/browse/PCBC-965[PCBC-965]: Support DocNotLockedException and core update (https://github.com/couchbase/couchbase-php-client/pull/142[#142])
+* https://issues.couchbase.com/browse/PCBC-960[PCBC-960]: Merge protostellar branch to master (https://github.com/couchbase/couchbase-php-client/pull/138[#138], https://github.com/couchbase/couchbase-php-client/pull/153[#153])
+
+==== Fixes
+
+* https://issues.couchbase.com/browse/PCBC-964[PCBC-964]: Wait until the core connection is closed (https://github.com/couchbase/couchbase-php-client/pull/141[#141])
+* https://issues.couchbase.com/browse/PCBC-972[PCBC-972]: Fix C++ detection on MacOS X (https://github.com/couchbase/couchbase-php-client/pull/145[#145])
+* Add missing use statement in class `DecrementOptions` (https://github.com/couchbase/couchbase-php-client/pull/146[#146])
+* Update core and rename query_index_create fields to keys (https://github.com/couchbase/couchbase-php-client/pull/148[#148])
+
+==== Notable changes in core C++
+
+===== Since 1.0.0-dp.14
+
+Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-482[CXXCBC-482]: Range scan orchestrator should use best effort retry strategy by default. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/542[#542])
+* https://issues.couchbase.com/browse/CXXCBC-481[CXXCBC-481]: Fix potential crash when parsing search result hits. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/541[#541])
+* https://issues.couchbase.com/browse/CXXCBC-461[CXXCBC-461]: Do not send ping to nodes that have not completed bootstrap. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/540[#540])
+* https://issues.couchbase.com/browse/CXXCBC-480[CXXCBC-480]: LookupInAnyReplica should not enforce any limits on number of specs in the library. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/539[#539])
+* https://issues.couchbase.com/browse/CXXCBC-479[CXXCBC-479]: Fix capabilities check for replica LookupIn operations. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/537[#537])
+* https://issues.couchbase.com/browse/CXXCBC-336[CXXCBC-336]: Do not fallback to 8.8.8.8, if we cannot obtain system DNS server (https://github.com/couchbaselabs/couchbase-cxx-client/pull/533[#533])
+
+===== Since 1.0.0-dp.13
+
+New features and enhancements
+
+* https://issues.couchbase.com/browse/CXXCBC-456[CXXCBC-456]: handle 0x0d (config_only) status from KV (https://github.com/couchbaselabs/couchbase-cxx-client/pull/523[#523]).
+* https://issues.couchbase.com/browse/CXXCBC-191[CXXCBC-191]: Create Index Key Encoding (https://github.com/couchbaselabs/couchbase-cxx-client/pull/519[#519])
+* https://issues.couchbase.com/browse/CXXCBC-442[CXXCBC-442]: Add support for raw_json and raw_string transcoders (https://github.com/couchbaselabs/couchbase-cxx-client/pull/514[#514], https://github.com/couchbaselabs/couchbase-cxx-client/pull/515[#515])
+* Add full_set option to view query options (https://github.com/couchbaselabs/couchbase-cxx-client/pull/517[#517])
+
+Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-345[CXXCBC-345]: Range scan improvements & resolve concurrency issues (https://github.com/couchbaselabs/couchbase-cxx-client/pull/525[#525]).
+* https://issues.couchbase.com/browse/CXXCBC-284[CXXCBC-284]: Do not use session that is not bootstrapped to poll for config (https://github.com/couchbaselabs/couchbase-cxx-client/pull/528[#528])
+* https://issues.couchbase.com/browse/CXXCBC-447[CXXCBC-447]: Use addresses from the config to bootstrap bucket (https://github.com/couchbaselabs/couchbase-cxx-client/pull/516[#516])
+* https://issues.couchbase.com/browse/CXXCBC-450[CXXCBC-450]: Reset bootstrap handler before re-bootstrap (https://github.com/couchbaselabs/couchbase-cxx-client/pull/524[#524]).
+* Update view design_document rev to be optional (https://github.com/couchbaselabs/couchbase-cxx-client/pull/526[#526]).
+* Change encoded search request showrequest param from string to boolean. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/518[#518])
+* https://issues.couchbase.com/browse/CXXCBC-452[CXXCBC-452]: Update capabilities and fail fast when selected feature is not available. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/522[#522], https://github.com/couchbaselabs/couchbase-cxx-client/pull/513[#513])
+    * https://issues.couchbase.com/browse/CXXCBC-431[CXXCBC-431]: Add check for history retention bucket capability in collection create/update (https://github.com/couchbaselabs/couchbase-cxx-client/pull/502[#502], https://github.com/couchbaselabs/couchbase-cxx-client/pull/505[#505])
+    * https://issues.couchbase.com/browse/CXXCBC-421[CXXCBC-421]: Return feature_not_available when query preserve expiry is not supported (https://github.com/couchbaselabs/couchbase-cxx-client/pull/510[#510])
+
+===== Since 1.0.0-dp.12
+
+New features and enhancements
+
+* https://issues.couchbase.com/browse/CXXCBC-346[CXXCBC-346]: Support for maxTTL value of -1 for collection 'no expiry'. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/500[#500])
+* https://issues.couchbase.com/browse/CXXCBC-442[CXXCBC-442]: Support for raw_json and raw_string transcoders. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/514[#514])
+* https://issues.couchbase.com/browse/CXXCBC-440[CXXCBC-440]: Support for Scoped Search Indexes. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/512[#512], https://github.com/couchbaselabs/couchbase-cxx-client/pull/513[#513])
+
+Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-284[CXXCBC-284]: Reduce network traffic when polling for cluster configuration. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/504[#504])
+* https://issues.couchbase.com/browse/CXXCBC-422[CXXCBC-422]: Add insufficient credentials error code to common query error code conversion. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/511[#511])
+* https://issues.couchbase.com/browse/CXXCBC-421[CXXCBC-421]: Return `feature_not_available` when query preserve expiry is not supported. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/510[#510])
+* https://issues.couchbase.com/browse/CXXCBC-426[CXXCBC-426]: Get with very large projection test is returning fields outside of the projection. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/499[#499])
+
+===== Since 1.0.0-dp.11
+
+Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-404[CXXCBC-404]: KV_LOCKED status should be exposed as `cas_mismatch` for unlock. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/479[#479])
+* https://issues.couchbase.com/browse/CXXCBC-403[CXXCBC-403]: Allow retries for KV `not_my_vbucket` response. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/480[#480])
+* https://issues.couchbase.com/browse/CXXCBC-368[CXXCBC-368]: Subscribe to clustermap notifications to speedup failover. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/490[#490])'
+* https://issues.couchbase.com/browse/CXXCBC-419[CXXCBC-419]: Ensure that MCBP protocol parser starts with clean state. Fixes protocol parsing issues when bootstrap sequence is being retried. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/496[#496])
+* https://issues.couchbase.com/browse/CXXCBC-409[CXXCBC-409]: Add handling for 'index does not exist' query error. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/492[#492])
+* https://issues.couchbase.com/browse/CXXCBC-391[CXXCBC-391]: Fix transactions API inconsistencies. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/482[#482])
+  * Remove `kv_timeout`
+  * Rename `expiration_time` to `timeout`
+
+New features and enhancements
+
+* https://issues.couchbase.com/browse/CXXCBC-100[CXXCBC-100]: Add ability to set timeout for ping. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/486[#486])
+* https://issues.couchbase.com/browse/CXXCBC-412[CXXCBC-412]: Support `document_not_locked` response. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/491[#491])
+
+===== Since 1.0.0-dp.10
+
+Fixes
+
+* https://issues.couchbase.com/browse/CXXCBC-383[CXXCBC-383]: Map `subdoc_doc_too_deep` KV status to `path_too_deep` error code. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/455[#455])
+
+New features and enhancements
+
+* https://issues.couchbase.com/browse/CXXCBC-377[CXXCBC-377]: Implement ExtParallelUnstaging in transactions. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/457[#457])
+* https://issues.couchbase.com/browse/CXXCBC-363[CXXCBC-363]: Add examples for bulk operations. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/442[#442])
+* Add more information to diagnose timeouts on NMV responses. (https://github.com/couchbaselabs/couchbase-cxx-client/pull/475[#475])
 
 == PHP SDK 4.1 Releases
 
 === Version 4.1.6 (10 October 2023)
 
-https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.6[API documentation] 
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.6[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.5...4.1.6++[Full Changelog]
 
 |===
@@ -49,31 +170,31 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.6[API documentation]
 Updated wrapper-side bucket settings -- to now use new `BucketSettings` optional fields in underlying {cpp} core
 (https://github.com/couchbase/couchbase-php-client/pull/132[#132]).
 * https://issues.couchbase.com/browse/PCBC-950[PCBC-950]:
-Added support to bucket settings for no dedup feature 
+Added support to bucket settings for no dedup feature
 (https://github.com/couchbase/couchbase-php-client/pull/131[#131]).
 * https://issues.couchbase.com/browse/PCBC-955[PCBC-955]:
-Preventing trailing garbage in encoded CAS value 
+Preventing trailing garbage in encoded CAS value
 (https://github.com/couchbase/couchbase-php-client/pull/134[#134]).
 * Updates to support PHP 8.3: `zend_bool` was removed from 8.3.
 
 ==== Underlying C++ SDK Core Changes
 
-* https://issues.couchbase.com/browse/CXXCBC-376[CXXCBC-376]: 
-Changed what 'create' and 'update' bucket operations send to the server. 
-Unrequired `BucketSettings` fields are now set to optional, and are not sent unless the settings are explicitly specified. 
+* https://issues.couchbase.com/browse/CXXCBC-376[CXXCBC-376]:
+Changed what 'create' and 'update' bucket operations send to the server.
+Unrequired `BucketSettings` fields are now set to optional, and are not sent unless the settings are explicitly specified.
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/451[#451]).
-* https://issues.couchbase.com/browse/CXXCBC-374[CXXCBC-374]: 
-The SDK should now return a 'bucket_exists' error when the bucket already exists during a 'create' operation. 
+* https://issues.couchbase.com/browse/CXXCBC-374[CXXCBC-374]:
+The SDK should now return a 'bucket_exists' error when the bucket already exists during a 'create' operation.
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/449[#449]).
-* https://issues.couchbase.com/browse/CXXCBC-359[CXXCBC-359]: 
-Reduced the default timeout for idle HTTP connections to 1 second. 
+* https://issues.couchbase.com/browse/CXXCBC-359[CXXCBC-359]:
+Reduced the default timeout for idle HTTP connections to 1 second.
 The previous default (4.5 seconds) was too close to the 5-second server-side timeout, and could lead to spurious request failures.
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/448[#448]).
-* https://issues.couchbase.com/browse/CXXCBC-367[CXXCBC-367], 
-https://issues.couchbase.com/browse/CXXCBC-370[CXXCBC-370]: 
+* https://issues.couchbase.com/browse/CXXCBC-367[CXXCBC-367],
+https://issues.couchbase.com/browse/CXXCBC-370[CXXCBC-370]:
 Added history retention settings to buckets/collection management
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/446[#446]).
-* https://issues.couchbase.com/browse/CXXCBC-119[CXXCBC-119]: 
+* https://issues.couchbase.com/browse/CXXCBC-119[CXXCBC-119]:
 Return booleans for subdocument 'exists' operation, instead of error code
 (https://github.com/couchbaselabs/couchbase-cxx-client/pull/444[#444],
 https://github.com/couchbaselabs/couchbase-cxx-client/pull/452[#452]).
@@ -83,7 +204,7 @@ https://github.com/couchbaselabs/couchbase-cxx-client/pull/452[#452]).
 
 === Version 4.1.5 (21 August 2023)
 
-https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.5[API documentation] 
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.1.5[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.4...4.1.5++[Full Changelog]
 
 |===
