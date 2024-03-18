@@ -13,7 +13,7 @@ include::partial$attributes.adoc[]
 The Document class and structure has been completely removed from the API, and the returned value is now `Result`.
 Retry behaviour is more proactive, and lazy bootstrapping moves all error handling to a single place.
 
-The current PHP SDK 4.0 is also based on the xref:project-docs:compatibility.adoc#sdk3.3[SDK API 3.3 specification], and offers an entirely new backend (Couchbase++) with better support for new features like Distributed ACID Transactions.
+The current PHP SDK 4.0 is also based on the <<api-version,SDK API 3.3 specification>>, and offers an entirely new backend (Couchbase++) with better support for new features like Distributed ACID Transactions.
 We have increased the major version to reflect the importance of this implementation change as per https://semver.org/[semantic versioning].
 
 The intent of this migration guide is to provide detail information on the changes and what to look for while upgrading the SDK.
