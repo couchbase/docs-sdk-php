@@ -96,7 +96,6 @@ See xref:project-docs:sdk-full-installation.adoc#post-installation[post-installa
 
 [source,ini]
 ----
-extension=json      ; not needed with PHP 8.0.0+
 extension=couchbase
 ----
 
@@ -106,8 +105,8 @@ Additionally, if you are using https://getcomposer.org/doc/00-intro.md[Composer]
 ----
 "require": {
   ...
-  "ext-couchbase": "^4.1",
-  "couchbase/couchbase": "^4.1"
+  "ext-couchbase": "^4.2",
+  "couchbase/couchbase": "^4.2"
 }
 ----
 
