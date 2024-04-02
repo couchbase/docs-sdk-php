@@ -3,6 +3,6 @@
 
 See:
 
-* The xref:3.2@php-sdk::sdk-release-notes.adoc[3.x PHP Release Notes & Download Archive].
+* The https://docs-archive.couchbase.com/php-sdk/3.2/project-docs/sdk-release-notes.html[3.x PHP Release Notes & Download Archive].
 * Although https://www.couchbase.com/support-policy/enterprise-software[no longer supported], documentation for older releases continues to be available in our https://docs-archive.couchbase.com/php-sdk/2.6/sdk-release-notes.html[docs archive].
 // end::older-releases[]
