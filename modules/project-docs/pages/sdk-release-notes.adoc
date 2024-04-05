@@ -31,6 +31,11 @@ PHP SDK 4.2 is written to xref:compatibility.adoc#api-version[version 3.5 of the
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.0[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.1.6...4.2.0++[Full Changelog]
 
+==== Known Issues
+
+* https://issues.couchbase.com/browse/CXXCBC-447[CXXCBC-447]:
+This version of the SDK will not be able to connect to a cluster utilizing alternate addressing.
+The recommendation is to wait to upgrade to a version of the {name-sdk} that contains {cpp} 1.0.0-dp.15 (or later).
 
 ==== Enhancements
 
