@@ -5,4 +5,4 @@
 :page-toclevels: 2
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
 
-include::4.1@php-sdk:project-docs:page$sdk-release-notes.adoc[tag=all]
+include::4.2@php-sdk:project-docs:page$sdk-release-notes.adoc[tag=all]
