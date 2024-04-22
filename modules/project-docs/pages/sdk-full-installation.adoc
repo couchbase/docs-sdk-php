@@ -29,7 +29,7 @@ We recommend using OS specific utilities such as `brew`, `apt-get`, and similar 
 * openssl >= 1.1+
 
 
-For more details regarding platform support refer to xref:compatibility.adoc#os-compatibility[Compatibility page].
+For more details regarding platform support refer to the xref:compatibility.adoc#os-compatibility[Compatibility page].
 
 
 [IMPORTANT]
