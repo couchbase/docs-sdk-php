@@ -28,6 +28,10 @@ We recommend using OS specific utilities such as `brew`, `apt-get`, and similar 
 
 * openssl >= 1.1+
 
+
+For more details regarding platform support refer to xref:compatibility.adoc#os-compatibility[Compatibility page].
+
+
 [IMPORTANT]
 ====
 When installing OpenSSL via `brew install` on *macOS*, the command will not be sufficient to be able to build.
