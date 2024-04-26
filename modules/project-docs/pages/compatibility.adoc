@@ -80,24 +80,13 @@ M1 ARM  architecture is fully supported in the PHP SDK.
 AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu 20.04+ (from SDK 4.1).
 ****
 
-=== x86-32 Processor Support
+=== x86-32 Processor Not Supported
 
-While the SDK can be compiled for 32-bit version of x86 platform, it is not
-generally tested and supported type of the deployment.
+Use of the PHP SDK on legacy or embedded 32-bit platforms is not supported.
 
-PHP does not have platform-independent
-https://www.php.net/manual/en/language.types.integer.php[64-bit integer], and
-all numbers are always signed. These facts do not allow to expose parts of the
-Couchbase API directly, and rather perform extra conversion steps. Here are few
-examples:
+While the SDK can be compiled for 32-bit version of x86 platform, there are complications in use from working around number handling in the API, including use of unsigned integers, 
+and it is not generally tested and supported.
 
-* JSON parser in PHP might silently convert integers in the documents to floats
-  with precision loss.
-* Increment/Decrement APIs in Couchbase operates on 64 bit numbers.
-* CAS values are reprensented as strings right now (but it would be more
-  efficient to use 64-number.
-* Expiration time is essentially 32-bit number, reprensenting Unix time in
-  seconds, so it has to be unsigned.
 
 // Network Requirements
 include::{version-common}@sdk:shared:partial$network-requirements.adoc[]
