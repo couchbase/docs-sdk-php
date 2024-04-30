@@ -80,6 +80,13 @@ M1 ARM  architecture is fully supported in the PHP SDK.
 AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu 20.04+ (from SDK 4.1).
 ****
 
+=== x86-32 Processor Not Supported
+
+Use of the PHP SDK on legacy or embedded 32-bit platforms is not supported.
+
+While the SDK can be compiled for 32-bit version of x86 platform, there are complications in use from working around number handling in the API, including use of unsigned integers, 
+and it is not generally tested and supported.
+
 
 // Network Requirements
 include::{version-common}@sdk:shared:partial$network-requirements.adoc[]
