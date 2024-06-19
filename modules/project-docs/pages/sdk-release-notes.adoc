@@ -16,15 +16,21 @@ For download instructions, see the xref:sdk-full-installation.adoc[installation 
 
 
 [#latest-release]
-== PHP SDK 4.2 Releases
+== PHP SDK 4.3 Releases
 
 We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
 
-PHP SDK 4.2 is written to xref:compatibility.adoc#api-version[version 3.5 of the SDK API specification]
-(and matching the features available in Couchbase 7.6 and earlier).
+PHP SDK 4.3 is written to xref:compatibility.adoc#api-version[version 3.6 of the SDK API specification]
+(and matching the features available in Couchbase 7.6.2 and earlier).
 
+
+=== Version 4.3.0 (??? June 2024)
+
+
+
+== PHP SDK 4.2 Releases
 
 === Version 4.2.1 (23 April 2024)
 
