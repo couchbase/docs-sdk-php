@@ -77,7 +77,7 @@ M1 ARM  architecture is fully supported in the PHP SDK.
 [discrete]
 === ARM Processor Support
 
-AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu 20.04+ (from SDK 4.1).
+AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu 20.04+.
 
 [discrete]
 === x86-32 Processor Not Supported
@@ -113,7 +113,7 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 3.2, 4.0, 4.1 | 4.2
+| | 3.2, 4.0, 4.1 | 4.2 - 4.3
 
 | *Server 7.0 - 7.2*
 | *✔*
