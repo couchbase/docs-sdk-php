@@ -1,6 +1,6 @@
 // tag::supported-versions[]
 The Couchbase PHP SDK generally tracks PHP's own https://www.php.net/supported-versions.php[supported versions], and recommends the most recent "Active Support" version, except as specified in our documentation and especially the xref:project-docs:sdk-release-notes.adoc[release notes].
 
-As of March 2024, these versions are PHP 8.3 (Latest Active Support), 8.2 (Active Support), and 8.1 (Security Support)
+As of June 2024, these versions are PHP 8.3 (Latest Active Support), 8.2 (Active Support), and 8.1 (Security Support)
  -- see the table below for <<php-version-compatibility,supported versions and dates>>.
 // end::supported-versions[]
