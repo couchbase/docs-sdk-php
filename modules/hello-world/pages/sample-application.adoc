@@ -26,4 +26,14 @@ The https://github.com/couchbaselabs/try-cb-nodejs/blob/6.5/index.js[index.js] f
 
 include::{version-server}@sdk:shared:partial$sample-application.adoc[tag=data-model]
 
-include::{version-server}@sdk:shared:partial$sample-application.adoc[tag=rest-api]
+include::7.5@sdk:shared:partial$sample-application.adoc[tag=rest-api]
+
+
+
+// TODO: we don't use the partial here, because of the location of swagger.json
+// in try-cb-dotnet/wwwroot/
+== REST API
+
+You can explore the REST API here in read-only mode, or once you are running the application, at the `/apidocs` endpoint.
+
+swagger_ui::https://raw.githubusercontent.com/couchbaselabs/try-cb-php/swagger-addon/swagger.json[]
