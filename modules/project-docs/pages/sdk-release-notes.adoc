@@ -25,6 +25,7 @@ any changes to expected behavior are noted in the release notes that follow.
 PHP SDK 4.2 is written to xref:compatibility.adoc#api-version[version 3.5 of the SDK API specification]
 (and matching the features available in Couchbase 7.6 and earlier).
 
+
 === Version 4.2.2 (24 July 2024)
 
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.2[API documentation]
@@ -32,18 +33,23 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.2[API documentation]
 
 ==== Fixes
 
- * https://issues.couchbase.com/browse/PCBC-997[PCBC-997]: Do not export development files. (https://github.com/couchbase/couchbase-php-client/pull/172[#172])
- Exclude C++ files, tests and development scripts, so that Packagist will not install them to the application `./vendor` directory.
+ * https://issues.couchbase.com/browse/PCBC-997[PCBC-997]:
+Excluded {cpp} files, tests, and development scripts, so that Packagist will not install them to the application `./vendor` directory
+https://github.com/couchbase/couchbase-php-client/pull/172[#172]).
 
- * https://issues.couchbase.com/browse/PCBC-991[PCBC-991]: Add consistency utility for testing (https://github.com/couchbase/couchbase-php-client/pull/168[#168])
+ * https://issues.couchbase.com/browse/PCBC-991[PCBC-991]:
+Added consistency utility for testing (https://github.com/couchbase/couchbase-php-client/pull/168[#168]).
 
- * https://issues.couchbase.com/browse/PCBC-989[PCBC-989]: Rollback to cmake 3.19 (https://github.com/couchbase/couchbase-php-client/pull/167[#167])
+ * https://issues.couchbase.com/browse/PCBC-989[PCBC-989]:
+Rollback to `cmake` 3.19 (https://github.com/couchbase/couchbase-php-client/pull/167[#167]).
 
- * https://issues.couchbase.com/browse/PCBC-988[PCBC-988]: Fix type annotation for JsonSerializable implementations (https://github.com/couchbase/couchbase-php-client/pull/166[#166])
+ * https://issues.couchbase.com/browse/PCBC-988[PCBC-988]:
+Fixed type annotation for `JsonSerializable` implementations (https://github.com/couchbase/couchbase-php-client/pull/166[#166]).
 
 ==== Enhancements
 
-* https://issues.couchbase.com/browse/PCBC-994[PCBC-994]: Support for base64 encoded vector types (https://github.com/couchbase/couchbase-php-client/pull/169[#169], https://github.com/couchbase/couchbase-php-client/pull/170[#170])
+* https://issues.couchbase.com/browse/PCBC-994[PCBC-994]:
+Support for base64 encoded vector types added (https://github.com/couchbase/couchbase-php-client/pull/169[#169], https://github.com/couchbase/couchbase-php-client/pull/170[#170]).
 
 * Core updated to 1.0.0. Release notes:
 https://docs.couchbase.com/cxx-sdk/current/project-docs/sdk-release-notes.html#version-1-0-0-26-june-2024[C++ SDK 1.0.0]
