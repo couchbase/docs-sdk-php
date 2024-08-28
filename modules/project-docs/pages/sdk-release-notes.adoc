@@ -33,13 +33,8 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.3[API documentation]
 
 ==== Enhancements
 
-* Core updated to 1.0.1. Release notes:
-https://docs.couchbase.com/cxx-sdk/current/project-docs/sdk-release-notes.html#version-1-0-1-22-august-2024[C++ SDK 1.0.1]
-
-=== Version 4.2.2 (24 July 2024)
-
-https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.2[API documentation]
-| link:++https://github.com/couchbase/couchbase-php-client/compare/4.2.1...4.2.2++[Full Changelog]
+* Core updated to 1.0.1.
+Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-1-22-august-2024[C++ SDK 1.0.1].
 
 ==== Download Links
 
@@ -75,6 +70,12 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.2[API documentation]
 |Windows  | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.3-php8.3-nts-windows-x64.zip[couchbase-4.2.3-php8.3-nts-windows-x64.zip]
 |Windows  | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.3-php8.3-zts-windows-x64.zip[couchbase-4.2.3-php8.3-zts-windows-x64.zip]
 |===
+
+
+=== Version 4.2.2 (24 July 2024)
+
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.2[API documentation]
+| link:++https://github.com/couchbase/couchbase-php-client/compare/4.2.1...4.2.2++[Full Changelog]
 
 ==== Fixes
 
