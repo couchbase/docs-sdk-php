@@ -141,7 +141,7 @@ $ code example.php
 ----
 
 Create a file with some sample PHP.
-(You will want to alter the username and password details to match your local database.)
+(You will want to alter the username and password details to match your local cluster.)
 
 [source,php]
 ----

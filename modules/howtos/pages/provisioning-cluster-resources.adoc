@@ -228,7 +228,7 @@ include::howtos:example$query-index-manager.php[tag=defer-indexes,indent=0]
 ----
 
 To delete a query index you can use the `dropIndex()` or `dropPrimaryIndex()` methods.
-Which one you use depends on the type of query index you wish to drop from the database.
+Which one you use depends on the type of query index you wish to drop from the cluster.
 
 .Deleting an index
 
