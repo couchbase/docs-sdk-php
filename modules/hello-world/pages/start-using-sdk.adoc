@@ -123,7 +123,7 @@ The following code samples assume:
 * Couchbase xref:cloud:ROOT:index.adoc[Capella] cluster, or Couchbase Server is installed and accessible locally (xref:server:getting-started:do-a-quick-install.adoc[Do a Quick Install] if you don't already have Couchbase Server installed).
 
 * You have create a bucket (perhaps using the xref:server:manage:manage-settings/install-sample-buckets.adoc[travel-sample dataset], or by creating a new bucket).
-Note, the Travel Sample dataset is installed automatically when deploying a Capella perpetual free tier cluster.
+Note, the Travel Sample dataset is installed automatically when deploying a Capella free tier cluster.
 
 * You have created a Couchbase user named "username" [change as appropriate] with permissions to access the cluster (at least Application Access permissions).
 
