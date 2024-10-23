@@ -30,8 +30,7 @@ PHP SDK 4.2 is written to xref:compatibility.adoc#api-version[version 3.5 of the
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.4[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.2.3...4.2.4++[Full Changelog]
 
-Enhancements
-============
+==== Enhancements
 
 * https://issues.couchbase.com/browse/PCBC-832[PCBC-832]:
 Management API - Analytics Management (#177).
@@ -39,8 +38,7 @@ Management API - Analytics Management (#177).
 * Core updated to 1.0.3.
 Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-3-22-october-2024[C++ SDK 1.0.3].
 
-Fixes
-=====
+==== Fixes
 
 * https://jira.issues.couchbase.com/browse/PCBC-1009[PCBC-1009]:
 `IS_RESOURCE` has been removed from function signatures of the extension, so that they compile with 8.4.
