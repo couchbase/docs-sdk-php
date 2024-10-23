@@ -42,13 +42,14 @@ Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-3-22
 Fixes
 =====
 
-* https://issues.couchbase.com/browse/PCBC-1009[PCBC-1009]:
-Do not use `IS_RESOURCE` in function signatures of the extension.
+* https://jira.issues.couchbase.com/browse/PCBC-1009[PCBC-1009]:
+`IS_RESOURCE` has been removed from function signatures of the extension, so that they compile with 8.4.
 
-* https://issues.couchbase.com/browse/PCBC-1010[PCBC-1010]:
+* https://jira.issues.couchbase.com/browse/PCBC-1010[PCBC-1010]:
+ implicit marking of certain parameters as nullable has now been deprecated.
 Use explicit nullable types where applicable to avoid deprecation warning in PHP 8.4.
 
-* Fix `SearchQuery` API docs link in API reference.
+* Fixed `SearchQuery` API docs link in API reference.
 
 ==== Download Links
 
