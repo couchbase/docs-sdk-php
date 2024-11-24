@@ -32,18 +32,16 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.5[API documentation]
 
 ==== Enhancements
 
-* Core updated to 1.0.4. Release notes:
-https://docs.couchbase.com/cxx-sdk/current/project-docs/sdk-release-notes.html#version-1-0-4-22-november-2024
+* Core updated to 1.0.4.
+Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-4-22-november-2024
 
 * https://issues.couchbase.com/browse/PCBC-1004[PCBC-1004]:
-Insert ABI version tag into PHP extension namespace
-(https://github.com/couchbase/couchbase-php-client/pull/187[#187]). At this
-moment this feature is optional and does not break existing ABI. The extension
-namespace will become versioned by default since 4.3.0.
+Insert ABI version tag into PHP extension namespace (https://github.com/couchbase/couchbase-php-client/pull/187[#187]).
+At this moment this feature is optional and does not break existing ABI.
+The extension namespace will become versioned by default from 4.3.0.
 +
 Prebuild binaries with `-abi` suffix have version tag in the extension name,
-and in the namespaces of the visible API, as it is shown with the following
-demo:
+and in the namespaces of the visible API, as is shown with the following demo:
 +
 [source,console]
 ----
@@ -88,10 +86,12 @@ Function [ <internal:couchbase> function Couchbase\Extension\createConnection ] 
 ==== Fixes
 
 * https://issues.couchbase.com/browse/PCBC-975[PCBC-975]:
-Fix expiry with `upsertMulti`. The option is now applied to all documents.
+Fixed expiry with `upsertMulti`.
+The option is now applied to all documents.
 
 * https://issues.couchbase.com/browse/PCBC-1017[PCBC-1017]:
-Update user agent generation. Now it uses the common SDK format.
+Updated user agent generation.
+It now uses the common SDK format.
 
 ==== Download Links
 
@@ -137,9 +137,8 @@ Update user agent generation. Now it uses the common SDK format.
 |Windows  | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.5-php8.4-zts-windows-x64.zip[couchbase-4.2.5-php8.4-zts-windows-x64.zip]
 |===
 
-As it has been said above, since this release we also publish ABI-safe
-binaries, that expose all internal API as `\Couchbase\Extension_4_2_5`, which
-allows to load different versions of the library at the same time.
+As noted above, from this release we also publish ABI-safe binaries that expose all internal APIs as `\Couchbase\Extension_4_2_5`,
+which allows the loading of different versions of the library at the same time.
 
 The extension file is also renamed to `couchbase_4_2_5.so`
 (`couchbase_4_2_5.dll`).
@@ -183,6 +182,7 @@ The extension file is also renamed to `couchbase_4_2_5.so`
 |Windows  | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.2.5-php8.4-nts-windows-x64-abi.zip[couchbase-4.2.5-php8.4-nts-windows-x64-abi.zip]
 |Windows  | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.2.5-php8.4-zts-windows-x64-abi.zip[couchbase-4.2.5-php8.4-zts-windows-x64-abi.zip]
 |===
+
 
 === Version 4.2.4 (22 October 2024)
 
