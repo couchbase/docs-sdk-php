@@ -33,7 +33,7 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.5[API documentation]
 ==== Enhancements
 
 * Core updated to 1.0.4.
-Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-4-22-november-2024
+Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-4-22-november-2024[C++ SDK 1.0.4].
 
 * https://issues.couchbase.com/browse/PCBC-1004[PCBC-1004]:
 Insert ABI version tag into PHP extension namespace (https://github.com/couchbase/couchbase-php-client/pull/187[#187]).
