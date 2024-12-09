@@ -236,11 +236,14 @@ E.....@.@.............+....Z.'yZ..#........
 ====
 
 
-// DNS-SRV
-include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv]
 
-DNS SRV bootstrapping is available in the PHP SDK from version 3.0.
-In order to make the SDK actually use the SRV records, you need to enable DNS SRV on the environment and pass in the host name from your records (here `example.com`):
+// DNS-SRV
+// == Using DNS SRV records
+
+include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv-rev]
+
+DNS SRV bootstrapping is enabled by default in the {name-sdk}.
+In order to make the SDK use the SRV records, you need to pass in the hostname from your records (here `example.com`):
 
 [source,php]
 ----
