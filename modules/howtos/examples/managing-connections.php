@@ -31,6 +31,6 @@ $cluster = new Cluster($connectionString, $opts);
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");
 
-$connectionString = "couchbase://couchbase.example.org";
+$connectionString = "couchbase://couchbase.example.com";
 $cluster = new Cluster($connectionString, $opts);
 // end::dnssrv[]
