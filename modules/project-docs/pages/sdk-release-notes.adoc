@@ -25,28 +25,38 @@ any changes to expected behavior are noted in the release notes that follow.
 PHP SDK 4.2 is written to xref:compatibility.adoc#api-version[version 3.5 of the SDK API specification]
 (and matching the features available in Couchbase 7.6 and earlier).
 
+
+
 === Version 4.2.6 (29 January 2025)
 
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.2.6[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.2.5...4.2.6++[Full Changelog]
 
-Enhancements
-============
+==== Enhancements
 
-* PCBC-992: Add zone aware replica reads (#201).
+* https://jira.issues.couchbase.com/browse/PCBC-992[PCBC-992]:
+New APIs added to allow getting KV documents from a preferred server group.
+This feature allows the implementation of network optimization when traffic cost between server groups is higher than in the local group.
+In this case the application might select preferred server group in the connection options,
+and later opt-in for local operations during replica reads (https://github.com/couchbase/couchbase-php-client/pull/201[#201]).
 
-Fixes
-=====
+==== Fixes
 
-* PCBC-1018: Do not destroy expired connection if it still being used (#200).
+* https://jira.issues.couchbase.com/browse/PCBC-1018[PCBC-1018]:
+In some cases, when the extension was configured aggressively close persistent connections (e.g. with `couchbase.max_persistent=0` and `couchbase.persistent_timeout=0`),
+the connections might be considered expired and scheduled for destruction even if the application has references to them.
+This patch changes this behavior to skip such actions and destroy them later, when the reference counter reaches zero
+(https://github.com/couchbase/couchbase-php-client/pull/200[#200]).
 
-* PCBC-1016: Fix `trustCertificate` option that was ignored previously (#195).
+* https://jira.issues.couchbase.com/browse/PCBC-1016[PCBC-1016]:
+Fixed `trustCertificate` option that was ignored previously (https://github.com/couchbase/couchbase-php-client/pull/195[#195]).
 
-* Update core to 1.0.5 (#203). Release notes: [couchbase-cxx-client 1.0.5](https://docs.couchbase.com/cxx-sdk/current/project-docs/sdk-release-notes.html#version-1-0-5-24-january-2025)
+* Updated core to 1.0.5 (https://github.com/couchbase/couchbase-php-client/pull/203[#203]).
+Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-0-5-24-january-2025[{cpp} SDK 1.0.5].
 
-* Fix PHP 8.4 deprecation warnings (#198).
+* Fixed PHP 8.4 deprecation warnings (https://github.com/couchbase/couchbase-php-client/pull/198[#198]).
 
-* Fix Undefined constant error (#196).
+* Fixed Undefined constant error (https://github.com/couchbase/couchbase-php-client/pull/196[#196]).
 
 ==== Download Links
 
