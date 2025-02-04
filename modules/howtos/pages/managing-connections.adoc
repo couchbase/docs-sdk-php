@@ -54,7 +54,7 @@ nodeA.example.com,nodeB.example.com
 
 .Connection string with two parameters
 ----
-127.0.0.1?io.networkResolution=external&timeout.kvTimeout=10s
+127.0.0.1?network=external&key_value_timeout=10s
 ----
 
 // The full list of recognized parameters is documented in the client settings reference.
