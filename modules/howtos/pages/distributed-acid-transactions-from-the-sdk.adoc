@@ -1,4 +1,5 @@
 = Using Couchbase Transactions
+:reftext: Distributed ACID Transactions from the PHP SDK
 :description: Distributed ACID Transactions in Couchbase SDKs
 :page-aliases: transactions-single-query.adoc
 :page-topic-type: howto
