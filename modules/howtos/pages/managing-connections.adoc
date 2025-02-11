@@ -258,6 +258,10 @@ If the DNS SRV records could not be loaded properly you'll get the message logge
 
 Also, if you pass in more than one node, DNS SRV bootstrap will not be initiated:
 
+----
+INFO: DNS SRV enabled, but less or more than one seed node given.
+Proceeding with normal bootstrap.
+----
 
 // WaitUntilReady section to be added once it is in the SDK - PCBC-695 
 
