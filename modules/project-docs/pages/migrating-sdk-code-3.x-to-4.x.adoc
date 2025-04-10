@@ -126,11 +126,11 @@ $ php -r 'printf("%s\n", ini_get("include_path"));'
 +
 [source,console]
 ----
-   .:/usr/share/pear:/usr/share/php
+ .:/usr/share/pear:/usr/share/php
 ----
 
-. SDK 4.x does not expect any system libraries or headers to be installed to work,
-and uses a statically compiled core implementation (just like all of the other wrapper SDKs -- Node.js, Python, ans Ruby).
+. SDK 4.x does not expect any system libraries or headers to be installed to work, and uses a statically compiled core implementation
+(just like all of the other wrapper SDKs -- those which use the {cpp} SDK at their core -- Node.js, Python, and Ruby).
 Additionally, it statically links the TLS library to the extension, which simplifies deployment on the Windows platform.
 
 
@@ -219,7 +219,7 @@ var_dump($res->content());
 SDK 4.x moved exceptions into the `\Couchbase\Exception` namespace,
 so if the application used to catch and handle exceptions from the SDK, those places should update to use the new names.
 
-[cols="8,9"]
+[cols="4,5"]
 |===
 | SDK 3.x exception | SDK 4.x exception
 
@@ -240,7 +240,7 @@ a|
 | `\Couchbase\CollectionMissingException`
 | `\Couchbase\Exception\CollectionNotFoundException`
 
-| `\Couchbase\DurabilityException
+| `\Couchbase\DurabilityException`
 a| One of the more specific exceptions:
 
 * `\Couchbase\Exception\DurabilityAmbiguousException`
