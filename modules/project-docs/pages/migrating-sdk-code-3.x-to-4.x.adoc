@@ -71,7 +71,7 @@ block-beta
 
 Some key differences:
 
-. SDKv4 uses Composer to deliver high-level API classes, while SDKv3 defines everything in the extension.
+. SDK 4.x uses Composer to deliver high-level API classes, while SDK 3.x defines everything in the extension.
 While it adds an extra step for the developer, it simplifies maintenance, reduces potential memory issues, allows documentation to be kept consistent, and improves IDE integration.
 +
 To add classes to the application using Composer:
@@ -129,17 +129,17 @@ $ php -r 'printf("%s\n", ini_get("include_path"));'
    .:/usr/share/pear:/usr/share/php
 ----
 
-. SDKv4 does not expect any system libraries or headers to be installed to work,
+. SDK 4.x does not expect any system libraries or headers to be installed to work,
 and uses a statically compiled core implementation (just like all of the other wrapper SDKs -- Node.js, Python, ans Ruby).
 Additionally, it statically links the TLS library to the extension, which simplifies deployment on the Windows platform.
 
 
 == Transcoder API
 
-SDKv3 used a non-standard way of specifying an encoder and decoder for the document objects for the KV API.
+SDK 3.x used a non-standard way of specifying an encoder and decoder for the document objects for the KV API.
 This API was inherited from SDKv2, where the developer needed to specify a decoder or encoder function in the options.
 
-SDKv4 fixes this and instead defines the `\Couchbase\Transcoder` interface, which encapsulates all of the logic.
+SDK 4.x fixes this and instead defines the `\Couchbase\Transcoder` interface, which encapsulates all of the logic.
 It provides four implementations of it, using `\Couchbase\JsonTranscoder` by default.
 
 === Overriding the Transcoder
@@ -147,7 +147,7 @@ It provides four implementations of it, using `\Couchbase\JsonTranscoder` by def
 To read/write documents without any conversion, just as a binary stream,we need to override the transcoder --
 otherwise our byte strings will be serialized as JSON strings.
 
-Here is how it is done with SDKv3:
+Here is how it is done with SDK 3.x:
 
 [source,php]
 ----
@@ -167,19 +167,19 @@ $passThruEncoder = function($value) {
 };
 
 
-// Mutation operations in SDKv3 explicitly ask for encoder callable
+// Mutation operations in SDK 3.x explicitly ask for encoder callable
 $options = new \Couchbase\UpsertOptions();
 $options->encoder($passThruEncoder);
 $collection->upsert("foo", "BINARY DATA: \xDE\xAD\xBE\xEF", $options);
 
-// Retrieval operation in SDKv3 only allow decoder callable
+// Retrieval operation in SDK 3.x only allow decoder callable
 $options = new \Couchbase\GetOptions();
 $options->decoder($passThruDecoder);
 $res = $collection->get("foo", $options);
 var_dump($res->content());
 ----
 
-With SDKv4 we ship `\Couchbase\RawBinaryTranscoder`, which could be reimplemented as the following:
+With SDK 4.x we ship `\Couchbase\RawBinaryTranscoder`, which could be reimplemented as the following:
 
 [source,php]
 ----
@@ -216,12 +216,12 @@ var_dump($res->content());
 
 == Error Handling
 
-SDKv4 moved exceptions into the `\Couchbase\Exception` namespace,
+SDK 4.x moved exceptions into the `\Couchbase\Exception` namespace,
 so if the application used to catch and handle exceptions from the SDK, those places should update to use the new names.
 
 [cols="8,9"]
 |===
-| SDKv3 exception | SDKv4 exception
+| SDK 3.x exception | SDK 4.x exception
 
 | `\Couchbase\AuthenticationException`
 | `\Couchbase\Exception\AuthenticationFailureException`
@@ -385,7 +385,7 @@ a| All generic exceptions mapped to `\Couchbase\Exception\CouchbaseException` or
 
 == String-backed Enumerations
 
-In SDKv4 various enumerations and constants changed their types from `int` to `string` to reduce potential issues.
+In SDK 4.x various enumerations and constants changed their types from `int` to `string` to reduce potential issues.
 In general nothing has to be changed here, but in some cases names of the types
 slightly changed to be more consistent with other SDKs.
 
@@ -435,8 +435,8 @@ slightly changed to be more consistent with other SDKs.
 
 [cols="8,9"]
 |===
-| *SDKv3*
-| *SDKv4*
+| *SDK 3.x*
+| *SDK 4.x*
 
 | `\Couchbase\QueryProfile::OFF (1)`
 | `\Couchbase\QueryProfile::OFF ("off")`
@@ -453,8 +453,8 @@ slightly changed to be more consistent with other SDKs.
 
 [cols="8,9"]
 |===
-| *SDKv3*
-| *SDKv4*
+| *SDK 3.x*
+| *SDK 4.x*
 
 | `""`
 | `\Couchbase\AnalyticsScanConsistency::NOT_BOUNDED ("notBounded")`
@@ -466,7 +466,7 @@ slightly changed to be more consistent with other SDKs.
 
 == Changing Timeout Values
 
-SDKv3 did not allow the setting of timeouts through `\Couchbase\ClusterOptions`,
+SDK 3.x did not allow the setting of timeouts through `\Couchbase\ClusterOptions`,
 and the application had to rely on the connection string (handled by `libcouchbase` eventually),
 or use setter methods on the `\Couchbase\Bucket` instance.
 
@@ -525,7 +525,7 @@ a| One of the service-related should be used:
 
 [cols="8,9"]
 |===
-| *SDKv3* | *SDKv4*
+| *SDK 3.x* | *SDK 4.x*
 
 a| `couchbase.log_level`:
 
@@ -572,7 +572,7 @@ so that next request will not need to wait for the instance to bootstrap if it u
 
 a| `couchbase.persistent_timeout`
 
-SDKv4 is based on the {cpp} SDK.
+SDK 4.x is based on the {cpp} SDK.
 It has similar behavior when it comes to persistent instances.
 But instead of running cleanup at the end of each request,
 it does a cleanup only when the library needs to create a new connection and the number of existing connection have reached `couchbase.max_persistent`.
@@ -581,7 +581,7 @@ By default both `couchbase.persistent_timeout` and `couchbase.max_persistent`
 are set to `-1`,
 which means that the instances will be destroyed naturally when the PHP process exits.
 
-This behavior was not possible in SDKv3 because `libcouchbase` does not have any background threads that can perform service tasks (like tracking configuration changes).
+This behavior was not possible in SDK 3.x because `libcouchbase` does not have any background threads that can perform service tasks (like tracking configuration changes).
 
 So if `couchbase.max_persistent` is set to a positive (or zero) value,
 the extension will run the cleanup tasks if the number of existing instances exceeds the max,
