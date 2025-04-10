@@ -230,7 +230,7 @@ so if the application used to catch and handle exceptions from the SDK, those pl
 
 a| 
 * `\Couchbase\BucketMissingException`
-* \Couchbase\KeyspaceNotFoundException`
+* `\Couchbase\KeyspaceNotFoundException`
 | `\Couchbase\Exception\BucketNotFoundException`
 
 | `\Couchbase\CasMismatchException`
@@ -297,7 +297,7 @@ etc.
 | `\Couchbase\Exception\PreparedStatementFailureException`
 
 a| 
-*`\Couchbase\QuotaLimitedException
+* `\Couchbase\QuotaLimitedException`
 * `\Couchbase\RateLimitedException`
 | Rate and Quota limit exceptions redesigned, and the SDK will not use them.
 
@@ -400,6 +400,9 @@ slightly changed to be more consistent with other SDKs.
 | `\Couchbase\ViewScanConsistency::UPDATE_AFTER (2)`
 | `\Couchbase\ViewConsistency::UPDATE_AFTER ("updateAfter")`
 
+|===
+
+
 === View Ordering
 
 |===
@@ -413,13 +416,13 @@ slightly changed to be more consistent with other SDKs.
 === Query Consistency
 
 |===
-| `\Couchbase\QueryScanConsistency::NOT_BOUNDED (1)
-| `\Couchbase\QueryScanConsistency::NOT_BOUNDED ("notBounded")
+| `\Couchbase\QueryScanConsistency::NOT_BOUNDED (1)`
+| `\Couchbase\QueryScanConsistency::NOT_BOUNDED ("notBounded")`
 
 | `\Couchbase\QueryScanConsistency::REQUEST_PLUS (2)`
 | `\Couchbase\QueryScanConsistency::REQUEST_PLUS ("requestPlus")`
 
-| `\Couchbase\QueryScanConsistency::STATEMENT_PLUS (3)
+| `\Couchbase\QueryScanConsistency::STATEMENT_PLUS (3)`
 | *Removed*
 |===
 
@@ -497,7 +500,7 @@ The table below shows correspondence of timeout values between `Bucket` object s
 | `Bucket::configPollInterval()`
 | `ClusterOptions::configPollInterval()`
 
-| `Bucket::httpTimeout()
+| `Bucket::httpTimeout()`
 a| One of the service-related should be used:
 
 * `ClusterOptions::viewTimeout()`
@@ -518,20 +521,20 @@ a| One of the service-related should be used:
 
 a| `couchbase.log_level`:
 
-* FATAL
-* ERROR
-* WARN
-* INFO
-* DEBUG
-* TRACE
+* `FATAL`
+* `ERROR`
+* `WARN`
+* `INFO`
+* `DEBUG`
+* `TRACE`
 a| `couchbase.log_level`:
 
-* fatal
-* error
-* warning
-* info
-* debug
-* trace
+* `fatal`
+* `error`
+* `warning`
+* `info`
+* `debug`
+* `trace`
 
 | `couchbase.encoder.format`
 | *Removed*
