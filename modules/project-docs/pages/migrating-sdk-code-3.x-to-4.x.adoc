@@ -219,6 +219,7 @@ var_dump($res->content());
 SDKv4 moved exceptions into the `\Couchbase\Exception` namespace,
 so if the application used to catch and handle exceptions from the SDK, those places should update to use the new names.
 
+[cols="8,9"]
 |===
 | SDKv3 exception | SDKv4 exception
 
@@ -390,6 +391,7 @@ slightly changed to be more consistent with other SDKs.
 
 === View Consistency
 
+[cols="8,9"]
 |===
 | `\Couchbase\ViewScanConsistency::NOT_BOUNDED (0)`
 | `\Couchbase\ViewConsistency::NOT_BOUNDED ("notBounded")`
@@ -405,6 +407,7 @@ slightly changed to be more consistent with other SDKs.
 
 === View Ordering
 
+[cols="8,9"]
 |===
 | `\Couchbase\ViewOrdering::ASCENDING (0)`
 | `\Couchbase\ViewOrdering::ASCENDING ("ascending")`
@@ -415,6 +418,7 @@ slightly changed to be more consistent with other SDKs.
 
 === Query Consistency
 
+[cols="8,9"]
 |===
 | `\Couchbase\QueryScanConsistency::NOT_BOUNDED (1)`
 | `\Couchbase\QueryScanConsistency::NOT_BOUNDED ("notBounded")`
@@ -429,6 +433,7 @@ slightly changed to be more consistent with other SDKs.
 
 === Query Profile
 
+[cols="8,9"]
 |===
 | *SDKv3*
 | *SDKv4*
@@ -446,6 +451,7 @@ slightly changed to be more consistent with other SDKs.
 
 === Analytics Consistency
 
+[cols="8,9"]
 |===
 | *SDKv3*
 | *SDKv4*
@@ -468,6 +474,7 @@ The table below shows correspondence of timeout values between `Bucket` object s
 `ClusterOptions` in the new API.
 
 
+[cols="8,9"]
 |===
 
 | `Bucket::operationTimeout()`
@@ -516,6 +523,7 @@ a| One of the service-related should be used:
 
 == PHP INI Entries
 
+[cols="8,9"]
 |===
 | *SDKv3* | *SDKv4*
 
