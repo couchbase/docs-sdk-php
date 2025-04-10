@@ -1,0 +1,591 @@
+= 3.x to 4.x Migration Guide
+:description: Couchbase PHP SDK 4.0 brought several improvements to the API; some of them involved breaking changes.
+:page-toclevels: 2
+
+[abstract]
+{description}
+This guide helps upgrade applications, and highlights the most important
+differences between 3.x and 4.x.
+
+Note, full information on the latst API is always available at the https://docs.couchbase.com/sdk-api/couchbase-php-client[API Reference].
+
+
+== Components Overview
+
+The following diagram illustrates the architecture of PHP SDK v3:
+
+[mermaid]
+....
+block-beta
+  columns 3
+
+  developer("Developer")
+  block:user:2
+    columns 2
+    Applications
+    ODMs
+    Frameworks
+    Integrations
+  end
+
+  low_level("Extension\n(exposes high-level API)")
+  extension("PHP Binary Extension\n(PECL: couchbase)"):2
+
+  dependencies("System Dependencies")
+  block:deps:2
+    lcb("libcouchbase")
+    libevent("libevent")
+    boring_ssl("OpenSSL")
+  end
+....
+
+
+The following diagram illustrates the architecture of PHP SDK v4:
+
+[mermaid]
+....
+block-beta
+  columns 3
+
+  developer("Developer")
+  block:user:2
+    columns 2
+    Applications
+    ODMs
+    Frameworks
+    Integrations
+  end
+
+  high_level("High-Level API")
+  library("PHP Library\n(Composer: couchbase/couchbase)"):2
+
+  low_level("Extension")
+  extension("PHP Binary Extension\n(PECL: couchbase)"):2
+
+  dependencies("Static Dependencies")
+  block:deps:2
+    cxx_core("C++ Core SDK")
+    boring_ssl("BoringSSL")
+  end
+....
+
+Some key differences:
+
+. SDKv4 uses Composer to deliver high-level API classes, while SDKv3 defines everything in the extension.
+While it adds an extra step for the developer, it simplifies maintenance, reduces potential memory issues, allows documentation to be kept consistent, and improves IDE integration.
++
+To add classes to the application using Composer:
++
+[source,console]
+----
+$ composer require couchbase/couchbase
+----
++
+The resulting `composer.json` needs only two lines to be added:
++
+[source,console]
+----
+$ diff --git i/composer.json w/composer.json
+----
++
+[source,console]
+----
+index b743a66..88e69da 100644
+--- i/composer.json
++++ w/composer.json
+@@ -24,6 +24,8 @@
+     "require": {
+         "php": "^7.4 || ^8.0",
+         "ext-json": "*",
++        "ext-couchbase": "^4.2",
++        "couchbase/couchbase": "^4.2",
+         "monolog/monolog": "^2.3",
+         "php-di/php-di": "^6.3",
+         "slim/psr7": "^1.5",
+----
++
+In case Composer cannot be used, we also supply the autoloader script, `Couchbase\autoload.php`,
+that sets up a hook to resolve and automatically require SDK classes.
+To use this autoloader, the headers must be installed somewhere in the PHP include path,
+which could be found in the `phpinfo()` output -- or by using one of the following commands:
++
+[source,console]
+----
+$ pecl config-get php_dir
+----
++
+[source,console]
+----
+   /usr/share/pear
+----
++
+[source,console]
+----
+$ php -r 'printf("%s\n", ini_get("include_path"));'
+----
++
+[source,console]
+----
+   .:/usr/share/pear:/usr/share/php
+----
+
+. SDKv4 does not expect any system libraries or headers to be installed to work,
+and uses a statically compiled core implementation (just like all of the other wrapper SDKs -- Node.js, Python, ans Ruby).
+Additionally, it statically links the TLS library to the extension, which simplifies deployment on the Windows platform.
+
+
+== Transcoder API
+
+SDKv3 used a non-standard way of specifying an encoder and decoder for the document objects for the KV API.
+This API was inherited from SDKv2, where the developer needed to specify a decoder or encoder function in the options.
+
+SDKv4 fixes this and instead defines the `\Couchbase\Transcoder` interface, which encapsulates all of the logic.
+It provides four implementations of it, using `\Couchbase\JsonTranscoder` by default.
+
+=== Overriding the Transcoder
+
+To read/write documents without any conversion, just as a binary stream,we need to override the transcoder --
+otherwise our byte strings will be serialized as JSON strings.
+
+Here is how it is done with SDKv3:
+
+[source,php]
+----
+$options = new \Couchbase\ClusterOptions();
+$options->credentials("Administrator", "password");
+$cluster = new \Couchbase\Cluster("couchbase://localhost", $options);
+$collection = $cluster->bucket("default")->defaultCollection();
+
+$passThruDecoder = function($bytes, $flags, $datatype) {
+    // do not check anything just return bytes as passed by core
+    return $bytes;
+};
+
+$passThruEncoder = function($value) {
+    // do not do conversion, and return zeroes for datatype and flags
+    return [$value, 0x00, 0x00];
+};
+
+
+// Mutation operations in SDKv3 explicitly ask for encoder callable
+$options = new \Couchbase\UpsertOptions();
+$options->encoder($passThruEncoder);
+$collection->upsert("foo", "BINARY DATA: \xDE\xAD\xBE\xEF", $options);
+
+// Retrieval operation in SDKv3 only allow decoder callable
+$options = new \Couchbase\GetOptions();
+$options->decoder($passThruDecoder);
+$res = $collection->get("foo", $options);
+var_dump($res->content());
+----
+
+With SDKv4 we ship `\Couchbase\RawBinaryTranscoder`, which could be reimplemented as the following:
+
+[source,php]
+----
+class PassThruTranscoder implements \Couchbase\Transcoder
+{
+    public function encode($value): array
+    {
+        return [
+            $value,
+            (new \Couchbase\TranscoderFlags(\Couchbase\TranscoderFlags::DATA_FORMAT_BINARY))->encode(),
+        ];
+    }
+
+    public function decode(string $bytes, int $flags)
+    {
+        return $bytes;
+    }
+}
+
+// RawBinaryTranscoder like any other implementation has static method getInstance() returning
+// singleton object.
+$passThruTranscoder = new PassThruTranscoder();
+
+$options = new \Couchbase\UpsertOptions();
+$options->transcoder($passThruTranscoder);
+$collection->upsert("foo", "BINARY DATA: \xDE\xAD\xBE\xEF", $options);
+
+$options = new \Couchbase\GetOptions();
+$options->transcoder($passThruTranscoder);
+$res = $collection->get("foo", $options);
+var_dump($res->content());
+----
+
+
+== Error Handling
+
+SDKv4 moved exceptions into the `\Couchbase\Exception` namespace,
+so if the application used to catch and handle exceptions from the SDK, those places should update to use the new names.
+
+|===
+| SDKv3 exception | SDKv4 exception
+
+| `\Couchbase\AuthenticationException`
+| `\Couchbase\Exception\AuthenticationFailureException`
+
+| `\Couchbase\BadInputException`
+| `\Couchbase\Exception\InvalidArgumentException`
+
+a| 
+* `\Couchbase\BucketMissingException`
+* \Couchbase\KeyspaceNotFoundException`
+| `\Couchbase\Exception\BucketNotFoundException`
+
+| `\Couchbase\CasMismatchException`
+| `\Couchbase\Exception\CasMismatchException`
+
+| `\Couchbase\CollectionMissingException`
+| `\Couchbase\Exception\CollectionNotFoundException`
+
+| `\Couchbase\DurabilityException
+a| One of the more specific exceptions:
+
+* `\Couchbase\Exception\DurabilityAmbiguousException`
+* `\Couchbase\Exception\DurabilityImpossibleException`
+* `\Couchbase\Exception\DurabilityLevelNotAvailableException`
+* `\Couchbase\Exception\DurableWriteInProgressException`
+* `\Couchbase\Exception\DurableWriteReCommitInProgressException`
+
+| `\Couchbase\DmlFailureException`
+a| The SDK will detect the underlying error that caused the query to fail and throw the specific exception:
+
+* `\Couchbase\Exception\CasMismatchException`
+* `\Couchbase\Exception\DocumentExistsException`
+* `\Couchbase\Exception\DocumentLockedException`
+
+etc.
+
+| `\Couchbase\DocumentNotFoundException`
+| `\Couchbase\Exception\DocumentNotFoundException`
+
+| `\Couchbase\IndexFailureException`
+| `\Couchbase\Exception\IndexFailureException`
+
+| `\Couchbase\IndexNotFoundException`
+| `\Couchbase\Exception\IndexNotFoundException`
+
+| `\Couchbase\InvalidRangeException`
+| `\Couchbase\Exception\DeltaInvalidException`
+
+| `\Couchbase\KeyDeletedException`
+| *Removed*
+
+| `\Couchbase\KeyExistsException`
+| `\Couchbase\Exception\DocumentExistsException`
+
+| `\Couchbase\KeyLockedException`
+| `\Couchbase\Exception\DocumentLockedException`
+
+| `\Couchbase\ParsingFailureException`
+| `\Couchbase\Exception\ParsingFailureException`
+
+| `\Couchbase\PartialViewException`
+| *Removed*
+
+| `\Couchbase\PathExistsException`
+| `\Couchbase\Exception\PathExistsException`
+
+| `\Couchbase\PathNotFoundException`
+| `\Couchbase\Exception\PathNotFoundException`
+
+| `\Couchbase\PlanningFailureException`
+| `\Couchbase\Exception\PlanningFailureException`
+
+| `\Couchbase\PreparedStatementFailureException`
+| `\Couchbase\Exception\PreparedStatementFailureException`
+
+a| 
+*`\Couchbase\QuotaLimitedException
+* `\Couchbase\RateLimitedException`
+| Rate and Quota limit exceptions redesigned, and the SDK will not use them.
+
+| `\Couchbase\RequestCanceledException`
+| `\Couchbase\Exception\RequestCanceledException`
+
+| `\Couchbase\ScopeMissingException`
+| `\Couchbase\Exception\ScopeNotFoundException`
+
+| `\Couchbase\ServiceNotAvailableException`
+| `\Couchbase\Exception\ServiceNotAvailableException`
+
+| `\Couchbase\TempFailException`
+| `\Couchbase\Exception\TemporaryFailureException`
+
+| `\Couchbase\TimeoutException`
+| `\Couchbase\Exception\TimeoutException`
+
+| `\Couchbase\ValueTooBigException`
+| `\Couchbase\Exception\ValueTooLargeException`
+
+a| 
+* `\Couchbase\AnalyticsException`
+* `\Couchbase\BindingsException`
+* `\Couchbase\InvalidConfigurationException`
+* `\Couchbase\InvalidStateException`
+* `\Couchbase\KeyValueException`
+* `\Couchbase\NetworkException`
+* `\Couchbase\QueryErrorException`
+* `\Couchbase\QueryException`
+* `\Couchbase\QueryServiceException`
+* `\Couchbase\SearchException`
+* `\Couchbase\SubdocumentException`
+* `\Couchbase\ViewException`
+a| All generic exceptions mapped to `\Couchbase\Exception\CouchbaseException` or to one of the new, more specific exceptions:
+
+* `\Couchbase\Exception\CollectionExistsException`
+* `\Couchbase\Exception\CompilationFailureException`
+* `\Couchbase\Exception\ConsistencyMismatchException`
+* `\Couchbase\Exception\DatasetExistsException`
+* `\Couchbase\Exception\DatasetNotFoundException`
+* `\Couchbase\Exception\DataverseExistsException`
+* `\Couchbase\Exception\DataverseNotFoundException`
+* `\Couchbase\Exception\DecodingFailureException`
+* `\Couchbase\Exception\DesignDocumentNotFoundException`
+* `\Couchbase\Exception\DocumentIrretrievableException`
+* `\Couchbase\Exception\DocumentNotJsonException`
+* `\Couchbase\Exception\DocumentNotLockedException`
+* `\Couchbase\Exception\EncodingFailureException`
+* `\Couchbase\Exception\FeatureNotAvailableException`
+* `\Couchbase\Exception\GroupNotFoundException`
+* `\Couchbase\Exception\IndexExistsException`
+* `\Couchbase\Exception\IndexNotReadyException`
+* `\Couchbase\Exception\InternalServerFailureException`
+* `\Couchbase\Exception\JobQueueFullException`
+* `\Couchbase\Exception\LinkExistsException`
+* `\Couchbase\Exception\LinkNotFoundException`
+* `\Couchbase\Exception\NumberTooBigException`
+* `\Couchbase\Exception\PathInvalidException`
+* `\Couchbase\Exception\PathMismatchException`
+* `\Couchbase\Exception\PathTooBigException`
+* `\Couchbase\Exception\PathTooDeepException`
+* `\Couchbase\Exception\PermissionDeniedException`
+* `\Couchbase\Exception\ScopeExistsException`
+* `\Couchbase\Exception\TransactionCommitAmbiguousException`
+* `\Couchbase\Exception\TransactionException`
+* `\Couchbase\Exception\TransactionExpiredException`
+* `\Couchbase\Exception\TransactionFailedException`
+* `\Couchbase\Exception\TransactionOperationFailedException`
+* `\Couchbase\Exception\UnambiguousTimeoutException`
+* `\Couchbase\Exception\UnsupportedOperationException`
+* `\Couchbase\Exception\UserExistsException`
+* `\Couchbase\Exception\UserNotFoundException`
+* `\Couchbase\Exception\ValueInvalidException`
+* `\Couchbase\Exception\ValueTooDeepException`
+* `\Couchbase\Exception\ViewNotFoundException`
+* `\Couchbase\Exception\XattrCannotModifyVirtualAttributeException`
+* `\Couchbase\Exception\XattrInvalidKeyComboException`
+* `\Couchbase\Exception\XattrUnknownMacroException`
+* `\Couchbase\Exception\XattrUnknownVirtualAttributeException`
+|===
+
+
+
+== String-backed Enumerations
+
+In SDKv4 various enumerations and constants changed their types from `int` to `string` to reduce potential issues.
+In general nothing has to be changed here, but in some cases names of the types
+slightly changed to be more consistent with other SDKs.
+
+=== View Consistency
+
+|===
+| `\Couchbase\ViewScanConsistency::NOT_BOUNDED (0)`
+| `\Couchbase\ViewConsistency::NOT_BOUNDED ("notBounded")`
+
+| `\Couchbase\ViewScanConsistency::REQUEST_PLUS (1)`
+| `\Couchbase\ViewConsistency::REQUEST_PLUS ("requestPlus")`
+
+| `\Couchbase\ViewScanConsistency::UPDATE_AFTER (2)`
+| `\Couchbase\ViewConsistency::UPDATE_AFTER ("updateAfter")`
+
+=== View Ordering
+
+|===
+| `\Couchbase\ViewOrdering::ASCENDING (0)`
+| `\Couchbase\ViewOrdering::ASCENDING ("ascending")`
+
+| `\Couchbase\ViewOrdering::DESCENDING (1)`
+| `\Couchbase\ViewOrdering::DESCENDING ("descending")`
+|===
+
+=== Query Consistency
+
+|===
+| `\Couchbase\QueryScanConsistency::NOT_BOUNDED (1)
+| `\Couchbase\QueryScanConsistency::NOT_BOUNDED ("notBounded")
+
+| `\Couchbase\QueryScanConsistency::REQUEST_PLUS (2)`
+| `\Couchbase\QueryScanConsistency::REQUEST_PLUS ("requestPlus")`
+
+| `\Couchbase\QueryScanConsistency::STATEMENT_PLUS (3)
+| *Removed*
+|===
+
+
+=== Query Profile
+
+|===
+| *SDKv3*
+| *SDKv4*
+
+| `\Couchbase\QueryProfile::OFF (1)`
+| `\Couchbase\QueryProfile::OFF ("off")`
+
+| `\Couchbase\QueryProfile::PHASES (2)`
+| `\Couchbase\QueryProfile::PHASES ("phases")`
+
+| `\Couchbase\QueryProfile::TIMINGS (3)`
+| `\Couchbase\QueryProfile::TIMINGS ("timings")`
+|===
+
+
+=== Analytics Consistency
+
+|===
+| *SDKv3*
+| *SDKv4*
+
+| `""`
+| `\Couchbase\AnalyticsScanConsistency::NOT_BOUNDED ("notBounded")`
+
+| `"request_plus"`
+| `\Couchbase\AnalyticsScanConsistency::REQUEST_PLUS ("requestPlus")`
+|===
+
+
+== Changing Timeout Values
+
+SDKv3 did not allow the setting of timeouts through `\Couchbase\ClusterOptions`,
+and the application had to rely on the connection string (handled by `libcouchbase` eventually),
+or use setter methods on the `\Couchbase\Bucket` instance.
+
+The table below shows correspondence of timeout values between `Bucket` object setters and
+`ClusterOptions` in the new API.
+
+
+|===
+
+| `Bucket::operationTimeout()`
+| `ClusterOptions::keyValueTimeout()`
+
+| `Bucket::viewTimeout()`
+| `ClusterOptions::viewTimeout()`
+
+| `Bucket::n1qlTimeout()`
+| `ClusterOptions::queryTimeout()`
+
+| `Bucket::durabilityInterval()`
+| *Removed*
+
+| `Bucket::durabilityTimeout()`
+| `ClusterOptions::keyValueDurableTimeout()`
+
+| `Bucket::configTimeout()`
+| `ClusterOptions::bootstrapTimeout()`
+
+| `Bucket::configDelay()`
+| *Removed*
+
+| `Bucket::configNodeTimeout()`
+| *Removed*
+
+| `Bucket::htconfigIdleTimeout()`
+| *Removed*
+
+| `Bucket::configPollInterval()`
+| `ClusterOptions::configPollInterval()`
+
+| `Bucket::httpTimeout()
+a| One of the service-related should be used:
+
+* `ClusterOptions::viewTimeout()`
+* `ClusterOptions::queryTimeout()`
+* `ClusterOptions::searchTimeout()`
+* `ClusterOptions::analyticsTimeout()`
+* `ClusterOptions::managementTimeout()`
+
+|===
+
+
+
+
+== PHP INI Entries
+
+|===
+| *SDKv3* | *SDKv4*
+
+a| `couchbase.log_level`:
+
+* FATAL
+* ERROR
+* WARN
+* INFO
+* DEBUG
+* TRACE
+a| `couchbase.log_level`:
+
+* fatal
+* error
+* warning
+* info
+* debug
+* trace
+
+| `couchbase.encoder.format`
+| *Removed*
+
+| `couchbase.encoder.compression`
+| *Removed*
+
+| `couchbase.encoder.compression_threshold`
+| *Removed*
+
+| `couchbase.encoder.compression_factor`
+| *Removed*
+
+| `couchbase.decoder.json_arrays`
+| *Removed*
+
+a| `couchbase.pool.max_idle_time_sec`
+
+Sets the maximum time that a persistent instance can be idle before being cleaned up.
+The efault is 60 seconds.
+The SDK associates a reference counter with the instance uniquely identified by the connection string and credentials.
+ When the reference ounter reaches zero, the SDK records the current time into the idle timestamp of the instance.
+At the end of each request, the SDK runs a cleanup process that will sweep all idle instances at that point in time.
+
+Persistent instances are useful for cases when the PHP worker process is not destroyed after serving the request,
+so that next request will not need to wait for the instance to bootstrap if it uses the same connection string, bucket, and credentials.
+
+a| `couchbase.persistent_timeout`
+
+SDKv4 is based on the {cpp} SDK.
+It has similar behavior when it comes to persistent instances.
+But instead of running cleanup at the end of each request,
+it does a cleanup only when the library needs to create a new connection and the number of existing connection have reached `couchbase.max_persistent`.
+
+By default both `couchbase.persistent_timeout` and `couchbase.max_persistent`
+are set to `-1`,
+which means that the instances will be destroyed naturally when the PHP process exits.
+
+This behavior was not possible in SDKv3 because `libcouchbase` does not have any background threads that can perform service tasks (like tracking configuration changes).
+
+So if `couchbase.max_persistent` is set to a positive (or zero) value,
+the extension will run the cleanup tasks if the number of existing instances exceeds the max,
+and will destroy all instances that have expired.
+
+The expiration time for the instance is recorded when the instance is created or pulled from the cache,
+and is set to the current time plus `couchbase.persistent_timeout`.
+
+Note that by setting both `couchbase.persistent_timeout` and `couchbase.max_persistent` to zero,
+this will force the extension to destroy all existing connections and always create a new one.
+If using this configuration, the application must be very careful not to reuse destroyed connections,
+perhaps by using the equivalent of a global singleton instance of the `\Couchbase\Cluster` object.
+This issue was reported as https://jira.issues.couchbase.com/browse/PCBC-1018[PCBC-1018],
+and fixed in the 4.2.6 release.
+
+| `couchbase.allow_fallback_to_bucket_connection`
+| *Removed*
+|===
