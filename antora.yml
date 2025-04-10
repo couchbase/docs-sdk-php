@@ -6,14 +6,14 @@ nav:
 - modules/ROOT/nav.adoc
 asciidoc:
   attributes:
-    server_version: '7.6.2'
+    server_version: '7.6.6'
     sdk_current_version: '4.3.0'
     sdk_dot_minor: '4.3'
     sdk_dot_major: 4.x'
     version-server: '7.6'
-    version-common: '7.6'
+    version-common: '7.6.6'
     name_platform: 'PHP'
     name-sdk: 'PHP SDK'
-    sdk_api: '3.6'
+    sdk_api: '3.7'
     sdk-api-link: https://github.com/couchbase/couchbase-php-client
     sdk-gh-link: https://docs.couchbase.com/sdk-api/couchbase-php-client/namespaces/couchbase.html

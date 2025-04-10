@@ -54,7 +54,7 @@ nodeA.example.com,nodeB.example.com
 
 .Connection string with two parameters
 ----
-127.0.0.1?io.networkResolution=external&timeout.kvTimeout=10s
+127.0.0.1?network=external&key_value_timeout=10s
 ----
 
 // The full list of recognized parameters is documented in the client settings reference.
@@ -236,11 +236,14 @@ E.....@.@.............+....Z.'yZ..#........
 ====
 
 
-// DNS-SRV
-include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv]
 
-DNS SRV bootstrapping is available in the PHP SDK from version 3.0.
-In order to make the SDK actually use the SRV records, you need to enable DNS SRV on the environment and pass in the host name from your records (here `example.com`):
+// DNS-SRV
+// == Using DNS SRV records
+
+include::{version-common}@sdk:shared:partial$dnssrv-pars.adoc[tag=dnssrv-rev]
+
+DNS SRV bootstrapping is enabled by default in the {name-sdk}.
+In order to make the SDK use the SRV records, you need to pass in the hostname from your records (here `example.com`):
 
 [source,php]
 ----
@@ -255,6 +258,10 @@ If the DNS SRV records could not be loaded properly you'll get the message logge
 
 Also, if you pass in more than one node, DNS SRV bootstrap will not be initiated:
 
+----
+INFO: DNS SRV enabled, but less or more than one seed node given.
+Proceeding with normal bootstrap.
+----
 
 // WaitUntilReady section to be added once it is in the SDK - PCBC-695 
 
