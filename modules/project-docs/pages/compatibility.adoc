@@ -179,9 +179,7 @@ include::{version-common}@sdk:shared:partial$capella.adoc[tag=cloud]
 
 === API Version
 
-// include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
-
-include::7.6@sdk:shared:partial$api-version.adoc[tag=api-version]
+include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
 
 
 

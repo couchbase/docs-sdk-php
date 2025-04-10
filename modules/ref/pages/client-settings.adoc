@@ -35,5 +35,5 @@ This profile changes the default timeouts.
 
 
 // table - WAN profile timeouts
-// include::{version-common}@sdk:shared:partial$client-settings-wan-profile.adoc[tag=profile-values]
-include::7.6@sdk:shared:partial$client-settings-wan-profile.adoc[tag=profile-values]
+include::{version-common}@sdk:shared:partial$client-settings-wan-profile.adoc[tag=profile-values]
+
