@@ -114,7 +114,7 @@ Where the number of operations or other circumstances make bandwidth a significa
 ====
 
 
-=== Preferred Server Group Replica Reads
+== Preferred Server Group Replica Reads
 
 IMPORTANT: Preferred Server Group Replica Reads are only accessible with the {name-sdk} working with Couchbase Server 7.6.2 or newer (Capella or self-managed), from SDK version 4.2.6.
 
