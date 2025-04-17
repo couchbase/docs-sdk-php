@@ -29,16 +29,20 @@ PHP versions that have reached their https://www.php.net/eol.php[End-of-Life dat
 | PHP Version | Security Support EOL | Couchbase SDK Versions Supported
 
 | 8.1
-| until 2024-11-25
+| until 2025-12-31
 | from 3.2.2
 
 | 8.2
-| until 2025-12-08
+| until 2026-12-31
 | from 4.1.0
 
 | 8.3
-| until 2026-11-23
+| until 2027-12-31
 | from 4.1.6
+
+| 8.4
+| until 2028-12-31
+| from 4.2.5
 
 |===
 
@@ -56,7 +60,7 @@ However, the {name-sdk} is tested and supported specifically on the following OS
 * Amazon Linux 2 & AL2023.
 * Red Hat Enterprise Linux 8 & 9;
 * Oracle Linux 8 & 9.
-* Ubuntu (LTS) 20.04 (_Focal_) & 22.04 (_Jammy_).
+* Ubuntu (LTS) 22.04 (_Jammy_) & 24.04 (_Noble_).
 * Debian 10 (_Buster_), 11 (_Bullseye_), and Debian 12 (_Bookworm_).
 * SUSE Enterprise Linux 12 & 15.
 * Alpine Linux 3.18.
@@ -71,13 +75,13 @@ However, the {name-sdk} is tested and supported specifically on the following OS
 === Mac OS X
 
 The current and previous two releases of OS X.
-At time of writing (March 2024): 14 (Sonoma), 13 (Ventura), and 12 (Monterey).
-M1 ARM  architecture is fully supported in the PHP SDK.
+At time of writing (March 2025): 15 (Sequoia), 14 (Sonoma), and 13 (Ventura).
+M1 ARM  architecture is fully supported in the {name-sdk}.
 
 [discrete]
 === ARM Processor Support
 
-AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu 20.04+.
+AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu.
 
 [discrete]
 === x86-32 Processor Not Supported
@@ -113,13 +117,15 @@ It is best to upgrade either the SDK or the Couchbase version you are using.
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 3.2, 4.0, 4.1 | 4.2 - 4.3
+| | 4.1 | 4.2 | 4.3
 
 | *Server 7.0 - 7.2*
 | *✔*
 | *✔*
+| *✔*
 
 | *Server 7.6*
+| *✔*
 | *✔*
 | *✔*
 |===
