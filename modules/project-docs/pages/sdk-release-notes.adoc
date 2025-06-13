@@ -36,18 +36,19 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.3.0[API documentation]
 * Updated core to 1.1.0.
 Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-1-0-01-june-2025[{cpp} SDK 1.1.0].
 
-* Updated core to 1.0.6 (https://github.com/couchbase/couchbase-php-client/pull/206[#206]).
+// * Updated core to 1.0.6 (https://github.com/couchbase/couchbase-php-client/pull/206[#206]).
+
 * https://jira.issues.couchbase.com/browse/PCBC-1023[PCBC-1023]:
-Add numVBuckets to BucketSettings. (https://github.com/couchbase/couchbase-php-client/pull/210[#210])
+Added `numVBuckets` to BucketSettings (https://github.com/couchbase/couchbase-php-client/pull/210[#210]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1024[PCBC-1024]:
-Improve SDK error messages for account lock/unlock feature. (https://github.com/couchbase/couchbase-php-client/pull/211[#211])
+Improved SDK error messages for account lock/unlock feature (https://github.com/couchbase/couchbase-php-client/pull/211[#211]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1025[PCBC-1025]:
-Add CAS to `append()`/`prepend()`. (https://github.com/couchbase/couchbase-php-client/pull/208[#208])
+Added CAS to `append()`/`prepend()` (https://github.com/couchbase/couchbase-php-client/pull/208[#208]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1020[PCBC-1020]:
-Implement `getMulti()` and `getMultiReplicasFromPreferredServerGroup()` for transactions. (https://github.com/couchbase/couchbase-php-client/pull/213[#213])
+Implemented `getMulti()` and `getMultiReplicasFromPreferredServerGroup()` for transactions (https://github.com/couchbase/couchbase-php-client/pull/213[#213]).
 
 ==== Download Links
 
