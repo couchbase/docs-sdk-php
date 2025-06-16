@@ -31,12 +31,13 @@ PHP SDK 4.3 is written to xref:compatibility.adoc#api-version[version 3.6 of the
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.3.0[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.2.7...4.3.0++[Full Changelog]
 
-==== Fixes
+
+==== Enhancements
 
 * Updated core to 1.1.0.
 Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-1-0-01-june-2025[{cpp} SDK 1.1.0].
 
-// * Updated core to 1.0.6 (https://github.com/couchbase/couchbase-php-client/pull/206[#206]).
+==== Fixes
 
 * https://jira.issues.couchbase.com/browse/PCBC-1023[PCBC-1023]:
 Added `numVBuckets` to BucketSettings (https://github.com/couchbase/couchbase-php-client/pull/210[#210]).
