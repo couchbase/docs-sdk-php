@@ -61,7 +61,7 @@ However, the {name-sdk} is tested and supported specifically on the following OS
 * Red Hat Enterprise Linux 8 & 9;
 * Oracle Linux 8 & 9.
 * Ubuntu (LTS) 22.04 (_Jammy_) & 24.04 (_Noble_).
-* Debian 10 (_Buster_), 11 (_Bullseye_), and Debian 12 (_Bookworm_).
+* Debian 11 (_Bullseye_) & Debian 12 (_Bookworm_).
 * SUSE Enterprise Linux 12 & 15.
 * Alpine Linux 3.18.
 
