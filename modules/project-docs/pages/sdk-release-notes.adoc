@@ -62,12 +62,12 @@ When using Microsoft Windows, instead of using PECL, download the pre-built bina
 You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
 Binaries labeled with *(TLS)* are linked against **OpenSSL 1.1.1d (MSVC15)** to support TLS connections to Couchbase.
-Simply download the correct version according to your installation details 
+Simply download the correct version according to your installation details
 and then copy the corresponding `libcouchbase.dll` and `php_couchbase.dll` binaries into the `extension_dir` as configured in your `php.ini` configuration.
 
 Depending on your installation details, you may also have to add the `extension_dir` to your `PATH` variable.
 
-The packages do not include OpenSSL binaries, 
+The packages do not include OpenSSL binaries,
 therefore they have to be installed in the `PATH` (see https://wiki.openssl.org/index.php/Binaries) for your Windows PHP distribution.
 
 [source,console]
@@ -86,12 +86,16 @@ $ copy /b php_couchbase.dll C:\php\ext
 |PHP 8.0 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64.zip[php_couchbase-3.2.2-8.0-zts-x64.zip]
 |PHP 8.1 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64.zip[php_couchbase-3.2.2-8.1-nts-x64.zip]
 |PHP 8.1 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64.zip[php_couchbase-3.2.2-8.1-zts-x64.zip]
+|PHP 8.2 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-nts-x64.zip[php_couchbase-3.2.2-8.2-nts-x64.zip]
+|PHP 8.2 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-zts-x64.zip[php_couchbase-3.2.2-8.2-zts-x64.zip]
 |PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64-openssl.zip[php_couchbase-3.2.2-7.4-nts-x64-openssl.zip]
 |PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64-openssl.zip[php_couchbase-3.2.2-7.4-zts-x64-openssl.zip]
 |PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64-openssl.zip[php_couchbase-3.2.2-8.0-nts-x64-openssl.zip]
 |PHP 8.0 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-zts-x64-openssl.zip[php_couchbase-3.2.2-8.0-zts-x64-openssl.zip]
 |PHP 8.1 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-nts-x64-openssl.zip[php_couchbase-3.2.2-8.1-nts-x64-openssl.zip]
 |PHP 8.1 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64-openssl.zip[php_couchbase-3.2.2-8.1-zts-x64-openssl.zip]
+|PHP 8.2 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-nts-x64-openssl.zip[php_couchbase-3.2.2-8.2-nts-x64-openssl.zip]
+|PHP 8.2 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-zts-x64-openssl.zip[php_couchbase-3.2.2-8.2-zts-x64-openssl.zip]
 |===
 
 Then follow the post-installation steps.
