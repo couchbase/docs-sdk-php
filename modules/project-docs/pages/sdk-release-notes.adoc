@@ -102,6 +102,19 @@ $ copy /b php_couchbase.dll C:\php\ext
 |PHP 8.3 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-zts-x64-openssl.zip[php_couchbase-3.2.2-8.3-zts-x64-openssl.zip]
 |===
 
+All packages in the previous table come with libcouchbase 3.2.4. The following
+table provides packages that produced from exactly the same source code, but
+bundle libcouchbase 3.3.18, which linked against OpenSSL 3 (expects
+`libssl-3-x64.dll` be availing in the system)
+
+|===
+|Platform|
+|PHP 8.3 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-nts-x64-libcouchbase-3.3.18.zip[php_couchbase-3.2.2-8.3-nts-x64-libcouchbase-3.3.18.zip]
+|PHP 8.3 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-zts-x64-libcouchbase-3.3.18.zip[php_couchbase-3.2.2-8.3-zts-x64-libcouchbase-3.3.18.zip]
+|PHP 8.3 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-nts-x64-libcouchbase-3.3.18-openssl3.zip[php_couchbase-3.2.2-8.3-nts-x64-libcouchbase-3.3.18-openssl3.zip]
+|PHP 8.3 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-zts-x64-libcouchbase-3.3.18-openssl3.zip[php_couchbase-3.2.2-8.3-zts-x64-libcouchbase-3.3.18-openssl3.zip]
+|===
+
 Then follow the post-installation steps.
 
 [#post-installation]
