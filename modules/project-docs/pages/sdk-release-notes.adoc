@@ -88,6 +88,8 @@ $ copy /b php_couchbase.dll C:\php\ext
 |PHP 8.1 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64.zip[php_couchbase-3.2.2-8.1-zts-x64.zip]
 |PHP 8.2 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-nts-x64.zip[php_couchbase-3.2.2-8.2-nts-x64.zip]
 |PHP 8.2 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-zts-x64.zip[php_couchbase-3.2.2-8.2-zts-x64.zip]
+|PHP 8.3 VC16 NTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-nts-x64.zip[php_couchbase-3.2.2-8.3-nts-x64.zip]
+|PHP 8.3 VC16 ZTS|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-zts-x64.zip[php_couchbase-3.2.2-8.3-zts-x64.zip]
 |PHP 7.4 VC15 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-nts-x64-openssl.zip[php_couchbase-3.2.2-7.4-nts-x64-openssl.zip]
 |PHP 7.4 VC15 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-7.4-zts-x64-openssl.zip[php_couchbase-3.2.2-7.4-zts-x64-openssl.zip]
 |PHP 8.0 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.0-nts-x64-openssl.zip[php_couchbase-3.2.2-8.0-nts-x64-openssl.zip]
@@ -96,6 +98,8 @@ $ copy /b php_couchbase.dll C:\php\ext
 |PHP 8.1 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.1-zts-x64-openssl.zip[php_couchbase-3.2.2-8.1-zts-x64-openssl.zip]
 |PHP 8.2 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-nts-x64-openssl.zip[php_couchbase-3.2.2-8.2-nts-x64-openssl.zip]
 |PHP 8.2 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.2-zts-x64-openssl.zip[php_couchbase-3.2.2-8.2-zts-x64-openssl.zip]
+|PHP 8.3 VC16 NTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-nts-x64-openssl.zip[php_couchbase-3.2.2-8.3-nts-x64-openssl.zip]
+|PHP 8.3 VC16 ZTS (TLS)|https://packages.couchbase.com/clients/php/php_couchbase-3.2.2-8.3-zts-x64-openssl.zip[php_couchbase-3.2.2-8.3-zts-x64-openssl.zip]
 |===
 
 Then follow the post-installation steps.
