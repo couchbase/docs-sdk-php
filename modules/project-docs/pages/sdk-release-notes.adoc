@@ -27,7 +27,7 @@ PHP SDK 4.4 is written to xref:compatibility.adoc#api-version[version 3.8 of the
 
 
 
-=== Version 4.4.0 (?? August 2024)
+=== Version 4.4.0 (29 September 2024)
 
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.4.0[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.3.0...4.4.0++[Full Changelog]
@@ -35,11 +35,105 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.4.0[API documentation]
 
 ==== Enhancements
 
+* https://jira.issues.couchbase.com/browse/PCBC-1026[PCBC-1026]:
+Implemented FTS vector search pre-filters.
+* https://jira.issues.couchbase.com/browse/PCBC-1030[PCBC-1030]:
+Fixed how SDK handles KV Expiry (https://github.com/couchbase/couchbase-php-client/pull/226[#226]).
 
+==== Build and Test Infrastructure Improvements
 
+* https://jira.issues.couchbase.com/browse/PCBC-1031[PCBC-1031]:
+Fixed build with debug version of PHP 8.5.
+* Github Actions: install VS2019 tools for building on windows 2022 (https://github.com/couchbase/couchbase-php-client/pull/225[#225]).
 
+==== Download Links
 
+[cols="2,3,2,1,11"]
+|===
+|Checksum |               |         |     |https://packages.couchbase.com/clients/php/couchbase-4.4.0.sha256.txt[couchbase-4.4.0.sha256.txt]
+|Source   |               |         |     |https://packages.couchbase.com/clients/php/couchbase-4.4.0.tgz[couchbase-4.4.0.tgz]
+|Linux    | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-linux-x86_64.tgz[couchbase-4.4.0-php8.1-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-linux-x86_64.tgz[couchbase-4.4.0-php8.1-zts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-linux-x86_64.tgz[couchbase-4.4.0-php8.2-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-linux-x86_64.tgz[couchbase-4.4.0-php8.2-zts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-linux-x86_64.tgz[couchbase-4.4.0-php8.3-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-linux-x86_64.tgz[couchbase-4.4.0-php8.3-zts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-linux-x86_64.tgz[couchbase-4.4.0-php8.4-nts-linux-x86_64.tgz]
+|Linux    | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-linux-x86_64.tgz[couchbase-4.4.0-php8.4-zts-linux-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-linux-musl-x86_64.tgz[couchbase-4.4.0-php8.1-nts-linux-musl-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-linux-musl-x86_64.tgz[couchbase-4.4.0-php8.2-nts-linux-musl-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-linux-musl-x86_64.tgz[couchbase-4.4.0-php8.3-nts-linux-musl-x86_64.tgz]
+|Linux    | x86_64 (musl) | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-linux-musl-x86_64.tgz[couchbase-4.4.0-php8.4-nts-linux-musl-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-macos-x86_64.tgz[couchbase-4.4.0-php8.1-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-macos-x86_64.tgz[couchbase-4.4.0-php8.1-zts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-macos-x86_64.tgz[couchbase-4.4.0-php8.2-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-macos-x86_64.tgz[couchbase-4.4.0-php8.2-zts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-macos-x86_64.tgz[couchbase-4.4.0-php8.3-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-macos-x86_64.tgz[couchbase-4.4.0-php8.3-zts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-macos-x86_64.tgz[couchbase-4.4.0-php8.4-nts-macos-x86_64.tgz]
+|MacOS    | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-macos-x86_64.tgz[couchbase-4.4.0-php8.4-zts-macos-x86_64.tgz]
+|MacOS    | arm64         | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-macos-arm64.tgz[couchbase-4.4.0-php8.1-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-macos-arm64.tgz[couchbase-4.4.0-php8.1-zts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-macos-arm64.tgz[couchbase-4.4.0-php8.2-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-macos-arm64.tgz[couchbase-4.4.0-php8.2-zts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-macos-arm64.tgz[couchbase-4.4.0-php8.3-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-macos-arm64.tgz[couchbase-4.4.0-php8.3-zts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-macos-arm64.tgz[couchbase-4.4.0-php8.4-nts-macos-arm64.tgz]
+|MacOS    | arm64         | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-macos-arm64.tgz[couchbase-4.4.0-php8.4-zts-macos-arm64.tgz]
+|Windows  | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-windows-x64.zip[couchbase-4.4.0-php8.1-nts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-windows-x64.zip[couchbase-4.4.0-php8.1-zts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-windows-x64.zip[couchbase-4.4.0-php8.2-nts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-windows-x64.zip[couchbase-4.4.0-php8.2-zts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-windows-x64.zip[couchbase-4.4.0-php8.3-nts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-windows-x64.zip[couchbase-4.4.0-php8.3-zts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-windows-x64.zip[couchbase-4.4.0-php8.4-nts-windows-x64.zip]
+|Windows  | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-windows-x64.zip[couchbase-4.4.0-php8.4-zts-windows-x64.zip]
+|===
 
+ABI-safe binaries that expose all internal APIs as `\Couchbase\Extension_4_4_0`,
+which allows the loading of different versions of the library at the same time.
+
+The extension file is named `couchbase_4_4_0.so` (`couchbase_4_4_0.dll`).
+
+[cols="2,3,2,1,11"]
+|===
+|Linux    | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.1-nts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.1-zts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.2-nts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.2-zts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.3-nts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.3-zts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.4-nts-linux-x86_64-abi.tgz]
+|Linux    | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-linux-x86_64-abi.tgz[couchbase-4.4.0-php8.4-zts-linux-x86_64-abi.tgz]
+|Linux    | x86_64 (musl) | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-linux-musl-x86_64-abi.tgz[couchbase-4.4.0-php8.1-nts-linux-musl-x86_64-abi.tgz]
+|Linux    | x86_64 (musl) | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-linux-musl-x86_64-abi.tgz[couchbase-4.4.0-php8.2-nts-linux-musl-x86_64-abi.tgz]
+|Linux    | x86_64 (musl) | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-linux-musl-x86_64-abi.tgz[couchbase-4.4.0-php8.3-nts-linux-musl-x86_64-abi.tgz]
+|Linux    | x86_64 (musl) | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-linux-musl-x86_64-abi.tgz[couchbase-4.4.0-php8.4-nts-linux-musl-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.1-nts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.1-zts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.2-nts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.2-zts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.3-nts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.3-zts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.4-nts-macos-x86_64-abi.tgz]
+|MacOS    | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-macos-x86_64-abi.tgz[couchbase-4.4.0-php8.4-zts-macos-x86_64-abi.tgz]
+|MacOS    | arm64         | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.1-nts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.1-zts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.2-nts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.2-zts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.3-nts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.3-zts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.4-nts-macos-arm64-abi.tgz]
+|MacOS    | arm64         | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-macos-arm64-abi.tgz[couchbase-4.4.0-php8.4-zts-macos-arm64-abi.tgz]
+|Windows  | x86_64        | PHP 8.1 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-nts-windows-x64-abi.zip[couchbase-4.4.0-php8.1-nts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.1 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.1-zts-windows-x64-abi.zip[couchbase-4.4.0-php8.1-zts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.2 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-nts-windows-x64-abi.zip[couchbase-4.4.0-php8.2-nts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.2 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.2-zts-windows-x64-abi.zip[couchbase-4.4.0-php8.2-zts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.3 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-nts-windows-x64-abi.zip[couchbase-4.4.0-php8.3-nts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.3 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.3-zts-windows-x64-abi.zip[couchbase-4.4.0-php8.3-zts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.4 | NTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-nts-windows-x64-abi.zip[couchbase-4.4.0-php8.4-nts-windows-x64-abi.zip]
+|Windows  | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.4.0-php8.4-zts-windows-x64-abi.zip[couchbase-4.4.0-php8.4-zts-windows-x64-abi.zip]
+|===
 
 
 == PHP SDK 4.3 Releases
@@ -114,10 +208,10 @@ Added CAS to `append()`/`prepend()` (https://github.com/couchbase/couchbase-php-
 |Windows  | x86_64        | PHP 8.4 | ZTS |https://packages.couchbase.com/clients/php/couchbase-4.3.0-php8.4-zts-windows-x64.zip[couchbase-4.3.0-php8.4-zts-windows-x64.zip]
 |===
 
-ABI-safe binaries that expose all internal APIs as `\Couchbase\Extension_4.3.0`,
+ABI-safe binaries that expose all internal APIs as `\Couchbase\Extension_4_3_0`,
 which allows the loading of different versions of the library at the same time.
 
-The extension file is named `couchbase_4.3.0.so` (`couchbase_4.3.0.dll`).
+The extension file is named `couchbase_4_3_0.so` (`couchbase_4_3_0.dll`).
 
 [cols="2,3,2,1,11"]
 |===
