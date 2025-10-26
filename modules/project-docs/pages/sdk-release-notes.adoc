@@ -39,6 +39,9 @@ https://docs.couchbase.com/sdk-api/couchbase-php-client-4.4.0[API documentation]
 Implemented FTS vector search pre-filters.
 * https://jira.issues.couchbase.com/browse/PCBC-1030[PCBC-1030]:
 Fixed how SDK handles KV Expiry (https://github.com/couchbase/couchbase-php-client/pull/226[#226]).
+* Updated core to 1.2.0.
+Release notes: xref:cxx-sdk:project-docs:sdk-release-notes.adoc#version-1-2-0-26-september-2025[{cpp} SDK 1.2.0].
+
 
 ==== Build and Test Infrastructure Improvements
 
