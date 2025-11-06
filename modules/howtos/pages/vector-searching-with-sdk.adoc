@@ -1,0 +1,207 @@
+= Vector Search
+:page-toclevels: 2
+:description: Vector Search from the SDK, to enable AI integration, semantic search, and use of RAG frameworks.
+
+// Note to editors
+// 
+// This page pulls in content from -sdk-common-
+// and code samples from -example-dir-
+// 
+// It can be seen built at https://docs.couchbase.com/php-sdk/4.4/howtos/vector-searching-with-sdk.html
+
+
+[abstract]
+{description}
+
+
+Vector Search has been available in Couchbase Capella Operational and self-managed Server since version 7.6, using the Couchbase Search Service.
+Version 8.0 introduces vector query using Global Secondary Indexes (GSI), the Query Service index --
+using either a fast Hyperscale index, or a composite index to combine scalar queries with semantic search.
+
+For fast and scalable vector queries, use one of the above two GSI choices -- detailed in the next section.
+If you don't require the speed and scale of vector query with GSI, or need to combine vector, geo-spatial search, range search, and traditional fuzzy text searches, then consider <<#vector-search-with-the-search-service>>.
+
+
+
+== Vector Search With the Query Service and GSI
+
+From the SDK, a vector query using GSI is the same as any other query.
+However, you will need to build one or more indexes.
+
+
+=== Prerequisites
+
+* Couchbase Server 8.0.0 or newer -- or a recent Capella instance.
+
+* Your chosen xref:server:vector-index:use-vector-indexes.adoc[vector index] -- 
+hyperscale or composite.
+
+
+You will need to refer to the xref:server:vector-index:vectors-and-indexes-overview.adoc[] pages for a full discussion of using Vector Indexes with Vector Queries.
+In particular, you will need to xref:server:vector-index:hyperscale-filter.adoc#creating-a-hyperscale-vector-index-with-included-scalar-values[create a Vector Index].
+
+
+
+=== Examples
+
+The xref:server:vector-index:vectors-and-indexes-overview.adoc[] pages contain examples using both hyperscale and compound indexes.
+
+Here is the xref:server:vector-index:hyperscale-vector-index.adoc#query-example[Hyperscale Index] example,
+wrapped inside the {name-sdk} Query API.
+
+.Hyperscale Index Example
+[source,php]
+----
+include::example$query.php[indent=0,tag=VectorSearchWithQueryHyperscaleIndex]
+----
+
+Parameterizing the query, as with xref:sqlpp-queries-with-sdk.adoc#parameterized-queries[regular queries], will allow the reuse of the xref:server:n1ql:n1ql-intro/queriesandresults.adoc#prepare-stmts[Query Plan].
+This can be more efficient, unless you are doing a lot of optimization to your query.
+
+.Parameterized Vector Query
+[source,php]
+----
+include::example$query.php[indent=0,tag=VectorSearchWithQueryParameterized]
+----
+
+
+== Vector Search With the Search Service
+
+Vector search is also implemented using xref:full-text-searching-with-sdk.adoc[Search Indexes], and can be combined with traditional full text search queries.
+Vector embeddings can be an array of floats or a xref:server:vector-search:run-vector-search-ui.adoc#base64[base64 encoded string].
+
+=== Prerequisites
+
+Couchbase Server 7.6.0 (7.6.2 for base64-encoded vectors) — or recent Capella instance.
+
+
+
+=== Examples
+
+==== Single vector query
+In this first example we are performing a single vector query:
+[source,php]
+----
+include::example$search.php[tag=singlevectorquery]
+----
+
+Let's break this down.
+We create a `SearchRequest`, which can contain a traditional FTS query `SearchQuery` and/or the new `VectorSearch`.
+Here we are just using the latter.
+
+The `VectorSearch` allows us to perform one or more `VectorQuery` s.
+
+The `VectorQuery` itself takes the name of the document field that contains embedded vectors ("vector_field" here), plus actual vector query in the form of a `float[]`.
+
+(Note that Couchbase itself is not involved in generating the vectors, and these will come from an external source such as an embeddings API.)
+
+Finally we execute the `SearchRequest` against the FTS index "vector-index", which has previously been setup to vector index the "vector_field" field.
+
+This happens to be a scoped index so we are using `scope.search()`.
+If it was a global index we would use `cluster.search()` instead (see xref:full-text-searching-with-sdk.adoc#scoped-vs-global-indexes[Scoped vs Global Indexes] on the Search page).
+
+It returns the same `SearchResult` detailed earlier.
+
+==== Multiple vector queries
+You can run multiple vector queries together:
+
+[source,php]
+----
+include::example$search.php[tag=multiplevectorqueries]
+----
+
+How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions->vectorQueryCombination()`.
+
+==== Combining FTS and vector queries
+You can combine a traditional FTS query with vector queries:
+
+[source,php]
+----
+include::example$search.php[tag=combinedvectorquery]
+----
+
+
+
+
+
+==== Pre-Filters
+
+From Couchbase Server 7.6.4 -- and in Capella Operational clusters -- 
+xref:server:vector-search:pre-filtering-vector-search.adoc#about-pre-filtering[pre-filtering with similarity search] is available.
+This is a non-vector query that the server executes first to get an intermediate result.
+Then it executes the vector query on the intermediate result to get the final result.
+
+[source,php]
+----
+// *** Please change this C++ example to PHP ***
+template<typename SearchQuery>
+auto prefilter(SearchQuery prefilter) -> couchbase::vector_query&
+----
+
+If no prefilter is specified, the server executes the vector query on all indexed documents.
+
+[source,php]
+----
+// *** Please change this C++ example to PHP ***
+couchbase::vector_query("vector_field", vector_query)
+  .num_candidates(num_candidates)
+  .prefilter(couchbase::match_query("primary")
+    .field("color_wheel_pos"))
+----
+
+The prefilter can be any Search Query --
+from a simple match, as above, to a string query:
+
+[source,php]
+----
+// *** Please change this C++ example to PHP ***
+  .prefilter(couchbase::query_string_query("+description:sea -color_hex:fff5ee"))
+----
+
+See the link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__query.html#aed005b80a8376445e114b59935f9465f++[API reference].
+
+
+==== Multiple vector queries
+
+You can run multiple vector queries together:
+
+[source,php]
+----
+include::example$search.php[indent=0,tag=multiple_vector_queries]
+----
+
+How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
+
+==== Combining FTS and vector queries
+
+You can combine a traditional FTS query with vector queries:
+
+[source,php]
+----
+include::example$search.php[indent=0,tag=combined_search_request]
+----
+
+How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
+
+
+
+
+// integrations??
+
+
+
+
+
+== Further Reading
+
+=== Vector Query
+
+* xref:server:vector-index:vectors-and-indexes-overview.adoc[Vector Query for AI Apps docs (self-managed Couchbase Server)].
+* xref:cloud::vector-index/vectors-and-indexes-overview.adoc[Vector Query for AI Apps docs (Capella DBaaS)]
+* Vector GSI Query is just like any other query from the SDK to the Query service: https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__query.html[Node.js SDK API Reference].
+
+=== Vector Search
+
+* xref:server:vector-search:vector-search.adoc[Vector Search for AI Apps docs (self-managed Couchbase Server)]
+* xref:cloud::vector-search:vector-search.adoc[Vector Search for AI Apps docs (Capella DBaaS)]
+* Vector Search in the https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__search.html[Scala API reference].

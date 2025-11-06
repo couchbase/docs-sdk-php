@@ -84,3 +84,24 @@ foreach ($result->rows() as $row) {
     printf("Name: %s, Callsign: %s, Country: %s\n", $row["name"], $row["callsign"], $row["country"]);
 }
 // end::scope-level-query[]
+
+
+
+
+
+// tag::VectorSearchWithQueryHyperscaleIndex[]
+
+// *** Please change this empty example to PHP ***
+
+// end::VectorSearchWithQueryHyperscaleIndex[]
+
+
+
+
+
+
+// tag::VectorSearchWithQueryParameterized[]
+
+// *** Please change this empty example to PHP ***
+
+// end::VectorSearchWithQueryParameterized[]
