@@ -158,7 +158,7 @@ from a simple match, as above, to a string query:
   .prefilter(couchbase::query_string_query("+description:sea -color_hex:fff5ee"))
 ----
 
-See the link:++https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__query.html#aed005b80a8376445e114b59935f9465f++[API reference].
+See the link:++https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-VectorQuery.html#property_prefilter++[API reference].
 
 
 ==== Multiple vector queries
@@ -198,10 +198,10 @@ How the results are combined (ANDed or ORed) can be controlled with `vector_sear
 
 * xref:server:vector-index:vectors-and-indexes-overview.adoc[Vector Query for AI Apps docs (self-managed Couchbase Server)].
 * xref:cloud::vector-index/vectors-and-indexes-overview.adoc[Vector Query for AI Apps docs (Capella DBaaS)]
-* Vector GSI Query is just like any other query from the SDK to the Query service: https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__query.html[Node.js SDK API Reference].
+* Vector GSI Query is just like any other query from the SDK to the Query service: https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Scope.html#method_query[PHP SDK API Reference].
 
 === Vector Search
 
 * xref:server:vector-search:vector-search.adoc[Vector Search for AI Apps docs (self-managed Couchbase Server)]
 * xref:cloud::vector-search:vector-search.adoc[Vector Search for AI Apps docs (Capella DBaaS)]
-* Vector Search in the https://docs.couchbase.com/sdk-api/couchbase-cxx-client/classcouchbase_1_1vector__search.html[Scala API reference].
+* Vector Search in the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-VectorQuery.html[PHP API reference].
