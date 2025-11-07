@@ -85,23 +85,39 @@ foreach ($result->rows() as $row) {
 }
 // end::scope-level-query[]
 
-
-
-
-
 // tag::VectorSearchWithQueryHyperscaleIndex[]
-
-// *** Please change this empty example to PHP ***
-
+$res = $cluster->query(
+    "SELECT d.id, d.question, d.wanted_similar_color_from_search, 
+      ARRAY_CONCAT(
+        d.couchbase_search_query.knn[0].vector[0:4], 
+        ['...']
+      ) AS vector 
+     FROM `vector-sample`.`color`.`rgb-questions` AS d 
+     WHERE d.id = '#87CEEB';",
+    QueryOptions::build()->metrics(true)
+);
+foreach ($res->rows() as $row) {
+    print("\nFound match:\n");
+    print_r($row);
+}
 // end::VectorSearchWithQueryHyperscaleIndex[]
 
-
-
-
-
-
 // tag::VectorSearchWithQueryParameterized[]
+$result = $cluster->query(
+    "SELECT d.id, d.question, d.wanted_similar_color_from_search, 
+        ARRAY_CONCAT(
+            d.couchbase_search_query.knn[0].vector[0:4], 
+            ['...']
+        ) AS vector 
+     FROM `vector-sample`.`color`.`rgb-questions` AS d 
+     WHERE d.id = \$id;",
+    QueryOptions::build()->namedParameters(["id" => "#87CEEB"])
+);
+foreach ($res->rows() as $row) {
+    print("\nFound match:\n");
+    print_r($row);
+}
 
-// *** Please change this empty example to PHP ***
+
 
 // end::VectorSearchWithQueryParameterized[]

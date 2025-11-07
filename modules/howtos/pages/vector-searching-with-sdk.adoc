@@ -110,7 +110,7 @@ You can run multiple vector queries together:
 include::example$search.php[tag=multiplevectorqueries]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions->vectorQueryCombination()`.
+How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions::vectorQueryCombination()`.
 
 ==== Combining FTS and vector queries
 You can combine a traditional FTS query with vector queries:
@@ -133,29 +133,32 @@ Then it executes the vector query on the intermediate result to get the final re
 
 [source,php]
 ----
-// *** Please change this C++ example to PHP ***
-template<typename SearchQuery>
-auto prefilter(SearchQuery prefilter) -> couchbase::vector_query&
+$prefilter = MatchSearchQuery::build("primary")->field("color-wheel-pos");
+    $request = SearchRequest::build(
+        VectorSearch::build([
+            VectorQuery::build("vector-field", $queryVector)
+                ->prefilter($prefilter)
+        ])
+    );
+
+$result = $scope->search("vector-index", $request);
 ----
 
 If no prefilter is specified, the server executes the vector query on all indexed documents.
-
-[source,php]
-----
-// *** Please change this C++ example to PHP ***
-couchbase::vector_query("vector_field", vector_query)
-  .num_candidates(num_candidates)
-  .prefilter(couchbase::match_query("primary")
-    .field("color_wheel_pos"))
-----
 
 The prefilter can be any Search Query --
 from a simple match, as above, to a string query:
 
 [source,php]
 ----
-// *** Please change this C++ example to PHP ***
-  .prefilter(couchbase::query_string_query("+description:sea -color_hex:fff5ee"))
+$prefilter = QueryStringSearchQuery::build('+description:sea -color_hex:fff5ee');
+$request = SearchRequest::build(
+    VectorSearch::build([
+        VectorQuery::build("vector-field", $queryVector)
+            ->prefilter($prefilter),
+    ]),
+);
+$result = $scope->search("vector-index", $request);
 ----
 
 See the link:++https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-VectorQuery.html#property_prefilter++[API reference].
@@ -167,10 +170,10 @@ You can run multiple vector queries together:
 
 [source,php]
 ----
-include::example$search.php[indent=0,tag=multiple_vector_queries]
+include::example$search.php[indent=0,tag=multiplevectorqueries]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
+How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions::vectorQueryCombination()`.
 
 ==== Combining FTS and vector queries
 
@@ -178,10 +181,10 @@ You can combine a traditional FTS query with vector queries:
 
 [source,php]
 ----
-include::example$search.php[indent=0,tag=combined_search_request]
+include::example$search.php[indent=0,tag=combinedvectorquery]
 ----
 
-How the results are combined (ANDed or ORed) can be controlled with `vector_search_options.query_combination()`.
+How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions::vectorQueryCombination()`.
 
 
 
