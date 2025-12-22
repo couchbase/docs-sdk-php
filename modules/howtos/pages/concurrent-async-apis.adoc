@@ -24,7 +24,7 @@ When operations are batched, there are fewer IP packets to be sent over the netw
 
 == Batching with Multi Get, Multi Options
 
-BAtching multiple data operations will improve network utilization efficiency, 
+Batching multiple data operations will improve network utilization efficiency, 
 until the point that maximum network efficiency is reached.
 For average network conditions, perhaps start with fetching one or two MiB of data.
 On a very fast connection between your application server and your Couchbase cluster, try at least 10 MiB.
