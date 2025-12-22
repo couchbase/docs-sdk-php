@@ -5,7 +5,6 @@
 :page-pagination: full
 :page-topic-type: tutorial
 
-include::project-docs:partial$attributes.adoc[]
 
 [abstract]
 {description}
@@ -211,6 +210,11 @@ Following successful authentication, add this code snippet to access your `Bucke
 ----
 include::example$start-using.php[tag=bucket,indent=0]
 ----
+
+// No waituntilready() in wrappers
+include::{version-common}@sdk:shared:partial$managing-connections.adoc[tag=bootstrap-completion]
+
+
 
 === Add and Retrieve Documents
 
