@@ -5,15 +5,15 @@
 
 [abstract]
 {description}
-Using process forks we can perform effective bulk operations over data.
+Using data batching or process forks you can perform effective bulk operations over data.
+
+
 
 Process forks give an improvement in performance -- but at the cost of increased use of CPU and memory. 
 Note, they do not help improve network efficiency, but will be no worse than making individual calls.
 
-// original text to fix and reinstate if multi-get is added to the API once more:
-////
-Using a combination of data batching and process forking or the batching API (not available just yet)
-we can perform effective bulk operations over data.
+Using a combination of data batching and process forking or the batching API,
+you can perform effective bulk operations over data.
 
 Batching operations allows you to make better utilization of your network and speed up your application by increasing network throughput and reducing latency. 
 Batched operations work by pipelining requests over the network. 
@@ -23,11 +23,49 @@ When operations are batched, there are fewer IP packets to be sent over the netw
 (since there are fewer individual TCP segments).
 
 == Batching with Multi Get, Multi Options
-Coming soon!? - see PM for priority
-////
+
+Batching multiple data operations will improve network utilization efficiency, 
+until the point that maximum network efficiency is reached.
+For average network conditions, perhaps start with fetching one or two MiB of data.
+On a very fast connection between your application server and your Couchbase cluster, try at least 10 MiB.
+
+=== getMulti()
+
+Pass an array of document keys to receive a group of documents.
+See the API ref for 
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html#method_getMulti[getMulti] for more information.
+
+[source,php]
+----
+public getMulti(array<string|int, mixed> $ids[, GetOptions|null $options = null ]) : array<string|int, GetResult>
+----
+
+=== upsertMulti()
+
+Creates a group of documents if they don't exist, otherwise updates them.
+See the API ref for 
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html#method_upsertMulti[upsertMulti] for more information.
+
+[source,php]
+----
+public upsertMulti(array<string|int, mixed> $entries[, UpsertOptions|null $options = null ]) : array<string|int, MutationResult>
+----
+
+=== removeMulti()
+
+Removes a group of documents.
+If second element of the entry (CAS) is null, then the operation will remove the document unconditionally.
+See the API ref for 
+https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html#method_removeMulti[removeMulti] for more information.
+
+[source,php]
+----
+public removeMulti(array<string|int, mixed> $entries[, RemoveOptions|null $options = null ]) : array<string|int, MutationResult>
+----
 
 
 == Batching with process forks
+
 Bulk loading with multiple PHP processes provides a useful way of achieving the effectiveness of parallel operations. 
 In the following example we will look at loading a set of JSON files and uploading them to Couchbase Server in concurrent batches.
 
