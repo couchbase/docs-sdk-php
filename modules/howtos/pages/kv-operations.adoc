@@ -66,7 +66,7 @@ The example above also shows how to handle the case when optimistic falure will 
 Expiration sets an explicit time to live (TTL) for a document.
 We'll discuss modifying `expiry` in more details xref:#expiration-ttl[below].
 For a discussion of item (Document) _vs_ Bucket expiration, see the
-xref:7.1@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
+xref:{version-server}@server:learn:buckets-memory-and-storage/expiration.adoc#expiration-bucket-versus-item[Expiration Overview page].
 
 [source,php]
 ----
@@ -311,7 +311,7 @@ include::example$kv-crud.php[tag=rangescanalldocumentids]
 
 == Scoped KV Operations
 
-It is possible to perform scoped key value operations on named xref:7.1@server:learn:data/scopes-and-collections.adoc[`Collections`] _with the beta version of the next Couchbase Server release, 7.0β_.
+It is possible to perform scoped key value operations on named xref:{version-server}@server:learn:data/scopes-and-collections.adoc[`Collections`] _with the beta version of the next Couchbase Server release, 7.0β_.
 See the https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Collection.html[API docs] for more information.
 
 CAUTION: This feature is marked xref:project-docs:compatibility.adoc#interface-stability[_Uncommitted_].

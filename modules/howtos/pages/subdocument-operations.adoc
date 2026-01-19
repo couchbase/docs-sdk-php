@@ -23,7 +23,7 @@ IMPORTANT: The sub-document operations described on this page are for _Key-Value
 (Sub-document {sqlpp} queries are explained in the section xref:n1ql-queries-with-sdk.adoc[Querying with {sqlpp}].)
 
 In order to use sub-document operations you need to specify a _path_ indicating the location of the sub-document.
-The _path_ follows {sqlpp} syntax xref:#[below^], and xref:7.1@server:n1ql:n1ql-intro/queriesandresults.adoc[{sqlpp} Queries and Results]).
+The _path_ follows {sqlpp} syntax xref:#[below^], and xref:{version-server}@server:n1ql:n1ql-intro/queriesandresults.adoc[{sqlpp} Queries and Results]).
 Considering the document:
 
 .customer123.json
