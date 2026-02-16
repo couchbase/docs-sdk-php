@@ -10,7 +10,8 @@ endif::[]
 :url-playbook: {url-org}/docs-site
 
 This repository hosts the documentation source for the Couchbase PHP SDK.
-You are in the branch for the new 3.2 API.
+You are in the branch for the new 3.9 API.
+
 
 == Contributing
 
@@ -23,6 +24,7 @@ Check out our {url-contribute}[contributing guide] to learn how to:
 
 Thank you for helping to make the documentation better.
 
+
 == Docs Component Configuration
 
 This repository contains an Antora docs component.
@@ -30,8 +32,9 @@ Keep in mind these key repository features:
 
 * Component name, version, and start page are configured in each branch's _antora.yml_ file.
 * The navigation for all of the modules is stored in the ROOT module's _nav.adoc_ file.
-* Production branches use the *release/X.Y* naming pattern (e.g., release/5.5, release/6.0).
+* Production branches use the *release/X.Y* naming pattern (e.g., release/5.5, release/6.0) -- or *temp/4.5* for SDK docs awaiting a move to the new SDK docs Information Architecture.
  ** The {url-playbook}[docs site playbook] instructs Antora to automatically aggregate any branch names that start with *release/*.
+
 
 == Documentation Site Toolchain
 
@@ -40,6 +43,8 @@ Once merged into a version branch, the source files and their assets are aggrega
 The docs components and {url-ui}[site UI] are orchestrated by the {url-playbook}[docs site playbook].
 See the contributing guide to learn more.
 
+
 == Docs License
 
-©2025 Couchbase, Inc. This work is licensed under CC BY-NC-SA 4.0.
+©2026 Couchbase, Inc. 
+This work is licensed under CC BY-NC-SA 4.0.
