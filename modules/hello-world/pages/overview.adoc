@@ -1,9 +1,9 @@
-= Couchbase PHP SDK 4.4
+= Couchbase PHP SDK 4.5
 :page-layout: landing-page-top-level-sdk
 :page-role: tiles
 :!sectids:
 
-= Couchbase PHP SDK 4.4
+= Couchbase PHP SDK 4.5
 
 [source,console]
 ----
@@ -112,4 +112,4 @@ Useful resources to help support your development experience with Couchbase and 
 </div>
 ++++
 
-include::{version-common}@sdk:shared:partial$columnar-available.adoc[tag=initial-availability]
+include::{version-common}@sdk:shared:partial$columnar-available.adoc[tag=initial-availability-o]
