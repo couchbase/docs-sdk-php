@@ -28,10 +28,6 @@ PHP versions that have reached their https://www.php.net/eol.php[End-of-Life dat
 |===
 | PHP Version | Security Support EOL | Couchbase SDK Versions Supported
 
-| 8.1
-| until 2025-12-31
-| from 3.2.2
-
 | 8.2
 | until 2026-12-31
 | from 4.1.0
@@ -44,6 +40,9 @@ PHP versions that have reached their https://www.php.net/eol.php[End-of-Life dat
 | until 2028-12-31
 | from 4.2.5
 
+| 8.5
+| until 2029-12-31
+| from 4.5.0
 |===
 
 
@@ -54,34 +53,35 @@ In general, the SDK can be expected to run on all of the Operating Systems suppo
 However, the {name-sdk} is tested and supported specifically on the following OSs and platforms:
 
 ****
+
+The {name-sdk} will run on, and is supported on, the following OSs and platforms.
+The SDK has been tested on a representative subset of the platforms listed below.
+
+****
 [discrete]
 === GNU/Linux
 
 * Amazon Linux 2 & AL2023.
-* Red Hat Enterprise Linux 8 & 9;
-* Oracle Linux 8 & 9.
+* Red Hat Enterprise Linux 8, 9, & 10.
+* Oracle Linux 8, 9, & 10.
+
 * Ubuntu (LTS) 22.04 (_Jammy_) & 24.04 (_Noble_).
-* Debian 11 (_Bullseye_) & Debian 12 (_Bookworm_).
+* Debian 11 (_Bullseye_), Debian 12 (_Bookworm_), & Debian 13 (_Trixie_).
 * SUSE Enterprise Linux 12 & 15.
-* Alpine Linux 3.18.
+* Alpine Linux 3.21 - 3.23.
+
 
 [discrete]
 === Microsoft Windows
 
 * Microsoft Windows 10 & 11;
-* Windows Server 2019 & 2022.
+* Windows Server 2019, 2022, & 2025.
 
 [discrete]
 === Mac OS X
 
-The current and previous two releases of OS X.
-At time of writing (March 2025): 15 (Sequoia), 14 (Sonoma), and 13 (Ventura).
-M1 ARM  architecture is fully supported in the {name-sdk}.
-
-[discrete]
-=== ARM Processor Support
-
-AWS Amazon Graviton2, Apple M1 ARM processors, and ARMv8 on Ubuntu.
+* The current and previous two releases of OS X.
+At time of writing (March 2026): 26 (Tahoe), 15 (Sequoia), and 14 (Sonoma).
 
 [discrete]
 === x86-32 Processor Not Supported
@@ -91,6 +91,14 @@ Use of the PHP SDK on legacy or embedded 32-bit platforms is not supported.
 While the SDK can be compiled for 32-bit version of x86 platform, there are complications in use from working around number handling in the API, including use of unsigned integers, 
 and it is not generally tested and supported.
 ****
+
+
+
+
+// Platforms, Chipsets, and Virtual Environments.
+include::{version-common}@sdk:shared:partial$platform.adoc[tag=virtual]
+
+
 
 
 
