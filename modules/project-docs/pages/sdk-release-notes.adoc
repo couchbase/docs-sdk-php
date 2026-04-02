@@ -31,6 +31,25 @@ PHP SDK 4.5 is written to xref:compatibility.adoc#api-version[version 3.9 of the
 
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.5.0[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.4.0...4.5.0++[Full Changelog]
+| link:++https://packagist.org/packages/couchbase/couchbase#4.5.0++[Composer (Library)]
+| link:++https://packagist.org/packages/couchbase/couchbase-opentelemetry#4.5.0++[Composer (OpenTelemetry integration)]
+
+[source,bash]
+----
+composer require ext-couchbase:4.5.0
+composer require couchbase/couchbase:4.5.0
+composer require couchbase/couchbase-opentelemetry:4.5.0
+----
+
+.composer.json
+[source,json]
+----
+"require": {
+    "ext-couchbase": "4.5.0",
+    "couchbase/couchbase-opentelemetry": "4.5.0",
+    "couchbase/couchbase": "4.5.0"
+}
+----
 
 ==== New features and Enhancements
 
@@ -71,7 +90,7 @@ Added support for mTLS Cert Refresh and exposed `idleHttpConnectionTimeout` (htt
 Added lazy connections with options -- this is to optimize the number of KV connections (https://github.com/couchbase/couchbase-php-client/pull/235[#235]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1015[PCBC-1015]:
-SDK Telemetry Collection for Server.
+SDK Telemetry Collection for Server. OpenTelemetry integration is available as composer package `couchbase/couchbase-opentelemetry`.
 
 * Updated core to `1.3.1` (https://github.com/couchbase/couchbase-php-client/pull/250[#250]).
 
