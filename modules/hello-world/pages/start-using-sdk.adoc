@@ -10,7 +10,7 @@
 {description}
 
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
-It is a native PHP extension and uses the `{cbpp}` high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
+It is a native PHP extension and uses a high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
 
 In this guide, you will learn:
 
@@ -104,8 +104,8 @@ Additionally, if you are using https://getcomposer.org/doc/00-intro.md[Composer]
 ----
 "require": {
   ...
-  "ext-couchbase": "^4.2",
-  "couchbase/couchbase": "^4.2"
+  "ext-couchbase": "^4.5",
+  "couchbase/couchbase": "^4.5"
 }
 ----
 
