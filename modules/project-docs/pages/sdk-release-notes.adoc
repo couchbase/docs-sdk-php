@@ -32,82 +32,79 @@ PHP SDK 4.5 is written to xref:compatibility.adoc#api-version[version 3.9 of the
 https://docs.couchbase.com/sdk-api/couchbase-php-client-4.5.0[API documentation]
 | link:++https://github.com/couchbase/couchbase-php-client/compare/4.4.0...4.5.0++[Full Changelog]
 
-New features and enhancements
-============================
+==== New features and Enhancements
 
 * https://jira.issues.couchbase.com/browse/PCBC-1040[PCBC-1040]:
-Tracing - include child spans created by the C++ core (https://github.com/couchbase/couchbase-php-client/pull/249[#249])
+Tracing -- include child spans created by the {cpp} core (https://github.com/couchbase/couchbase-php-client/pull/249[#249]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1039[PCBC-1039]:
-Add MeterException (https://github.com/couchbase/couchbase-php-client/pull/248[#248])
+Added `MeterException` (https://github.com/couchbase/couchbase-php-client/pull/248[#248]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1038[PCBC-1038],
 https://jira.issues.couchbase.com/browse/PCBC-1039[PCBC-1039]:
-Add tracing and metrics instrumentation for management operations (https://github.com/couchbase/couchbase-php-client/pull/244[#244])
+Added tracing and metrics instrumentation for management operations (https://github.com/couchbase/couchbase-php-client/pull/244[#244]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1039[PCBC-1039]:
-Add LoggingMeter implementation (https://github.com/couchbase/couchbase-php-client/pull/246[#246])
+Added `LoggingMeter` implementation (https://github.com/couchbase/couchbase-php-client/pull/246[#246]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1038[PCBC-1038]:
-Add ThresholdLoggingTracer implementation (https://github.com/couchbase/couchbase-php-client/pull/245[#245])
+Added `ThresholdLoggingTracer` implementation (https://github.com/couchbase/couchbase-php-client/pull/245[#245]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1038[PCBC-1038],
 https://jira.issues.couchbase.com/browse/PCBC-1039[PCBC-1039]:
-Add tracing/metrics instrumentation for non-management operations (https://github.com/couchbase/couchbase-php-client/pull/241[#241])
+Added tracing and metrics instrumentation for non-management operations (https://github.com/couchbase/couchbase-php-client/pull/241[#241]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1050[PCBC-1050]:
-Add missing manager accessors in Cluster/Bucket/Collection interfaces (https://github.com/couchbase/couchbase-php-client/pull/243[#243])
+Added missing manager accessors in Cluster, Bucket, and Collection interfaces (https://github.com/couchbase/couchbase-php-client/pull/243[#243]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1048[PCBC-1048]:
-Update all KV operations to use C++ Core API (https://github.com/couchbase/couchbase-php-client/pull/239[#239])
+Updated all KV operations to use {cpp} Core API (https://github.com/couchbase/couchbase-php-client/pull/239[#239]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1033[PCBC-1033]:
-JWT Based authentication in Operational SDKs (https://github.com/couchbase/couchbase-php-client/pull/236[#236])
+JWT Based authentication added (https://github.com/couchbase/couchbase-php-client/pull/236[#236]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1032[PCBC-1032],
 https://jira.issues.couchbase.com/browse/PCBC-1041[PCBC-1041]:
-Support mTLS Cert Refresh and Expose idleHttpConnectionTimeout (https://github.com/couchbase/couchbase-php-client/pull/233[#233])
+Added support for mTLS Cert Refresh and exposed `idleHttpConnectionTimeout` (https://github.com/couchbase/couchbase-php-client/pull/233[#233]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1035[PCBC-1035]:
-Lazy connections with options (https://github.com/couchbase/couchbase-php-client/pull/235[#235])
+Added lazy connections with options -- this is to optimize the number of KV connections (https://github.com/couchbase/couchbase-php-client/pull/235[#235]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1015[PCBC-1015]:
-SDK Telemetry Collection in Server
+SDK Telemetry Collection for Server.
 
-* Update core to 1.3.1 (https://github.com/couchbase/couchbase-php-client/pull/250[#250])
+* Updated core to `1.3.1` (https://github.com/couchbase/couchbase-php-client/pull/250[#250]).
 
-Bug fixes
-=========
+==== Bug fixes
 
 * https://jira.issues.couchbase.com/browse/PCBC-1053[PCBC-1053]:
-Fix CC compiler flags bleeding into CMAKE_C_COMPILER on macOS (https://github.com/couchbase/couchbase-php-client/pull/251[#251])
+Fixed CC compiler flags bleeding into `CMAKE_C_COMPILER` on macOS (https://github.com/couchbase/couchbase-php-client/pull/251[#251]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1052[PCBC-1052]:
-Initialize timeout to null in search/collection mgmt options blocks (https://github.com/couchbase/couchbase-php-client/pull/247[#247])
+Initialize timeout to null in search/collection management options blocks (https://github.com/couchbase/couchbase-php-client/pull/247[#247]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1034[PCBC-1034]:
-Binary CasMismatch tests occasionally fail
+Binary `CasMismatch` test fix.
 
-Build improvements
-===================
+==== Build improvements
 
 * https://jira.issues.couchbase.com/browse/PCBC-1054[PCBC-1054]:
-Update CI matrix - bump PHP versions and Alpine images (https://github.com/couchbase/couchbase-php-client/pull/252[#252]).
+Updated CI matrix.
+Bumped PHP versions and Alpine images (https://github.com/couchbase/couchbase-php-client/pull/252[#252]).
 Dropped support for PHP 8.1, added support for PHP 8.5.
 
 * https://jira.issues.couchbase.com/browse/PCBC-1049[PCBC-1049]:
-GHA - Add 8.0 to server version matrix (https://github.com/couchbase/couchbase-php-client/pull/242[#242])
+Added 8.0 to server test version matrix (https://github.com/couchbase/couchbase-php-client/pull/242[#242]).
 
 * https://jira.issues.couchbase.com/browse/PCBC-1047[PCBC-1047]:
-GHA macos13 runners have been retired
+GHA macos13 runners have been retired.
 
-* remove intl from setup php (https://github.com/couchbase/couchbase-php-client/pull/234[#234])
+* removed intl from setup php (https://github.com/couchbase/couchbase-php-client/pull/234[#234]).
 
-Deprecations
-=============
+==== Deprecations
 
 * https://jira.issues.couchbase.com/browse/PCBC-1043[PCBC-1043]:
-Deprecate Support for MapReduce Views Since Server Deprecated
+Deprecated support for MapReduce Views (which is also now deprecated in Couchbase Server).
 
 ==== Download Links
 
