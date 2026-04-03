@@ -24,8 +24,8 @@ In this guide, you will learn:
 
 We will go through the code sample step by step, but for those in a hurry to see it, here it is:
 
-[{tabs}] 
-==== 
+[{tabs}]
+====
 Couchbase Capella Sample::
 +
 --
@@ -40,8 +40,8 @@ The Couchbase Capella free tier version comes with the Travel Sample Bucket, and
 --
 
 Local Couchbase Server::
-+ 
--- 
++
+--
 [source,php]
 ----
 include::hello-world:example$start-using.php[tags=**]
@@ -76,7 +76,7 @@ Alpine Linux::
 *Alpine Linux* is very slim and uses `musl libc` and the `apk` package manager.
 As a result, the installation is a little different from other Unix-Like systems and `pecl` equivalent packages are used instead.
 
-// Update usingpage for our SDK inside Alpine Linux: https://pkgs.alpinelinux.org/packages?name=php*-pecl-couchbase&branch=edge 
+// Update usingpage for our SDK inside Alpine Linux: https://pkgs.alpinelinux.org/packages?name=php*-pecl-couchbase&branch=edge
 
 [source,console]
 ----
@@ -106,6 +106,7 @@ Additionally, if you are using https://getcomposer.org/doc/00-intro.md[Composer]
   ...
   "ext-couchbase": "^4.5",
   "couchbase/couchbase": "^4.5"
+  "couchbase/couchbase-opentelemetry": "^4.5"
 }
 ----
 
@@ -171,7 +172,7 @@ include::hello-world:example$start-using.php[tag=imports]
 Connect to your cluster by instantiating a new `Cluster` object and pass it your connection details.
 The basic connection details that you’ll need are given below -- for more background information, see xref:howtos:managing-connections.adoc[].
 
-[{tabs}] 
+[{tabs}]
 ====
 Couchbase Capella::
 +
