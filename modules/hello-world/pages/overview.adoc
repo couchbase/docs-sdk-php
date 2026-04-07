@@ -11,7 +11,7 @@ $ pecl install couchbase
 ----
 
 The Couchbase PHP SDK allows you to connect to a Couchbase cluster from PHP.
-The Couchbase PHP SDK is a native PHP extension and uses the {cbpp} high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
+The Couchbase PHP SDK is a native PHP extension and uses a high-performance {cpp} library to handle communicating to the cluster over Couchbase binary protocols.
 
 {empty} +
 
