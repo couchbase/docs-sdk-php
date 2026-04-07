@@ -38,6 +38,7 @@
 * xref:howtos:collecting-information-and-logging.adoc[Logging]
 // * xref:howtos:health-check.adoc[Health Check]
 // * Observability
+* xref:concept-docs:response-time-observability.adoc[]
 ** xref:howtos:slow-operations-logging.adoc[]
 // ** xref:howtos:observability-metrics.adoc[Metrics Reporting]
 // ** xref:howtos:observability-orphan-logger.adoc[Orphan Requests Logging]
@@ -55,7 +56,6 @@
 ** xref:concept-docs:xattr.adoc[XATTR & Virtual XATTR]
 * xref:concept-docs:errors.adoc[Errors and Diagnostics]
 ** xref:concept-docs:health-check.adoc[]
-** xref:concept-docs:response-time-observability.adoc[]
 * xref:concept-docs:durability-replication-failure-considerations.adoc[]
 * xref:concept-docs:encryption.adoc[]
 * xref:concept-docs:data-services.adoc[Service Selection]
