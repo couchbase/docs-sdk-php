@@ -153,7 +153,7 @@ xref:concept-docs:transactions.adoc[multi-document ACID transactions].
 
 
 
-== Retrieving full documents
+== Retrieving Full Documents
 
 Using the `Get()` method with the document key can be done in a similar fashion to the other operations:
 
@@ -233,7 +233,7 @@ include::example$kv-counter.php[tag=incrementwithoptions]
 include::example$kv-counter.php[tag=decrement]
 ----
 
-.Decrement (with options)
+.Decrement (With Options)
 [source,php]
 ----
 include::example$kv-counter.php[tag=decrementwithoptions]
@@ -255,7 +255,7 @@ TIP: KV range scan is suitable for use cases that require relatively low concurr
 If your application does many scans at once, or requires low latency results, we recommend using {sqlpp} (with a primary index on the collection) instead of KV range scan.
 
 [#kv-range-scan-range]
-=== Range scan
+=== Range Scan
 
 Here's an example of a KV range scan that gets all documents in a collection:
 
@@ -271,7 +271,7 @@ These parameters are for advanced use cases; you probably won't need to specify 
 Instead, it's more common to use the "prefix" scan type shown in the next example.
 
 [#kv-range-scan-prefix]
-=== Prefix scan
+=== Prefix Scan
 
 KV range scan can also give you all documents whose IDs start with the same prefix.
 Imagine you have a collection where documents are named like this: `<username>::<uuid>`.
@@ -288,7 +288,7 @@ include::example$kv-crud.php[tag=rangescanprefix]
 <1> Note the scan type is `PrefixScan`
 
 [#kv-range-scan-sample]
-=== Sample scan
+=== Sample Scan
 
 If you want to get random documents from a collection, use a sample scan.
 
@@ -299,7 +299,7 @@ include::example$kv-crud.php[tag=rangescansample]
 ----
 
 [#kv-range-scan-only-ids]
-=== Get IDs instead of full documents
+=== Get IDs Instead of Full Documents
 
 If you only want the document IDs, set the `idsOnly()` in `ScanOptions` to `true`, like this:
 
