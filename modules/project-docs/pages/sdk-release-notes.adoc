@@ -1,9 +1,11 @@
 = SDK Release Notes
 :description: Release notes for the Couchbase PHP Client.
 :navtitle: Release Notes
-:page-topic-type: reference
 :page-toclevels: 2
 :page-aliases: ROOT:relnotes-php-sdk.adoc,ROOT:release-notes,ROOT:sdk-release-notes.adoc
+:page-partial:
+
+
 
 // tag::all[]
 [abstract]
