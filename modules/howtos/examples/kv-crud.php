@@ -8,6 +8,10 @@ use \Couchbase\UpsertOptions;
 use \Couchbase\GetOptions;
 use \Couchbase\RemoveOptions;
 use \Couchbase\DurabilityLevel;
+use \Couchbase\RangeScan;
+use \Couchbase\PrefixScan;
+use \Couchbase\SamplingScan;
+use \Couchbase\ScanOptions;
 
 $opts = new ClusterOptions();
 $opts->credentials("Administrator", "password");

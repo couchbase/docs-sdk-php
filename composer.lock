@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fa3f142633f474874cf71c8e5c890557",
+    "content-hash": "905d5dc22d85ee317433e1896ffecd08",
     "packages": [
         {
             "name": "couchbase/couchbase",
-            "version": "4.0.0",
+            "version": "4.5.0",
             "source": {
                 "type": "git",
-                "url": "git@github.com:couchbase/couchbase-php-client.git",
-                "reference": "12ca305b72d36cc60ebffca0aa2c7e1cfc3ab803"
+                "url": "https://github.com/couchbase/couchbase-php-client.git",
+                "reference": "41d3b2bd484d8a823d7b236df9b7973021237f3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/couchbase/couchbase-php-client/zipball/12ca305b72d36cc60ebffca0aa2c7e1cfc3ab803",
-                "reference": "12ca305b72d36cc60ebffca0aa2c7e1cfc3ab803",
+                "url": "https://api.github.com/repos/couchbase/couchbase-php-client/zipball/41d3b2bd484d8a823d7b236df9b7973021237f3d",
+                "reference": "41d3b2bd484d8a823d7b236df9b7973021237f3d",
                 "shasum": ""
             },
             "require": {
@@ -27,10 +27,19 @@
                 "ext-sockets": "*",
                 "phpunit/phpunit": "^9"
             },
+            "suggest": {
+                "ext-grpc": "^1.15",
+                "ext-protobuf": "^3.21",
+                "google/common-protos": "^3.1",
+                "google/protobuf": "^3.21",
+                "grpc/grpc": "^1.42"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Couchbase\\": "Couchbase/"
+                    "Couchbase\\": "Couchbase/",
+                    "GPBMetadata\\Couchbase\\": "GPBMetadata/Couchbase",
+                    "Couchbase\\Protostellar\\": "Couchbase/Protostellar"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -44,16 +53,85 @@
                 }
             ],
             "description": "The PHP client library provides fast access to documents stored in a Couchbase Server.",
-            "time": "2022-05-11T08:48:37+00:00"
+            "support": {
+                "issues": "https://github.com/couchbase/couchbase-php-client/issues",
+                "source": "https://github.com/couchbase/couchbase-php-client/tree/4.5.0"
+            },
+            "time": "2026-04-01T23:20:49+00:00"
         }
     ],
-    "packages-dev": [],
+    "packages-dev": [
+        {
+            "name": "phpstan/phpstan",
+            "version": "2.2.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/dea9c8f2d25cc849391042b71e429c1a4bf82660",
+                "reference": "dea9c8f2d25cc849391042b71e429c1a4bf82660",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ondřej Mirtes"
+                },
+                {
+                    "name": "Markus Staab"
+                },
+                {
+                    "name": "Vincent Langlet"
+                }
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                }
+            ],
+            "time": "2026-05-28T14:44:12+00:00"
+        }
+    ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }

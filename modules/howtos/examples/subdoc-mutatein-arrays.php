@@ -23,7 +23,7 @@ $result = $collection->MutateIn("customer123", [
 
 // #tag::mutateInArrayPrepend[]
 $result = $collection->MutateIn("customer123", [
-    new \Couchbase\MutateArrayPrependspec("purchases.abandoned", [18])
+    new \Couchbase\MutateArrayPrependSpec("purchases.abandoned", [18])
 ]);
 // purchases.abandoned is now [18, 157, 49, 999]
 // #end::mutateInArrayPrepend[]

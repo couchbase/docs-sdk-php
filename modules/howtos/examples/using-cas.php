@@ -4,7 +4,7 @@ use \Couchbase\ClusterOptions;
 use \Couchbase\Cluster;
 use \Couchbase\Collection;
 use \Couchbase\ReplaceOptions;
-use \Couchbase\CasMismatchError;
+use \Couchbase\Exception\CasMismatchException;
 
 // #tag::increment[]
 function incrementVisitCount(Collection $collection, string $userId) {
@@ -22,7 +22,7 @@ function incrementVisitCount(Collection $collection, string $userId) {
             $opts = new ReplaceOptions();
             $opts->cas($res->cas());
             $collection->replace($userId, $user, $opts);
-        } catch (CasMismatchError $ex) {
+        } catch (CasMismatchException $ex) {
             continue;
         }
 
@@ -62,5 +62,5 @@ $collection = $bucket->scope("inventory")->collection("airport");
 
 $collection->upsert("userId", ["visit_count" => 0]);
 
-replaceWithCas($collection, "userId");
+incrementVisitCount($collection, "userId");
 lockingAndCas($collection, "userId");

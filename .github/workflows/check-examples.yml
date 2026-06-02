@@ -1,0 +1,52 @@
+name: Check Examples
+
+on:
+  pull_request:
+    paths:
+      - 'modules/**/examples/**'
+      - '.github/workflows/check-examples.yml'
+  workflow_dispatch:
+    inputs:
+      sdk_commit_sha:
+        description: 'Commit SHA of couchbase-php-client to use (leave blank for latest main)'
+        required: false
+        default: ''
+
+jobs:
+  check-examples:
+    name: Lint Examples
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout docs-sdk-php
+        uses: actions/checkout@v4
+
+      - name: Checkout couchbase-php-client SDK
+        uses: actions/checkout@v4
+        with:
+          repository: couchbase/couchbase-php-client
+          path: couchbase-php-client
+          ref: ${{ (github.event_name == 'workflow_dispatch' && inputs.sdk_commit_sha != '') && inputs.sdk_commit_sha || 'main' }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: composer, phpstan
+
+      - name: Patch composer.json to use local SDK
+        run: |
+          composer config repositories.couchbase-php-client '{"type": "path", "url": "./couchbase-php-client", "options": {"symlink": false}}'
+          composer require --no-update couchbase/couchbase:@dev
+          composer require --no-update --dev phpstan/phpstan
+          composer update --no-interaction --prefer-dist
+
+      - name: Run PHPStan on examples
+        run: |
+          php -d memory_limit=512M vendor/bin/phpstan analyse \
+            --configuration=phpstan.neon \
+            --no-progress \
+            $(find modules -name "*.php" -path "*/examples/*" | tr '\n' ' ')
+
+
+
