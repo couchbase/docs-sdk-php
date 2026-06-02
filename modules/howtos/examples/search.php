@@ -7,6 +7,9 @@ use \Couchbase\NumericRangeSearchQuery;
 use \Couchbase\ConjunctionSearchQuery;
 use \Couchbase\SearchOptions;
 use \Couchbase\MutationState;
+use \Couchbase\SearchRequest;
+use \Couchbase\VectorSearch;
+use \Couchbase\VectorQuery;
 
 /*
  * index definition

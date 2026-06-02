@@ -243,6 +243,11 @@ function insertExample($cluster, $collection)
   // end::insert[]
 }
 
+function calculateLevelForExperience(int $experience): int
+{
+    return (int)floor($experience / 100);
+}
+
 function queryExamples($cluster)
 {
   echo "\nRunning: queryExamplesSelect\n";
@@ -306,12 +311,11 @@ function queryExamples($cluster)
 
       // This function (not provided here) will use a trained machine learning model to provide a
       // suitable price based on recent customer reviews.
-      function priceFromRecentReviews(Couchbase\QueryResult $qr)
-      {
+      $priceFromRecentReviews = function (\Couchbase\QueryResult $qr): float {
         // this would call a trained ML model to get the best price
         return 99.98;
-      }
-      $updatedPrice = priceFromRecentReviews($qr);
+      };
+      $updatedPrice = $priceFromRecentReviews($qr);
 
       // Set the price of all hotels in the chain
       $ctx->query(
@@ -502,6 +506,7 @@ function rollbackCause($cluster, $collection)
 echo "\nRunning: full-error-handling example\n";
 function completeErrorHandling($cluster, $collection)
 {
+    $costOfItem = 0;
   // tag::full-error-handling[]
   try {
     $result = $cluster->transactions()->run(
