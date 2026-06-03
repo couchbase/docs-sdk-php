@@ -51,7 +51,7 @@ include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=creating
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=examples,indent=0]
+include::devguide:example$php/transactions-example.php[tag=examples,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag={lambda}-ctx]
@@ -66,7 +66,7 @@ To aid troubleshooting, raise the log level on the SDK.
 
 //[source,java]
 //----
-//include::example$TransactionsExample.java[tag=logging,indent=0]
+//include::devguide:example$php/TransactionsExample.java[tag=logging,indent=0]
 //----
 //
 //A failed transaction can involve dozens, even hundreds, of lines of logging, so the application may prefer to write failed transactions into a separate file.
@@ -75,7 +75,7 @@ To aid troubleshooting, raise the log level on the SDK.
 //This will log all lines of any failed transactions, to `WARN` level:
 //[source,java]
 //----
-//include::example$TransactionsExample.java[tag=config_warn,indent=0]
+//include::devguide:example$php/TransactionsExample.java[tag=config_warn,indent=0]
 //----
 //
 
@@ -104,7 +104,7 @@ To insert a document within a transaction {lambda}, simply call `ctx.insert()`.
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=insert,indent=0]
+include::devguide:example$php/transactions-example.php[tag=insert,indent=0]
 ----
 
 === Get
@@ -113,7 +113,7 @@ From a transaction context you may get a document:
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=get,indent=0]
+include::devguide:example$php/transactions-example.php[tag=get,indent=0]
 ----
 
 If the document does not exist, the transaction will fail with a `TransactionFailedException` (after rolling back any changes, of course).
@@ -122,7 +122,7 @@ Gets will "Read Your Own Writes", e.g. this will succeed:
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=getReadOwnWrites,indent=0]
+include::devguide:example$php/transactions-example.php[tag=getReadOwnWrites,indent=0]
 ----
 
 === Replace
@@ -132,7 +132,7 @@ This is necessary so the SDK can check that the document is not involved in anot
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=replace,indent=0]
+include::devguide:example$php/transactions-example.php[tag=replace,indent=0]
 ----
 
 === Remove
@@ -141,7 +141,7 @@ As with replaces, removing a document requires a `$ctx->get()` call first.
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=remove,indent=0]
+include::devguide:example$php/transactions-example.php[tag=remove,indent=0]
 ----
 
 == {sqlpp} Queries
@@ -158,7 +158,7 @@ Here is an example of selecting some rows from the `travel-sample` bucket:
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=queryExamplesSelect,indent=0]
+include::devguide:example$php/transactions-example.php[tag=queryExamplesSelect,indent=0]
 ----
 
 // TODO: Scope reference stuff doesn't seem to work (marked as deprecated?)
@@ -167,21 +167,21 @@ include::example$transactions-example.php[tag=queryExamplesSelect,indent=0]
 
 // [source,php]
 // ----
-// include::example$transactions-example.php[tag=queryExamplesSelectScope,indent=0]
+// include::devguide:example$php/transactions-example.php[tag=queryExamplesSelectScope,indent=0]
 // ----
 
 // An example using a `Scope` for an UPDATE:
 
 // [source,php]
 // ----
-// include::example$transactions-example.php[tag=queryExamplesUpdate,indent=0]
+// include::devguide:example$php/transactions-example.php[tag=queryExamplesUpdate,indent=0]
 // ----
 
 And an example combining `SELECT` and an `UPDATE`.
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=queryExamplesComplex,indent=0]
+include::devguide:example$php/transactions-example.php[tag=queryExamplesComplex,indent=0]
 ----
 
 As you can see from the snippet above, it is possible to call regular PHP functions from the {lambda}, permitting complex logic to be performed.
@@ -192,7 +192,7 @@ This example shows inserting a document and then selecting it again:
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=queryRYOW,indent=0]
+include::devguide:example$php/transactions-example.php[tag=queryRYOW,indent=0]
 ----
 <1> The inserted document is only staged at this point, as the transaction has not yet committed. +
 Other transactions, and other non-transactional actors, will not be able to see this staged insert yet.
@@ -204,7 +204,7 @@ Query options can be provided via `TransactionQueryOptions`, which provides a su
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=queryOptions,indent=0]
+include::devguide:example$php/transactions-example.php[tag=queryOptions,indent=0]
 ----
 
 .Supported Transaction Query Options
@@ -233,7 +233,7 @@ In this example we insert a document with a key-value operation, and read it wit
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=queryKvMix,indent=0]
+include::devguide:example$php/transactions-example.php[tag=queryKvMix,indent=0]
 ----
 
 <1> The key-value insert operation is only staged, and so it is not visible to other transactions or non-transactional actors.
@@ -246,7 +246,7 @@ For example, if you want to change the level of durability which must be attaine
 
 [source,php]
 ----
-include::example$transactions-example.php[tag=config,indent=0]
+include::devguide:example$php/transactions-example.php[tag=config,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tag=config]

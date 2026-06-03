@@ -26,14 +26,14 @@ Before setting this up, however, you must ensure that your log level is high eno
 
 [source,php]
 ----
-include::example$threshold-logging.php[tag=logLevel]
+include::devguide:example$php/threshold-logging.php[tag=logLevel]
 ----
 
 Next, add the tracer settings to the connection when initialising a cluster:
 
 [source,php]
 ----
-include::example$threshold-logging.php[tag=thresholdLogging]
+include::devguide:example$php/threshold-logging.php[tag=thresholdLogging]
 ----
 
 This will set our threshold for key-value operations to 10 milliseconds, and log the found operations every 3 seconds.
@@ -42,7 +42,7 @@ Here is an example that shows upserting a document that causes longer processing
 
 [source,php]
 ----
-include::example$threshold-logging.php[tag=thresholdLongProcessing]
+include::devguide:example$php/threshold-logging.php[tag=thresholdLongProcessing]
 ----
 
 You should expect to see output in JSON format in the logs for operations over the specified threshold (prettified for readability):
@@ -105,14 +105,14 @@ Configuring orphan logging is very similar to how we configured the threshold lo
 
 [source,php]
 ----
-include::example$orphan-logging.php[tag=orphanLogging]
+include::devguide:example$php/orphan-logging.php[tag=orphanLogging]
 ----
 
 The same code example from the threshold logging section can be used to demonstrate orphaned responses.
 
 [source,php]
 ----
-include::example$orphan-logging.php[tag=orphanTimeout]
+include::devguide:example$php/orphan-logging.php[tag=orphanTimeout]
 ----
 
 The expected output should be something similar to the log below:

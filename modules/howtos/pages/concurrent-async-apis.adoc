@@ -76,7 +76,7 @@ you can find the default locations for other Operating Systems in our xref:https
 
 [source,php]
 ----
-include::example$batch.php[tag=loading]
+include::devguide:example$php/batch.php[tag=loading]
 ----
 
 Here we've unzipped the zip file containing the dataset and then set up the relevant number of batches, 
@@ -91,7 +91,7 @@ The parent then uses `pcntl_waitpid` to wait for each child process to complete.
 
 [source,php]
 ----
-include::example$batch.php[tag=batching]
+include::devguide:example$php/batch.php[tag=batching]
 ----
 
 In the output we can see something like:

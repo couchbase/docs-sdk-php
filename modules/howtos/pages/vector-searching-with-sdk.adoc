@@ -52,7 +52,7 @@ wrapped inside the {name-sdk} Query API.
 .Hyperscale Index Example
 [source,php]
 ----
-include::example$query.php[indent=0,tag=VectorSearchWithQueryHyperscaleIndex]
+include::devguide:example$php/query.php[indent=0,tag=VectorSearchWithQueryHyperscaleIndex]
 ----
 
 Parameterizing the query, as with xref:sqlpp-queries-with-sdk.adoc#parameterized-queries[regular queries], will allow the reuse of the xref:server:n1ql:n1ql-intro/queriesandresults.adoc#prepare-stmts[Query Plan].
@@ -61,7 +61,7 @@ This can be more efficient, unless you are doing a lot of optimization to your q
 .Parameterized Vector Query
 [source,php]
 ----
-include::example$query.php[indent=0,tag=VectorSearchWithQueryParameterized]
+include::devguide:example$php/query.php[indent=0,tag=VectorSearchWithQueryParameterized]
 ----
 
 
@@ -82,7 +82,7 @@ Couchbase Server 7.6.0 (7.6.2 for base64-encoded vectors) — or recent Cape
 In this first example we are performing a single vector query:
 [source,php]
 ----
-include::example$search.php[tag=singlevectorquery]
+include::devguide:example$php/search.php[tag=singlevectorquery]
 ----
 
 Let's break this down.
@@ -107,7 +107,7 @@ You can run multiple vector queries together:
 
 [source,php]
 ----
-include::example$search.php[tag=multiplevectorqueries]
+include::devguide:example$php/search.php[tag=multiplevectorqueries]
 ----
 
 How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions::vectorQueryCombination()`.
@@ -117,7 +117,7 @@ You can combine a traditional Search query with vector queries:
 
 [source,php]
 ----
-include::example$search.php[tag=combinedvectorquery]
+include::devguide:example$php/search.php[tag=combinedvectorquery]
 ----
 
 
@@ -170,7 +170,7 @@ You can run multiple vector queries together:
 
 [source,php]
 ----
-include::example$search.php[indent=0,tag=multiplevectorqueries]
+include::devguide:example$php/search.php[indent=0,tag=multiplevectorqueries]
 ----
 
 Note that `num_candidates` sets how many similar vectors are returned. 
@@ -185,7 +185,7 @@ You can combine a traditional Search query with vector queries:
 
 [source,php]
 ----
-include::example$search.php[indent=0,tag=combinedvectorquery]
+include::devguide:example$php/search.php[indent=0,tag=combinedvectorquery]
 ----
 
 How the results are combined (ANDed or ORed) can be controlled with `VectorSearchOptions::vectorQueryCombination()`.
