@@ -81,21 +81,21 @@ First we will create the encoder function:
 
 [source,php]
 ----
-include::example$transcoding.php[tag=encoder,indent=0]
+include::devguide:example$php/transcoding.php[tag=encoder,indent=0]
 ----
 
 And now create a corresponding decoder function:
 
 [source,php]
 ----
-include::example$transcoding.php[tag=decoder,indent=0]
+include::devguide:example$php/transcoding.php[tag=decoder,indent=0]
 ----
 
 To use these functions with some data we can do the following and our image will be seamlessly stored in Couchbase Server:
 
 [source,php]
 ----
-include::example$transcoding.php[tag=usage,indent=0]
+include::devguide:example$php/transcoding.php[tag=usage,indent=0]
 ----
 
 == Configuration

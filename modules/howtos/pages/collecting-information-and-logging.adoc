@@ -30,7 +30,7 @@ For example, the script below:
 
 [source,php]
 ----
-include::example$logging.php[tag=logging, indent=0]
+include::devguide:example$php/logging.php[tag=logging, indent=0]
 ----
 
 ...along with this `php.ini` snippet:

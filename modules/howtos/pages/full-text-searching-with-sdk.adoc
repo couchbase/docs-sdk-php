@@ -33,7 +33,7 @@ For the purposes of the below examples we will use the Travel Sample bucket with
 
 [source,json]
 ----
-include::example$search.php[tag=indexdefinition]
+include::devguide:example$php/search.php[tag=indexdefinition]
 ----
 
 Search queries are executed at Cluster level (not bucket or collection). As of Couchbase Server 6.5+ they do also not
@@ -44,7 +44,7 @@ Here is a simple MatchQuery that looks for the text “swanky” using a defined
 
 [source,php]
 ----
-include::example$search.php[tag=matchquery]
+include::devguide:example$php/search.php[tag=matchquery]
 ----
 
 All simple query types are created in the same manner, although some have additional properties, which can be seen in
@@ -55,7 +55,7 @@ Here is a numeric range query that looks for hotels with `"Cleanliness"` ratings
 
 [source,php]
 ----
-include::example$search.php[tag=numrangequery]
+include::devguide:example$php/search.php[tag=numrangequery]
 ----
 
 Queries can also be combined together.
@@ -63,7 +63,7 @@ A conjunction query contains multiple child queries; its result documents must s
 
 [source,php]
 ----
-include::example$search.php[tag=conjunctionquery]
+include::devguide:example$php/search.php[tag=conjunctionquery]
 ----
 
 [TIP]
@@ -103,7 +103,7 @@ Facets can only be accessed once `Close` has been called on rows.
 
 [source,php]
 ----
-include::example$search-facets.php[tag=iteratingfacets]
+include::devguide:example$php/search-facets.php[tag=iteratingfacets]
 ----
 
 
@@ -123,7 +123,7 @@ And note that traditional FTS queries, without vector search, are also supported
 
 [source,php]
 ----
-include::example$search.php[tag=traditionalftsquery]
+include::devguide:example$php/search.php[tag=traditionalftsquery]
 ----
 
 The `SearchQuery` is created in the same way as detailed earlier.
@@ -136,7 +136,7 @@ ensuring results contain information from updated indexes:
 
 [source,php]
 ----
-include::example$search.php[tag=consistency]
+include::devguide:example$php/search.php[tag=consistency]
 ----
 
 

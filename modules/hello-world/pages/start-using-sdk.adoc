@@ -33,7 +33,7 @@ If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase C
 
 [source,php]
 ----
-include::hello-world:example$cloud.php[tags=**]
+include::devguide:example$php/cloud.php[tags=**]
 ----
 
 The Couchbase Capella free tier version comes with the Travel Sample Bucket, and its Query indexes, loaded and ready.
@@ -44,7 +44,7 @@ Local Couchbase Server::
 --
 [source,php]
 ----
-include::hello-world:example$start-using.php[tags=**]
+include::devguide:example$php/start-using.php[tags=**]
 ----
 
 As well as the PHP SDK (see below), and a running instance of Couchbase Server, you will need to load up the Travel Sample Bucket
@@ -164,7 +164,7 @@ Firstly, you will need to have a few `import` statements at the top of your PHP 
 [#imports]
 [source,php]
 ----
-include::hello-world:example$start-using.php[tag=imports]
+include::devguide:example$php/start-using.php[tag=imports]
 ----
 
 === Connect

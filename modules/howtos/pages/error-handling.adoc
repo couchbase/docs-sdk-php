@@ -55,7 +55,7 @@ Transient errors -- such as those caused by resource starvation -- are best tack
 
 [source,php]
 ----
-include::example$errors.php[tag=retry]
+include::devguide:example$php/errors.php[tag=retry]
 ----
 
 == Key-Value Errors
@@ -68,7 +68,7 @@ If a particular key cannot be found it is raised as a `DocumentNotFoundException
 
 [source,php]
 ----
-include::example$errors.php[tag=document-not-found-exception]
+include::devguide:example$php/errors.php[tag=document-not-found-exception]
 ----
 
 === Key already exists
@@ -77,14 +77,14 @@ On the other hand if the key already exists and should not (e.g. on an insert) t
 
 [source,php]
 ----
-include::example$errors.php[tag=key-exists-exception]
+include::devguide:example$php/errors.php[tag=key-exists-exception]
 ----
 
 === Document body too large
 
 [source,php]
 ----
-include::example$errors.php[tag=value-too-big-exception]
+include::devguide:example$php/errors.php[tag=value-too-big-exception]
 ----
 
 === Concurrency
@@ -94,7 +94,7 @@ When you get a document you automatically receive its CAS value, and when replac
 
 [source,php]
 ----
-include::example$errors.php[tag=cas-mismatch-exception, indent=0]
+include::devguide:example$php/errors.php[tag=cas-mismatch-exception, indent=0]
 ----
 
 
@@ -113,7 +113,7 @@ For instance, for inserts, they can simply be retried to see if they fail on `Do
 
 [source,scala]
 ----
-include::example$ErrorHandling.scala[tag=insert,indent=0]
+include::devguide:example$php/ErrorHandling.scala[tag=insert,indent=0]
 ----
 
 That example is much closer to what an application will want to be doing.  Let's flesh it out further.
@@ -123,7 +123,7 @@ The application can write wrappers so that it can easily do operations without h
 
 [source,scala]
 ----
-include::example$ErrorHandling.scala[tag=insert-real,indent=0]
+include::devguide:example$php/ErrorHandling.scala[tag=insert-real,indent=0]
 ----
 
 This will make a 'best effort' to do the insert (though its retry strategy is rather naive, and applications may want to implement a more sophisticated approach involving exponential backoff and circuit breaking.)
@@ -147,7 +147,7 @@ A SQL++ query either returns results or `QueryError`, like so:
 
 [source,scala]
 ----
-include::example$ErrorHandling.scala[tag=query,indent=0]
+include::devguide:example$php/ErrorHandling.scala[tag=query,indent=0]
 ----
 
 Analytics works in an identical fashion, raising an `AnalyticsError`.

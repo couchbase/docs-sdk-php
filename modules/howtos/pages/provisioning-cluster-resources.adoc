@@ -61,7 +61,7 @@ It is instantiated through the `Cluster::buckets()` method.
 
 [source,php]
 ----
-include::howtos:example$provisioning-resources-buckets.php[tag=creating-bucket-mgr,indent=0]
+include::devguide:example$php/provisioning-resources-buckets.php[tag=creating-bucket-mgr,indent=0]
 ----
 
 The `BucketSettings` class is used for creating and updating buckets, and for exposing information about existing buckets.
@@ -88,21 +88,21 @@ The following example creates a "hello" bucket:
 
 [source,php]
 ----
-include::howtos:example$provisioning-resources-buckets.php[tag=create-bucket,indent=0]
+include::devguide:example$php/provisioning-resources-buckets.php[tag=create-bucket,indent=0]
 ----
 
 We can now get this bucket and update it to enable Flush:
 
 [source,php]
 ----
-include::howtos:example$provisioning-resources-buckets.php[tag=update-bucket,indent=0]
+include::devguide:example$php/provisioning-resources-buckets.php[tag=update-bucket,indent=0]
 ----
 
 Once you no longer need to use the bucket, you can remove it:
 
 [source,php]
 ----
-include::howtos:example$provisioning-resources-buckets.php[tag=remove-bucket,indent=0]
+include::devguide:example$php/provisioning-resources-buckets.php[tag=remove-bucket,indent=0]
 ----
 
 === Flushing Buckets
@@ -113,7 +113,7 @@ You can flush a bucket in the SDK by using the `flush()` method:
 
 [source,php]
 ----
-include::howtos:example$provisioning-resources-buckets.php[tag=flush-bucket,indent=0]
+include::devguide:example$php/provisioning-resources-buckets.php[tag=flush-bucket,indent=0]
 ----
 
 The `flush()` operation may fail if the bucket does not have https://docs.couchbase.com/sdk-api/couchbase-php-client/classes/Couchbase-Management-BucketSettings.html#method_flushEnabled[flush enabled], in that case it will return an `BucketNotFlushableException`.
@@ -185,7 +185,7 @@ It can be instantiated through the `Cluster::queryIndexes()` method.
 
 [source,php]
 ----
-include::howtos:example$query-index-manager.php[tag=creating-index-mgr,indent=0]
+include::devguide:example$php/query-index-manager.php[tag=creating-index-mgr,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$flush-info-pars.adoc[tag=query-index-manager-intro]
@@ -197,7 +197,7 @@ Note that you cannot provide a named scope or collection separately, both must b
 
 [source,php]
 ----
-include::howtos:example$query-index-manager.php[tag=primary,indent=0]
+include::devguide:example$php/query-index-manager.php[tag=primary,indent=0]
 ----
 
 When a primary index name is not specified, the SDK will create the index as `#primary` by default.
@@ -212,7 +212,7 @@ Creating a _secondary_ index follows a similar approach, with some minor differe
 
 [source,php]
 ----
-include::howtos:example$query-index-manager.php[tag=secondary,indent=0]
+include::devguide:example$php/query-index-manager.php[tag=secondary,indent=0]
 ----
 
 The `createIndex()` method requires an index name to be provided, along with the fields to create the index on.
@@ -226,7 +226,7 @@ To achieve this we can use the `deferred` boolean option, and set it to `true`.
 
 [source,php]
 ----
-include::howtos:example$query-index-manager.php[tag=defer-indexes,indent=0]
+include::devguide:example$php/query-index-manager.php[tag=defer-indexes,indent=0]
 ----
 
 To delete a query index you can use the `dropIndex()` or `dropPrimaryIndex()` methods.
@@ -236,7 +236,7 @@ Which one you use depends on the type of query index you wish to drop from the c
 
 [source,php]
 ----
-include::howtos:example$query-index-manager.php[tag=drop-primary-or-secondary-index,indent=0]
+include::devguide:example$php/query-index-manager.php[tag=drop-primary-or-secondary-index,indent=0]
 ----
 
 // * Search - note & link to FTS page & API?

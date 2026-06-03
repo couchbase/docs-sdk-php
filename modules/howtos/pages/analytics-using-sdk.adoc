@@ -55,7 +55,7 @@ Alternatively, the query may be performed with named parameters:
 
 [source,php]
 ----
-include::example$analytics.php[tag=named]
+include::devguide:example$php/analytics.php[tag=named]
 ----
 
 NOTE: As timeouts are propagated to the server by the client, a timeout set on the client side may be used to stop the processing of a request, in order to save system resources.
@@ -80,7 +80,7 @@ Here, we set a custom, server-side timeout value:
 
 [source,php]
 ----
-include::example$analytics.php[tag=options]
+include::devguide:example$php/analytics.php[tag=options]
 ----
 
 
@@ -92,7 +92,7 @@ as you will have seen when working through our xref:{version-server}@server:anal
 
 [source,php]
 ----
-include::example$analytics.php[tag=results]
+include::devguide:example$php/analytics.php[tag=results]
 ----
 
 // Move these to Error reference doc?
@@ -115,7 +115,7 @@ Here is a snippet using several items of metadata
 
 [source,php]
 ----
-include::example$analytics.php[tag=metadata]
+include::devguide:example$php/analytics.php[tag=metadata]
 ----
 
 
@@ -139,7 +139,7 @@ We can then query the Dataset as normal, using the fully qualified keyspace:
 
 [source,php]
 ----
-include::example$analytics.php[tag=handle-collection,indent=0]
+include::devguide:example$php/analytics.php[tag=handle-collection,indent=0]
 ----
 
 Note that using the `CREATE DATASET` syntax we could choose any Dataset name in any Dataverse, including the default.
@@ -147,5 +147,5 @@ However the SDK supports this standard convention, allowing us to query from the
 
 [source,php]
 ----
-include::example$analytics.php[tag=handle-scope,indent=0]
+include::devguide:example$php/analytics.php[tag=handle-scope,indent=0]
 ----
