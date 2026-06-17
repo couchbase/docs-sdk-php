@@ -15,6 +15,16 @@ These pages cover the 4.x versions of the Couchbase PHP SDK.
 
 For download instructions, see the xref:sdk-full-installation.adoc[installation page].
 
+// tag::pecl[]
+[TIP]
+.PECL Packages
+====
+The download packages given on the xref:project-docs:sdk-release-notes.adoc#latest-release[Release Notes page] are officially supported.
+The source tarball found on https://pecl.php.net/ at https://pecl.php.net/package/couchbase is also the same one as the one linked xref:project-docs:sdk-release-notes.adoc#latest-release[here].
+
+However the Windows binaries at https://pecl.php.net/ are produced there, not through Couchbase's CI/CD pipeline, and are not necessarily the same as the Couchbase-produced binaries.
+====
+// end::pecl[]
 
 
 [#latest-release]

@@ -97,6 +97,8 @@ From xref:sdk-release-notes.adoc#version-4-2-1-23-april-2024[PHP SDK version 4.2
 Windows binaries are available to download --
 see the xref:sdk-release-notes.adoc[Release Notes page] for links to the binary built for your preferred PHP version.
 
+include::sdk-release-notes.adoc[tag=pecl]
+
 For older versions of the PHP 4.x SDK, there are no pre-built binaries for the Windows platform.
 Instead, you will need to follow https://github.com/couchbase/couchbase-php-client/blob/4.0.0/WINDOWS.md[these steps] to build an extension along with the PHP interpreter.
 We recommend always running the latest version of the SDK.
