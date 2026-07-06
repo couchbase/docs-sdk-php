@@ -4,10 +4,15 @@
 :page-topic-type: reference
 :page-toclevels: 2
 :page-aliases: ROOT:relnotes-php-sdk.adoc,ROOT:release-notes.adoc,ROOT:sdk-release-notes.adoc
+:name_platform_lc: php
 
 // tag::all[]
 [abstract]
 {description}
+
+include::6.5@sdk:shared:partial$use-latest.adoc[tag=latest]
+
+
 
 These pages cover the 4.x versions of the Couchbase PHP SDK.
 
