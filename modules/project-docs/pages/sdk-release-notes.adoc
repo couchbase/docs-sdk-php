@@ -3,7 +3,7 @@
 :navtitle: Release Notes
 :page-topic-type: project-doc
 :page-aliases: ROOT:relnotes-php-sdk,ROOT:release-notes,ROOT:sdk-release-notes
-:name_platform_lc: java
+:name_platform_lc: php
 
 // tag::all[]
 [abstract]
