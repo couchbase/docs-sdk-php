@@ -1,0 +1,26 @@
+= 3^rd^ Party Integrations
+:description: The Couchbase {name-sdk} is often used with unofficial and third party tools and applications to integrate into broader language and platform ecosystems, and across data lakes in heterogeneous environments.
+
+
+[abstract]
+
+{description}
+
+
+include::{version-common}@sdk:shared:partial$integrations.adoc[tag=intro]
+
+
+include::{version-common}@sdk:shared:partial$integrations.adoc[tag=official]
+
+The Couchbase Kotlin SDK works with Spring Boot -- 
+as shown in our xref:hello-world:sample-application.adoc[Sample Application].
+
+
+include::{version-common}@sdk:shared:partial$integrations.adoc[tag=important]
+
+https://ktor.io/[Ktor] can be seen integrated with the Kotlin SDK in https://developer.couchbase.com/tutorial-quickstart-kotlin-ktor/[this Quickstart Guide].
+
+
+include::{version-common}@sdk:shared:partial$integrations.adoc[tag=other]
+
+Note, if you search for extensions to the Couchbase Kotlin SDK, many results will be for our Mobile solution, as Kotlin is a first class citizen for Android development on Couchbase Lite (CBL).
