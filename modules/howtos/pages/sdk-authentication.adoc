@@ -19,7 +19,7 @@ Our xref:hello-world:start-using-sdk.adoc[Getting Started] guide introduced basi
 
 [source,php]
 ----
-include::example$auth.php[tag=auth1,indent=0]
+include::devguide:example$php/auth.php[tag=auth1,indent=0]
 ----
 
 include::{version-common}@sdk:shared:partial$auth-overview.adoc[tag=rbac]
@@ -34,7 +34,7 @@ The rest of this document assumes that the processes there, or something similar
 
 [source,php]
 ----
-include::example$auth.php[tag=auth2,indent=0]
+include::devguide:example$php/auth.php[tag=auth2,indent=0]
 ----
 
 Note the options passed into the connection string:
@@ -51,5 +51,5 @@ include::{version-common}@sdk:shared:partial$auth-overview.adoc[tag=ldap]
 
 [source,php]
 ----
-include::example$auth.php[tag=auth3,indent=0]
+include::devguide:example$php/auth.php[tag=auth3,indent=0]
 ----

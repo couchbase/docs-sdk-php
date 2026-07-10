@@ -19,20 +19,20 @@ The most common uses of the `UserManager` API are creating and listing users:
 .Creating Users
 [source,php]
 ----
-include::howtos:example$provisioning-resources-users.php[tag=create-user,indent=0]
+include::devguide:example$php/provisioning-resources-users.php[tag=create-user,indent=0]
 ----
 
 .Listing Users
 [source,php]
 ----
-include::howtos:example$provisioning-resources-users.php[tag=get-all-users,indent=0]
+include::devguide:example$php/provisioning-resources-users.php[tag=get-all-users,indent=0]
 ----
 
 Using a user created in the SDK to access data:
 
 [source,php]
 ----
-include::howtos:example$provisioning-resources-users.php[tag=user-operations,indent=0]
+include::devguide:example$php/provisioning-resources-users.php[tag=user-operations,indent=0]
 ----
 
 

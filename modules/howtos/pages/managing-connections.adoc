@@ -18,7 +18,7 @@ The simplest way to create a `Cluster` is to call `new Cluster()` with a <<conne
 
 [source,php]
 ----
-include::example$connections.php[tag=rbac]
+include::devguide:example$php/connections.php[tag=rbac]
 ----
 
 
@@ -31,7 +31,7 @@ Multiple addresses may be specified in a connection string by delimiting them wi
 
 [source,php]
 ----
-include::example$managing-connections.php[tag=multiplenodes,indent=0]
+include::devguide:example$php/managing-connections.php[tag=multiplenodes,indent=0]
 ----
 
 TIP: You don't need to include the address of every node in the cluster.
@@ -95,7 +95,7 @@ If the external ports are not the default, you can specify custom ports instead 
 
 [source,php]
 ----
-include::example$managing-connections.php[tag=customPorts,indent=0]
+include::devguide:example$php/managing-connections.php[tag=customPorts,indent=0]
 ----
 
 TIP: In a deployment that uses multi-dimensional scaling, a custom KV port is only applicable for nodes running the KV service.
@@ -215,7 +215,7 @@ and pass it the path to the certificate file via '?trust_certificate=...' in the
 
 [source,php]
 ----
-include::example$managing-connections.php[tag=tls,indent=0]
+include::devguide:example$php/managing-connections.php[tag=tls,indent=0]
 ----
 
 Then use this custom `Cluster` when opening the connection to the cluster.
@@ -250,7 +250,7 @@ In order to make the SDK use the SRV records, you need to pass in the hostname f
 
 [source,php]
 ----
-include::example$managing-connections.php[tag=dnssrv,indent=0]
+include::devguide:example$php/managing-connections.php[tag=dnssrv,indent=0]
 ----
 
 If the DNS SRV records could not be loaded properly you'll get the message logged and the given host name will be used as an A record lookup.

@@ -37,14 +37,14 @@ Here is the _Insert_ operation at its simplest:
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=insert]
+include::devguide:example$php/kv-crud.php[tag=insert]
 ----
 
 Options may be added to operations:
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=insertwithoptions]
+include::devguide:example$php/kv-crud.php[tag=insertwithoptions]
 ----
 
 Setting a Compare and Swap (CAS) value is a form of optimistic locking - dealt with in depth in the xref:concurrent-document-mutations.adoc[CAS page].
@@ -58,7 +58,7 @@ We will add to these options for the _Replace_ example:
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=replacewithcas]
+include::devguide:example$php/kv-crud.php[tag=replacewithcas]
 ----
 
 The example above also shows how to handle the case when optimistic falure will fail.
@@ -70,7 +70,7 @@ xref:{version-server}@server:learn:buckets-memory-and-storage/expiration.adoc#ex
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=upsertwithexpiry]
+include::devguide:example$php/kv-crud.php[tag=upsertwithexpiry]
 ----
 
 // TODO: old-style durability will come later
@@ -99,7 +99,7 @@ The following example demonstrates using the newer durability features available
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=upsertwithdurability]
+include::devguide:example$php/kv-crud.php[tag=upsertwithdurability]
 ----
 
 To stress, durability is a useful feature but should not be the default for most applications, as there is a performance consideration,
@@ -159,14 +159,14 @@ Using the `Get()` method with the document key can be done in a similar fashion 
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=get]
+include::devguide:example$php/kv-crud.php[tag=get]
 ----
 
 Timeout can also be set - as in the earlier `Insert` example:
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=getwithoptions]
+include::devguide:example$php/kv-crud.php[tag=getwithoptions]
 ----
 
 
@@ -177,7 +177,7 @@ When removing a document, you will have the same concern for durability as with 
 Remove (with options)
 [source,php]
 ----
-include::example$kv-crud.php[tag=removewithoptions]
+include::devguide:example$php/kv-crud.php[tag=removewithoptions]
 ----
 // TODO: old-style durability will come later
 
@@ -191,21 +191,21 @@ NOTE: Increment & Decrement are considered part of the ‘binary’ API and as s
 
 [source,php]
 ----
-include::example$kv-expiry.php[tag=touch]
+include::devguide:example$php/kv-expiry.php[tag=touch]
 ----
 
 A network timeout can be set with the optional `TouchOptions()`, in the same fashion as earlier examples on this page:
 
 [source,php]
 ----
-include::example$kv-expiry.php[tag=touchwithoptions]
+include::devguide:example$php/kv-expiry.php[tag=touchwithoptions]
 ----
 
 Another way to change expiration time is to use `getAndTouch()` method of the collection.
 
 [source,php]
 ----
-include::example$kv-expiry.php[tag=getandtouch]
+include::devguide:example$php/kv-expiry.php[tag=getandtouch]
 ----
 
 
@@ -219,24 +219,24 @@ NOTE: Increment & Decrement are considered part of the ‘binary’ API and as s
 .Increment
 [source,php]
 ----
-include::example$kv-counter.php[tag=increment]
+include::devguide:example$php/kv-counter.php[tag=increment]
 ----
 
 [source,php]
 ----
-include::example$kv-counter.php[tag=incrementwithoptions]
+include::devguide:example$php/kv-counter.php[tag=incrementwithoptions]
 ----
 
 .Decrement
 [source,php]
 ----
-include::example$kv-counter.php[tag=decrement]
+include::devguide:example$php/kv-counter.php[tag=decrement]
 ----
 
 .Decrement (With Options)
 [source,php]
 ----
-include::example$kv-counter.php[tag=decrementwithoptions]
+include::devguide:example$php/kv-counter.php[tag=decrementwithoptions]
 ----
 
 TIP: Setting the document expiry time only works when a document is created, and it is not possible to update the expiry time of an existing counter document with the Increment method -- to do this during an increment, use with the `Touch()` method.
@@ -262,7 +262,7 @@ Here's an example of a KV range scan that gets all documents in a collection:
 .KV Range Scan for all documents in a collection
 [source,php]
 ----
-include::example$kv-crud.php[tag=rangescanalldocuments]
+include::devguide:example$php/kv-crud.php[tag=rangescanalldocuments]
 ----
 
 <1> The `RangeScan` class has two optional parameters: `from` and `to`.
@@ -282,7 +282,7 @@ For example, to get all documents associated with user "alice", you would write:
 .KV Range Scan for all documents in a collection whose IDs start with `alice::`
 [source,php]
 ----
-include::example$kv-crud.php[tag=rangescanprefix]
+include::devguide:example$php/kv-crud.php[tag=rangescanprefix]
 ----
 
 <1> Note the scan type is `PrefixScan`
@@ -295,7 +295,7 @@ If you want to get random documents from a collection, use a sample scan.
 .KV Range Scan for 100 random documents
 [source,php]
 ----
-include::example$kv-crud.php[tag=rangescansample]
+include::devguide:example$php/kv-crud.php[tag=rangescansample]
 ----
 
 [#kv-range-scan-only-ids]
@@ -306,7 +306,7 @@ If you only want the document IDs, set the `idsOnly()` in `ScanOptions` to `true
 .KV Range Scan for all document IDs in a collection
 [source,php]
 ----
-include::example$kv-crud.php[tag=rangescanalldocumentids]
+include::devguide:example$php/kv-crud.php[tag=rangescanalldocumentids]
 ----
 
 == Scoped KV Operations
@@ -321,7 +321,7 @@ Here is an example showing an upsert in the `users` collection, which lives in t
 
 [source,php]
 ----
-include::example$kv-crud.php[tag=namedcollectionupsert]
+include::devguide:example$php/kv-crud.php[tag=namedcollectionupsert]
 ----
 
 == Additional Resources

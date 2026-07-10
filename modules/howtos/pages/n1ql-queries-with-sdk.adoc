@@ -45,13 +45,13 @@ Note that both parameters and options are optional.
 .Positional parameter example:
 [source,php]
 ----
-include::example$query.php[tag=positionalParams]
+include::devguide:example$php/query.php[tag=positionalParams]
 ----
 
 .Named parameter example:
 [source,php]
 ----
-include::example$query.php[tag=namedParams]
+include::devguide:example$php/query.php[tag=namedParams]
 ----
 
 The complete code for this page's examples can be found https://github.com/couchbase/docs-sdk-php/blob/release/3.2/modules/howtos/examples/query.php:[here]
@@ -63,7 +63,7 @@ In most cases your query will return more than one result, and you may be lookin
 
 [source,php]
 ----
-include::example$query.php[tag=results]
+include::devguide:example$php/query.php[tag=results]
 ----
 
 You can also get metrics for your query.
@@ -71,7 +71,7 @@ See the https://docs.couchbase.com/sdk-api/couchbase-php-client-3.2.2/classes/Co
 
 [source,php]
 ----
-include::example$query.php[tag=metrics]
+include::devguide:example$php/query.php[tag=metrics]
 ----
 
 == Scan Consistency
@@ -91,7 +91,7 @@ Select this when consistency is always more important than performance.
 
 [source,php]
 ----
-include::example$query.php[tag=scan]
+include::devguide:example$php/query.php[tag=scan]
 ----
 
 // Due to https://issues.couchbase.com/browse/MB-46876 this section won’t work with named scopes and collections,
@@ -103,7 +103,7 @@ More granular consistency requirement could be achieved with `consistentWith` qu
 
 [source,php]
 ----
-include::example$query.php[tag=consistentWith]
+include::devguide:example$php/query.php[tag=consistentWith]
 ----
 ////
 
@@ -117,7 +117,7 @@ A complete list of `QueryOptions` can be found in the https://docs.couchbase.com
 
 [source,php]
 ----
-include::example$query.php[tag=scope-level-query]
+include::devguide:example$php/query.php[tag=scope-level-query]
 ----
 
 == Additional Resources

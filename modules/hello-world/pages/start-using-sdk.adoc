@@ -33,7 +33,7 @@ If you are connecting to https://docs.couchbase.com/cloud/index.html[Couchbase C
 
 [source,php]
 ----
-include::hello-world:example$cloud.php[tags=**]
+include::devguide:example$php/cloud.php[tags=**]
 ----
 
 The Couchbase Capella free tier version comes with the Travel Sample Bucket, and its Query indexes, loaded and ready.
@@ -44,7 +44,7 @@ Local Couchbase Server::
 --
 [source,php]
 ----
-include::hello-world:example$start-using.php[tags=**]
+include::devguide:example$php/start-using.php[tags=**]
 ----
 
 As well as the PHP SDK (see below), and a running instance of Couchbase Server, you will need to load up the Travel Sample Bucket
@@ -164,7 +164,7 @@ Firstly, you will need to have a few `import` statements at the top of your PHP 
 [#imports]
 [source,php]
 ----
-include::hello-world:example$start-using.php[tag=imports]
+include::devguide:example$php/start-using.php[tag=imports]
 ----
 
 === Connect
@@ -182,7 +182,7 @@ You do need to enable TLS, which can be done by simply using `couchbases://` in 
 
 [source,php]
 ----
-include::example$cloud.php[tag=connect,indent=0]
+include::devguide:example$cloud.php[tag=connect,indent=0]
 ----
 
 When accessing Capella from a different Wide Area Network or Availability Zone, you may experience latency issues with the default connection settings.
@@ -197,7 +197,7 @@ Local Couchbase Server::
 --
 [source,php]
 ----
-include::example$start-using.php[tag=connect,indent=0]
+include::devguide:example$start-using.php[tag=connect,indent=0]
 ----
 
 For developing locally on the same machine as Couchbase Server, your URI can be `couchbase://localhost` as shown here.
@@ -209,7 +209,7 @@ Following successful authentication, add this code snippet to access your `Bucke
 
 [source,php]
 ----
-include::example$start-using.php[tag=bucket,indent=0]
+include::devguide:example$start-using.php[tag=bucket,indent=0]
 ----
 
 // No waituntilready() in wrappers
@@ -226,7 +226,7 @@ Here we refer to the `users` collection within the `tenant_agent_00` scope from 
 
 [source,php]
 ----
-include::example$cloud.php[tag=collection,indent=0]
+include::devguide:example$cloud.php[tag=collection,indent=0]
 ----
 
 xref:howtos:kv-operations.adoc[Data operations], like storing and retrieving documents, can be done using simple methods on the `Collection` class such as `Collection->get()` and `Collection->upsert()`.
@@ -235,7 +235,7 @@ Add the following code to create a new document and retrieve it:
 
 [source,php]
 ----
-include::example$cloud.php[tag=upsert-get,indent=0]
+include::devguide:example$cloud.php[tag=upsert-get,indent=0]
 ----
 
 === {sqlpp} Lookup
@@ -247,7 +247,7 @@ However, with a Scope level query you only need to specify the Collection name -
 
 [source,php]
 ----
-include::example$cloud.php[tag=n1ql-query,indent=0]
+include::devguide:example$cloud.php[tag=n1ql-query,indent=0]
 ----
 
 You can learn more about {sqlpp} queries on the xref:howtos:n1ql-queries-with-sdk.adoc[] page.
