@@ -12,15 +12,12 @@ include::{version-common}@sdk:shared:partial$integrations.adoc[tag=intro]
 
 include::{version-common}@sdk:shared:partial$integrations.adoc[tag=official]
 
-The Couchbase Kotlin SDK works with Spring Boot -- 
-as shown in our xref:hello-world:sample-application.adoc[Sample Application].
 
-
-include::{version-common}@sdk:shared:partial$integrations.adoc[tag=important]
-
-https://ktor.io/[Ktor] can be seen integrated with the Kotlin SDK in https://developer.couchbase.com/tutorial-quickstart-kotlin-ktor/[this Quickstart Guide].
+// include::{version-common}@sdk:shared:partial$integrations.adoc[tag=important]
 
 
 include::{version-common}@sdk:shared:partial$integrations.adoc[tag=other]
 
-Note, if you search for extensions to the Couchbase Kotlin SDK, many results will be for our Mobile solution, as Kotlin is a first class citizen for Android development on Couchbase Lite (CBL).
+Working with Laravel is demonstrated in this https://developer.couchbase.com/tutorial-quickstart-php-laravel/[sample application].
+You can find other ideas on using Couchbase PHP SDK with Laravel in the codebase of https://github.com/friendsofcat/laravel-couchbase[Laravel-Couchbase],
+which has not been updated to recent versions of Couchbase.
