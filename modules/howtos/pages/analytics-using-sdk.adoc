@@ -30,7 +30,7 @@ in PHP SDK 3.x, Analytics queries are submitted using the Cluster reference, not
 
 [source,php]
 ----
-include::example$analytics.php[tag=query]
+include::devguide:example$php/analytics.php[tag=query]
 ----
 
 
@@ -41,14 +41,14 @@ Here is one example of each:
 
 [source,php]
 ----
-include::example$analytics.php[tag=simple]
+include::devguide:example$php/analytics.php[tag=simple]
 ----
 
 The query may be performed with positional parameters:
 
 [source,php]
 ----
-include::example$analytics.php[tag=positional]
+include::devguide:example$php/analytics.php[tag=positional]
 ----
 
 Alternatively, the query may be performed with named parameters:
