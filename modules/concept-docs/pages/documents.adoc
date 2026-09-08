@@ -55,7 +55,7 @@ If you wish to only modify certain parts of a document, you can use xref:subdocu
 
 [source,php,indent=0]
 ----
-include::example$documents-concept.php[tag=mutate-in]
+include::devguide:example$php/documents-concept.php[tag=mutate-in]
 ----
 
 or xref:{version-server}@server:n1ql:n1ql-language-reference/update.adoc[N1QL UPDATE] to update documents based on specific query criteria:
@@ -84,7 +84,7 @@ You can also retrieve _parts_ of documents using xref:subdocument-operations.ado
 
 [source,php,indent=0]
 ----
-include::example$documents-concept.php[tag=lookup-in]
+include::devguide:example$php/documents-concept.php[tag=lookup-in]
 ----
 
 // Counters
@@ -93,14 +93,14 @@ include::{version-common}@sdk:shared:partial$documents.adoc[tag=counters1]
 
 [source,php,indent=0]
 ----
-include::example$documents-concept.php[tag=counters]
+include::devguide:example$php/documents-concept.php[tag=counters]
 ----
 
 include::{version-common}@sdk:shared:partial$documents.adoc[tag=counters2]
 
 [source,php,indent=0]
 ----
-include::example$documents-concept.php[tag=counter-increment]
+include::devguide:example$php/documents-concept.php[tag=counter-increment]
 ----
 
 include::{version-common}@sdk:shared:partial$documents.adoc[tag=counters3]

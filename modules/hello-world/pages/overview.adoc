@@ -3,8 +3,6 @@
 :page-role: tiles
 :!sectids:
 
-= Couchbase PHP SDK 4.5
-
 [source,console]
 ----
 $ pecl install couchbase
