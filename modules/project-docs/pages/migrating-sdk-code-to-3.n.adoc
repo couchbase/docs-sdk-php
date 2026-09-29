@@ -62,7 +62,7 @@ include::{version-common}@sdk:shared:partial$migration.adoc[tag=lang]
 
 ===  Installation and Configuration
 
-The primary source of artifacts is xref:installation.adoc[the installation page], 
+The primary source of artifacts is xref:sdk-full-installation.adoc[the installation page],
 where we publish links to pre-built binaries, as well as to source tarballs.
 
 From 3.0 onwards, binaries are available for Windows with the OpenSSL dependency. 

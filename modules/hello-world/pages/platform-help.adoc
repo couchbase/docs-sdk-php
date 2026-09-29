@@ -145,7 +145,7 @@ Create a file with some sample PHP.
 
 [source,php]
 ----
-include::howtos:example$auth.php[tags=**]
+include::devguide:example$php/auth.php[tags=**]
 ----
 
 === Running Couchbase examples

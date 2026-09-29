@@ -32,5 +32,5 @@ Pulling all of the above together, this is the suggested best practice for error
 
 [source,php]
 ----
-include::howtos:example$transactions-example.php[tag=full-error-handling,indent=0]
+include::devguide:example$php/transactions-example.php[tag=full-error-handling,indent=0]
 ----

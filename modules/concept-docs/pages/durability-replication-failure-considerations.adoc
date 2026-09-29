@@ -24,7 +24,7 @@ include::{version-common}@sdk:shared:partial$durability-replication-failure-cons
 // include::{version-common}@sdk:shared:partial$durability-replication-failure-considerations.adoc[tag=older]
 If a version of Couchbase Server lower than 6.5 is being used then the fallback is 'client verified' durability.
 
-WARNING: Client Verified durability is supported in xref:3.2@durability-replication-failure-considerations.adoc#older-server-versions[PHP SDK 3.2] but not in 4.0.
+WARNING: Client Verified durability is supported in xref:3.2@php-sdk:concept-docs:durability-replication-failure-considerations.adoc#older-server-versions[PHP SDK 3.2] but not in 4.0.
 Legacy support will be available in a later 4.x release.
 See the xref:project-docs:migrating-sdk-code-to-3.n.adoc#sdk4-specifics[SDK 4.0 migration considerations].
 
