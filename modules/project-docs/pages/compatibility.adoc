@@ -116,9 +116,6 @@ include::{version-common}@sdk:shared:partial$compat.adoc[tag=cloud]
 
 
 
-=== Couchbase New Feature Availability Matrix
-
-
 
 === Couchbase New Feature Availability Matrix
 
