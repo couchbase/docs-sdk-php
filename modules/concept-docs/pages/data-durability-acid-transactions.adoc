@@ -25,7 +25,7 @@ The CRUD API of the {sqlpp} Query service is mirrored by the Data Service's API,
 
 [source,php]
 ----
-include::devguide:example$python/kv-crud.php[tag=upsertwithdurability]
+include::devguide:example$php/kv-crud.php[tag=upsertwithdurability]
 ----
 
 At its heart, a database is in the business of storing data and letting you query and retrieve it.
