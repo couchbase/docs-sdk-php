@@ -343,4 +343,4 @@ In addition:
 * Because of the change to the backend Couchbase++ library, an Autoload is needed, as in xref:hello-world:start-using-sdk.adoc#imports[this imports example].
 If you are managing your Autoloads with Composer, as recommended, this process should be trivial, and not require any additional manual addition of `require_once` statements throughout your codebase.
 
-include::{version-common}@sdk:shared:partial$archive.adoc[tag=migration]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=migration]
