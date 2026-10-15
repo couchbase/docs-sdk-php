@@ -1,14 +1,32 @@
 = Field Level Encryption
 :description: Fields within a document can be securely encrypted by the SDK, to support FIPS-140-2 compliance.
-:page-topic-type: concept
 :page-edition: Enterprise Edition
-include::project-docs:partial$attributes.adoc[]
 :page-aliases: ROOT:encryption
 
 [abstract]
 {description}
 
-Client-side implementation of Field Level Encryption was available in previous versions of the C, .NET, Go, Java, Node.js, PHP, and Python SDK.
+Client-side implementation of Field Level Encryption is available in the
+xref:cxx-sdk:howtos:encrypting-using-sdk.adoc[{cpp}], 
+xref:dotnet-sdk:howtos:encrypting-using-sdk.adoc[.NET], 
+xref:go-sdk:howtos:encrypting-using-sdk.adoc[Go], 
+xref:java-sdk:howtos:encrypting-using-sdk.adoc[Java], 
+// xref:kotlin-sdk:howtos:encrypting-using-sdk.adoc[Kotlin], 
+xref:nodejs-sdk:howtos:encrypting-using-sdk.adoc[Node.js], 
+// xref:php-sdk:howtos:encrypting-using-sdk.adoc[PHP], 
+xref:python-sdk:howtos:encrypting-using-sdk.adoc[Python], 
+// xref:ruby-sdk:howtos:encrypting-using-sdk.adoc[Ruby], 
+// xref:rust-sdk:howtos:encrypting-using-sdk.adoc[Rust], 
+and xref:scala-sdk:howtos:encrypting-using-sdk.adoc[Scala] SDKs.
 
-It is being enabled in the 3.x SDKs, including PHP in near future.
-In the meantime, please check one of the currently enabled SDKs such as xref:python-sdk:concept-docs:encryption.adoc[Python] for a detailed overview of what to expect.
+
+[TIP]
+.Native Encryption at Rest
+====
+Server 8.x (and new Capella Operational clusters) offer xref:server:learn:security/native-encryption-at-rest-overview.adoc[encryption at rest].
+It's a comprehensive way of encrypting all data in a non-ephemeral bucket,
+as well as logs, configuration data, and audit data.
+// However, you may prefer the relative simplicity of key management in Field Level Encryption for use cases where there are a limited number of data to be encrypted.
+====
+
+

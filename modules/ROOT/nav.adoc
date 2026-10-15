@@ -14,7 +14,7 @@
 ** xref:concept-docs:data-model.adoc[]
 *** xref:concept-docs:documents.adoc[]
 // *** xref:concept-docs:collections.adoc[]
-*** xref:howtos:json.adoc[Choosing a JSON Library]
+//  *** xref:howtos:json.adoc[Choosing a JSON Library]
 // only Java and Scala have ^
 // Scala's we keep - Java's turns into the concept??
 *** xref:concept-docs:subdocument-operations.adoc[Sub-Documents]
@@ -35,7 +35,6 @@
 // TODO: Add Single Query and Tracing when available in PHP SDK
 //** xref:howtos:transactions-single-query.adoc[Single Query Transactions]
 //** xref:howtos:transactions-tracing.adoc[Tracing]
-** xref:howtos:transactions-tracing.adoc[]
 ** xref:concept-docs:transactions.adoc[]
 *** xref:concept-docs:transactions-cleanup.adoc[]
 *** xref:concept-docs:transactions-error-handling.adoc[]
@@ -44,9 +43,9 @@
 ** xref:howtos:health-check.adoc[Using Health Check]
 ** xref:concept-docs:response-time-observability.adoc[Observability]
 *** xref:howtos:slow-operations-logging.adoc[]
-*** xref:howtos:observability-metrics.adoc[]
+// *** xref:howtos:observability-metrics.adoc[]
 *** xref:howtos:observability-orphan-logger.adoc[]
-*** xref:howtos:observability-tracing.adoc[]
+// *** xref:howtos:observability-tracing.adoc[]
 * xref:concept-docs:best-practices.adoc[]
 ** xref:howtos:concurrent-async-apis.adoc[]
 ** xref:howtos:error-handling.adoc[]
@@ -59,7 +58,7 @@
 *** https://docs-archive.couchbase.com/home/index.html[Older Versions Archive^]
 ** xref:project-docs:compatibility.adoc[]
 *** xref:project-docs:migrating-sdk-code-3.x-to-4.x.adoc[]
-*** xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
+**** xref:project-docs:migrating-sdk-code-to-3.n.adoc[]
 // *** xref:project-docs:distributed-acid-transactions-migration-guide.adoc[]
 *** xref:project-docs:third-party-integrations.adoc[]
 ** xref:project-docs:sdk-full-installation.adoc[]

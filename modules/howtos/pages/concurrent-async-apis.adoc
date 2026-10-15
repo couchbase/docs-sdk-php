@@ -1,6 +1,5 @@
 = Batching
 :description: The PHP SDK offers only a blocking API -- but this is not necessarily a limitation.
-:page-topic-type: howto
 :page-aliases: ROOT:async-programming,ROOT:batching-operations,multiple-apis
 
 [abstract]

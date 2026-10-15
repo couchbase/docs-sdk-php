@@ -1,11 +1,10 @@
 = Documents
 :description: Couchbase supports CRUD operations, various data structures, and binary documents.
-:page-topic-type: concept
 :page-aliases: ROOT:documents,ROOT:documents-basics,ROOT:documents-atomic
 :page-toclevels: 2
+:sub-doc-snippet: pass:q[include::devguide:example$php/subdoc-mutatein-arrays.php[tag=mutateInArrayAppend]]
 
 
-include::project-docs:partial$attributes.adoc[]
 
 [abstract]
 {description}
@@ -55,7 +54,7 @@ If you wish to only modify certain parts of a document, you can use xref:subdocu
 
 [source,php,indent=0]
 ----
-include::example$documents-concept.php[tag=mutate-in]
+include::devguide:example$php/ocuments-concept.php[tag=mutate-in]
 ----
 
 or xref:{version-server}@server:n1ql:n1ql-language-reference/update.adoc[N1QL UPDATE] to update documents based on specific query criteria:

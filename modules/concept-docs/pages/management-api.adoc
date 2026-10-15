@@ -18,6 +18,12 @@ xref:cloud:terraform:index.adoc[Terraform] for Capella, or some of our command l
 
 include::{version-common}@sdk:shared:partial$clusters-buckets.adoc[tag=management]
 
+
+
+
+
+
+////
 // ...
 Management operations in the Python SDK may be performed through several interfaces depending on the object:
 
@@ -36,7 +42,7 @@ manager.createBucket(bucketSettings);
 This class is also used to expose information about an existing bucket (`manager.getBucket(string)`) or to update an existing bucket (`manager.updateBucket(bucketSettings)`).
 
 The default Collection & Default Scope will be used automatically.
-
+////
 
 
 

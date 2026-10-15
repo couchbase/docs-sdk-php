@@ -1,7 +1,6 @@
 = Handling Errors
 :description: Practical steps to handle errors and exceptions.
 :navtitle: Handling Errors
-:page-topic-type: howto
 :page-aliases: handling-error-conditions.adoc
 :source-language: php
 :lang: php

@@ -28,11 +28,52 @@ However the Windows binaries at https://pecl.php.net/ are produced there, not th
 
 
 [#latest-release]
-== PHP SDK 4.5 Releases
+== PHP SDK 4.6 Releases
 
 We always recommend using the latest version of the SDK -- it contains all of the latest security patches and support for new and upcoming features.
 All patch releases for each dot minor release should be API compatible, and safe to upgrade;
 any changes to expected behavior are noted in the release notes that follow.
+
+
+PHP SDK 4.6 is written to xref:compatibility.adoc#api-version[version 3.10 of the SDK API specification]
+(and matching the features available in Couchbase 8.0.3 and earlier).
+
+
+=== Version 4.6.0 (????? October 2026)
+
+https://docs.couchbase.com/sdk-api/couchbase-php-client-4.6.0[API documentation]
+| link:++https://github.com/couchbase/couchbase-php-client/compare/4.5.0...4.6.0++[Full Changelog]
+| link:++https://packagist.org/packages/couchbase/couchbase#4.6.0++[Composer (Library)]
+| link:++https://packagist.org/packages/couchbase/couchbase-opentelemetry#4.6.0++[Composer (OpenTelemetry integration)]
+
+[source,bash]
+----
+composer require ext-couchbase:4.6.0
+composer require couchbase/couchbase:4.6.0
+composer require couchbase/couchbase-opentelemetry:4.6.0
+----
+
+.composer.json
+[source,json]
+----
+"require": {
+    "ext-couchbase": "4.6.0",
+    "couchbase/couchbase-opentelemetry": "4.6.0",
+    "couchbase/couchbase": "4.6.0"
+}
+----
+
+==== New features and Enhancements
+
+
+
+
+
+
+
+
+
+== PHP SDK 4.5 Releases
 
 PHP SDK 4.5 is written to xref:compatibility.adoc#api-version[version 3.9 of the SDK API specification]
 (and matching the features available in Couchbase 8.0.0 and earlier).

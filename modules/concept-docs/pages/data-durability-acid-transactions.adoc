@@ -19,17 +19,13 @@
 {description}
 
 
-**TODO: Scala --> Python**
-
-
-
 You want to query your data, but does that always mean a {sqlpp} query to the Query Service?
 The CRUD API of the {sqlpp} Query service is mirrored by the Data Service's API, but without the need for indexes, and using a binary protocol gives faster access than streaming JSON from the Query Service.
 
 
-[source,python]
+[source,php]
 ----
-include::devguide:example$python/kv_operations.py[tag=durability]
+include::devguide:example$python/kv-crud.php[tag=upsertwithdurability]
 ----
 
 At its heart, a database is in the business of storing data and letting you query and retrieve it.

@@ -1,10 +1,9 @@
 = Client Settings
 :description: Client settings
-:page-topic-type: reference
 :page-aliases: ROOT:client-settings
 :page-toclevels: 2
 
-include::project-docs:partial$attributes.adoc[]
+
 
 [abstract]
 {description}

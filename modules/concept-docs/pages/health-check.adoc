@@ -1,19 +1,18 @@
 = Health Check
 :description: Health Check provides ping() and diagnostics() tests for the health of the network and the cluster.
-:page-topic-type: concept
 :page-aliases: ROOT:health-check
 
-include::project-docs:partial$attributes.adoc[]
+
 
 [abstract]
 {description}
 
 
-include::{version-common}@sdk:pages:partial$health-check.adoc[tag="intro"]
+include::{version-common}@sdk:shared:partial$health-check.adoc[tag="intro"]
 
-include::{version-common}@sdk:pages:partial$health-check.adoc[tag="users"]
+include::{version-common}@sdk:shared:partial$health-check.adoc[tag="users"]
 
-include::{version-common}@sdk:pages:partial$health-check.adoc[tag="ping"]
+include::{version-common}@sdk:shared:partial$health-check.adoc[tag="ping"]
 
 [source,javascript]
 ----
@@ -82,7 +81,7 @@ bucket.ping(services, (err, res) => {
 */
 ----
 
-include::{version-common}@sdk:pages:partial$health-check.adoc[tag="diag"]
+include::{version-common}@sdk:shared:partial$health-check.adoc[tag="diag"]
 
 
 [source,javascript]

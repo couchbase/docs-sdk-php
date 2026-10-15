@@ -1,12 +1,11 @@
 = XATTR and Virtual XATTR
 :description: Extended Attributes (XATTR) are metadata that can be provided on a per-application basis.
-:page-topic-type: concept
 :page-aliases: sdk-xattr-overview,ROOT:sdk-xattr-overview
 
 [abstract]
 {description}
 
-include::project-docs:partial$attributes.adoc[]
+
 
 include::{version-common}@sdk:shared:partial$sdk-xattr-overview.adoc[tag=using_extended_attributes]
 

@@ -8,8 +8,18 @@
 {description}
 
 
-Client-side implementation of Field Level Encryption is available in the previous version of the SDK.
-It will be enabled in a future release of the third generation SDK.
+Client-side implementation of Field Level Encryption is available in the
+xref:cxx-sdk:howtos:encrypting-using-sdk.adoc[{cpp}], 
+xref:dotnet-sdk:howtos:encrypting-using-sdk.adoc[.NET], 
+xref:go-sdk:howtos:encrypting-using-sdk.adoc[Go], 
+xref:java-sdk:howtos:encrypting-using-sdk.adoc[Java], 
+// xref:kotlin-sdk:howtos:encrypting-using-sdk.adoc[Kotlin], 
+xref:nodejs-sdk:howtos:encrypting-using-sdk.adoc[Node.js], 
+// xref:php-sdk:howtos:encrypting-using-sdk.adoc[PHP], 
+xref:python-sdk:howtos:encrypting-using-sdk.adoc[Python], 
+// xref:ruby-sdk:howtos:encrypting-using-sdk.adoc[Ruby], 
+// xref:rust-sdk:howtos:encrypting-using-sdk.adoc[Rust], 
+and xref:scala-sdk:howtos:encrypting-using-sdk.adoc[Scala] SDKs.
 
 
 [TIP]

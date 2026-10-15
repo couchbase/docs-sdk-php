@@ -2,12 +2,12 @@
 :description: The SDK takes care of failed or lost transactions, using an asynchronous cleanup background task.
 :page-toclevels: 2
 :page-pagination: full
-:page-topic-type: reference
+
 
 [abstract]
 {description}
 
-include::project-docs:partial$attributes.adoc[]
+
 include::howtos:partial$acid-transactions-attributes.adoc[]
 
 include::{version-common}@sdk:shared:partial$acid-transactions.adoc[tags=cleanup;!library-cleanup-buckets]

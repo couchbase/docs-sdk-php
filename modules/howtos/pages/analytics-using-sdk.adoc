@@ -1,6 +1,5 @@
 = Analytics
 :description: Parallel data management for complex queries over many records, using a familiar {sqlpp} syntax.
-:page-topic-type: howto
 :page-edition: Enterprise Edition
 
 [abstract]
@@ -25,8 +24,7 @@ try Couchbase Analytics using the PHP SDK.
 Intentionally, the API for analytics is very similar to that of the query service. 
 In these examples we will be using an `airports` dataset created on the `travel-sample` bucket.
 
-In PHP SDK 2.x, Analytics was only available on the `Bucket` object;
-in PHP SDK 3.x, Analytics queries are submitted using the Cluster reference, not a Bucket or Collection:
+In the PHP SDK Analytics queries are submitted using the Cluster reference, not a Bucket or Collection:
 
 [source,php]
 ----

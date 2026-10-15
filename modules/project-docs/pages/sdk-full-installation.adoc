@@ -1,6 +1,5 @@
 = Full Installation
 :description: Installation instructions, and download archive for the Couchbase PHP Client.
-:page-topic-type: howto
 :page-toclevels: 2
 
 // tag::all[]
@@ -24,7 +23,7 @@ We recommend using OS specific utilities such as `brew`, `apt-get`, and similar 
 
 * cmake >= 3.20.0+
 
-* c++ compiler >= std_17
+* {cpp} compiler >= std_17
 
 * openssl >= 1.1+
 
