@@ -147,10 +147,9 @@ include::{version-common}@sdk:shared:partial$compat.adoc[tag=feature-notes]
 
 
 
-
 === API Version
 
-include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=api-version]
 
 
 
@@ -158,9 +157,13 @@ include::{version-common}@sdk:shared:partial$api-version.adoc[tag=api-version]
 == SDK API Stability
 
 
-include::{version-common}@sdk:shared:partial$interface-stability-pars.adoc[tag=interface-stability-section]
+=== Interface Stability
+
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=interface-stability-section]
 
 
 === Older SDK Versions
 
-include::{version-common}@sdk:shared:partial$archive.adoc[tag=link]
+
+include::{version-common}@sdk:shared:partial$compat.adoc[tag=archive-link]
+
