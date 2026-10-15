@@ -10,6 +10,7 @@ Plus notes on Cloud, networks, and AWS Lambda.
 {description}
 
 include::partial$supported-versions.adoc[]
+See the table below for <<php-version-compatibility,supported versions and dates>>.
 
 
 == Platform Compatibility
