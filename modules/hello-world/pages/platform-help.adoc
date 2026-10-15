@@ -79,7 +79,7 @@ Windows::
 --
 Windows downloads for PHP are available from https://windows.php.net/download/
 A handy sidebar on the left explores the various considerations you will want to consider.
-For most environments, the first option (PHP 8.1 VS16 x64 Non Thread Safe) should be fine for evaluation purposes.
+For most environments, the first option (PHP 8.5 VS17 x64 Non Thread Safe) should be fine for evaluation purposes.
 
 Windows downloads and instructions for the PHP SDK are available from xref:project-docs:sdk-full-installation.adoc#installing-on-microsoft-windows[the installation page].
 
