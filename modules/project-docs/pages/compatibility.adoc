@@ -86,7 +86,7 @@ include::{version-common}@sdk:shared:partial$compat.adoc[tag=matrix-notes1]
 .Recommended SDK per Server Version Matrix
 [#table_sdk_versions]
 |===
-| | 4.1 - 4.2 | 4.3 | 4.4 - 4.5
+| | 4.1 - 4.2 | 4.3 | 4.4 - 4.6
 
 | *Server 8.0* ①
 | *✔*
