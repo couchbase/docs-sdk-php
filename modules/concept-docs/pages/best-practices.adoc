@@ -109,6 +109,7 @@ Practical information can be found on the xref:howtos:concurrent-async-apis.adoc
 
 
 
+////
 == Error Handling
 
 Best practices for error handling in Scala depend somewhat upon your choice of API: 
@@ -116,7 +117,7 @@ blocking, asynchronous, or reactive, as covered in the xref:concurrent-async-api
 That guide also covers how errors are actually returned (e.g. via `Try`, `Future`, or `Mono`) and handled.
 See also the xref:howtos:error-handling.adoc[error handling guide],
 which covers specific errors, along with a broader look at error handling strategies.
-
+////
 
 == Testing
 
@@ -147,6 +148,11 @@ include::{version-common}@sdk:shared:partial$errors.adoc[tag=observability]
 // until opentelemetry release for link below, could add note on API to expose own tracing features?
 // include::{version-common}@sdk:shared:partial$errors.adoc[tag=rto]
 
+
+
+
+
+////
 [#rto-vs-performance]
 
 [TIP]
@@ -161,6 +167,7 @@ If absolute performance is critical to your application, then observability feat
 But be sure that your performance need is strong --
 observability information is invaluable in diagnosing network bottlenecks and problems.
 ====
+////
 
 
 
