@@ -1,7 +1,5 @@
 = Search
 :description: You can use the Search service (FTS) to create queryable Search indexes in Couchbase Server.
-:page-topic-type: howto
-:page-pagination: full
 
 [abstract]
 {description}
