@@ -240,6 +240,23 @@ E.....@.@.............+....Z.'yZ..#........
 
 
 
+
+////
+// Uncomment once supported:
+
+== Cloud Native Gateway
+
+include::{version-common}@sdk:shared:partial$managing-connections.adoc[tag=cng]
+
+
+=== Limitations
+
+
+include::{version-common}@sdk:shared:partial$managing-connections.adoc[tag=cng-limitations]
+////
+
+
+
 // DNS-SRV
 // == Using DNS SRV records
 
