@@ -178,7 +178,8 @@ Ensure that you have installed https://getcomposer.org/doc/00-intro.md[Composer]
 [source,console]
 ----
 $ composer --version
-Composer version 2.3.5 2022-04-13 16:43:00
+Composer version 2.11.0 2026-10-29 10:23:20
+PHP version 8.5.12 (/opt/homebrew/Cellar/php/8.5.12_1/bin/php)
 ----
 
 To add Couchbase to your project's dependency list, simply update your `composer.json` file with the following dependencies:
