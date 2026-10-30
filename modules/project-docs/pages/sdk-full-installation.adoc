@@ -53,9 +53,9 @@ $ pecl install couchbase
 
 Or install from the Couchbase repository:
 
-[source,console]
+[source,console,subs="+attributes"]
 ----
-$ pecl install https://packages.couchbase.com/clients/php/couchbase-4.0.0.tgz
+$ pecl install https://packages.couchbase.com/clients/php/couchbase-{sdk_current_version}.tgz
 ----
 
 Then follow the <<post-installation,post-installation steps>>.
@@ -81,8 +81,8 @@ and then install the equivalent `pecl` package for the version of `php` that you
 
 [source,console]
 ----
-$ apk add php81
-$ apk add php81-pecl-couchbase
+$ apk add php83
+$ apk add php83-pecl-couchbase
 ----
 
 Then follow the <<post-installation,post-installation steps>>.
@@ -92,7 +92,6 @@ Then follow the <<post-installation,post-installation steps>>.
 When using Microsoft Windows, instead of using PECL, download the pre-built binary package matching your environment.
 You may also download the https://github.com/couchbase/php-couchbase[php-couchbase source code] for the SDK and build it directly in your environment if you have a complete build toolchain.
 
-From xref:sdk-release-notes.adoc#version-4-2-1-23-april-2024[PHP SDK version 4.2.1]
 Windows binaries are available to download --
 see the xref:sdk-release-notes.adoc[Release Notes page] for links to the binary built for your preferred PHP version.
 
@@ -153,9 +152,9 @@ This can be done using the command `php --ini`
 [source,console]
 ----
 $ php --ini
-Configuration File (php.ini) Path: /usr/local/etc/php/8.1
-Loaded Configuration File:         /usr/local/etc/php/8.1/php.ini
-Scan for additional .ini files in: /usr/local/etc/php/8.1/conf.d
+Configuration File (php.ini) Path: /usr/local/etc/php/8.3
+Loaded Configuration File:         /usr/local/etc/php/8.3/php.ini
+Scan for additional .ini files in: /usr/local/etc/php/8.3/conf.d
 Additional .ini files parsed:      (none)
 ----
 +
@@ -164,7 +163,6 @@ If you don't know where that is, simply search for existing commented or uncomme
 +
 [source,ini]
 ----
-extension=json      ; not needed with PHP 8.0.0+
 extension=couchbase
 ----
 +
@@ -189,8 +187,8 @@ To add Couchbase to your project's dependency list, simply update your `composer
 ----
 "require": {
   ...
-  "ext-couchbase": "^4.0",
-  "couchbase/couchbase": "^4.0"
+  "ext-couchbase": "^4.6",
+  "couchbase/couchbase": "^4.6"
 }
 ----
 
