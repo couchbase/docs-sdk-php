@@ -184,16 +184,28 @@ PHP version 8.5.12 (/opt/homebrew/Cellar/php/8.5.12_1/bin/php)
 
 To add Couchbase to your project's dependency list, simply update your `composer.json` file with the following dependencies:
 
-[source,json]
+[source,json,subs="+attributes"]
 ----
 "require": {
   ...
-  "ext-couchbase": "^4.6",
-  "couchbase/couchbase": "^4.6"
+  "ext-couchbase": "{sdk_current_version}",
+  "couchbase/couchbase": "{sdk_current_version}"
 }
 ----
 
 Run `composer update` to lock the change in the generated `composer.lock` file.
+
+[#containers]
+=== SDK Versions and Containers
+
+The `couchbase` extension and the `couchbase/couchbase` Composer package loaded by a PHP process have to come from the same release.
+The library checks only that the `couchbase` module is loaded.
+Pin the Composer package to the release of the installed extension, as in the example above.
+
+Loading two SDK versions in one PHP process is not supported.
+Applications that need different SDK versions have to run in separate processes.
+Running each application in its own container is recommended.
+https://github.com/couchbase/couchbase-php-client/blob/{sdk_current_version}/CONTAINERS.md[CONTAINERS.md] shows how to install a release archive into an official PHP image.
 
 === Note on Extension Dependencies
 
