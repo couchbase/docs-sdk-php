@@ -562,33 +562,45 @@ a| `couchbase.log_level`:
 a| `couchbase.pool.max_idle_time_sec`
 
 Sets the maximum time that a persistent instance can be idle before being cleaned up.
-The efault is 60 seconds.
+The default is 60 seconds.
 The SDK associates a reference counter with the instance uniquely identified by the connection string and credentials.
- When the reference ounter reaches zero, the SDK records the current time into the idle timestamp of the instance.
+When the reference counter reaches zero, the SDK records the current time into the idle timestamp of the instance.
 At the end of each request, the SDK runs a cleanup process that will sweep all idle instances at that point in time.
 
 Persistent instances are useful for cases when the PHP worker process is not destroyed after serving the request,
 so that next request will not need to wait for the instance to bootstrap if it uses the same connection string, bucket, and credentials.
 
-a| `couchbase.persistent_timeout`
+a| `couchbase.persistent_timeout` and `couchbase.max_persistent`
 
-SDK 4.x is based on the {cpp} SDK.
-It has similar behavior when it comes to persistent instances.
-But instead of running cleanup at the end of each request,
-it does a cleanup only when the library needs to create a new connection and the number of existing connection have reached `couchbase.max_persistent`.
+SDK 4.x is based on the {cpp} SDK, and also keeps persistent instances.
+Each instance holds one connection to a cluster.
+Two independent settings control them.
 
-By default both `couchbase.persistent_timeout` and `couchbase.max_persistent`
-are set to `-1`,
-which means that the instances will be destroyed naturally when the PHP process exits.
+`couchbase.max_persistent` limits the number of instances.
+When a new connection pushes the count over the limit, the library destroys idle instances until the new one fits.
+Instances detached by `setAuthenticator()` or `disconnect()` go first, then cached ones, least recently used first.
+An instance is idle when nothing uses it.
+That means no `\Couchbase\Cluster` object, no `Bucket`, `Scope` or `Collection` obtained from one, and no transaction or range scan.
+
+The limit is soft.
+When every instance is in use, the new one is kept over the limit.
+Each connection opened over the limit checks a small batch of cached instances, in cache order.
+It destroys those that have become idle.
+Freeing all of them can take several connections.
+The first connection opened in the next request checks every cached instance, least recently used first.
+
+A new connection is opened before any idle instance is destroyed, so a failed attempt costs no cached instance.
+Its sockets have to fit next to those of the cached instances.
+Keep `couchbase.max_persistent` well below the file descriptor limit of the worker process (`ulimit -n`).
+A connection that cannot open its sockets fails with `UnambiguousTimeoutException`, the same as an unreachable cluster.
+
+`couchbase.persistent_timeout` is the time in milliseconds an instance may stay idle.
+After each request, the extension destroys idle instances that have not been used for longer than that.
+An instance counts as used when it has finished connecting or is pulled from the cache.
+
+By default both settings are `-1`, so instances are destroyed when the PHP process exits.
 
 This behavior was not possible in SDK 3.x because `libcouchbase` does not have any background threads that can perform service tasks (like tracking configuration changes).
-
-So if `couchbase.max_persistent` is set to a positive (or zero) value,
-the extension will run the cleanup tasks if the number of existing instances exceeds the max,
-and will destroy all instances that have expired.
-
-The expiration time for the instance is recorded when the instance is created or pulled from the cache,
-and is set to the current time plus `couchbase.persistent_timeout`.
 
 Note that by setting both `couchbase.persistent_timeout` and `couchbase.max_persistent` to zero,
 this will force the extension to destroy all existing connections and always create a new one.
